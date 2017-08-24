@@ -1,24 +1,40 @@
 const ADD_ITEM = 'ADD_ITEM';
 
 const initialState = {
-    items: [
-        {
-            id: 1,
-            title: 'Block 1',
-        },
-        {
-            id: 2,
-            title: 'Block 2',
-        },
-        {
-            id: 3,
-            title: 'Tags',
-        },
-        {
-            id: 4,
-            title: 'Block 3',
-        },
-    ],
+    items: {
+        hashes: [
+            {
+                id: 0,
+                href: '/',
+                text: '#design',
+                background: 'red',
+            },
+            {
+                id: 1,
+                href: '/',
+                text: '#dev',
+                background: '#ffe200',
+            },
+            {
+                id: 2,
+                href: '/',
+                text: '#links',
+                background: 'black',
+            },
+            {
+                id: 3,
+                href: '/',
+                text: '#javascript',
+                background: '#b58c63',
+            },
+            {
+                id: 4,
+                href: '/',
+                text: '#humor',
+                background: '#547e8e',
+            },
+        ],
+    },
 };
 
 const reducer = (state = initialState, action) => {

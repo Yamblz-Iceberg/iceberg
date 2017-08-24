@@ -1,0 +1,15 @@
+.feed-container {
+    display: flex;
+    flex-direction: column;
+    .hash-tape {
+        padding: 0 20px;
+        display: block;
+        white-space: nowrap;
+    }
+}
+
+.hash-tape__container {
+    max-width: 100%;
+    margin: 26px auto;
+
+}
