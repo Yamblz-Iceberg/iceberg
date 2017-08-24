@@ -1,4 +1,4 @@
-.HashTag {
+.hash-tag {
     display: inline-block;
     padding: 0 15px;
     min-width: 85px;
@@ -12,7 +12,7 @@
         font-size: 14px;
         color: white;
     }
-    & + .HashTag {
+    & + .hash-tag {
         margin-left: 8px;
     }
 }

@@ -9,8 +9,8 @@ const HashTag = ({ href, text, background }) => {
     };
 
     return (
-        <a href={href} className="HashTag" style={hashTagStyles}>
-            <span className="HashTag__text">{text}</span>
+        <a href={href} className="hash-tag" style={hashTagStyles}>
+            <span className="hash-tag__text">{text}</span>
         </a>
     );
 };
