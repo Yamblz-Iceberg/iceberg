@@ -4,21 +4,22 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import { Router, Route } from 'react-router-dom';
-import { syncHistoryWithStore } from 'react-router-redux';
-import createBrowserHistory from 'history/createBrowserHistory';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Home from './components/pages/Home';
-
 import reducer from './reducers';
 
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
-const history = syncHistoryWithStore(createBrowserHistory(), store);
+import './styles.scss';
+
+const store = createStore(reducer, {}, composeWithDevTools(applyMiddleware(thunk)));
 
 render(
     <Provider store={store}>
-        <Router history={history}>
-            <Route exact path="/" component={Home} />
+        <Router>
+            <Switch>
+                <Route path="/" component={Home} />
+                <Route path="*" render={() => <h1>Страница не найдена</h1>} />
+            </Switch>
         </Router>
     </Provider>,
     document.getElementById('app'),

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+
 import { Tabs } from './../blocks';
 
 const tabs = [
@@ -15,9 +17,16 @@ const tabs = [
 ];
 
 const Home = () => (
-    <div>
-        Hello, world!
+    <div className="main-wrap">
         <Tabs tabs={tabs} />
+        <Switch>
+            <Route exact path="/">
+                <h1>Лента</h1>
+            </Route>
+            <Route path="/new">
+                <h1>Новое</h1>
+            </Route>
+        </Switch>
     </div>
 );
 
