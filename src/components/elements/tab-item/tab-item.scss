@@ -1,0 +1,30 @@
+.tab__item {
+    display: inline-block;
+}
+
+.tab__link {
+    display: block;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: Arial;
+    position: relative;
+    color: #949494;
+    font-size: 12px;
+    padding: 9px 0;
+    &:hover {
+        text-decoration: none;
+    }
+    &-active {
+        color: #000;
+        font-weight: bold;
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #ffe200;
+        }
+    }
+}
