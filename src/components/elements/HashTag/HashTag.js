@@ -15,14 +15,10 @@ const HashTag = ({ href, text, background }) => {
     );
 };
 
-HashTag.defaultProps = {
-    background: '#ffe200',
-};
-
 HashTag.propTypes = {
     href: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-    background: PropTypes.string,
+    background: PropTypes.string.isRequired,
 };
 
 export default HashTag;
