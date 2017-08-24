@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './HashTag.scss';
+import './hash-tag.scss';
 
 const HashTag = ({ href, text, background }) => {
     const hashTagStyles = {
