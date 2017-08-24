@@ -3,40 +3,52 @@
 ## Используемые технологии
 
 1. Kebab-case для названий папок;
-2. Component + SASS;
-3. SASS + БЭМ;
-4. 4 пробела;
-5. Cordova;
-6. React + Redux + Thunk;
-7. Webpack + Jest;
-8. ESLint с конфигом от Airbnb.
+1. Component + SASS;
+1. SASS + БЭМ;
+1. 4 пробела;
+1. Cordova;
+1. React + Redux + Thunk;
+1. Webpack + Jest;
+1. ESLint с конфигом от Airbnb.
 
 ## NPM-скрипты
 
-1. `npm start` – запуск сервера (development);
-2. `npm run build` – билд проекта (production);
-3. `npm run patch` – патч для платформы iOS (необходимо запустить после `cordova platform add ios`);
-4. `cordova platform add ios/android` – добавление платформы;
-5. `cordova run ios/android` – билд статики в эмулятор;
+- `npm start` – запуск сервера (development);
+- `npm run build` – билд проекта (production);
+- `npm run patch` – патч для платформы iOS (необходимо запустить после `cordova platform add ios`);
+- `cordova platform add ios/android` – добавление платформы;
+- `cordova run ios/android` – билд статики в эмулятор;
 
 ## Пример структуры проекта
 
-```
-src/
-  components/
-    parts
-    elements
-    pages
-    blocks/
-      card/
-        index.js
-        card.js
-        card.scss
-        card.test.js
-  reducers/
-    card.js
-  services/
-  utils/
-  assets/
-    img/
+```text
+.
+├── components
+│   ├── blocks
+│   │   ├── hash-tape
+│   │   │   ├── hash-tape.js
+│   │   │   ├── hash-tape.scss
+│   │   │   └── index.js
+│   │   ├── index.js
+│   │   └── tabs
+│   │       ├── index.js
+│   │       ├── tabs.js
+│   │       └── tabs.scss
+│   ├── elements
+│   │   ├── hash-tag
+│   │   │   ├── hash-tag.js
+│   │   │   ├── hash-tag.scss
+│   │   │   └── index.js
+│   │   ├── index.js
+│   │   └── tab-item
+│   │       ├── index.js
+│   │       ├── tab-item.js
+│   │       └── tab-item.scss
+│   └── pages
+│       └── Home.js
+├── index.html
+├── index.js
+├── reducers
+│   └── index.js
+└── styles.scss
 ```
