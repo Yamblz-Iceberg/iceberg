@@ -1,0 +1,18 @@
+.hash-tag {
+    display: inline-block;
+    padding: 0 15px;
+    min-width: 85px;
+    height: 40px;
+    line-height: 40px;
+    box-sizing: border-box;
+    border-radius: 50px;
+    text-align: center;
+    text-decoration: none;
+    &__text {
+        font-size: 14px;
+        color: white;
+    }
+    & + .hash-tag {
+        margin-left: 8px;
+    }
+}
