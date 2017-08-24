@@ -13,14 +13,27 @@ import './styles.scss';
 
 const store = createStore(reducer, {}, composeWithDevTools(applyMiddleware(thunk)));
 
-render(
-    <Provider store={store}>
-        <Router>
-            <Switch>
-                <Route path="/" component={Home} />
-                <Route path="*" render={() => <h1>Страница не найдена</h1>} />
-            </Switch>
-        </Router>
-    </Provider>,
-    document.getElementById('app'),
-);
+function onDeviceReady() {
+    /* eslint-disable */
+    if (StatusBar) {
+        StatusBar.backgroundColorByHexString('#fff');
+        StatusBar.overlaysWebView(false);
+        StatusBar.styleDefault();
+    }
+    /* eslint-enable */
+
+    render(
+        <Provider store={store}>
+            <Router>
+                <Switch>
+                    <Route path="/" component={Home} />
+                    <Route path="*" render={() => <h1>Страница не найдена</h1>} />
+                </Switch>
+            </Router>
+        </Provider>,
+        document.getElementById('app'),
+    );
+}
+
+// document.addEventListener('deviceready', onDeviceReady);
+onDeviceReady();
