@@ -10,6 +10,9 @@ const OUTPUT_PATH = '../www';
 const PORT = 8080;
 
 module.exports = merge([{
+    devServer: {
+        historyApiFallback: true
+    },
     entry: [
         'react-hot-loader/patch',
         `webpack-dev-server/client?http://localhost:${PORT}`,

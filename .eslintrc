@@ -4,6 +4,7 @@
     "env": {
         "browser": true
     },
+    "parser": "babel-eslint",
     "rules": {
         "react/jsx-filename-extension": [ 1, { "extensions": [".js"] } ],
         // Валидация пробелов
@@ -12,6 +13,8 @@
         "import/prefer-default-export": "off",
         "import/no-extraneous-dependencies": "off",
         // Валидация пробелов для propTypes
-        "react/jsx-indent-props": ["error", 4]
+        "react/jsx-indent-props": ["error", 4],
+        // forbidden proptypes
+        "react/forbid-prop-types": "off"
     }
 }
