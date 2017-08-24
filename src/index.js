@@ -13,15 +13,25 @@ import './styles.scss';
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
-render(
-    <Provider store={store}>
-        <Router>
-            <Switch>
-                <Route path="/feed" component={Home} />
-                <Redirect from="/" exact to="/feed" />
-                <Route path="*" render={() => <h1>Страница не найдена</h1>} />
-            </Switch>
-        </Router>
-    </Provider>,
-    document.getElementById('app'),
-);
+function onDeviceReady() {
+    if (window.StatusBar) {
+        window.StatusBar.backgroundColorByHexString('#fff');
+        window.StatusBar.overlaysWebView(false);
+        window.StatusBar.styleDefault();
+    }
+
+    render(
+        <Provider store={store}>
+            <Router>
+                <Switch>
+                    <Route path="/feed" component={Home} />
+                    <Redirect from="/" to="/feed" />
+                </Switch>
+            </Router>
+        </Provider>,
+        document.getElementById('app'),
+    );
+}
+
+// document.addEventListener('deviceready', onDeviceReady);
+onDeviceReady();
