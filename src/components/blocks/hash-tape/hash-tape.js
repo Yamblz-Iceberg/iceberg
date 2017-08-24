@@ -2,19 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { HashTag } from '../../elements';
 
+import './hash-tape.scss';
+
 const HashTape = ({ hashes }) => (
-    <div>
-        {hashes && hashes.map(hash => <HashTag hash key={hash.id} />)}
+    <div className="hash-tape">
+        {(hashes.length > 0)
+            ? hashes.map(hash => <HashTag {...hash} key={hash.id} />)
+            : ''}
     </div>
 );
 
 HashTape.propTypes = {
     hashes: PropTypes.arrayOf(
-        PropTypes.shape({
-            href: PropTypes.string.isRequired,
-            string: PropTypes.string.isRequired,
-            background: PropTypes.string.isRequired,
-        }),
+        PropTypes.object.isRequired,
     ).isRequired,
 };
 
