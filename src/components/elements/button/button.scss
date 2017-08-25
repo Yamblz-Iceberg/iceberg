@@ -1,0 +1,14 @@
+.button {
+    padding: 0 41px;
+    height: 48px;
+    line-height: 48px;
+    border: 0;
+    border-radius: 4px;
+    outline-color: yellow;
+    &__text {
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: black;
+    }
+}
