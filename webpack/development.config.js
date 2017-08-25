@@ -42,6 +42,17 @@ module.exports = merge([{
                 test: /\.scss$/,
                 use: ['style-loader', 'css-loader', 'sass-loader']
             },
+            {
+                test: /\.svg$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            outputPath: '/assets/svg/'
+                        }
+                    }
+                ]
+            },
         ]
     },
     plugins: [
