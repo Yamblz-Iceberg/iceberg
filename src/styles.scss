@@ -4,3 +4,31 @@ body {
     max-width: 100%;
     font-family: Arial;
 }
+
+h1, h2, h3, h4 {
+    margin: 0;
+}
+
+// Заголовки подборок ("Скейтбординг для новичков")
+h1 {
+    font-size: 28px;
+    line-height: 32px;
+}
+
+// Заголовки ссылок
+h2 {
+    font-size: 20px;
+    line-height: 24px;
+}
+
+// Заголовки маленьких карточек подборок(в поиске и ЛК)
+h3 {
+    font-size: 20px;
+    line-height: 20px;
+}
+
+// Заголовки в плашках в хэддере
+h4 {
+    font-size: 16px;
+    line-height: 20px;
+}
