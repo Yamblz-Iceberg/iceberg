@@ -34,6 +34,13 @@ const initialState = {
                 background: '#547e8e',
             },
         ],
+        cards: [
+            {
+                id: 0,
+                background: '#f43f00',
+                title: 'Скейтбординг для новичков',
+            },
+        ],
     },
 };
 

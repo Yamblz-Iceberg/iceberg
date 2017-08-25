@@ -10,9 +10,6 @@ const OUTPUT_PATH = '../www';
 const PORT = 8080;
 
 module.exports = merge([{
-    devServer: {
-        historyApiFallback: true
-    },
     entry: [
         'react-hot-loader/patch',
         `webpack-dev-server/client?http://localhost:${PORT}`,
@@ -38,7 +35,7 @@ module.exports = merge([{
                 exclude: /node_modules/,
                 loader: 'babel-loader'
             },
-            { 
+            {
                 test: /\.scss$/,
                 use: ['style-loader', 'css-loader', 'sass-loader']
             },
@@ -48,7 +45,8 @@ module.exports = merge([{
                     {
                         loader: 'file-loader',
                         options: {
-                            outputPath: '/assets/svg/'
+                            name: '[name].[ext]',
+                            outputPath: 'assets/svg/',
                         }
                     }
                 ]
@@ -73,6 +71,8 @@ module.exports = merge([{
         stats: 'errors-only',
         host: 'localhost',
         port: PORT,
-        contentBase: path.join(__dirname, OUTPUT_PATH)
+        contentBase: path.join(__dirname, OUTPUT_PATH),
+        historyApiFallback: true,
+        publicPath: '/',
     }
 }]);
