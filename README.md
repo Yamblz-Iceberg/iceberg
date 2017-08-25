@@ -52,3 +52,20 @@
 │   └── index.js
 └── styles.scss
 ```
+
+#### Имена иконок в `icons-sprite.svg`
+- search
+- themes
+- archive
+- arrow-left
+- close
+- more-vert
+- search
+- settings
+- share
+- like-big
+- like-small
+- link
+- plus
+- save-big
+- save-small
