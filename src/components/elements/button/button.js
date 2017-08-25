@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import './button.scss';
 import vars from '../../../variables.scss';
 
-const Button = ({ text, background }) => {
+const Button = ({ icon, text, background }) => {
     const buttonStyles = {
         background,
     };
 
     return (
         <button className="button" style={buttonStyles}>
+            {icon}
             <span className="button__text">{text}</span>
         </button>
     );
