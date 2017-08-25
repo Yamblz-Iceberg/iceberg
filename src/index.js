@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import Home from './components/pages/Home';
+import Profile from './components/pages/Account-profile';
 import reducer from './reducers';
 
 import './styles.scss';
@@ -25,6 +26,7 @@ function onDeviceReady() {
             <Router>
                 <Switch>
                     <Route path="/feed" component={Home} />
+                    <Route path="/profile" component={Profile} />
                     <Redirect from="/" to="/feed" />
                 </Switch>
             </Router>
