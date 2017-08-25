@@ -13,7 +13,7 @@ const HomeHeader = () => (
             </div>
             <div className="home-header__block">
                 <Icon iconName={'archive'} iconHeight="18" iconWidth="18" />
-                <NavLink to={'/profile'} activeClassName="tab__link-active">
+                <NavLink to={'/profile'}>
                     <Icon className="home-header__icon-settings" iconName={'settings'} iconHeight="24" iconWidth="24" />
                 </NavLink>
             </div>
