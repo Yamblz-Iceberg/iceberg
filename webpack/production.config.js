@@ -39,6 +39,17 @@ module.exports = merge([{
                     ]
                 })
             },
+            {
+                test: /\.svg$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            outputPath: '/assets/svg/'
+                        }
+                    }
+                ]
+            },
         ]
     },
     plugins: [
