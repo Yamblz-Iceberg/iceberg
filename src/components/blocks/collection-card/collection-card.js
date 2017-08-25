@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Icon from './../../elements/icon/icon';
+import { Icon } from './../../elements';
 
 import './collection-card.scss';
 
@@ -23,11 +23,11 @@ const CollectionCard = ({ data }) => {
 
                 <div className="collection-card-footer__actions">
                     <div className="collection-card-footer__link-action">
-                        <Icon iconName={'link'} />
+                        <Icon iconName={'link'} iconWidth={'22'} iconHeight={'14'} />
                         <span>4</span>
                     </div>
                     <div className="collection-card-footer__save-action">
-                        <Icon iconName={'save-big'} />
+                        <Icon iconName={'save-big'} iconWidth={'16'} iconHeight={'20'} />
                         <span>4</span>
                     </div>
                 </div>
