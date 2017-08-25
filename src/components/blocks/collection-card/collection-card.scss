@@ -1,0 +1,39 @@
+.collection-card {
+    position: relative;
+    margin: 20px;
+    height: 300px;
+    border-radius: 10px;
+    padding: 16px;
+
+    &__title {
+        font-size: 28px;
+        font-weight: bold;
+        line-height: 31px;
+        color: #fff;
+    }
+
+    &:before, &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        height: 20px;
+        background-color: inherit;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 10px;
+    }
+
+    &:before {
+        width: 90%;
+        bottom: -20px;
+        z-index: -2;
+        filter: brightness(80%);
+    }
+
+    &:after {
+        width: 95%;
+        bottom: -10px;
+        filter: brightness(90%);
+        z-index: -1;
+    }
+}
