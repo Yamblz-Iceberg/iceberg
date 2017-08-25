@@ -1,29 +1,24 @@
 import React from 'react';
-
-// import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
+import { Icon } from '../../elements';
 
 import './home-header.scss';
-import { Icon } from '../../elements';
 
 const HomeHeader = () => (
     <header className="home-header">
-        <div>
-            <Icon iconName={'search'} />
-        </div>
-        <div>
-            <h2>Айсберг</h2>
-        </div>
-        <div>
-            <Icon iconName={'archive'} />
-            <Icon iconName={'settings'} />
+        <div className="home-header__container">
+            <div className="home-header__block">
+                <Icon iconName={'search'} iconHeight="20" iconWidth="20" />
+                <h3 className="home-header__title">Айсберг</h3>
+            </div>
+            <div className="home-header__block">
+                <Icon iconName={'archive'} iconHeight="18" iconWidth="18" />
+                <NavLink to={'/profile'} activeClassName="tab__link-active">
+                    <Icon className="home-header__icon-settings" iconName={'settings'} iconHeight="24" iconWidth="24" />
+                </NavLink>
+            </div>
         </div>
     </header>
 );
-
-// FeedHeader.propTypes = {
-//     hashes: PropTypes.arrayOf(
-//         PropTypes.object.isRequired,
-//     ).isRequired,
-// };
 
 export default HomeHeader;

@@ -13,22 +13,26 @@ h1, h2, h3, h4 {
 h1 {
     font-size: 28px;
     line-height: 32px;
+    font-weight: bold;
 }
 
 // Заголовки ссылок
 h2 {
     font-size: 20px;
     line-height: 24px;
+    font-weight: bold;
 }
 
 // Заголовки маленьких карточек подборок (в поиске и ЛК)
 h3 {
     font-size: 20px;
     line-height: 20px;
+    font-weight: normal;
 }
 
 // Заголовки в плашках в хэддере
 h4 {
     font-size: 16px;
     line-height: 20px;
+    font-weight: bold;
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
 
 import { Tabs, HomeHeader } from './../blocks';
 import { Feed } from './../part';
@@ -22,7 +21,6 @@ const Home = () => (
     <main className="main-wrap">
         <HomeHeader />
         <Tabs tabs={tabs} />
-        <NavLink to={'/profile'} activeClassName="tab__link-active">User</NavLink>
         <Switch>
             <Route exact path="/feed">
                 <Feed />
