@@ -45,6 +45,7 @@ module.exports = merge([{
                     {
                         loader: 'file-loader',
                         options: {
+                            name: '[name].[ext]',
                             outputPath: '/assets/svg/'
                         }
                     }
