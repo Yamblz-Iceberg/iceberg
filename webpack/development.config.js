@@ -57,6 +57,7 @@ module.exports = merge([{
             outputPath: path.join(__dirname, OUTPUT_PATH)
         })
     ],
+    devtool: 'inline-source-map',
     devServer: {
         stats: 'errors-only',
         host: 'localhost',
