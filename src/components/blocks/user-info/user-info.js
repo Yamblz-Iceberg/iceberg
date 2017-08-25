@@ -8,7 +8,7 @@ import './user-info.scss';
 
 const UserInfo = ({ user }) => (
     <div className="user__info">
-        <Avatar photo={user.photo} size={100} />
+        <Avatar photo={user.photo} size={120} />
         <br />
         <h1 className="user__name">{user.name} {user.lastname}</h1>
         <p className="user__description">{user.description}</p>

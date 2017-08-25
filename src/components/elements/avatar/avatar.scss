@@ -4,4 +4,12 @@
     border-radius: 50%;
     overflow: hidden;
     background-color: #f0f0f0;
+    position: relative;
+}
+
+.user__photo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
 }
