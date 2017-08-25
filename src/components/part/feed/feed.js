@@ -9,14 +9,23 @@ class Feed extends Component {
     onElementClick = e => (e);
     render() {
         const { items } = this.props.feed;
-        return (<div className="feed-container">
-            <div className="collection-card-container">
-                <CollectionCard data={items.cards[0]} />
+        return (
+            <div className="feed-container">
+
+                <div className="collection-card-container">
+                    <CollectionCard data={items.cards[0]} />
+                </div>
+
+                <div className="hash-tape__container">
+                    <HashTape hashes={items.hashes} />
+                </div>
+
+                <div className="collection-card-container">
+                    <CollectionCard data={items.cards[1]} />
+                </div>
+
             </div>
-            <div className="hash-tape__container">
-                <HashTape hashes={items.hashes} />
-            </div>
-        </div>);
+        );
     }
 }
 

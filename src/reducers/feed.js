@@ -40,6 +40,11 @@ const initialState = {
                 background: '#f43f00',
                 title: 'Скейтбординг для новичков',
             },
+            {
+                id: 1,
+                background: '#d1a571',
+                title: 'Анимации в новой iOS 11',
+            },
         ],
     },
 };
