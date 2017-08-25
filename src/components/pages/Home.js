@@ -1,8 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
 
-import { Tabs } from './../blocks';
+import { Tabs, HomeHeader } from './../blocks';
 import { Feed } from './../part';
 
 const tabs = [
@@ -19,8 +18,8 @@ const tabs = [
 ];
 
 const Home = () => (
-    <div className="main-wrap">
-        <NavLink to={'/profile'} activeClassName="tab__link-active">User</NavLink>
+    <main className="main-wrap">
+        <HomeHeader />
         <Tabs tabs={tabs} />
         <Switch>
             <Route exact path="/feed">
@@ -30,7 +29,7 @@ const Home = () => (
                 <h1>Новое</h1>
             </Route>
         </Switch>
-    </div>
+    </main>
 );
 
 export default Home;
