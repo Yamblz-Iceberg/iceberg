@@ -1,15 +1,16 @@
 .user__avatar {
-    display: inline-block;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 24px;
+    height: 24px;
     margin: auto;
     border-radius: 50%;
     overflow: hidden;
     background-color: #f0f0f0;
-    position: relative;
 }
 
 .user__photo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
+    display: block;
 }

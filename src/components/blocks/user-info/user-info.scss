@@ -1,5 +1,8 @@
 .user__info {
-    text-align: center;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
     padding-bottom: 16px;
     .user__avatar {
         width: 120px;
@@ -13,7 +16,9 @@
     margin-top: 16px;
     margin-bottom: 2px;
 }
+
 .user__description {
+    text-align: center;
     font-size: 14px;
     color: #949494;
 }
