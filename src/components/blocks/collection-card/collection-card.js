@@ -8,7 +8,7 @@ import { TemplateCard } from './..';
 const CollectionCard = ({ data }) => {
     const component = () => (
         <div className="collection-card">
-            <h4 className="collection-card__title">{data.name}</h4>
+            <h2 className="collection-card__title">{data.name}</h2>
         </div>
     );
 

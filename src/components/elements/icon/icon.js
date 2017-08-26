@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import '../../../assets/svg/icons-sprite.svg';
+import './icon.scss';
 
 const URL = './assets/svg/icons-sprite.svg';
 

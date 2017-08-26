@@ -10,7 +10,7 @@ html {
     margin: 0;
     max-width: 100%;
     height: 100%;
-    font-family: Arial;
+    font-family: 'Yandex Sans Text', Arial;
 }
 
 h1, h2, h3, h4 {
@@ -18,28 +18,28 @@ h1, h2, h3, h4 {
 }
 
 // Заголовки подборок ("Скейтбординг для новичков")
-h1 {
+h2 {
     font-size: 28px;
     line-height: 32px;
     font-weight: bold;
 }
 
 // Заголовки ссылок
-h2 {
+h3 {
     font-size: 20px;
     line-height: 24px;
     font-weight: bold;
 }
 
 // Заголовки маленьких карточек подборок (в поиске и ЛК)
-h3 {
+h4 {
     font-size: 20px;
     line-height: 20px;
     font-weight: normal;
 }
 
 // Заголовки в плашках в хэддере
-h4 {
+h5 {
     font-size: 16px;
     line-height: 20px;
     font-weight: bold;
@@ -47,13 +47,4 @@ h4 {
 
 #app {
     height: 100%;
-}
-
-.main-wrap {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: flex-start;
-    align-items: stretch;
-    align-content: stretch;
 }

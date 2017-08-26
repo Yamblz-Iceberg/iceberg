@@ -1,5 +1,13 @@
 // colors
 
 $main-yellow: #ffe200;
+$blue: #0476fc;
+$light-blue: #1672ff;
+$dark-blue: #0045cb;
 
-:export { mainYellow: $main-yellow; }
+:export {
+    mainYellow: $main-yellow;
+    blue: $blue;
+    lightBlue: $light-blue;
+    darkBlue: $dark-blue;
+}
