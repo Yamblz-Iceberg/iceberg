@@ -1,6 +1,8 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
+import './template-card.scss';
+
 import { Icon, Avatar } from '../../elements';
 
 const TemplateCard = ({ data }) => {
