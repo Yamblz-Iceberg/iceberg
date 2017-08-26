@@ -13,8 +13,6 @@ const CreateCard = ({ data }) => {
                 <Icon
                     iconName={'plus'}
                     iconColor={'#fff'}
-                    iconWidth={'14'}
-                    iconHeight={'14'}
                 />
                 <span className="create-card__text">добавить категории</span>
             </button>
