@@ -1,0 +1,37 @@
+@import '../../../variables.scss';
+
+.create-card {
+    &__button {
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+        height: 30px;
+        border: none;
+        border-radius: 50px;
+        background-color: $dark-blue;
+        color: white;
+    }
+
+    &__input {
+        margin-bottom: 10px;
+        padding-right: 40px;
+        padding-bottom: 5px;
+        width: 100%;
+        font-weight: 700;
+        font-size: 28px;
+        border: none;
+        border-bottom: 2px solid $light-blue;
+        background-color: transparent;
+        outline: none;
+        &:empty:before {
+            content: 'Название темы'
+        }
+        &, &::placeholder {
+            color: white;
+        }
+    }
+
+    &__text {
+        margin-left: 5px;
+    }
+}
