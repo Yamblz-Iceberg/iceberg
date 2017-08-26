@@ -13,6 +13,7 @@ const TemplateCard = ({ data }) => {
     const avatarOptions = {
         size: '25',
         photo: data.avatar,
+        iconColor: '#fff',
     };
 
     return (

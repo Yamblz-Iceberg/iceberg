@@ -14,8 +14,8 @@ const HomeHeader = ({ user }) => (
             </div>
             <div className="home-header__block">
                 <Icon iconName={'archive'} />
-                <NavLink to={'/profile'}>
-                    <div className="home-header__icon-user">
+                <NavLink to={'/profile'} className="home-header__icon-user">
+                    <div>
                         <Avatar photo={user.photo} />
                     </div>
                 </NavLink>
