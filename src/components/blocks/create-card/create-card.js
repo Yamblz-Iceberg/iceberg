@@ -16,7 +16,6 @@ const CreateCard = ({ data }) => {
                 />
                 <span className="create-card__text">добавить категории</span>
             </button>
-            <br />
             <div
                 className="create-card__input"
                 contentEditable
