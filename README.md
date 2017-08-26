@@ -57,7 +57,9 @@
 - search
 - themes
 - archive
-- arrow-left
+- arrow-back
+- arrow-detail
+- account
 - close
 - more-vert
 - search
