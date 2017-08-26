@@ -16,7 +16,11 @@ class Feed extends Component {
         const { cards } = this.props;
         return (
             <div className="feed-container">
-                { cards.map(card => (<CollectionCard data={card} />)) }
+                { cards.map(card => (
+                    <div className="collection-card-container">
+                        <CollectionCard key={card._id} data={card} />
+                    </div>
+                )) }
                 {/* <div className="collection-card-container">
                     <CollectionCard data={cards.cards[0]} />
                 </div>

@@ -50,9 +50,11 @@ const reducer = (state = initialState, action) => {
 };
 
 const loader = () => (
-    async (dispatch) => {
-        const cards = await fetchCards();
-        dispatch(loadCards(cards));
+    (dispatch) => {
+        fetchCards().then((cards) => {
+            console.log(cards);
+            dispatch(loadCards(cards.cards));
+        });
     }
 );
 
