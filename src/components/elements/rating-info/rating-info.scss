@@ -1,0 +1,14 @@
+.rating-info-wrap {
+    display: inline-block;
+}
+
+.rating-info {
+    display: flex;
+    border-radius: 2px;
+    border: 1px solid #e0e0e0;
+    padding: 4px 8px;
+    &_count {
+        font-size: 14px;
+        font-weight: bold;
+    }
+}

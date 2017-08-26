@@ -1,23 +1,25 @@
-.user__info {
+.user-info {
+    flex: 1;
     display: flex;
+    align-items: center;
     align-content: center;
     justify-content: center;
     flex-direction: column;
     padding-bottom: 16px;
     .user__avatar {
-        width: 120px;
-        height: 120px;
+        width: 180px;
+        height: 180px;
     }
 }
 
-.user__name {
+.user-info__name {
     text-align: center;
     font-size: 32px;
     margin-top: 16px;
     margin-bottom: 2px;
 }
 
-.user__description {
+.user-info__description {
     text-align: center;
     font-size: 14px;
     color: #949494;

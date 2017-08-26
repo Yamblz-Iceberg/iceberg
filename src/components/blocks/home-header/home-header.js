@@ -14,7 +14,7 @@ const HomeHeader = () => (
             <div className="home-header__block">
                 <Icon iconName={'archive'} iconHeight="20" iconWidth="20" />
                 <NavLink to={'/profile'}>
-                    <Icon className="home-header__icon-settings" iconName={'settings'} iconHeight="24" iconWidth="24" />
+                    <Icon className="home-header__icon-settings" iconName={'account'} iconHeight="20" iconWidth="20" />
                 </NavLink>
             </div>
         </div>
