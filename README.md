@@ -58,11 +58,10 @@
 - themes
 - archive
 - arrow-back
-- arrow-detail
+- arrow-details
 - account
 - close
 - more-vert
-- search
 - settings
 - share
 - like-big
