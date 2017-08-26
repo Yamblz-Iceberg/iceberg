@@ -11,9 +11,11 @@
 }
 
 .collection-card-container {
-    max-width: 320px;
+    width: 100%;
+    max-width: 370px;
     height: 320px;
-    margin: 0 25px 25px;
+    padding: 0 25px;
+    margin-bottom: 25px;
 }
 
 .hash-tape__container {
