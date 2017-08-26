@@ -53,7 +53,7 @@ TemplateCard.defaultProps = {
 TemplateCard.propTypes = {
     data: PropTypes.objectOf(PropTypes.shape({
         // React Component
-        component: PropTypes.object.isRequired,
+        component: PropTypes.func.isRequired,
         background: PropTypes.string.isRequired,
         // User
         userName: PropTypes.string.isRequired,
