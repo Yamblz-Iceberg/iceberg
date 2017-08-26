@@ -9,6 +9,7 @@ const Icon = props => (
         className={props.className}
         width={props.iconWidth}
         height={props.iconHeight}
+        color={props.iconColor}
     >
         <use xlinkHref={`${URL}#${props.iconName}`} />
     </svg>
@@ -19,10 +20,12 @@ Icon.propTypes = {
     className: PropTypes.string,
     iconWidth: PropTypes.string.isRequired,
     iconHeight: PropTypes.string.isRequired,
+    iconColor: PropTypes.string,
 };
 
 Icon.defaultProps = {
     className: '',
+    iconColor: '#000',
 };
 
 export default Icon;
