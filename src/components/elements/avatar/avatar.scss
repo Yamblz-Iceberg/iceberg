@@ -1,11 +1,12 @@
 .user__avatar {
     display: flex;
+    align-items: center;
     align-content: center;
     justify-content: center;
     flex-direction: column;
     width: 24px;
     height: 24px;
-    margin: auto;
+    margin: 0 auto;
     border-radius: 50%;
     overflow: hidden;
     background-color: #f0f0f0;

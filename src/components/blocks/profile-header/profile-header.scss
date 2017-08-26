@@ -1,8 +1,8 @@
-.home-header {
+.profile-header {
     height: 56px;
 }
 
-.home-header__container {
+.profile-header__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -10,20 +10,15 @@
     height: 100%;
 }
 
-.home-header__block {
+.profile-header__block {
     display: flex;
     align-items: center;
 }
 
-.home-header__title {
+.profile-header__title {
     margin-left: 25px;
 }
 
-.home-header__icon-settings {
-    display: flex;
-    align-self: center;
-}
-
-.home-header__icon-user {
+.profile-header__icon-settings {
     margin-left: 25px;
 }
