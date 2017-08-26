@@ -1,0 +1,24 @@
+.profile-header {
+    height: 56px;
+}
+
+.profile-header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 100%;
+}
+
+.profile-header__block {
+    display: flex;
+    align-items: center;
+}
+
+.profile-header__title {
+    margin-left: 25px;
+}
+
+.profile-header__icon-settings {
+    margin-left: 25px;
+}
