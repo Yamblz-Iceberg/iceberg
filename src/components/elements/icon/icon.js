@@ -15,17 +15,14 @@ const Icon = props => (
 );
 
 Icon.propTypes = {
-    iconName: PropTypes.string,
+    iconName: PropTypes.string.isRequired,
     className: PropTypes.string,
-    iconWidth: PropTypes.string,
-    iconHeight: PropTypes.string,
+    iconWidth: PropTypes.string.isRequired,
+    iconHeight: PropTypes.string.isRequired,
 };
 
 Icon.defaultProps = {
-    iconName: '',
     className: '',
-    iconWidth: '16',
-    iconHeight: '16',
 };
 
 export default Icon;
