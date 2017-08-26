@@ -11,7 +11,6 @@ import Profile from './components/pages/account';
 import reducer from './reducers';
 
 import './styles.scss';
-
 import './assets/fonts/fonts.scss';
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
