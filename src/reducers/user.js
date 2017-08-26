@@ -1,8 +1,8 @@
 const initialState = {
     name: 'Архип',
-    lastname: 'Бессмертный',
-    photo: 'https://i.ytimg.com/vi/cnxCp34BxDY/hqdefault.jpg',
-    description: 'За братуху втащу вертуху',
+    lastname: 'Быстров',
+    photo: 'https://i.pinimg.com/736x/18/35/aa/1835aae4518adfc95d6d119a4685048f.jpg',
+    description: 'С юмором по жизни',
     rating: 4.9,
 };
 
