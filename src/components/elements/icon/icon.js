@@ -17,9 +17,9 @@ const Icon = props => (
 
 Icon.propTypes = {
     iconName: PropTypes.string.isRequired,
-    className: PropTypes.string,
     iconWidth: PropTypes.string.isRequired,
     iconHeight: PropTypes.string.isRequired,
+    className: PropTypes.string,
     iconColor: PropTypes.string,
 };
 
