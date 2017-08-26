@@ -17,12 +17,7 @@ const Avatar = ({ photo, size }) => {
             <img className="user__photo" src={photo} alt="user" width={size} />
         </div>);
     } else {
-        template = (<Icon
-            className="home-header__icon-settings"
-            iconName={'account'}
-            iconHeight={size}
-            iconWidth={size}
-        />);
+        template = (<Icon iconName={'account'} />);
     }
     return template;
 };
