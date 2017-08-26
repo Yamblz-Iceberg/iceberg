@@ -12,6 +12,8 @@ import reducer from './reducers';
 
 import './styles.scss';
 
+import './assets/fonts/fonts.scss';
+
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 function onDeviceReady() {

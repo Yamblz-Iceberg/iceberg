@@ -1,3 +1,5 @@
+//@import '/assets/fonts/fonts.scss';
+
 *,
 *:before,
 *:after
@@ -10,7 +12,7 @@ html {
     margin: 0;
     max-width: 100%;
     height: 100%;
-    font-family: Arial;
+    font-family: 'Yandex Sans Text', Arial;
 }
 
 h1, h2, h3, h4 {
