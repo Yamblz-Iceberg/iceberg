@@ -29,11 +29,11 @@ const TemplateCard = ({ data }) => {
                 <div className="template-card-footer__actions">
                     <div className="template-card-footer__link-action">
                         <Icon iconName={'link'} iconWidth={'22'} iconHeight={'14'} />
-                        <span>{data.links}</span>
+                        <span>{data.linksCount}</span>
                     </div>
                     <div className="template-card-footer__save-action">
                         <Icon iconName={'save-big'} iconWidth={'16'} iconHeight={'20'} />
-                        <span>{data.savedLinks}</span>
+                        <span>{data.savedLinksCount}</span>
                     </div>
                 </div>
             </div>
@@ -44,8 +44,8 @@ const TemplateCard = ({ data }) => {
 TemplateCard.defaultProps = {
     data: PropTypes.objectOf(
         PropTypes.shape({
-            links: 0,
-            savedLinks: 0,
+            linksCount: 0,
+            savedLinksCount: 0,
         }),
     ),
 };
@@ -58,8 +58,8 @@ TemplateCard.propTypes = {
         // User
         userName: PropTypes.string.isRequired,
         avatar: PropTypes.string.isRequired,
-        links: PropTypes.number,
-        savedLinks: PropTypes.number,
+        linksCount: PropTypes.number,
+        savedLinksCount: PropTypes.number,
     })),
 };
 
