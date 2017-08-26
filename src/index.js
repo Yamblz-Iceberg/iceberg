@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import Home from './components/pages/home';
-import Profile from './components/pages/account-profile';
+import Profile from './components/pages/account';
 import reducer from './reducers';
 
 import './styles.scss';
