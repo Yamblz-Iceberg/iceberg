@@ -11,7 +11,7 @@ const TemplateCard = ({ data }) => {
     };
 
     const avatarOptions = {
-        size: 25,
+        size: '25',
         photo: data.avatar,
     };
 

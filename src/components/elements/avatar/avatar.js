@@ -4,12 +4,12 @@ import { Icon } from './../';
 
 import './avatar.scss';
 
-const Avatar = ({ photo, size = 24 }) => {
+const Avatar = ({ photo, size }) => {
     let template;
 
     const avatarStyles = {
-        width: size,
-        height: size,
+        width: `${size}px`,
+        height: `${size}px`,
     };
 
     if (photo) {
@@ -29,7 +29,12 @@ const Avatar = ({ photo, size = 24 }) => {
 
 Avatar.propTypes = {
     photo: PropTypes.string,
-    size: PropTypes.number,
+    size: PropTypes.string,
+};
+
+Avatar.defaultProps = {
+    photo: '',
+    size: '24',
 };
 
 export default Avatar;
