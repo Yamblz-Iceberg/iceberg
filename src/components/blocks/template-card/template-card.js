@@ -17,7 +17,7 @@ const TemplateCard = ({ data }) => {
 
     return (
         <div className="template-card" style={cardStyles}>
-            {data.component}
+            {data.component()}
 
             <div className="template-card-footer">
 
