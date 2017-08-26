@@ -1,26 +1,33 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { UserInfo } from './../blocks';
-import { Tabs } from './../blocks';
+import { UserInfo, ProfileHeader, ListGroup } from './../blocks';
 
-const tabs = [
+const menuItems = [
     {
         id: 1,
-        title: 'Мой лист',
+        title: 'Ссылок посоветовано',
         linkTo: '/profile',
+        info: 38,
     },
     {
         id: 2,
-        title: 'Темы',
-        linkTo: '/profile/themes',
+        title: 'Тем создано',
+        linkTo: '/profile',
+        info: 5,
     },
     {
         id: 3,
-        title: 'Эксперты',
-        linkTo: '/profile/experts',
+        title: 'Темы сохранено себе',
+        linkTo: '/profile',
+        info: 3,
+    },
+    {
+        id: 4,
+        title: 'Ссылок сохранено себе',
+        linkTo: '/profile',
+        info: 16,
     },
 ];
 
@@ -29,19 +36,9 @@ class AccountProfile extends Component {
     render() {
         const { user } = this.props;
         return (<div className="main-wrap">
+            <ProfileHeader />
             <UserInfo user={user} />
-            <Tabs tabs={tabs} />
-            <Switch>
-                <Route exact path="/profile">
-                    <h1>Мой лист</h1>
-                </Route>
-                <Route path="/profile/themes">
-                    <h1>Темы</h1>
-                </Route>
-                <Route path="/profile/experts">
-                    <h1>Эксперты</h1>
-                </Route>
-            </Switch>
+            <ListGroup items={menuItems} />
         </div>);
     }
 }
