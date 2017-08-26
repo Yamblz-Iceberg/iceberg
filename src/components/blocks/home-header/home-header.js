@@ -10,7 +10,7 @@ const HomeHeader = ({ user }) => (
         <div className="home-header__container">
             <div className="home-header__block">
                 <Icon iconName={'search'} />
-                <h3 className="home-header__title">Айсберг</h3>
+                <h4 className="home-header__title">Айсберг</h4>
             </div>
             <div className="home-header__block">
                 <Icon iconName={'archive'} />
