@@ -38,24 +38,8 @@ const CreateCard = ({ data }) => {
     );
 };
 
-CreateCard.defaultProps = {
-    data: PropTypes.objectOf(
-        PropTypes.shape({
-            linksCount: 0,
-            savedLinksCount: 0,
-        }),
-    ),
-};
-
 CreateCard.propTypes = {
-    data: PropTypes.objectOf(
-        PropTypes.shape({
-            userName: PropTypes.string.isRequired,
-            avatar: PropTypes.string.isRequired,
-            linksCount: PropTypes.number,
-            savedLinksCount: PropTypes.number,
-        }),
-    ).isRequired,
+    data: PropTypes.object.isRequired,
 };
 
 export default CreateCard;
