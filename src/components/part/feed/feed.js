@@ -39,9 +39,7 @@ class Feed extends Component {
 
 Feed.propTypes = {
     cards: PropTypes.arrayOf(PropTypes.object.isRequired),
-    // token: PropTypes.string.isRequired,
     loader: PropTypes.func.isRequired,
-    // userLoader: PropTypes.func.isRequired,
 };
 
 Feed.defaultProps = {
