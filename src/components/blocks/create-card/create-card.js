@@ -7,6 +7,12 @@ import { Icon } from './../../elements';
 import { TemplateCard } from './..';
 
 const CreateCard = ({ data }) => {
+    const maxNumberOfCharacters = (event) => {
+        if (event.target.textContent.length > 50 && event.keyCode !== 8) {
+            event.preventDefault();
+        }
+    };
+
     const component = (
         <div className="create-card">
             <button className="create-card__button">
@@ -18,6 +24,9 @@ const CreateCard = ({ data }) => {
             </button>
             <div
                 className="create-card__input"
+                role="textbox"
+                tabIndex="0"
+                onKeyDown={maxNumberOfCharacters}
                 contentEditable
             />
         </div>
