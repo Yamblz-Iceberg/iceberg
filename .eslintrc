@@ -17,6 +17,7 @@
         // forbidden proptypes
         "react/forbid-prop-types": "off",
         // чтобы можно было с одной папки доставать компоненты
-        "import/no-duplicates": "off"
+        "import/no-duplicates": "off",
+        "no-underscore-dangle": "off"
     }
 }

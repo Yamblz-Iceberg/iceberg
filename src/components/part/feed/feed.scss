@@ -4,15 +4,17 @@
     align-items: center;
     padding: 25px 0;
     .hash-tape {
-        padding: 0 20px;
+        padding: 0 25px;
         display: block;
         white-space: nowrap;
     }
 }
 
 .collection-card-container {
-    width: 320px;
+    width: 100%;
+    max-width: 370px;
     height: 320px;
+    padding: 0 25px;
     margin-bottom: 25px;
 }
 

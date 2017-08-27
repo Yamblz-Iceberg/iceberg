@@ -1,72 +1,60 @@
-const ADD_ITEM = 'ADD_ITEM';
+import { fetchCards } from './../services/feed';
+
+const FETCH_CARDS = 'FETCH_CARDS';
 
 const initialState = {
-    items: {
-        hashes: [
-            {
-                id: 0,
-                href: '/',
-                text: '#design',
-                background: 'red',
-            },
-            {
-                id: 1,
-                href: '/',
-                text: '#dev',
-                background: '#ffe200',
-            },
-            {
-                id: 2,
-                href: '/',
-                text: '#links',
-                background: 'black',
-            },
-            {
-                id: 3,
-                href: '/',
-                text: '#javascript',
-                background: '#b58c63',
-            },
-            {
-                id: 4,
-                href: '/',
-                text: '#humor',
-                background: '#547e8e',
-            },
-        ],
-        cards: [
-            {
-                id: 0,
-                background: '#f43f00',
-                title: 'Скейтбординг для новичков',
-            },
-            {
-                id: 1,
-                background: '#d1a571',
-                title: 'Анимации в новой iOS 11',
-            },
-        ],
-    },
+    hashes: [
+        {
+            id: 0,
+            href: '/',
+            text: '#design',
+            background: 'red',
+        },
+        {
+            id: 1,
+            href: '/',
+            text: '#dev',
+            background: '#ffe200',
+        },
+        {
+            id: 2,
+            href: '/',
+            text: '#links',
+            background: 'black',
+        },
+        {
+            id: 3,
+            href: '/',
+            text: '#javascript',
+            background: '#b58c63',
+        },
+        {
+            id: 4,
+            href: '/',
+            text: '#humor',
+            background: '#547e8e',
+        },
+    ],
+    cards: [],
 };
+
+const loadCards = cards => ({ type: FETCH_CARDS, payload: cards });
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-    case ADD_ITEM:
-        return { ...state, items: [...state.items, action.item] };
+    case FETCH_CARDS:
+        return { ...state, cards: action.payload };
     default:
         return state;
     }
 };
 
-const addItem = item => (dispatch) => {
-    dispatch({
-        type: ADD_ITEM,
-        item,
-    });
-};
+const loader = () => (
+    (dispatch) => {
+        fetchCards().then((cards) => {
+            dispatch(loadCards(cards.cards));
+        });
+    }
+);
 
-const actions = {
-    addItem,
-};
-
-export { reducer, actions };
+export { reducer, loader };

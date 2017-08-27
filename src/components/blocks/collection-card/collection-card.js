@@ -8,17 +8,17 @@ import { TemplateCard } from './..';
 const CollectionCard = ({ data }) => {
     const component = () => (
         <div className="collection-card">
-            <h2 className="collection-card__title">{data.title}</h2>
+            <h2 className="collection-card__title">{data.name}</h2>
         </div>
     );
 
     const tempCard = {
         component,
-        background: data.background,
-        userName: data.userName,
-        avatar: data.avatar,
-        linksCount: data.linksCount,
-        savedLinksCount: data.savedLinksCount,
+        background: data.color,
+        userName: `${data.author.firstName} ${data.author.lastName}`,
+        avatar: data.author.photo,
+        linksCount: data.links.length,
+        savedLinksCount: 5,
     };
 
     return (

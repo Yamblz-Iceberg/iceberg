@@ -1,19 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { HashTape, CollectionCard } from './../../blocks';
+import { CollectionCard } from './../../blocks';
+
+import { loader } from './../../../reducers/feed';
 
 import './feed.scss';
 
 class Feed extends Component {
-    onElementClick = e => (e);
+    componentDidMount() {
+        this.props.loader();
+    }
+
     render() {
-        const { items } = this.props.feed;
+        const { cards } = this.props;
         return (
             <div className="feed-container">
-
-                <div className="collection-card-container">
-                    <CollectionCard data={items.cards[0]} />
+                { cards.map(card => (
+                    <div key={card._id} className="collection-card-container">
+                        <CollectionCard data={card} />
+                    </div>
+                )) }
+                {/* <div className="collection-card-container">
+                    <CollectionCard data={cards.cards[0]} />
                 </div>
 
                 <div className="hash-tape__container">
@@ -21,26 +30,26 @@ class Feed extends Component {
                 </div>
 
                 <div className="collection-card-container">
-                    <CollectionCard data={items.cards[1]} />
-                </div>
-
+                    <CollectionCard data={cards.cards[1]} />
+                </div> */}
             </div>
         );
     }
 }
 
 Feed.propTypes = {
-    feed: PropTypes.object,
+    cards: PropTypes.arrayOf(PropTypes.object.isRequired),
+    loader: PropTypes.func.isRequired,
 };
 
 Feed.defaultProps = {
-    feed: {},
+    cards: {},
 };
 
 function mapStateToProps(state) {
     return {
-        feed: state.feed,
+        cards: state.feed.cards,
     };
 }
 
-export default connect(mapStateToProps)(Feed);
+export default connect(mapStateToProps, { loader })(Feed);

@@ -10,7 +10,7 @@ html {
     margin: 0;
     max-width: 100%;
     height: 100%;
-    font-family: Arial;
+    font-family: 'Yandex Sans Text', Arial;
 }
 
 h1, h2, h3, h4 {
@@ -31,14 +31,14 @@ h3 {
     font-weight: bold;
 }
 
-// Заголовки маленьких карточек подборок (в поиске и ЛК)
+// Заголовки в плашках в хэддере
 h4 {
     font-size: 20px;
     line-height: 20px;
     font-weight: normal;
 }
 
-// Заголовки в плашках в хэддере
+// Заголовки маленьких карточек подборок (в поиске и ЛК)
 h5 {
     font-size: 16px;
     line-height: 20px;
