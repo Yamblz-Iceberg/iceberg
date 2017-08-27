@@ -3,11 +3,41 @@ import PropTypes from 'prop-types';
 
 import './collection-card.scss';
 
+import { HashTag } from './../../elements';
 import { TemplateCard } from './..';
 
 const CollectionCard = ({ data }) => {
+    const hashes = [
+        {
+            href: '#',
+            text: '#анимации',
+        },
+        {
+            href: '#',
+            text: '#ux',
+        },
+        {
+            href: '#',
+            text: '#ui',
+        },
+        {
+            href: '#',
+            text: '#javascript',
+        },
+    ];
+
+    const hashStyle = {
+        className: 'hash-tag--small',
+        background: 'rgba(0,0,0, .5)',
+    };
+
     const component = (
         <div className="collection-card">
+            { hashes.map(hash => (
+                <HashTag
+                    {...Object.assign(hash, hashStyle)}
+                    key={hash.id}
+                />)) }
             <h2 className="collection-card__title">{data.name}</h2>
         </div>
     );
