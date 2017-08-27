@@ -7,7 +7,14 @@ import { Icon } from './../../elements';
 import { TemplateCard } from './..';
 
 const CreateCard = ({ data }) => {
-    const component = () => (
+    const maxNumberOfCharacters = (event) => {
+        // "event.keyCode !== 8" для backspace
+        if (event.target.textContent.length > 50 && event.keyCode !== 8) {
+            event.preventDefault();
+        }
+    };
+
+    const component = (
         <div className="create-card">
             <button className="create-card__button">
                 <Icon
@@ -16,9 +23,11 @@ const CreateCard = ({ data }) => {
                 />
                 <span className="create-card__text">добавить категории</span>
             </button>
-            <br />
             <div
                 className="create-card__input"
+                role="textbox"
+                tabIndex="0"
+                onKeyDown={maxNumberOfCharacters}
                 contentEditable
             />
         </div>
@@ -29,8 +38,8 @@ const CreateCard = ({ data }) => {
         background: 'blue',
         userName: data.userName,
         avatar: data.avatar,
-        linksCount: data.linksCount,
-        savedLinksCount: data.savedLinksCount,
+        linksCount: data.linksCount || 0,
+        savedLinksCount: data.savedLinksCount || 0,
     };
 
     return (
@@ -38,24 +47,8 @@ const CreateCard = ({ data }) => {
     );
 };
 
-CreateCard.defaultProps = {
-    data: PropTypes.objectOf(
-        PropTypes.shape({
-            linksCount: 0,
-            savedLinksCount: 0,
-        }),
-    ),
-};
-
 CreateCard.propTypes = {
-    data: PropTypes.objectOf(
-        PropTypes.shape({
-            userName: PropTypes.string.isRequired,
-            avatar: PropTypes.string.isRequired,
-            linksCount: PropTypes.number,
-            savedLinksCount: PropTypes.number,
-        }),
-    ).isRequired,
+    data: PropTypes.object.isRequired,
 };
 
 export default CreateCard;
