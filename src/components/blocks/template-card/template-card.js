@@ -18,7 +18,7 @@ const TemplateCard = ({ data }) => {
 
     return (
         <div className="template-card" style={cardStyles}>
-            {data.component()}
+            {data.component}
 
             <div className="template-card-footer">
 
@@ -59,8 +59,8 @@ TemplateCard.propTypes = {
         // User
         userName: PropTypes.string.isRequired,
         avatar: PropTypes.string.isRequired,
-        linksCount: PropTypes.number,
-        savedLinksCount: PropTypes.number,
+        linksCount: PropTypes.number.isRequired,
+        savedLinksCount: PropTypes.number.isRequired,
     })),
 };
 
