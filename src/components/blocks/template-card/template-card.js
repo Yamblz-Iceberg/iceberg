@@ -52,7 +52,7 @@ TemplateCard.defaultProps = {
 };
 
 TemplateCard.propTypes = {
-    data: PropTypes.objectOf(PropTypes.shape({
+    data: PropTypes.shape({
         // React Component
         component: PropTypes.object.isRequired,
         background: PropTypes.string.isRequired,
@@ -61,7 +61,7 @@ TemplateCard.propTypes = {
         avatar: PropTypes.string.isRequired,
         linksCount: PropTypes.number.isRequired,
         savedLinksCount: PropTypes.number.isRequired,
-    })),
+    }),
 };
 
 export default TemplateCard;
