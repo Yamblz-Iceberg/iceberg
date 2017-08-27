@@ -6,7 +6,7 @@ import './collection-card.scss';
 import { TemplateCard } from './..';
 
 const CollectionCard = ({ data }) => {
-    const component = () => (
+    const component = (
         <div className="collection-card">
             <h2 className="collection-card__title">{data.name}</h2>
         </div>
