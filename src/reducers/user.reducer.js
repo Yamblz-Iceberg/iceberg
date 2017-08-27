@@ -1,16 +1,29 @@
+import { fetchUser } from '../services/user.service';
+
+const FETCH_USER = 'FETCH_USER';
+
 const initialState = {
-    name: 'Архип',
-    lastname: 'Быстров',
-    photo: 'https://i.pinimg.com/736x/18/35/aa/1835aae4518adfc95d6d119a4685048f.jpg',
-    description: 'С юмором по жизни',
-    rating: 4.9,
+    user: {},
 };
+
+const loadUser = data => ({ type: FETCH_USER, payload: data });
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+    case FETCH_USER:
+        return { user: action.payload };
     default:
         return state;
     }
 };
 
-export { reducer };
+
+const userLoader = token => (
+    (dispatch) => {
+        fetchUser(token).then((data) => {
+            dispatch(loadUser(data));
+        });
+    }
+);
+
+export { reducer, userLoader };

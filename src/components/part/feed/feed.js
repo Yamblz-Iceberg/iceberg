@@ -10,6 +10,7 @@ import './feed.scss';
 class Feed extends Component {
     componentDidMount() {
         this.props.loader();
+        // console.log(this.props);
     }
 
     render() {
@@ -39,7 +40,9 @@ class Feed extends Component {
 
 Feed.propTypes = {
     cards: PropTypes.arrayOf(PropTypes.object.isRequired),
+    // token: PropTypes.string.isRequired,
     loader: PropTypes.func.isRequired,
+    // userLoader: PropTypes.func.isRequired,
 };
 
 Feed.defaultProps = {
@@ -49,6 +52,8 @@ Feed.defaultProps = {
 function mapStateToProps(state) {
     return {
         cards: state.feed.cards,
+        token: state.app.token,
+        user: state.user.user,
     };
 }
 
