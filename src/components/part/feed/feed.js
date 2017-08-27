@@ -49,6 +49,8 @@ Feed.defaultProps = {
 function mapStateToProps(state) {
     return {
         cards: state.feed.cards,
+        token: state.app.token,
+        user: state.user.user,
     };
 }
 
