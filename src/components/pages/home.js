@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import { Tabs, HomeHeader } from './../blocks';
 import { Feed } from './../part';
+import { userLoader } from './../../reducers/user.reducer';
 
 const tabs = [
     {
@@ -20,7 +21,10 @@ const tabs = [
 ];
 
 class Home extends Component {
-    onElementClick = e => (e);
+    componentDidMount() {
+        this.props.userLoader(this.props.token);
+    }
+
     render() {
         const { user } = this.props;
         return (<main className="main-wrap">
@@ -40,6 +44,8 @@ class Home extends Component {
 
 Home.propTypes = {
     user: PropTypes.object,
+    token: PropTypes.string.isRequired,
+    userLoader: PropTypes.func.isRequired,
 };
 
 Home.defaultProps = {
@@ -48,8 +54,9 @@ Home.defaultProps = {
 
 function mapStateToProps(state) {
     return {
-        user: state.user,
+        token: state.app.token,
+        user: state.user.data,
     };
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, { userLoader })(Home);
