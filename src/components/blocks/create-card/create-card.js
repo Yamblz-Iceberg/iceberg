@@ -8,6 +8,7 @@ import { TemplateCard } from './..';
 
 const CreateCard = ({ data }) => {
     const maxNumberOfCharacters = (event) => {
+        // "event.keyCode !== 8" для backspace
         if (event.target.textContent.length > 50 && event.keyCode !== 8) {
             event.preventDefault();
         }
