@@ -1,4 +1,4 @@
-import { fetchCards } from './../services/feed';
+import { fetchCards } from '../services/feed.service';
 
 const FETCH_CARDS = 'FETCH_CARDS';
 
