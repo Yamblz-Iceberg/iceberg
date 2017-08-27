@@ -18,7 +18,7 @@ const CollectionCard = ({ data }) => {
         userName: `${data.author.firstName} ${data.author.lastName}`,
         avatar: data.author.photo,
         linksCount: data.links.length || 0,
-        savedLinksCount: 5 || 0,
+        savedLinksCount: 5 || 0, // Todo: Заменить '5' на свойство
     };
 
     return (
