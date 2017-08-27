@@ -17,8 +17,8 @@ const CollectionCard = ({ data }) => {
         background: data.color,
         userName: `${data.author.firstName} ${data.author.lastName}`,
         avatar: data.author.photo,
-        linksCount: data.links.length,
-        savedLinksCount: 5,
+        linksCount: data.links.length || 0,
+        savedLinksCount: 5 || 0,
     };
 
     return (
