@@ -7,7 +7,7 @@ import { Icon } from './../../elements';
 import { TemplateCard } from './..';
 
 const CreateCard = ({ data }) => {
-    const component = () => (
+    const component = (
         <div className="create-card">
             <button className="create-card__button">
                 <Icon
@@ -28,8 +28,8 @@ const CreateCard = ({ data }) => {
         background: 'blue',
         userName: data.userName,
         avatar: data.avatar,
-        linksCount: data.linksCount,
-        savedLinksCount: data.savedLinksCount,
+        linksCount: data.linksCount || 0,
+        savedLinksCount: data.savedLinksCount || 0,
     };
 
     return (
