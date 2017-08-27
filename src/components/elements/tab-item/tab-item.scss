@@ -8,17 +8,16 @@
     display: block;
     text-decoration: none;
     text-transform: uppercase;
-    font-family: Arial;
     position: relative;
     color: #949494;
     font-size: 12px;
     padding: 9px 0;
+    font-weight: 500;
     &:hover {
         text-decoration: none;
     }
     &-active {
         color: #000;
-        font-weight: bold;
         &::after {
             content: '';
             position: absolute;
