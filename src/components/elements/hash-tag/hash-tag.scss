@@ -1,5 +1,7 @@
 .hash-tag {
     display: inline-block;
+    margin-right: 8px;
+    margin-bottom: 8px;
     padding: 0 15px;
     min-width: 85px;
     height: 40px;
@@ -8,6 +10,9 @@
     border-radius: 50px;
     text-align: center;
     text-decoration: none;
+    &:last-child {
+        margin-right: 0;
+    }
     &--small {
         height: 30px;
         line-height: 30px;
@@ -16,8 +21,5 @@
     &__text {
         font-size: 14px;
         color: white;
-    }
-    & + .hash-tag {
-        margin-left: 8px;
     }
 }
