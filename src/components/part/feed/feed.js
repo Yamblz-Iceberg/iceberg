@@ -10,7 +10,6 @@ import './feed.scss';
 class Feed extends Component {
     componentDidMount() {
         this.props.loader();
-        // console.log(this.props);
     }
 
     render() {
