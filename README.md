@@ -18,6 +18,7 @@
 - `npm run patch` – патч для платформы iOS (необходимо запустить после `cordova platform add ios`);
 - `cordova platform add ios/android` – добавление платформы;
 - `cordova run ios/android` – билд статики в эмулятор;
+- `npm run android-device` – билд в production и запуск на андроид устройстве;
 
 ## Пример структуры проекта
 
