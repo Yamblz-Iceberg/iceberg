@@ -4,7 +4,7 @@ import { Icon } from './../';
 
 import './avatar.scss';
 
-const Avatar = ({ photo, size }) => {
+const Avatar = ({ photo, size, iconColor }) => {
     let template;
 
     const avatarStyles = {
@@ -17,7 +17,7 @@ const Avatar = ({ photo, size }) => {
             <img className="user__photo" src={photo} alt="user" width={size} />
         </div>);
     } else {
-        template = (<Icon iconName={'account'} />);
+        template = (<Icon iconName={'account'} iconColor={iconColor} />);
     }
     return template;
 };
@@ -25,11 +25,13 @@ const Avatar = ({ photo, size }) => {
 Avatar.propTypes = {
     photo: PropTypes.string,
     size: PropTypes.string,
+    iconColor: PropTypes.string,
 };
 
 Avatar.defaultProps = {
     photo: '',
     size: '24',
+    iconColor: '#000',
 };
 
 export default Avatar;
