@@ -49,7 +49,7 @@ AccountProfile.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        user: state.user.user,
+        user: state.user.data,
     };
 }
 

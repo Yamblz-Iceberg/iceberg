@@ -55,7 +55,7 @@ Home.defaultProps = {
 function mapStateToProps(state) {
     return {
         token: state.app.token,
-        user: state.user.user,
+        user: state.user.data,
     };
 }
 

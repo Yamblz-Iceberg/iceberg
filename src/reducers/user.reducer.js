@@ -3,7 +3,7 @@ import { fetchUser } from '../services/user.service';
 const FETCH_USER = 'FETCH_USER';
 
 const initialState = {
-    user: {},
+    data: {},
 };
 
 const loadUser = data => ({ type: FETCH_USER, payload: data });
@@ -11,7 +11,7 @@ const loadUser = data => ({ type: FETCH_USER, payload: data });
 const reducer = (state = initialState, action) => {
     switch (action.type) {
     case FETCH_USER:
-        return { user: action.payload };
+        return { ...state, data: action.payload };
     default:
         return state;
     }
