@@ -46,7 +46,7 @@ module.exports = merge([{
                         loader: 'file-loader',
                         options: {
                             name: '[name].[ext]',
-                            outputPath: '/assets/svg/'
+                            outputPath: 'assets/svg/',
                         }
                     }
                 ]
@@ -58,7 +58,8 @@ module.exports = merge([{
                         loader: 'file-loader',
                         options: {
                             name: '[name].[ext]',
-                            outputPath: '/assets/fonts/',
+                            outputPath: 'assets/fonts/',
+                            publicPath: '../../',
                         }
                     }
                 ]

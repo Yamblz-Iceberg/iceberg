@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../../../assets/svg/icons-sprite.svg';
 import './icon.scss';
 
-const URL = './assets/svg/icons-sprite.svg';
+import Sprite from '../../../assets/svg/icons-sprite.svg';
+
+// const URL = '../svg/icons-sprite.svg';
 
 const iconsSizes = {
     account: {
@@ -70,6 +71,18 @@ const iconsSizes = {
         width: '18px',
         height: '20px',
     },
+    flash: {
+        width: '16px',
+        height: '20px',
+    },
+    question: {
+        width: '20px',
+        height: '20px',
+    },
+    'arrow-more--popup': {
+        width: '12px',
+        height: '8px',
+    },
 };
 
 const Icon = (props) => {
@@ -82,7 +95,7 @@ const Icon = (props) => {
             className={`${props.className} ${'svg-icon'}`}
             color={props.iconColor}
         >
-            <use xlinkHref={`${URL}#${props.iconName}`} />
+            <use xlinkHref={`${Sprite}#${props.iconName}`} />
         </svg>
     );
 };

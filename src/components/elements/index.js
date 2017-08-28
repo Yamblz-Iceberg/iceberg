@@ -6,3 +6,4 @@ export { default as Icon } from './icon';
 export { default as ListGroupItem } from './list-group-item';
 export { default as RatingInfo } from './rating-info';
 export { default as SwitchButton } from './switch-button';
+export { default as FloatingButton } from './floating-button';

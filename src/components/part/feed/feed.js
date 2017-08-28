@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CollectionCard } from './../../blocks';
 
-import { loader } from './../../../reducers/feed';
+import { loader } from '../../../reducers/feed.reducer';
 
 import './feed.scss';
 
@@ -49,6 +49,8 @@ Feed.defaultProps = {
 function mapStateToProps(state) {
     return {
         cards: state.feed.cards,
+        token: state.app.token,
+        user: state.user.user,
     };
 }
 

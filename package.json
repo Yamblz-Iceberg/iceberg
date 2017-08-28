@@ -8,7 +8,11 @@
         "clear-assets": "rm -rf ./www/assets",
         "start": "webpack-dev-server --env development --history-api-fallback",
         "build": "npm run clear-assets && webpack --env production",
-        "patch": "cd platforms/ios/cordova/node_modules/ && npm i ios-sim@latest"
+        "patch": "cd platforms/ios/cordova/node_modules/ && npm i ios-sim@latest",
+        "android-device": "npm run build && cordova run android --device",
+        "android-simulator": "npm run build && cordova emulate android",
+        "ios-device": "npm run build && cordova run ios --device",
+        "ios-simulator": "npm run build && cordova emulate ios"
     },
     "author": "",
     "license": "ISC",
