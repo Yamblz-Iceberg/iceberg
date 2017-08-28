@@ -7,3 +7,4 @@ export { default as TemplateCard } from './template-card';
 export { default as ProfileHeader } from './profile-header';
 export { default as ListGroup } from './list-group';
 export { default as CreateCard } from './create-card';
+export { default as CreateEmptyHeader } from './create-empty-header';
