@@ -1,0 +1,23 @@
+@import "./../../../variables";
+
+.collection-detail-info {
+    height: 370px;
+}
+.collection-detail-card {
+    position: relative;
+    height: 250px;
+    &__wrapper {
+        height: 250px;
+        background-color: $blue;
+        filter: blur(10px);
+        z-index: -1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    &__info {
+        padding: 0 20px 20px;
+    }
+}
