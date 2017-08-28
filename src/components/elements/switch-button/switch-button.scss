@@ -1,15 +1,7 @@
 @import '../../../variables.scss';
 
-#ios, #android {
-    position: absolute;
-    visibility: hidden;
-}
-
 .switch-button {
     position: relative;
-    top: -120px;
-    margin-right: 15px;
-
     display: inline-block;
     &__label {
         display: block;
@@ -83,7 +75,7 @@
                 width: 20px;
                 background-color: #eaeaeb;
                 transition: all 0.25s ease-in-out;
-                box-shadow: 0 5px 15px rgba($main-yellow, 0.3);
+                box-shadow: 0 5px 15px rgba($main-yellow, 0.3), 0 2px 3px rgba(0,0,0, .3);
             }
 
             &::before {
@@ -104,8 +96,10 @@
     }
 
     &__input {
-        &:checked + .switch-button__label {
+        position: absolute;
+        visibility: hidden;
 
+        &:checked + .switch-button__label {
             &.ios {
                 background-color: #fffb93;
                 transition: 0s background 0s ease-in-out;
