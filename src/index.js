@@ -6,8 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
-import Home from './components/pages/home';
-import Profile from './components/pages/account';
+import { Home, Profile } from './components/pages';
 import reducer from './reducers';
 
 import './styles.scss';
