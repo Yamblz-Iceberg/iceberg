@@ -71,3 +71,27 @@
 - plus
 - save-big
 - save-small
+
+
+### Запуск приложения
+
+1. Склонировать проект локально:
+
+`git clone https://github.com/batogov/iceberg.git`
+
+1. Перейти в директорию проекта: `cd iceberg`
+
+1. Установить зависимости: `npm i`
+
+1. Установить нужные платформы: 
+- Android `cordova platform add android`
+- iOS `cordova platform add ios`
+
+Если при установке платформы IOS возникает ошибка 'Error: Cannot read property 'replace' of undefined', то предварительно выполните команду: `npm run patch`
+
+1. Команды для запуска проекта:
+- в браузере в режиме **livereload**: `npm start`
+- на устройстве Android: `npm run android-device`
+- в эмуляторе Android по умолчанию: `npm run android-emulator`
+- на устройстве iOS: `npm run ios-device`
+- в эмуляторе iOS по умолчанию: `npm run ios-emulator`
