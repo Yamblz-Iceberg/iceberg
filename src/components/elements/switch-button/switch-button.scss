@@ -107,10 +107,11 @@
         &:checked + .switch-button__label {
 
             &.ios {
-                background-color: $main-yellow;
+                background-color: #fffb93;
                 transition: 0s background 0s ease-in-out;
 
                 &::after {
+                    background-color: $main-yellow;
                     transform: translateX(16px);
                 }
 
@@ -124,7 +125,7 @@
             }
 
             &.android {
-                background-color: rgba($main-yellow, 0.5);
+                background-color: #fffb93;
 
                 &::after {
                     background-color: $main-yellow;
