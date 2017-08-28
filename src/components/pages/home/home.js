@@ -4,7 +4,8 @@ import { Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { Tabs, HomeHeader } from './../../blocks';
-import { Feed } from './../../part';
+import { Feed } from './../../parts';
+import { FloatingButton } from './../../elements';
 import { userLoader } from './../../../reducers/user.reducer';
 
 import './home.scss';
@@ -35,6 +36,7 @@ class Home extends Component {
                     <HomeHeader user={user} />
                     <Tabs tabs={tabs} />
                 </div>
+                <FloatingButton />
                 <Switch>
                     <Route exact path="/feed">
                         <Feed />

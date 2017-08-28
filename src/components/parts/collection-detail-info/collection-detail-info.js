@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CollectionDetailHeader } from '../../blocks';
+import { CollectionDetailHeader } from '../../blocks/index';
 // import PropTypes from 'prop-types';
 import './collection-detail-info.scss';
 import { HashTag, Icon } from '../../elements';

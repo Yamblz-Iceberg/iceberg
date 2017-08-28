@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CollectionDetailInfo } from '../../part';
+import { CollectionDetailInfo } from '../../parts';
 // import PropTypes from 'prop-types';
 
 /* eslint-disable */
