@@ -57,7 +57,6 @@
 #### Имена иконок в `icons-sprite.svg`
 - search
 - themes
-- archive
 - arrow-back
 - arrow-details
 - account
@@ -71,6 +70,9 @@
 - plus
 - save-big
 - save-small
+- question
+- flash
+- arrow-more--popup
 
 
 ### Запуск приложения
