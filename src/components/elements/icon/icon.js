@@ -71,6 +71,18 @@ const iconsSizes = {
         width: '18px',
         height: '20px',
     },
+    flash: {
+        width: '16px',
+        height: '20px',
+    },
+    question: {
+        width: '20px',
+        height: '20px',
+    },
+    'arrow-more--popup': {
+        width: '12px',
+        height: '8px',
+    },
 };
 
 const Icon = (props) => {
