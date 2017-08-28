@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { Tabs, HomeHeader } from './../blocks';
-import { Feed } from './../part';
-import { userLoader } from './../../reducers/user.reducer';
+import { Tabs, HomeHeader } from './../../blocks';
+import { Feed } from './../../part';
+import { userLoader } from './../../../reducers/user.reducer';
+
+import './home.scss';
 
 const tabs = [
     {
@@ -27,18 +29,22 @@ class Home extends Component {
 
     render() {
         const { user } = this.props;
-        return (<main className="main-wrap">
-            <HomeHeader user={user} />
-            <Tabs tabs={tabs} />
-            <Switch>
-                <Route exact path="/feed">
-                    <Feed />
-                </Route>
-                <Route path="/feed/new">
-                    <h1>Новое</h1>
-                </Route>
-            </Switch>
-        </main>);
+        return (
+            <main className="home">
+                <div className="home__floating-header">
+                    <HomeHeader user={user} />
+                    <Tabs tabs={tabs} />
+                </div>
+                <Switch>
+                    <Route exact path="/feed">
+                        <Feed />
+                    </Route>
+                    <Route path="/feed/new">
+                        <h1>Новое</h1>
+                    </Route>
+                </Switch>
+            </main>
+        );
     }
 }
 
