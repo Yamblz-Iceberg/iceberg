@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { Tabs, HomeHeader } from './../../blocks';
-import { Feed } from './../../part';
+import { Feed } from './../../parts';
 import { FloatingButton } from './../../elements';
 import { userLoader } from './../../../reducers/user.reducer';
 
