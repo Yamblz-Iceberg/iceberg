@@ -23,6 +23,7 @@ class Feed extends Component {
 
     render() {
         const { cards } = this.props;
+
         return (
             <div className="feed-container">
                 { cards.map(card => (
@@ -57,7 +58,7 @@ Feed.propTypes = {
 };
 
 Feed.defaultProps = {
-    cards: {},
+    cards: [],
 };
 
 function mapStateToProps(state) {
