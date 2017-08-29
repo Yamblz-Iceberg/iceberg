@@ -1,2 +1,2 @@
-export const fetchCards = () => fetch('https://iceberg-project.herokuapp.com/feed')
+export const fetchFeed = () => fetch('https://iceberg-project.herokuapp.com/feed')
     .then(res => res.json());

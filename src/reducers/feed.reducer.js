@@ -1,49 +1,18 @@
-import { fetchCards } from '../services/feed.service';
+import { fetchFeed } from '../services/feed.service';
 
-const FETCH_CARDS = 'FETCH_CARDS';
+const FETCH_FEED = 'FETCH_FEED';
 
 const initialState = {
-    hashes: [
-        {
-            id: 0,
-            href: '/',
-            text: '#design',
-            background: 'red',
-        },
-        {
-            id: 1,
-            href: '/',
-            text: '#dev',
-            background: '#ffe200',
-        },
-        {
-            id: 2,
-            href: '/',
-            text: '#links',
-            background: 'black',
-        },
-        {
-            id: 3,
-            href: '/',
-            text: '#javascript',
-            background: '#b58c63',
-        },
-        {
-            id: 4,
-            href: '/',
-            text: '#humor',
-            background: '#547e8e',
-        },
-    ],
+    tags: [],
     cards: [],
 };
 
-const loadCards = cards => ({ type: FETCH_CARDS, payload: cards });
+const loadFeed = feed => ({ type: FETCH_FEED, payload: feed });
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-    case FETCH_CARDS:
-        return { ...state, cards: action.payload };
+    case FETCH_FEED:
+        return { cards: action.payload.cards, tags: action.payload.tags };
     default:
         return state;
     }
@@ -51,8 +20,8 @@ const reducer = (state = initialState, action) => {
 
 const loader = () => (
     (dispatch) => {
-        fetchCards().then((cards) => {
-            dispatch(loadCards(cards.cards));
+        fetchFeed().then((feed) => {
+            dispatch(loadFeed(feed));
         });
     }
 );
