@@ -16,7 +16,7 @@ class SearchResult extends Component {
     render() {
         const { search } = this.props;
         const emptyButtonIcon = (
-            <Icon iconName={'themes'} iconHeight="16" iconWidth="16" />
+            <Icon iconName={'themes'} />
         );
         const emptyResult = (
             <div className="search-result__empty-block">
