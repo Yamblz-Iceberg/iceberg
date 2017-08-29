@@ -28,14 +28,14 @@ class SearchHeader extends Component {
             <div className="search-header__container">
                 <div className="search-header__block" onClick={this.handleClearSearch}>
                     <NavLink to={'/feed'}>
-                        <Icon iconName={'arrow-back'} iconHeight="16" iconWidth="16" />
+                        <Icon iconName={'arrow-back'} />
                     </NavLink>
                 </div>
                 <div className="search-header__input-block">
                     <input type="text" className="search-header__input" placeholder="Поиск" value={this.state.text} onChange={this.handleChangeSearch} autoFocus />
                 </div>
                 <div className="search-header__block" onClick={this.handleClearSearch}>
-                    <Icon iconName={'close'} iconHeight="16" iconWidth="16" />
+                    <Icon iconName={'close'} />
                 </div>
             </div>
         </header>);
