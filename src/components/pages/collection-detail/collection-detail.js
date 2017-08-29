@@ -11,8 +11,7 @@ class CollectionDetail extends Component {
         this.props.collectionLoader(this.props.location.state);
     }
     render() {
-        const { collection } = this.props.collection;
-        console.log('collection', collection)
+        // const { collection } = this.props;
         return (
             <div>
                 <CollectionDetailInfo />
