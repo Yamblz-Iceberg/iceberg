@@ -4,7 +4,7 @@ const FETCH_FEED = 'FETCH_FEED';
 
 const initialState = {
     tags: [],
-    cards: [],
+    collections: [],
 };
 
 const loadFeed = feed => ({ type: FETCH_FEED, payload: feed });
@@ -12,7 +12,7 @@ const loadFeed = feed => ({ type: FETCH_FEED, payload: feed });
 const reducer = (state = initialState, action) => {
     switch (action.type) {
     case FETCH_FEED:
-        return { cards: action.payload.cards, tags: action.payload.tags };
+        return { collections: action.payload.collections, tags: action.payload.tags };
     default:
         return state;
     }
@@ -21,6 +21,7 @@ const reducer = (state = initialState, action) => {
 const loader = () => (
     (dispatch) => {
         fetchFeed().then((feed) => {
+            console.log(feed);
             dispatch(loadFeed(feed));
         });
     }
