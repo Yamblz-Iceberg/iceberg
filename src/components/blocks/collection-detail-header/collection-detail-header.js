@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Icon } from '../../elements';
 
@@ -13,8 +13,6 @@ class CollectionDetailHeader extends Component {
         };
     }
 
-    goBack = () => (this.props.history.goBack());
-
     render() {
         return (
             <header
@@ -22,8 +20,10 @@ class CollectionDetailHeader extends Component {
                 ${this.state.fixedHeader === true ? 'collection-detail-header--fixed' : ''}`}
             >
                 <div className="collection-detail-header__container">
-                    <div className="collection-detail-header__block" onClick={this.goBack}>
-                        <Icon iconName={'arrow-back'} iconColor={this.state.fixedHeader ? '#000' : '#fff'} />
+                    <div className="collection-detail-header__block">
+                        <Link to="/feed">
+                            <Icon iconName={'arrow-back'} iconColor={this.state.fixedHeader ? '#000' : '#fff'} />
+                        </Link>
                         <h4 className="collection-detail-header__title">
                             {this.state.fixedHeader === true ? this.props.collectionTitle : false}
                         </h4>
@@ -39,7 +39,6 @@ class CollectionDetailHeader extends Component {
 
 CollectionDetailHeader.propTypes = {
     collectionTitle: PropTypes.string.isRequired,
-    history: PropTypes.any.isRequired,
 };
 
-export default withRouter(CollectionDetailHeader);
+export default CollectionDetailHeader;

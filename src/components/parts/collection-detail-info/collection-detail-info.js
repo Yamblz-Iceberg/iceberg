@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { CollectionDetailHeader } from '../../blocks/index';
-import './collection-detail-info.scss';
-import { HashTag, Icon, Avatar } from '../../elements';
+import { CollectionDetailHeader } from '../../blocks';
+import { HashTag, Icon, Avatar, Button } from '../../elements';
 import { collectionLoader } from '../../../reducers/collection.reducer';
+
+import './collection-detail-info.scss';
 
 
 /* eslint-disable */
@@ -11,6 +12,13 @@ class CollectionDetailInfo extends Component {
     componentDidMount() {
         const { collectionId } = this.props;
         this.props.collectionLoader(collectionId);
+    }
+
+    constructor(props) {
+        super(props);
+        this.state =  {
+            showAllText: false
+        };
     }
 
     render() {
@@ -31,14 +39,14 @@ class CollectionDetailInfo extends Component {
                         <CollectionDetailHeader collectionTitle={ collection.name } />
 
                         <div className="collection-detail-card__info">
-                            <div className="collection-detail-card__desc">
+                            <div>
                                 {collection.tags.map(hash => (
                                     <HashTag
                                         {...hash}
                                         size={'small'}
                                         key={hash._id}
                                     />)) }
-                                <h2 className="collection-card__title">{ collection.name }</h2>
+                                <h2 className="collection-detail-card__title">{ collection.name }</h2>
                             </div>
 
                             <div className="template-card-footer">
@@ -61,6 +69,29 @@ class CollectionDetailInfo extends Component {
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div className={`collection-detail-description ${ this.state.showAllText === true ? 'collection-detail-description--show-all' : '' }`} >
+                        <div className="collection-detail-description__text">
+                            { collection.description }
+                        </div>
+                        <div className="collection-detail-description__icon"
+                             onClick={() => this.setState({showAllText: !this.state.showAllText}) }
+                        >
+                            <Icon iconName={'arrow-more--popup'} />
+                        </div>
+                    </div>
+
+                    <div className="collection-detail-actions">
+                        <Button {...{
+                                icon: <Icon iconName={'save-big'} />,
+                                text: 'подписаться',
+                            }}
+                        />
+                        <button className="collection-detail-actions__add-link">
+                            <Icon iconName={'link'} />
+                            <Icon iconName={'plus'} />
+                        </button>
                     </div>
                 </div>
             </section>

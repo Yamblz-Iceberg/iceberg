@@ -9,7 +9,7 @@ import variables from './../../../variables.scss';
 const LinkCard = ({ data }) => {
     const cardStyles = {
         backgroundColor: variables.blue,
-        backgroundImage: `url('${data.background}')`,
+        backgroundImage: `url('${data.photo}')`,
     };
 
     const avatarOptions = {
@@ -18,7 +18,7 @@ const LinkCard = ({ data }) => {
         iconColor: '#fff',
     };
 
-    return (<a className="link-card" href={data.href} style={cardStyles}>
+    return (<a className="link-card" href={data.url} style={cardStyles}>
         <div className="link-card__header">
             <div className="link-card__user">
                 <Avatar {...avatarOptions} />
@@ -33,7 +33,7 @@ const LinkCard = ({ data }) => {
         </div>
 
         <div className="link-card__body">
-            <h3 className="link-card__title">{data.title}</h3>
+            <h3 className="link-card__title">{data.name}</h3>
             <img src={data.favicon} className="link-card__favicon" alt="link_ico" />
             {
                 data.comment && data.comment.length ?
