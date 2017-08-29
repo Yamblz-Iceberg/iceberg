@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CollectionDetailHeader } from '../../blocks/index';
 import './collection-detail-info.scss';
-import { HashTag, Icon, Avatar } from '../../elements';
+import { HashTag, Icon, Avatar, Button } from '../../elements';
 import { collectionLoader } from '../../../reducers/collection.reducer';
 
 
@@ -80,6 +80,18 @@ class CollectionDetailInfo extends Component {
                         >
                             <Icon iconName={'arrow-more--popup'} />
                         </div>
+                    </div>
+
+                    <div className="collection-detail-actions">
+                        <Button {...{
+                                icon: <Icon iconName={'save-big'} />,
+                                text: 'подписаться',
+                            }}
+                        />
+                        <button className="collection-detail-actions__add-link">
+                            <Icon iconName={'link'} />
+                            <Icon iconName={'plus'} />
+                        </button>
                     </div>
                 </div>
             </section>

@@ -70,3 +70,23 @@
         }
     }
 }
+
+.collection-detail-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+
+    &__add-link {
+        display: flex;
+        justify-content: center;
+        width: 90px;
+        height: 48px;
+        background-color: transparent;
+        border: 2px solid $border-gray;
+        border-radius: 4px;
+
+        svg:first-of-type {
+            margin-right: 5px;
+        }
+    }
+}
