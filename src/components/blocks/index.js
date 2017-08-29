@@ -8,3 +8,4 @@ export { default as ProfileHeader } from './profile-header';
 export { default as ListGroup } from './list-group';
 export { default as CreateCard } from './create-card';
 export { default as CollectionDetailHeader } from './collection-detail-header';
+export { default as SearchHeader } from './search-header';

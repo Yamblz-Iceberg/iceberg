@@ -6,7 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
-import { Home, AccountProfile, CollectionDetail } from './components/pages';
+import { Home, AccountProfile, CollectionDetail, Search } from './components/pages';
 import reducer from './reducers';
 
 import './styles.scss';
@@ -28,6 +28,7 @@ function onDeviceReady() {
                     <Route path="/feed" component={Home} />
                     <Route path="/collection-detail" component={CollectionDetail} />
                     <Route path="/profile" component={AccountProfile} />
+                    <Route path="/search" component={Search} />
                     <Redirect from="/" to="/feed" />
                 </Switch>
             </Router>
