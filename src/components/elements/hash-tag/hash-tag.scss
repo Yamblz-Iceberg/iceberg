@@ -1,7 +1,6 @@
 .hash-tag {
     display: inline-block;
     margin-right: 8px;
-    margin-bottom: 8px;
     padding: 0 15px;
     min-width: 85px;
     height: 40px;
@@ -19,7 +18,10 @@
     }
 
     &--small {
-        height: 24px;
+        margin-bottom: 8px;
+        color: #fff;
+        height: 25px;
+        line-height: 25px;
         font-size: 12px;
         line-height: 24px;
         color: #fff;
