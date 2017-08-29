@@ -8,7 +8,7 @@ import './create-empty-header.scss';
 const CreateEmptyHeader = ({ callback }) => (
     <header className="create-empty-header">
         <NavLink to={'/feed'}>
-            <Icon iconName={'arrow-back'} iconHeight="16" iconWidth="16" />
+            <Icon iconName={'arrow-back'} />
         </NavLink>
         <h4 className="create-empty-header__title">Новая тема</h4>
         <button
