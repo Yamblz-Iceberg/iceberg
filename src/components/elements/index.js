@@ -5,4 +5,6 @@ export { default as Avatar } from './avatar';
 export { default as Icon } from './icon';
 export { default as ListGroupItem } from './list-group-item';
 export { default as RatingInfo } from './rating-info';
+export { default as SwitchButton } from './switch-button';
 export { default as FloatingButton } from './floating-button';
+export { default as Notice } from './notice';
