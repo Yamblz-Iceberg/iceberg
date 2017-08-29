@@ -5,6 +5,8 @@ const FETCH_COLLECTION = 'FETCH_COLLECTION';
 const initialState = {
     author: [],
     tags: [],
+    name: '',
+    description: '',
 };
 
 const loadCollection = collection => ({ type: FETCH_COLLECTION, payload: collection });

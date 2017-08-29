@@ -13,8 +13,16 @@ class CollectionDetailInfo extends Component {
         this.props.collectionLoader(collectionId);
     }
 
+    constructor(props) {
+        super(props);
+        this.state =  {
+            showAllText: false
+        };
+    }
+
     render() {
         const { collection } = this.props;
+        console.log(collection);
 
         const avatarOptions = {
             size: '25',
@@ -31,14 +39,14 @@ class CollectionDetailInfo extends Component {
                         <CollectionDetailHeader collectionTitle={ collection.name } />
 
                         <div className="collection-detail-card__info">
-                            <div className="collection-detail-card__desc">
+                            <div>
                                 {collection.tags.map(hash => (
                                     <HashTag
                                         {...hash}
                                         size={'small'}
                                         key={hash._id}
                                     />)) }
-                                <h2 className="collection-card__title">{ collection.name }</h2>
+                                <h2 className="collection-detail-card__title">{ collection.name }</h2>
                             </div>
 
                             <div className="template-card-footer">
@@ -60,6 +68,17 @@ class CollectionDetailInfo extends Component {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <div className={`collection-detail-description ${ this.state.showAllText === true ? 'collection-detail-description--show-all' : '' }`} >
+                        <div className="collection-detail-description__text">
+                            { collection.description }
+                        </div>
+                        <div className="collection-detail-description__icon"
+                             onClick={() => this.setState({showAllText: !this.state.showAllText}) }
+                        >
+                            <Icon iconName={'arrow-more--popup'} />
                         </div>
                     </div>
                 </div>
