@@ -21,7 +21,6 @@ const reducer = (state = initialState, action) => {
 const loader = () => (
     (dispatch) => {
         fetchFeed().then((feed) => {
-            console.log(feed);
             dispatch(loadFeed(feed));
         });
     }
