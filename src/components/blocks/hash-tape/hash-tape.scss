@@ -1,7 +1,10 @@
 .hash-tape {
-    display: flex;
     overflow-x: auto;
+    padding: 25px;
+    display: block;
+    white-space: nowrap;
     -webkit-overflow-scrolling: touch;
+    
     &::-webkit-scrollbar {
         display: none;
     }

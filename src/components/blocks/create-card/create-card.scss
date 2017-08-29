@@ -24,11 +24,11 @@
         border-bottom: 2px solid $light-blue;
         background-color: transparent;
         outline: none;
+        color: #fff;
+        
         &:empty:before {
+            color: #fff;
             content: 'Название темы'
-        }
-        &, &::placeholder {
-            color: white;
         }
     }
 
