@@ -4,6 +4,7 @@ import { reducer as user } from './user.reducer';
 import { reducer as search } from './search.reducer';
 import { reducer as app } from './app.reducer';
 import { reducer as collection } from './collection.reducer';
+import { reducer as modal } from './modal.reducer';
 
 export default combineReducers({
     feed,
@@ -11,4 +12,5 @@ export default combineReducers({
     search,
     app,
     collection,
+    modal,
 });
