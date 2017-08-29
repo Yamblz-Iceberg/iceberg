@@ -2,4 +2,10 @@
     &__card-wrapper {
         padding: 20px;
     }
+    &__add-description {
+        display: flex;
+        justify-content: center;
+        margin: 10px 0;
+        text-align: center;
+    }
 }
