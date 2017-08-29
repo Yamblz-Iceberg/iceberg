@@ -21,19 +21,20 @@ class Feed extends Component {
         }
     }
 
-    renderFeed = (cardsCount, tagsCount) => {
-        const { cards, tags } = this.props;
+    renderFeed = (collectionsCount, tagsCount) => {
+        const { collections, tags } = this.props;
 
         const feedToRender = [];
 
-        let cardsIndex = 0;
+        let collectionsIndex = 0;
         let tagsIndex = 0;
 
-        while (cardsIndex < cards.length) {
-            const currentCards = cards.slice(cardsIndex, cardsIndex + cardsCount);
+        while (collectionsIndex < collections.length) {
+            const currentCollections =
+                collections.slice(collectionsIndex, collectionsIndex + collectionsCount);
 
             feedToRender.push(
-                currentCards.map(card => (
+                currentCollections.map(card => (
                     <div
                         key={card._id}
                         className="collection-card-container"
@@ -44,9 +45,9 @@ class Feed extends Component {
                 )),
             );
 
-            cardsIndex += cardsCount;
+            collectionsIndex += collectionsCount;
 
-            if (currentCards.length === cardsCount) {
+            if (currentCollections.length === collectionsCount) {
                 const currentTags = tags.slice(tagsIndex, tagsIndex + tagsCount);
 
                 const key = currentTags[0]._id + currentTags[1]._id;
@@ -72,20 +73,20 @@ class Feed extends Component {
 }
 
 Feed.propTypes = {
-    cards: PropTypes.arrayOf(PropTypes.object.isRequired),
+    collections: PropTypes.arrayOf(PropTypes.object.isRequired),
     tags: PropTypes.arrayOf(PropTypes.object.isRequired),
     loader: PropTypes.func.isRequired,
     history: PropTypes.any.isRequired,
 };
 
 Feed.defaultProps = {
-    cards: [],
+    collections: [],
     tags: [],
 };
 
 function mapStateToProps(state) {
     return {
-        cards: state.feed.cards,
+        collections: state.feed.collections,
         tags: state.feed.tags,
         token: state.app.token,
         user: state.user.user,
