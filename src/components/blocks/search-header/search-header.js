@@ -14,8 +14,6 @@ class SearchHeader extends Component {
         super(props);
         const { search } = this.props;
         this.state = search;
-        this.handleChangeSearch = this.handleChangeSearch.bind(this);
-        this.handleClearSearch = this.handleClearSearch.bind(this);
     }
     handleChangeSearch = (event) => {
         this.setState({ text: event.target.value });
