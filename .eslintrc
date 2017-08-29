@@ -18,6 +18,7 @@
         "react/forbid-prop-types": "off",
         // чтобы можно было с одной папки доставать компоненты
         "import/no-duplicates": "off",
-        "no-underscore-dangle": "off"
+        "no-underscore-dangle": "off",
+        "jsx-a11y/no-static-element-interactions": "off"
     }
 }
