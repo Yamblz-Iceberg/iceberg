@@ -9,12 +9,14 @@ class CollectionDetail extends Component {
     constructor(props) {
         super(props);
         this.props.collectionLoader(this.props.location.state);
+        console.log(props);
     }
     render() {
-        // const { collection } = this.props;
+        const { collection } = this.props;
+        console.log('collection', collection);
         return (
             <div>
-                <CollectionDetailInfo />
+                <CollectionDetailInfo collection={collection} />
             </div>
         );
     }

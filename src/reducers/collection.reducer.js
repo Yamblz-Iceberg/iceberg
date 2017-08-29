@@ -17,8 +17,8 @@ const reducer = (state = initialState, action) => {
 
 const collectionLoader = collectionId => (
     (dispatch) => {
-        fetchCollection(collectionId).then((collection) => {
-            dispatch(loadCollection(collection.collection[0]));
+        fetchCollection(collectionId).then((res) => {
+            dispatch(loadCollection(res.collection));
         });
     }
 );

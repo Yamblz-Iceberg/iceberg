@@ -9,11 +9,11 @@ import { HashTag, Icon } from '../../elements';
 class CollectionDetailInfo extends Component {
     constructor(props) {
         super(props);
-        this.hashes = [{id: '1', name: 'tag1'}, {id: '2', name: 'tag2'}];
         this.hashStyle = {
             className: 'hash-tag--small',
             color: 'rgba(0,0,0, .5)',
         };
+        console.log('CollectionDetailInfo', props);
     }
     render() {
         return (
