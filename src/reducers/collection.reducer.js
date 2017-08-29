@@ -2,7 +2,9 @@ import { fetchCollection } from '../services/collection.service';
 
 const FETCH_COLLECTION = 'FETCH_COLLECTION';
 
-const initialState = {};
+const initialState = {
+    tags: [],
+};
 
 const loadCollection = collection => ({ type: FETCH_COLLECTION, payload: collection });
 

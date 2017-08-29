@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { CollectionDetailHeader } from '../../blocks/index';
-// import PropTypes from 'prop-types';
 import './collection-detail-info.scss';
 import { HashTag, Icon } from '../../elements';
+import { collectionLoader } from '../../../reducers/collection.reducer';
 
 
 /* eslint-disable */
 class CollectionDetailInfo extends Component {
-    constructor(props) {
-        super(props);
-        this.hashStyle = {
-            className: 'hash-tag--small',
-            color: 'rgba(0,0,0, .5)',
-        };
-        console.log('CollectionDetailInfo', props);
+    componentDidMount() {
+        const { collectionId } = this.props;
+        this.props.collectionLoader(collectionId);
     }
     render() {
+        const { collection } = this.props;
+        console.log('collection', collection);
         return (
             <section>
                 <div className="collection-detail-info">
@@ -23,9 +22,10 @@ class CollectionDetailInfo extends Component {
                     <div className="collection-detail-card">
                         <CollectionDetailHeader collectionTitle={'Test'} />
                         <div className="collection-detail-card__info">
-                            { this.hashes.map(hash => (
+                            {collection.tags.map(hash => (
                                 <HashTag
-                                    {...Object.assign(hash, this.hashStyle)}
+                                    {...hash}
+                                    size={'small'}
                                     key={hash._id}
                                 />)) }
                             <h2 className="collection-card__title">{'Айсберг'}</h2>
@@ -52,4 +52,7 @@ class CollectionDetailInfo extends Component {
     }
 }
 
-export default CollectionDetailInfo;
+export default connect(
+    state => ({ collection: state.collection }),
+    { collectionLoader }
+)(CollectionDetailInfo);
