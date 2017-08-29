@@ -5,6 +5,7 @@
     padding: 0 15px;
     min-width: 85px;
     height: 40px;
+    font-size: 14px;
     line-height: 40px;
     box-sizing: border-box;
     border-radius: 50px;
@@ -15,11 +16,10 @@
     }
     &--small {
         height: 25px;
-        line-height: 25px;
         font-size: 12px;
+        line-height: 25px;
     }
     &__text {
-        font-size: 14px;
         color: white;
     }
 }
