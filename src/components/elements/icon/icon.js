@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './icon.scss';
 
-import Sprite from '../../../assets/svg/icons-sprite.svg';
+import '../../../assets/svg/icons-sprite.svg';
 
-// const URL = '../svg/icons-sprite.svg';
 
 const iconsSizes = {
     account: {
@@ -88,6 +87,9 @@ const iconsSizes = {
 const Icon = (props) => {
     const iconWidth = props.iconWidth !== '' ? props.iconWidth : iconsSizes[props.iconName].width;
     const iconHeight = props.iconHeight !== '' ? props.iconHeight : iconsSizes[props.iconName].height;
+    const url = window.cordova !== undefined
+        ? `${window.cordova.file.applicationDirectory}www/assets/svg/icons-sprite.svg`
+        : 'assets/svg/icons-sprite.svg';
     return (
         <svg
             width={iconWidth}
@@ -95,7 +97,8 @@ const Icon = (props) => {
             className={`${props.className} ${'svg-icon'}`}
             color={props.iconColor}
         >
-            <use xlinkHref={`${Sprite}#${props.iconName}`} />
+            <use xlinkHref={`${url}#${props.iconName}`} />
+
         </svg>
     );
 };
