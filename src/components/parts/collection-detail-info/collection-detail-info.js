@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { CollectionDetailHeader } from '../../blocks/index';
-import './collection-detail-info.scss';
+import { CollectionDetailHeader } from '../../blocks';
 import { HashTag, Icon, Avatar, Button } from '../../elements';
 import { collectionLoader } from '../../../reducers/collection.reducer';
+
+import './collection-detail-info.scss';
 
 
 /* eslint-disable */
