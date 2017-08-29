@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './switch-button.scss';
 
 const SwitchButton = ({ type }) => {
-    const switchButtonsId = `${type}-${Math.floor(Math.random() * (1, 100))}`;
+    const switchButtonsId = `${type}-${Math.random()}`;
 
     return (
         <div className="switch-button">
