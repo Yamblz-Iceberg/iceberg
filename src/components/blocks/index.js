@@ -10,3 +10,4 @@ export { default as CreateCard } from './create-card';
 export { default as CreateEmptyHeader } from './create-empty-header';
 export { default as Option } from './option';
 export { default as CollectionDetailHeader } from './collection-detail-header';
+export { default as SearchHeader } from './search-header';

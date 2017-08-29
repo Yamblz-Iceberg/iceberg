@@ -13,6 +13,12 @@ html {
     font-family: 'Yandex Sans Text', Arial;
 }
 
+button,
+input,
+input:focus {
+    outline: none;
+}
+
 h1, h2, h3, h4 {
     margin: 0;
 }
