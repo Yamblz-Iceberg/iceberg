@@ -6,6 +6,7 @@
 .collection-detail-card {
     position: relative;
     height: 250px;
+
     &__wrapper {
         height: 250px;
         background-color: $blue;
@@ -17,7 +18,12 @@
         right: 0;
         bottom: 0;
     }
+
     &__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 196px;
         padding: 0 20px 20px;
     }
 }

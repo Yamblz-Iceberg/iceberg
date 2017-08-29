@@ -2,7 +2,10 @@ import { fetchCollection } from '../services/collection.service';
 
 const FETCH_COLLECTION = 'FETCH_COLLECTION';
 
-const initialState = {};
+const initialState = {
+    author: [],
+    tags: [],
+};
 
 const loadCollection = collection => ({ type: FETCH_COLLECTION, payload: collection });
 
@@ -17,8 +20,8 @@ const reducer = (state = initialState, action) => {
 
 const collectionLoader = collectionId => (
     (dispatch) => {
-        fetchCollection(collectionId).then((collection) => {
-            dispatch(loadCollection(collection.collection[0]));
+        fetchCollection(collectionId).then((res) => {
+            dispatch(loadCollection(res.collection));
         });
     }
 );
