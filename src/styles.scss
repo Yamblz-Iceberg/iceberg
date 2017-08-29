@@ -3,7 +3,9 @@
 *:after
 {
     box-sizing: border-box;
+    outline: none;
 }
+
 body,
 html {
     padding: 0;
@@ -13,14 +15,12 @@ html {
     font-family: 'Yandex Sans Text', Arial;
 }
 
-button,
-input,
-input:focus {
-    outline: none;
-}
-
 h1, h2, h3, h4 {
     margin: 0;
+}
+
+input[type=text] {
+    border: none;
 }
 
 // Заголовки подборок ("Скейтбординг для новичков")
