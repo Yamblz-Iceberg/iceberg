@@ -1,6 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
+import { cardBlue } from './../../../variables.scss';
 import './create-card.scss';
 
 import { Icon } from './../../elements';
@@ -35,7 +36,7 @@ const CreateCard = ({ data }) => {
 
     const tempCard = {
         component,
-        background: 'blue',
+        background: cardBlue,
         userName: data.userName,
         avatar: data.avatar,
         linksCount: data.linksCount || 0,
