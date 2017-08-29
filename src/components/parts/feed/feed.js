@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { CollectionCard } from './../../blocks';
+import { CollectionCard, HashTape } from './../../blocks';
 
 import { loader } from '../../../reducers/feed.reducer';
 
@@ -21,11 +21,20 @@ class Feed extends Component {
         }
     }
 
-    render() {
-        const { cards } = this.props;
-        return (
-            <div className="feed-container">
-                { cards.map(card => (
+    renderFeed = (collectionsCount, tagsCount) => {
+        const { collections, tags } = this.props;
+
+        const feedToRender = [];
+
+        let collectionsIndex = 0;
+        let tagsIndex = 0;
+
+        while (collectionsIndex < collections.length) {
+            const currentCollections =
+                collections.slice(collectionsIndex, collectionsIndex + collectionsCount);
+
+            feedToRender.push(
+                currentCollections.map(card => (
                     <div
                         key={card._id}
                         className="collection-card-container"
@@ -33,36 +42,52 @@ class Feed extends Component {
                     >
                         <CollectionCard data={card} />
                     </div>
-                )) }
-                {/* <div className="collection-card-container">
-                    <CollectionCard data={cards.cards[0]} />
-                </div>
+                )),
+            );
 
-                <div className="hash-tape__container">
-                    <HashTape hashes={items.hashes} />
-                </div>
+            collectionsIndex += collectionsCount;
 
-                <div className="collection-card-container">
-                    <CollectionCard data={cards.cards[1]} />
-                </div> */}
+            if (currentCollections.length === collectionsCount) {
+                const currentTags = tags.slice(tagsIndex, tagsIndex + tagsCount);
+
+                const key = currentTags[0]._id + currentTags[1]._id;
+                feedToRender.push(
+                    <div className="hash-tape__container" key={key}>
+                        <HashTape hashes={currentTags} />
+                    </div>,
+                );
+
+                tagsIndex += tagsCount;
+            }
+        }
+        return feedToRender;
+    }
+
+    render() {
+        return (
+            <div className="feed-container">
+                { this.renderFeed(6, 3) }
             </div>
         );
     }
 }
 
 Feed.propTypes = {
-    cards: PropTypes.arrayOf(PropTypes.object.isRequired),
+    collections: PropTypes.arrayOf(PropTypes.object.isRequired),
+    tags: PropTypes.arrayOf(PropTypes.object.isRequired),
     loader: PropTypes.func.isRequired,
     history: PropTypes.any.isRequired,
 };
 
 Feed.defaultProps = {
-    cards: {},
+    collections: [],
+    tags: [],
 };
 
 function mapStateToProps(state) {
     return {
-        cards: state.feed.cards,
+        collections: state.feed.collections,
+        tags: state.feed.tags,
         token: state.app.token,
         user: state.user.user,
     };

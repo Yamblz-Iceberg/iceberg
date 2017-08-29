@@ -6,7 +6,7 @@ import './hash-tape.scss';
 
 const HashTape = ({ hashes }) => (
     <div className="hash-tape">
-        { hashes.map(hash => <HashTag {...hash} key={hash.id} />) }
+        { hashes.map(hash => <HashTag {...hash} key={hash._id} />) }
     </div>
 );
 

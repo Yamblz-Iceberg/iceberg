@@ -11,15 +11,19 @@
     border-radius: 50px;
     text-align: center;
     text-decoration: none;
+    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.3);
+    color: #000;
+
     &:last-child {
         margin-right: 0;
     }
+
     &--small {
         height: 24px;
         font-size: 12px;
         line-height: 24px;
-    }
-    &__text {
-        color: white;
+        color: #fff;
+        background-color: rgba(0, 0, 0, .5);
+        box-shadow: none;
     }
 }

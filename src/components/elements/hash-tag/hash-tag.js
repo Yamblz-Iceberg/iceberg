@@ -3,26 +3,23 @@ import PropTypes from 'prop-types';
 
 import './hash-tag.scss';
 
-const HashTag = ({ name, color, className }) => {
-    const hashTagStyles = {
-        background: color,
-    };
+const HashTag = ({ name, size }) => {
+    const className = size === 'small' ? 'hash-tag hash-tag--small' : 'hash-tag';
 
     return (
-        <a href="test" className={`hash-tag ${className}`} style={hashTagStyles}>
+        <a href="test" className={className}>
             <span className="hash-tag__text">{`#${name}`}</span>
         </a>
     );
 };
 
 HashTag.defaultProps = {
-    className: '',
+    size: '',
 };
 
 HashTag.propTypes = {
     name: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
-    className: PropTypes.string,
+    size: PropTypes.string.isRequired,
 };
 
 export default HashTag;
