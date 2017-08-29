@@ -15,7 +15,6 @@ class CollectionDetailInfo extends Component {
 
     render() {
         const { collection } = this.props;
-        console.log('collection', collection);
 
         const avatarOptions = {
             size: '25',
