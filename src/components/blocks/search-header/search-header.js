@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
+import { actions } from './../../../reducers/search.reducer';
+
 import { Icon } from '../../elements';
 
 import './search-header.scss';
@@ -17,20 +19,22 @@ class SearchHeader extends Component {
     }
     handleChangeSearch = (event) => {
         this.setState({ text: event.target.value });
+        this.props.changeSearch(event.target.value);
     }
     handleClearSearch = () => {
         this.setState({ text: '' });
+        this.props.changeSearch('');
     }
     render() {
         return (<header className="search-header">
             <div className="search-header__container">
-                <div className="search-header__block">
+                <div className="search-header__block" onClick={this.handleClearSearch}>
                     <NavLink to={'/feed'}>
                         <Icon iconName={'arrow-back'} iconHeight="16" iconWidth="16" />
                     </NavLink>
                 </div>
                 <div className="search-header__input-block">
-                    <input type="text" className="search-header__input" placeholder="Поиск" value={this.state.text} onChange={this.handleChangeSearch} />
+                    <input type="text" className="search-header__input" placeholder="Поиск" value={this.state.text} onChange={this.handleChangeSearch} autoFocus />
                 </div>
                 <div className="search-header__block" onClick={this.handleClearSearch}>
                     <Icon iconName={'close'} iconHeight="16" iconWidth="16" />
@@ -41,11 +45,8 @@ class SearchHeader extends Component {
 }
 
 SearchHeader.propTypes = {
-    search: PropTypes.object,
-};
-
-SearchHeader.defaultProps = {
-    search: {},
+    search: PropTypes.object.isRequired,
+    changeSearch: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -54,4 +55,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(SearchHeader);
+export default connect(mapStateToProps, { ...actions })(SearchHeader);
