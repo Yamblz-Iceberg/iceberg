@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Tabs } from '../../blocks';
+import { Tabs, CollectionDetailLinks } from '../../blocks';
 import { CollectionDetailInfo } from '../../parts';
 // import PropTypes from 'prop-types';
 
@@ -36,14 +36,12 @@ class CollectionDetail extends Component {
                     <Tabs tabs={tabs} />
                     <Switch>
                         <Route exact path="/collection-detail" />
-                        <Route path="/collection-detail/unread">
-                            <h1>Unread</h1>
-                        </Route>
-                        <Route path="/collection-detail/new">
-                            <h1>Новое</h1>
-                        </Route>
+                        <Route path="/collection-detail/unread" />
+                        <Route path="/collection-detail/new" />
                     </Switch>
                 </div>
+
+                <CollectionDetailLinks collectionId={this.props.location.state} />
 
             </div>
         );

@@ -1,0 +1,10 @@
+.collection-detail-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+
+    &__item {
+        margin-bottom: 20px;
+    }
+}

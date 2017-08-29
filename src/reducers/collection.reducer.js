@@ -5,6 +5,7 @@ const FETCH_COLLECTION = 'FETCH_COLLECTION';
 const initialState = {
     author: [],
     tags: [],
+    links: [],
     name: '',
     description: '',
 };
