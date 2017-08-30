@@ -9,16 +9,12 @@ import { TemplateCard } from './..';
 const CollectionCard = ({ data }) => {
     const hashes = data.tags;
 
-    const hashStyle = {
-        className: 'hash-tag--small',
-        color: 'rgba(0,0,0, .5)',
-    };
-
     const component = (
         <div className="collection-card">
             { hashes.map(hash => (
                 <HashTag
-                    {...Object.assign(hash, hashStyle)}
+                    name={hash.name}
+                    size={'small'}
                     key={hash._id}
                 />)) }
             <h2 className="collection-card__title">{data.name}</h2>

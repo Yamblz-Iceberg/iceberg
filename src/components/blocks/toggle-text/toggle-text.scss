@@ -1,0 +1,39 @@
+.text-toggle {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+
+    &__text {
+        max-height: 74px;
+        display: block;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 14px;
+        line-height: 18px;
+        color: rgba(0, 0, 0, 0.6);
+    }
+
+    &__icon {
+        min-width: 24px;
+        padding-top: 6px;
+    }
+}
+
+.text-toggle--show-all {
+    .text-toggle {
+        &__text {
+            max-height: none;
+            -webkit-line-clamp: unset;
+            overflow: visible;
+            text-overflow: unset;
+        }
+        &__icon {
+            svg {
+                transform: rotate(180deg);
+            }
+        }
+    }
+}

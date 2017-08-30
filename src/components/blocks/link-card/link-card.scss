@@ -1,0 +1,99 @@
+.link-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 260px;
+    min-height: 384px;
+    border-radius: 10px;
+    padding: 16px 12px;
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.3);
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-decoration: none;
+
+    &__user {
+        display: flex;
+        align-content: center;
+    }
+
+    &__user-info {
+        padding-left: 6px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    &__user-name {
+        font-size: 11px;
+        color: #fff;
+        margin: 0;
+    }
+    &__user-rating {
+        font-size: 8px;
+        font-weight: 500;
+        color: #fff;
+        margin: 0;
+    }
+
+    &__title {
+        color: #fff;
+        margin: 12px 0;
+    }
+
+    &__favicon {
+        height: 20px;
+        max-height: 20px;
+    }
+    
+    &__block {
+        display: flex;
+        align-items: center;
+        color: #fff;
+        & > span {
+            margin-left: 5px;
+        }
+    }
+}
+
+.link-card__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.link-card__body {
+    flex: 1;
+    position: relative;
+}
+
+.link-card__comment {
+    background-color: #fff;
+    color: #000;
+    margin: 0;
+    padding: 16px;
+    width: 225px;
+    height: 100px;
+    position: absolute;
+    bottom: 16px;
+    right: -12px;
+    > p {
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+    }
+    &::before {
+        content: '‘‘';
+        color: #ffe200;
+        font-size: 70px;
+        font-weight: bold;
+        position: absolute;
+        top: 0;
+        left: 16px;
+        transform: translateY(-30%);
+    }
+}
+
+.link-card__footer {
+    display: flex;
+    justify-content: space-between;
+}

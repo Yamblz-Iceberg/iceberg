@@ -1,11 +1,9 @@
 @import "../../../variables";
 
-.collection-detail-info {
-    height: 370px;
-}
 .collection-detail-card {
     position: relative;
     height: 250px;
+
     &__wrapper {
         height: 250px;
         background-color: $blue;
@@ -17,7 +15,78 @@
         right: 0;
         bottom: 0;
     }
+
     &__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 196px;
         padding: 0 20px 20px;
+    }
+
+    &__title {
+        max-height: 100px;
+        overflow: hidden;
+        color: #fff;
+    }
+}
+
+.collection-detail-description {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+
+    &__text {
+        max-height: 74px;
+        display: block;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 14px;
+        line-height: 18px;
+        color: rgba(0, 0, 0, 0.6);
+    }
+
+    &__icon {
+        min-width: 24px;
+        padding-top: 6px;
+    }
+}
+
+.collection-detail-description--show-all {
+    .collection-detail-description {
+        &__text {
+            max-height: none;
+            -webkit-line-clamp: unset;
+            overflow: visible;
+            text-overflow: unset;
+        }
+        &__icon {
+            svg {
+                transform: rotate(180deg);
+            }
+        }
+    }
+}
+
+.collection-detail-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+
+    &__add-link {
+        display: flex;
+        justify-content: center;
+        width: 90px;
+        height: 48px;
+        background-color: transparent;
+        border: 2px solid $border-gray;
+        border-radius: 4px;
+
+        svg:first-of-type {
+            margin-right: 5px;
+        }
     }
 }

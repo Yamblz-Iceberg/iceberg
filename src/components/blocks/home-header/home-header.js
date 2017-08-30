@@ -9,7 +9,9 @@ const HomeHeader = ({ user }) => (
     <header className="home-header">
         <div className="home-header__container">
             <div className="home-header__block">
-                <Icon iconName={'search'} />
+                <NavLink to={'/search'}>
+                    <Icon iconName={'search'} />
+                </NavLink>
                 <h4 className="home-header__title">Айсберг</h4>
             </div>
             <div className="home-header__block">

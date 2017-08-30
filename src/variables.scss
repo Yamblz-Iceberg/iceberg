@@ -8,6 +8,7 @@ $card-blue: #0055ff;
 $dark-gray: #5c5c5c;
 $gray: #b1b1b1;
 $light-gray: #e4e4e4;
+$border-gray: #d3d3d3;
 
 :export {
     mainYellow: $main-yellow;
@@ -17,5 +18,6 @@ $light-gray: #e4e4e4;
     cardBlue: $card-blue;
     darkGray: $dark-gray;
     lightGray: $light-gray;
+    border-gray: $border-gray;
     gray: $gray;
 }

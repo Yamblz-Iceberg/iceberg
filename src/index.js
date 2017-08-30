@@ -5,9 +5,13 @@ import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-
 import {
-    Home, AccountProfile, CollectionDetail, CreateEmpty, CreateDescription,
+    Home,
+    AccountProfile,
+    CollectionDetail,
+    Search,
+    CreateEmpty,
+    CreateDescription,
 } from './components/pages';
 import reducer from './reducers';
 
@@ -17,10 +21,13 @@ import './assets/fonts/fonts.scss';
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 function onDeviceReady() {
-    if (window.StatusBar) {
-        window.StatusBar.backgroundColorByHexString('#fff');
+    if (window.StatusBar && window.cordova) {
+        if (window.cordova.platformId === 'android') {
+            window.StatusBar.backgroundColorByHexString('#000');
+        } else {
+            window.StatusBar.styleDefault();
+        }
         window.StatusBar.overlaysWebView(false);
-        window.StatusBar.styleDefault();
     }
 
     render(
@@ -32,6 +39,7 @@ function onDeviceReady() {
                     <Route path="/create-description" component={CreateDescription} />
                     <Route path="/collection-detail" component={CollectionDetail} />
                     <Route path="/profile" component={AccountProfile} />
+                    <Route path="/search" component={Search} />
                     <Redirect from="/" to="/feed" />
                 </Switch>
             </Router>

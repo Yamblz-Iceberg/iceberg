@@ -29,11 +29,11 @@ const TemplateCard = ({ data }) => {
 
                 <div className="template-card-footer__actions">
                     <div className="template-card-footer__link-action">
-                        <Icon iconName={'link'} iconWidth={'22'} iconHeight={'14'} iconColor={'#fff'} />
+                        <Icon iconName={'link'} iconColor={'#fff'} />
                         <span>{data.linksCount}</span>
                     </div>
                     <div className="template-card-footer__save-action">
-                        <Icon iconName={'save-big'} iconWidth={'16'} iconHeight={'20'} iconColor={'#fff'} />
+                        <Icon iconName={'save-big'} iconColor={'#fff'} />
                         <span>{data.savedLinksCount}</span>
                     </div>
                 </div>
