@@ -3,17 +3,19 @@
 .collection-detail-card {
     position: relative;
     height: 250px;
+    overflow: hidden;
 
-    &__wrapper {
-        height: 250px;
+    &__img {
         background-color: $blue;
-        filter: blur(10px);
-        z-index: -1;
+        transform: scale(1.1);
+        background-size: cover;
+        height: 250px;
+        z-index: -2;
         position: absolute;
-        top: 0;
         left: 0;
+        top: 0;
         right: 0;
-        bottom: 0;
+        filter: blur(10px);
     }
 
     &__info {
@@ -28,46 +30,12 @@
         max-height: 100px;
         overflow: hidden;
         color: #fff;
-    }
-}
-
-.collection-detail-description {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-
-    &__text {
-        max-height: 74px;
         display: block;
         display: -webkit-box;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
-        font-size: 14px;
-        line-height: 18px;
-        color: rgba(0, 0, 0, 0.6);
-    }
-
-    &__icon {
-        min-width: 24px;
-        padding-top: 6px;
-    }
-}
-
-.collection-detail-description--show-all {
-    .collection-detail-description {
-        &__text {
-            max-height: none;
-            -webkit-line-clamp: unset;
-            overflow: visible;
-            text-overflow: unset;
-        }
-        &__icon {
-            svg {
-                transform: rotate(180deg);
-            }
-        }
     }
 }
 

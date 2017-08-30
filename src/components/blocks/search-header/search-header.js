@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { actions } from './../../../reducers/search.reducer';
 import { actions as modalActions } from './../../../reducers/modal.reducer';
@@ -25,13 +25,16 @@ class SearchHeader extends Component {
         this.props.changeSearch('');
         this.props.showModal('ERROR_MESSAGE');
     }
+    handleGoBack = () => {
+        this.setState({ text: '' });
+        this.props.changeSearch('');
+        this.props.history.goBack();
+    }
     render() {
         return (<header className="search-header">
             <div className="search-header__container">
-                <div className="search-header__block" onClick={this.handleClearSearch}>
-                    <NavLink to={'/feed'}>
-                        <Icon iconName={'arrow-back'} />
-                    </NavLink>
+                <div className="search-header__block" onClick={this.handleGoBack}>
+                    <Icon iconName={'arrow-back'} />
                 </div>
                 <div className="search-header__input-block">
                     <input type="text" className="search-header__input" placeholder="Поиск" value={this.state.text} onChange={this.handleChangeSearch} autoFocus />
@@ -48,6 +51,7 @@ SearchHeader.propTypes = {
     search: PropTypes.object.isRequired,
     changeSearch: PropTypes.func.isRequired,
     showModal: PropTypes.func.isRequired,
+    history: PropTypes.any.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -56,4 +60,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, { ...actions, ...modalActions })(SearchHeader);
+export default connect(mapStateToProps, { ...actions, ...modalActions })(withRouter(SearchHeader));
