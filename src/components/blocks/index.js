@@ -16,3 +16,4 @@ export { default as SearchHeader } from './search-header';
 export { default as ModalTemplate } from './modal-template';
 export { default as ModalError } from './modal-error';
 export { default as Modal } from './modal-root';
+export { default as ToggleText } from './toggle-text';
