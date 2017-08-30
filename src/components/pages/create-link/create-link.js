@@ -12,7 +12,7 @@ class CreateLink extends Component {
         super(props);
         this.state = this.props.link;
     }
-    handlAdd = () => {
+    handleAdd = () => {
         alert('Еще не готово!');
     }
     handleChangeUrl = (event) => {
@@ -20,7 +20,7 @@ class CreateLink extends Component {
     }
     render() {
         const { collection } = this.props;
-        const icanPlus = (
+        const iconPlus = (
             <Icon iconName={'plus'} />
         );
         return (
@@ -31,7 +31,7 @@ class CreateLink extends Component {
                         <input type="text" value={this.state.url} placeholder="Вставьте ссылку сюда" onChange={this.handleChangeUrl} autoFocus />
                         <Icon iconName={'link'} iconColor="#d3d3d3" iconWidth="24" iconHeight="24" />
                     </div>
-                    <Button type="light" size="max-width" text="добавить из моих" icon={icanPlus} onClick={this.handlAdd} />
+                    <Button type="light" size="max-width" text="добавить из моих" icon={iconPlus} onClick={this.handleAdd} />
                 </div>
             </div>
         );
