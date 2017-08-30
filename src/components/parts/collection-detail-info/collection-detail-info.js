@@ -71,13 +71,13 @@ class CollectionDetailInfo extends Component {
                         </div>
                     </div>
 
-                    <div className={`collection-detail-description ${ this.state.showAllText === true ? 'collection-detail-description--show-all' : '' }`} >
+                    <div className={`collection-detail-description ${ this.state.showAllText === true ? 'collection-detail-description--show-all' : '' }`}
+                         onClick={() => this.setState({showAllText: !this.state.showAllText}) }
+                    >
                         <div className="collection-detail-description__text">
                             { collection.description }
                         </div>
-                        <div className="collection-detail-description__icon"
-                             onClick={() => this.setState({showAllText: !this.state.showAllText}) }
-                        >
+                        <div className="collection-detail-description__icon" >
                             <Icon iconName={'arrow-more--popup'} />
                         </div>
                     </div>
