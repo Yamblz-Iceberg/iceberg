@@ -8,6 +8,7 @@ export { default as ProfileHeader } from './profile-header';
 export { default as ListGroup } from './list-group';
 export { default as CreateCard } from './create-card';
 export { default as CreateEmptyHeader } from './create-empty-header';
+export { default as CreateDescriptionHeader } from './create-description-header';
 export { default as Option } from './option';
 export { default as CollectionDetailHeader } from './collection-detail-header';
 export { default as LimitedTextarea } from './limited-textarea';
