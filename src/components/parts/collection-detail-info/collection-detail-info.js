@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 import { CollectionDetailHeader, ToggleText } from '../../blocks';
 import { HashTag, Icon, Avatar, Button } from '../../elements';
@@ -23,9 +25,12 @@ class CollectionDetailInfo extends Component {
             },
         };
     }
-
     componentWillReceiveProps(props) {
         this.setState({ collection: props.collection });
+    }
+
+    createLink = () => {
+        this.props.history.push({ pathname: './create-link' });
     }
 
     render() {
@@ -87,7 +92,7 @@ class CollectionDetailInfo extends Component {
                             text: 'подписаться',
                         }}
                         />
-                        <button className="collection-detail-actions__add-link">
+                        <button className="collection-detail-actions__add-link" onClick={this.createLink}>
                             <Icon iconName={'link'} />
                             <Icon iconName={'plus'} />
                         </button>
@@ -100,6 +105,7 @@ class CollectionDetailInfo extends Component {
 
 CollectionDetailInfo.propTypes = {
     collection: PropTypes.object.isRequired,
+    history: PropTypes.any.isRequired,
 };
 
-export default CollectionDetailInfo;
+export default withRouter(CollectionDetailInfo);

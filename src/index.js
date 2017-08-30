@@ -12,6 +12,7 @@ import {
     Search,
     CreateEmpty,
     CreateDescription,
+    CreateLink,
 } from './components/pages';
 import reducer from './reducers';
 
@@ -35,6 +36,7 @@ function onDeviceReady() {
             <Router>
                 <Switch>
                     <Route path="/feed" component={Home} />
+                    <Route path="/create-link" component={CreateLink} />
                     <Route path="/create-empty" component={CreateEmpty} />
                     <Route path="/create-description" component={CreateDescription} />
                     <Route path="/collection-detail" component={CollectionDetail} />

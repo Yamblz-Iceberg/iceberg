@@ -19,3 +19,4 @@ export { default as ModalTemplate } from './modal-template';
 export { default as ModalError } from './modal-error';
 export { default as Modal } from './modal-root';
 export { default as ToggleText } from './toggle-text';
+export { default as CreateLinkHeader } from './create-link-header';

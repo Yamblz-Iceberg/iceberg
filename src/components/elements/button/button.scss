@@ -7,10 +7,11 @@
     border-radius: 4px;
     outline-color: yellow;
     &__text {
-        margin-left: 10px;
+        * + & {
+            margin-left: 10px;
+        }
         font-size: 14px;
         font-weight: 500;
         text-transform: uppercase;
-        color: black;
     }
 }
