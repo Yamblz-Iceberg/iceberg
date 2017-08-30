@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { collectionLoader } from '../../../reducers/collection.reducer';
+import PropTypes from 'prop-types';
 import { LinkCard } from '../../blocks';
 
 import './collection-detail-links.scss';
 
-/* eslint-disable */
 class CollectionDetailLinks extends Component {
-    componentDidMount() {
-        const { collectionId } = this.props;
-        this.props.collectionLoader(collectionId);
+    constructor(props) {
+        super(props);
+        this.state = {
+            links: [],
+        };
+    }
+
+    componentWillReceiveProps(props) {
+        this.setState({ links: props.links });
     }
 
     render() {
-        const { collection } = this.props;
-
         return (
             <section className="collection-detail-links">
-                {collection.links.map(link => (
+                {this.state.links.map(link => (
                     <div className="collection-detail-links__item" key={link._id}>
                         <LinkCard data={link} />
                     </div>
@@ -27,7 +29,8 @@ class CollectionDetailLinks extends Component {
     }
 }
 
-export default connect(
-    state => ({ collection: state.collection }),
-    { collectionLoader }
-)(CollectionDetailLinks);
+CollectionDetailLinks.propTypes = {
+    links: PropTypes.array.isRequired,
+};
+
+export default CollectionDetailLinks;
