@@ -6,10 +6,35 @@ import { connect } from 'react-redux';
 import { Button, Icon } from './../../elements';
 import { CreateCard, CreateEmptyHeader, Option, ToggleText } from './../../blocks';
 
+import {
+    updateTitle,
+    updateSwitcher,
+} from '../../../reducers/create-collection.reducer';
+
 import './create-empty.scss';
 
 class CreateEmpty extends Component {
+    constructor() {
+        super();
+        this.state = {
+            title: '',
+        };
+    }
+
+    setTitle = (title) => {
+        this.setState({
+            title,
+        });
+    }
+
+    handleTitleUpdate = (value) => {
+        this.props.updateTitle(value);
+        this.setTitle(value);
+    }
+
     handleSubmitData = e => e;
+
+    handleSwitcherUpdate = id => value => this.props.updateSwitcher(id, value);
 
     render() {
         const {
@@ -20,16 +45,17 @@ class CreateEmpty extends Component {
         const createCardProps = {
             userName: `${user.firstName} ${user.lastName}`,
             avatar: user.photo,
+            callback: this.handleTitleUpdate,
         };
 
         const optionsProperties = [
             {
-                num: 1,
+                id: 1,
                 option: 'Предлагать ссылки',
                 noticeText: 'Нотификация1',
             },
             {
-                num: 2,
+                id: 2,
                 option: 'Модерировать ссылки',
                 noticeText: 'Нотификация2',
             },
@@ -37,7 +63,10 @@ class CreateEmpty extends Component {
 
         return (
             <main className="create-empty">
-                <CreateEmptyHeader callback={this.handleSubmitData} />
+                <CreateEmptyHeader
+                    submitCallback={this.handleSubmitData}
+                    title={this.state.title}
+                />
                 <div className="create-empty__card-wrapper">
                     <CreateCard data={createCardProps} />
                 </div>
@@ -60,7 +89,13 @@ class CreateEmpty extends Component {
                         </div>
                     )
                 }
-                { optionsProperties.map(option => <Option key={option.num} {...option} />) }
+                { optionsProperties
+                    .map(option => (
+                        <Option
+                            callback={this.handleSwitcherUpdate(option.id)}
+                            key={option.id}
+                            {...option}
+                        />)) }
             </main>
         );
     }
@@ -68,12 +103,17 @@ class CreateEmpty extends Component {
 
 CreateEmpty.propTypes = {
     description: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     user: PropTypes.string.isRequired,
+    updateTitle: PropTypes.func.isRequired,
+    updateSwitcher: PropTypes.func.isRequired,
 };
 
 export default connect(
     state => ({
         description: state.createCollection.description,
+        title: state.createCollection.title,
         user: state.user.data,
     }),
+    { updateTitle, updateSwitcher },
 )(CreateEmpty);

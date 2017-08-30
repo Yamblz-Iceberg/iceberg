@@ -13,6 +13,8 @@ const CreateCard = ({ data }) => {
         if (event.target.textContent.length > 50 && event.keyCode !== 8) {
             event.preventDefault();
         }
+
+        data.callback(event.target.textContent);
     };
 
     const component = (
@@ -28,7 +30,7 @@ const CreateCard = ({ data }) => {
                 className="create-card__input"
                 role="textbox"
                 tabIndex="0"
-                onKeyDown={maxNumberOfCharacters}
+                onKeyUp={maxNumberOfCharacters}
                 contentEditable
             />
         </div>
