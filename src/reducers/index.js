@@ -6,6 +6,7 @@ import { reducer as app } from './app.reducer';
 import { reducer as collection } from './collection.reducer';
 import { reducer as createCollection } from './create-collection.reducer';
 import { reducer as modal } from './modal.reducer';
+import { reducer as link } from './link.reducer';
 
 export default combineReducers({
     feed,
@@ -15,4 +16,5 @@ export default combineReducers({
     collection,
     createCollection,
     modal,
+    link,
 });
