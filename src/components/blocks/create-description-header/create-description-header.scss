@@ -1,0 +1,32 @@
+.create-description-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 0 20px;
+    height: 56px;
+    box-shadow: 0 0 13px 0 rgba(0,0,0, .3);
+    &__title {
+        margin-right: auto;
+        margin-left: 28px;
+        font-weight: 600;
+    }
+    .dropdown {
+        position: absolute;
+        right: 0;
+        top: 56px;
+        z-index: 2;
+        margin: 0;
+        padding: 10px 0;
+        background-color: white;
+        box-shadow: 0 1px 5px 0 rgba(0,0,0, .3);
+        &__item {
+            padding: 8px 20px;
+            height: 40px;
+            list-style-type: none;
+            &:hover {
+                background-color: #fafafa;
+            }
+        }
+    }
+}

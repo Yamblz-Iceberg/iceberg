@@ -5,8 +5,14 @@ import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-
-import { Home, AccountProfile, CollectionDetail, Search, CreateEmpty } from './components/pages';
+import {
+    Home,
+    AccountProfile,
+    CollectionDetail,
+    Search,
+    CreateEmpty,
+    CreateDescription,
+} from './components/pages';
 import reducer from './reducers';
 
 import './styles.scss';
@@ -30,6 +36,7 @@ function onDeviceReady() {
                 <Switch>
                     <Route path="/feed" component={Home} />
                     <Route path="/create-empty" component={CreateEmpty} />
+                    <Route path="/create-description" component={CreateDescription} />
                     <Route path="/collection-detail" component={CollectionDetail} />
                     <Route path="/profile" component={AccountProfile} />
                     <Route path="/search" component={Search} />
