@@ -1,45 +1,42 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import PropTypes from 'prop-types';
 import { CollectionDetailHeader, ToggleText } from '../../blocks';
 import { HashTag, Icon, Avatar, Button } from '../../elements';
-import { collectionLoader } from '../../../reducers/collection.reducer';
 
 import './collection-detail-info.scss';
 
-
-/* eslint-disable */
 class CollectionDetailInfo extends Component {
-    componentDidMount() {
-        const { collectionId } = this.props;
-        this.props.collectionLoader(collectionId);
-    }
-
     constructor(props) {
         super(props);
-        this.state =  {
+        this.state = {
             showAllText: false,
             collection: {
                 description: '',
+                photo: '',
+                author: {
+                    firstName: '',
+                    lastName: '',
+                    photo: '',
+                },
+                name: '',
+                tags: [],
             },
         };
+    }
+    componentWillReceiveProps(props) {
+        this.setState({ collection: props.collection });
     }
 
     createLink = () => {
         this.props.history.push({ pathname: './create-link' });
     }
 
-    componentWillReceiveProps() {
-        this.setState({collection: this.props.collection});
-    }
-
     render() {
-        const { collection } = this.props;
-
         const avatarOptions = {
             size: '25',
-            photo: collection.author.photo,
+            photo: this.state.collection.author.photo,
             iconColor: '#fff',
         };
 
@@ -47,29 +44,30 @@ class CollectionDetailInfo extends Component {
             <section>
                 <div className="collection-detail-info">
                     <div className="collection-detail-card">
-                        <div className="collection-detail-card__img"
-                             style={{ backgroundImage: `url(${collection.photo})` }}>
-                        </div>
+                        <div
+                            className="collection-detail-card__img"
+                            style={{ backgroundImage: `url(${this.state.collection.photo})` }}
+                        />
 
-                        <CollectionDetailHeader collectionTitle={ collection.name } />
+                        <CollectionDetailHeader collectionTitle={this.state.collection.name} />
 
                         <div className="collection-detail-card__info">
                             <div>
-                                {collection.tags.map(hash => (
+                                {this.state.collection.tags.map(hash => (
                                     <HashTag
                                         {...hash}
                                         size={'small'}
                                         key={hash._id}
                                     />)) }
-                                <h2 className="collection-detail-card__title">{ collection.name }</h2>
+                                <h2 className="collection-detail-card__title">{ this.state.collection.name }</h2>
                             </div>
 
                             <div className="template-card-footer">
                                 <div className="template-card-footer__user">
-                                     <Avatar {...avatarOptions} />
-                                     <span className="template-card-footer__user-name">
-                                         {`${collection.author.firstName} ${collection.author.lastName}`}
-                                     </span>
+                                    <Avatar {...avatarOptions} />
+                                    <span className="template-card-footer__user-name">
+                                        {`${this.state.collection.author.firstName} ${this.state.collection.author.lastName}`}
+                                    </span>
                                 </div>
 
                                 <div className="template-card-footer__actions">
@@ -90,9 +88,9 @@ class CollectionDetailInfo extends Component {
 
                     <div className="collection-detail-actions">
                         <Button {...{
-                                icon: <Icon iconName={'save-big'} />,
-                                text: 'подписаться',
-                            }}
+                            icon: <Icon iconName={'save-big'} />,
+                            text: 'подписаться',
+                        }}
                         />
                         <button className="collection-detail-actions__add-link" onClick={this.createLink}>
                             <Icon iconName={'link'} />
@@ -105,7 +103,9 @@ class CollectionDetailInfo extends Component {
     }
 }
 
-export default connect(
-    state => ({ collection: state.collection }),
-    { collectionLoader }
-)(withRouter(CollectionDetailInfo));
+CollectionDetailInfo.propTypes = {
+    collection: PropTypes.object.isRequired,
+    history: PropTypes.any.isRequired,
+};
+
+export default withRouter(CollectionDetailInfo);

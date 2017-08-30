@@ -1,15 +1,41 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Tabs, CollectionDetailLinks } from '../../blocks';
 import { CollectionDetailInfo } from '../../parts';
-// import PropTypes from 'prop-types';
+import { collectionLoader } from '../../../reducers/collection.reducer';
 
 import './collection-detail.scss';
 
-/* eslint-disable */
 class CollectionDetail extends Component {
-    render() {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showAllText: false,
+            collection: {
+                description: '',
+                photo: '',
+                author: {
+                    firstName: '',
+                    lastName: '',
+                    photo: '',
+                },
+                name: '',
+                tags: [],
+                links: [],
+            },
+        };
+    }
+    componentDidMount() {
+        this.props.collectionLoader(this.props.location.state);
+    }
 
+    componentWillReceiveProps(props) {
+        this.setState({ collection: props.collection });
+    }
+
+    render() {
         const tabs = [
             {
                 id: 1,
@@ -30,7 +56,7 @@ class CollectionDetail extends Component {
 
         return (
             <div>
-                <CollectionDetailInfo collectionId={this.props.location.state} />
+                <CollectionDetailInfo collection={this.state.collection} />
 
                 <div className="collection-detail-tabs">
                     <Tabs tabs={tabs} />
@@ -40,12 +66,19 @@ class CollectionDetail extends Component {
                         <Route path="/collection-detail/new" />
                     </Switch>
                 </div>
-
-                <CollectionDetailLinks collectionId={this.props.location.state} />
-
+                <CollectionDetailLinks links={this.state.collection.links} />
             </div>
         );
     }
 }
 
-export default (CollectionDetail);
+CollectionDetail.propTypes = {
+    collection: PropTypes.object.isRequired,
+    collectionLoader: PropTypes.func.isRequired,
+    location: PropTypes.object.isRequired,
+};
+
+export default connect(
+    state => ({ collection: state.collection }),
+    { collectionLoader },
+)(CollectionDetail);

@@ -2,5 +2,11 @@
     &__title {
         margin: 10px 0 10px;
         color: white;
+        display: block;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
