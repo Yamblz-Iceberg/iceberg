@@ -34,7 +34,7 @@ const TemplateCard = ({ data }) => {
                     </div>
                     <div className="template-card-footer__save-action">
                         <Icon iconName={'save-big'} iconColor={'#fff'} />
-                        <span>{data.savedLinksCount}</span>
+                        <span>{data.savedTimesCount}</span>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@ TemplateCard.defaultProps = {
     data: PropTypes.objectOf(
         PropTypes.shape({
             linksCount: 0,
-            savedLinksCount: 0,
+            savedTimesCount: 0,
         }),
     ),
 };
@@ -60,7 +60,7 @@ TemplateCard.propTypes = {
         userName: PropTypes.string.isRequired,
         avatar: PropTypes.string.isRequired,
         linksCount: PropTypes.number.isRequired,
-        savedLinksCount: PropTypes.number.isRequired,
+        savedTimesCount: PropTypes.number.isRequired,
     }),
 };
 
