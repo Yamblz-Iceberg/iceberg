@@ -6,19 +6,19 @@
     align-items: center;
     padding: 0 20px;
     height: 56px;
-    box-shadow: 0 0 13px 0 rgba(0,0,0, .3);
+    box-shadow: 0 0 13px 0 rgba(0, 0, 0, .3);
+
     &__title {
         margin-right: auto;
         margin-left: 28px;
-        font-weight: 600;
     }
+
     &__submit {
         padding: 0 16px;
         height: 36px;
-        line-height: 40px;
         border: none;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 500;
         letter-spacing: .03em;
         border-radius: 4px;
         background-color: $light-gray;

@@ -1,16 +1,16 @@
 .hash-tag {
     display: inline-block;
     margin-right: 8px;
-    margin-bottom: 8px;
     padding: 0 15px;
     min-width: 85px;
     height: 40px;
+    font-size: 14px;
     line-height: 40px;
     box-sizing: border-box;
     border-radius: 50px;
     text-align: center;
     text-decoration: none;
-    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.3);
     color: #000;
 
     &:last-child {
@@ -18,15 +18,14 @@
     }
 
     &--small {
+        margin-bottom: 8px;
         color: #fff;
         height: 25px;
         line-height: 25px;
         font-size: 12px;
+        line-height: 24px;
+        color: #fff;
         background-color: rgba(0, 0, 0, .5);
         box-shadow: none;
-    }
-
-    &__text {
-        font-size: 14px;
     }
 }

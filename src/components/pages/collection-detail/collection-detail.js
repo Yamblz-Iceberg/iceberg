@@ -1,26 +1,51 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
+import { Tabs, CollectionDetailLinks } from '../../blocks';
 import { CollectionDetailInfo } from '../../parts';
-import { collectionLoader } from '../../../reducers/collection.reducer';
 // import PropTypes from 'prop-types';
+
+import './collection-detail.scss';
 
 /* eslint-disable */
 class CollectionDetail extends Component {
-    constructor(props) {
-        super(props);
-        this.props.collectionLoader(this.props.location.state);
-    }
     render() {
-        // const { collection } = this.props;
+
+        const tabs = [
+            {
+                id: 1,
+                title: ' Все',
+                linkTo: '/collection-detail',
+            },
+            {
+                id: 2,
+                title: 'Непрочитанные',
+                linkTo: '/collection-detail/unread',
+            },
+            {
+                id: 3,
+                title: 'Новое',
+                linkTo: '/collection-detail/new',
+            },
+        ];
+
         return (
             <div>
-                <CollectionDetailInfo />
+                <CollectionDetailInfo collectionId={this.props.location.state} />
+
+                <div className="collection-detail-tabs">
+                    <Tabs tabs={tabs} />
+                    <Switch>
+                        <Route exact path="/collection-detail" />
+                        <Route path="/collection-detail/unread" />
+                        <Route path="/collection-detail/new" />
+                    </Switch>
+                </div>
+
+                <CollectionDetailLinks collectionId={this.props.location.state} />
+
             </div>
         );
     }
 }
 
-export default connect(
-    state => ({ collection: state.collection }),
-    { collectionLoader }
-)(CollectionDetail);
+export default (CollectionDetail);

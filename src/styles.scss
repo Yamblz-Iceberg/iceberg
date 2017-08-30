@@ -3,7 +3,10 @@
 *:after
 {
     box-sizing: border-box;
+    outline: none;
+    user-select: none;
 }
+
 body,
 html {
     padding: 0;
@@ -13,14 +16,12 @@ html {
     font-family: 'Yandex Sans Text', Arial;
 }
 
-button,
-input,
-input:focus {
-    outline: none;
-}
-
 h1, h2, h3, h4 {
     margin: 0;
+}
+
+input[type=text] {
+    border: none;
 }
 
 // Заголовки подборок ("Скейтбординг для новичков")
@@ -41,7 +42,7 @@ h3 {
 h4 {
     font-size: 20px;
     line-height: 20px;
-    font-weight: normal;
+    font-weight: 500;
 }
 
 // Заголовки маленьких карточек подборок (в поиске и ЛК)
