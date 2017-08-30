@@ -15,10 +15,13 @@ import './assets/fonts/fonts.scss';
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 function onDeviceReady() {
-    if (window.StatusBar) {
-        window.StatusBar.backgroundColorByHexString('#fff');
+    if (window.StatusBar && window.cordova) {
+        if (window.cordova.platformId === 'android') {
+            window.StatusBar.backgroundColorByHexString('#000');
+        } else {
+            window.StatusBar.styleDefault();
+        }
         window.StatusBar.overlaysWebView(false);
-        window.StatusBar.styleDefault();
     }
 
     render(
@@ -38,5 +41,5 @@ function onDeviceReady() {
     );
 }
 
-// document.addEventListener('deviceready', onDeviceReady);
-onDeviceReady();
+document.addEventListener('deviceready', onDeviceReady);
+// onDeviceReady();
