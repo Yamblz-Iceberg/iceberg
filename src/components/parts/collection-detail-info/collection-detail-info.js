@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { CollectionDetailHeader } from '../../blocks';
+import { CollectionDetailHeader, ToggleText } from '../../blocks';
 import { HashTag, Icon, Avatar, Button } from '../../elements';
 import { collectionLoader } from '../../../reducers/collection.reducer';
 
@@ -17,8 +17,15 @@ class CollectionDetailInfo extends Component {
     constructor(props) {
         super(props);
         this.state =  {
-            showAllText: false
+            showAllText: false,
+            collection: {
+                description: '',
+            },
         };
+    }
+
+    componentWillReceiveProps() {
+        this.setState({collection: this.props.collection});
     }
 
     render() {
@@ -33,8 +40,10 @@ class CollectionDetailInfo extends Component {
         return (
             <section>
                 <div className="collection-detail-info">
-                    <div className="collection-detail-card__wrapper"></div>
                     <div className="collection-detail-card">
+                        <div className="collection-detail-card__img"
+                             style={{ backgroundImage: `url(${collection.photo})` }}>
+                        </div>
 
                         <CollectionDetailHeader collectionTitle={ collection.name } />
 
@@ -71,16 +80,7 @@ class CollectionDetailInfo extends Component {
                         </div>
                     </div>
 
-                    <div className={`collection-detail-description ${ this.state.showAllText === true ? 'collection-detail-description--show-all' : '' }`}
-                         onClick={() => this.setState({showAllText: !this.state.showAllText}) }
-                    >
-                        <div className="collection-detail-description__text">
-                            { collection.description }
-                        </div>
-                        <div className="collection-detail-description__icon" >
-                            <Icon iconName={'arrow-more--popup'} />
-                        </div>
-                    </div>
+                    <ToggleText text={this.state.collection.description} />
 
                     <div className="collection-detail-actions">
                         <Button {...{
