@@ -20,7 +20,7 @@ class CreateEmpty extends Component {
         this.props.updateTitle(value);
     }
 
-    handleSwitcherUpdate = id => value => this.props.updateSwitcher(id)(value);
+    handleSwitcherUpdate = id => value => this.props.updateSwitcher(id, value);
 
     render() {
         const {
