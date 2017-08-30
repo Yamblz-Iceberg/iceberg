@@ -11,8 +11,8 @@ class LimitedTextarea extends Component {
         };
     }
 
-    componentWillReceiveProps = () => {
-        if (this.props.resetTextContent) {
+    componentWillReceiveProps = (nextProps) => {
+        if (this.props.resetTextContent !== nextProps.resetTextContent) {
             this.resetTextContent();
             this.setTextContent();
         }
