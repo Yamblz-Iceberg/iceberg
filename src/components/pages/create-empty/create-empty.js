@@ -6,10 +6,16 @@ import { connect } from 'react-redux';
 import { Button, Icon } from './../../elements';
 import { CreateCard, CreateEmptyHeader, Option, ToggleText } from './../../blocks';
 
+import { updateTitle } from '../../../reducers/create-collection.reducer';
+
 import './create-empty.scss';
 
 class CreateEmpty extends Component {
     handleSubmitData = e => e;
+
+    handleTitleUpdate = (value) => {
+        this.props.updateTitle(value);
+    }
 
     render() {
         const {
@@ -19,6 +25,7 @@ class CreateEmpty extends Component {
         const createCardProps = {
             userName: 'Pavel',
             avatar: '',
+            callback: this.handleTitleUpdate,
         };
 
         const optionsProperties = [
@@ -67,8 +74,10 @@ class CreateEmpty extends Component {
 
 CreateEmpty.propTypes = {
     description: PropTypes.string.isRequired,
+    updateTitle: PropTypes.func.isRequired,
 };
 
 export default connect(
     state => ({ description: state.createCollection.description }),
+    { updateTitle },
 )(CreateEmpty);
