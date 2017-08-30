@@ -14,11 +14,25 @@ import {
 import './create-empty.scss';
 
 class CreateEmpty extends Component {
-    handleSubmitData = e => e;
+    constructor() {
+        super();
+        this.state = {
+            title: '',
+        };
+    }
+
+    setTitle = (title) => {
+        this.setState({
+            title,
+        });
+    }
 
     handleTitleUpdate = (value) => {
         this.props.updateTitle(value);
+        this.setTitle(value);
     }
+
+    handleSubmitData = e => e;
 
     handleSwitcherUpdate = id => value => this.props.updateSwitcher(id, value);
 
@@ -49,7 +63,10 @@ class CreateEmpty extends Component {
 
         return (
             <main className="create-empty">
-                <CreateEmptyHeader callback={this.handleSubmitData} />
+                <CreateEmptyHeader
+                    submitCallback={this.handleSubmitData}
+                    title={this.state.title}
+                />
                 <div className="create-empty__card-wrapper">
                     <CreateCard data={createCardProps} />
                 </div>
@@ -86,6 +103,7 @@ class CreateEmpty extends Component {
 
 CreateEmpty.propTypes = {
     description: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     user: PropTypes.string.isRequired,
     updateTitle: PropTypes.func.isRequired,
     updateSwitcher: PropTypes.func.isRequired,
@@ -94,6 +112,7 @@ CreateEmpty.propTypes = {
 export default connect(
     state => ({
         description: state.createCollection.description,
+        title: state.createCollection.title,
         user: state.user.data,
     }),
     { updateTitle, updateSwitcher },
