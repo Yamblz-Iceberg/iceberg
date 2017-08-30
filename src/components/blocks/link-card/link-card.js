@@ -14,8 +14,8 @@ const LinkCard = ({ data }) => {
 
     const avatarOptions = {
         size: '25',
-        photo: data.avatar,
         iconColor: '#fff',
+        photo: data.userAdded.photo,
     };
 
     return (<a className="link-card" href={data.url} style={cardStyles}>
@@ -23,8 +23,8 @@ const LinkCard = ({ data }) => {
             <div className="link-card__user">
                 <Avatar {...avatarOptions} />
                 <div className="link-card__user-info">
-                    <p className="link-card__user-name">{data.userName}</p>
-                    <p className="link-card__user-rating">{data.userRating}</p>
+                    <p className="link-card__user-name">{data.userAdded.firstName}</p>
+                    <p className="link-card__user-rating">{data.userAdded.rating}</p>
                 </div>
             </div>
             <div className="link-card__context-menu">
@@ -48,11 +48,11 @@ const LinkCard = ({ data }) => {
         <div className="link-card__footer">
             <div className="link-card__block">
                 <Icon iconName={'like-big'} iconColor={'#fff'} />
-                <span>{data.likesCount}</span>
+                <span>{data.likes}</span>
             </div>
             <div className="link-card__block">
                 <Icon iconName={'save-big'} iconColor={'#fff'} />
-                <span>{data.savedCount}</span>
+                <span>{data.savedTimesCount}</span>
             </div>
         </div>
     </a>);
