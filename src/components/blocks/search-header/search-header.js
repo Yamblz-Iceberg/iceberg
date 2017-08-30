@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 import { actions } from './../../../reducers/search.reducer';
+import { actions as modalActions } from './../../../reducers/modal.reducer';
 
 import { Icon } from '../../elements';
 
@@ -22,6 +23,7 @@ class SearchHeader extends Component {
     handleClearSearch = () => {
         this.setState({ text: '' });
         this.props.changeSearch('');
+        this.props.showModal('ERROR_MESSAGE');
     }
     render() {
         return (<header className="search-header">
@@ -45,6 +47,7 @@ class SearchHeader extends Component {
 SearchHeader.propTypes = {
     search: PropTypes.object.isRequired,
     changeSearch: PropTypes.func.isRequired,
+    showModal: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -53,4 +56,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, { ...actions })(SearchHeader);
+export default connect(mapStateToProps, { ...actions, ...modalActions })(SearchHeader);
