@@ -41,8 +41,8 @@ const CreateCard = ({ data }) => {
         background: cardBlue,
         userName: data.userName,
         avatar: data.avatar,
-        linksCount: data.linksCount || 0,
-        savedLinksCount: data.savedLinksCount || 0,
+        linksCount: 0,
+        savedTimesCount: 0,
     };
 
     return (

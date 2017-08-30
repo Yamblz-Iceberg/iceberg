@@ -25,11 +25,12 @@ class CreateEmpty extends Component {
     render() {
         const {
             description,
+            user,
         } = this.props;
 
         const createCardProps = {
-            userName: 'Pavel',
-            avatar: '',
+            userName: `${user.firstName} ${user.lastName}`,
+            avatar: user.photo,
             callback: this.handleTitleUpdate,
         };
 
@@ -85,11 +86,15 @@ class CreateEmpty extends Component {
 
 CreateEmpty.propTypes = {
     description: PropTypes.string.isRequired,
+    user: PropTypes.string.isRequired,
     updateTitle: PropTypes.func.isRequired,
     updateSwitcher: PropTypes.func.isRequired,
 };
 
 export default connect(
-    state => ({ description: state.createCollection.description }),
+    state => ({
+        description: state.createCollection.description,
+        user: state.user.data,
+    }),
     { updateTitle, updateSwitcher },
 )(CreateEmpty);
