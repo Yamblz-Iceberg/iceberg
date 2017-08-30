@@ -1,0 +1,14 @@
+.create-link__container {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+
+.create-link__body {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}

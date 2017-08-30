@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
 import { CollectionDetailHeader, ToggleText } from '../../blocks';
 import { HashTag, Icon, Avatar, Button } from '../../elements';
 import { collectionLoader } from '../../../reducers/collection.reducer';
@@ -22,6 +24,10 @@ class CollectionDetailInfo extends Component {
                 description: '',
             },
         };
+    }
+
+    createLink = () => {
+        this.props.history.push({ pathname: './create-link' });
     }
 
     componentWillReceiveProps() {
@@ -88,7 +94,7 @@ class CollectionDetailInfo extends Component {
                                 text: 'подписаться',
                             }}
                         />
-                        <button className="collection-detail-actions__add-link">
+                        <button className="collection-detail-actions__add-link" onClick={this.createLink}>
                             <Icon iconName={'link'} />
                             <Icon iconName={'plus'} />
                         </button>
@@ -102,4 +108,4 @@ class CollectionDetailInfo extends Component {
 export default connect(
     state => ({ collection: state.collection }),
     { collectionLoader }
-)(CollectionDetailInfo);
+)(withRouter(CollectionDetailInfo));
