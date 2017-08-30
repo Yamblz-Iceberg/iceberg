@@ -22,11 +22,8 @@ class CreateDescription extends Component {
     }
 
     resetTextContent = () => {
-        this.setTextContent(true);
+        this.setTextContent(!this.state.resetText);
         this.props.updateDescription('');
-        setTimeout(() => {
-            this.setTextContent(false);
-        }, 0);
     }
 
     handleTextContentChange = (value) => {
