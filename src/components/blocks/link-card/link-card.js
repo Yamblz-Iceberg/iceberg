@@ -14,6 +14,7 @@ const LinkCard = ({ data }) => {
 
     const avatarOptions = {
         size: '25',
+        iconColor: '#fff',
         photo: data.userAdded.photo,
     };
 
