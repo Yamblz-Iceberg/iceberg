@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { ModalTemplate } from './../../blocks';
+import { Button } from './../../elements';
+import { ModalTemplate } from './../';
 import { actions } from './../../../reducers/modal.reducer';
 
 class ModalError extends Component {
@@ -10,16 +11,14 @@ class ModalError extends Component {
         this.props.hideModal()
     );
     render() {
-        const content = (<div />);
-        const buttons = [
-            {
-                name: 'ok',
-                text: 'Подождать',
-                className: 'button-success',
-                onClick: this.handleClose,
-            },
-        ];
-        return (<ModalTemplate content={content} buttons={buttons} />);
+        const content = (<div>
+            <h3 className="modal__title">Произошла ошибка</h3>
+            <p className="modal__text">Попробуйте подождать или перезапустите приложение и попробуйте еше раз</p>
+            <div className="modal__buttons-block">
+                <Button name={'wait'} text={'Подождать'} onClick={this.handleClose} />
+            </div>
+        </div>);
+        return (<ModalTemplate content={content} />);
     }
 }
 

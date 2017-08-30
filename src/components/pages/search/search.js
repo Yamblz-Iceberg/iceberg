@@ -10,7 +10,7 @@ class Search extends Component {
     onElementClick = e => (e);
     render() {
         return (<div className="search-wrap">
-            <Modal type={'ERROR_MESSAGE'} />
+            <Modal />
             <SearchHeader />
             <SearchResult />
         </div>);
