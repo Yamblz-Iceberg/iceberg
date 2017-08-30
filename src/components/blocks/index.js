@@ -13,3 +13,6 @@ export { default as Option } from './option';
 export { default as CollectionDetailHeader } from './collection-detail-header';
 export { default as CollectionDetailLinks } from './collection-detail-links';
 export { default as SearchHeader } from './search-header';
+export { default as ModalTemplate } from './modal-template';
+export { default as ModalError } from './modal-error';
+export { default as Modal } from './modal-root';
