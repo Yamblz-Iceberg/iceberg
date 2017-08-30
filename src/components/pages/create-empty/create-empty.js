@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { Button, Icon } from './../../elements';
-import { CreateCard, CreateEmptyHeader, Option } from './../../blocks';
+import { CreateCard, CreateEmptyHeader, Option, ToggleText } from './../../blocks';
 
 import './create-empty.scss';
 
@@ -54,7 +54,9 @@ class CreateEmpty extends Component {
                         </NavLink>
                     )
                     : (
-                        <p>{description}</p>
+                        <div className="create-empty__toggle-text">
+                            <ToggleText text={description} />
+                        </div>
                     )
                 }
                 { optionsProperties.map(option => <Option key={option.num} {...option} />) }
