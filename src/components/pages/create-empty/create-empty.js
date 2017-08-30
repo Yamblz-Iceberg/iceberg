@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { Button, Icon } from './../../elements';
@@ -10,6 +12,10 @@ class CreateEmpty extends Component {
     handleSubmitData = e => e;
 
     render() {
+        const {
+            description,
+        } = this.props;
+
         const createCardProps = {
             userName: 'Pavel',
             avatar: '',
@@ -34,25 +40,33 @@ class CreateEmpty extends Component {
                 <div className="create-empty__card-wrapper">
                     <CreateCard data={createCardProps} />
                 </div>
-                <div className="create-empty__add-description">
-                    <Button
-                        {...{
-                            icon: <Icon iconName={'plus'} />,
-                            text: 'Добавить описание',
-                            background: 'rgba(255,255,255, 0)',
-                        }}
-                    />
-                </div>
+                {description === ''
+                    ? (
+                        <NavLink
+                            to={'/create-description'}
+                            className="create-empty__add-description"
+                        >
+                            <Button
+                                icon={<Icon iconName={'plus'} />}
+                                text="Добавить описание"
+                                background="rgba(255,255,255, 0)"
+                            />
+                        </NavLink>
+                    )
+                    : (
+                        <p>{description}</p>
+                    )
+                }
                 { optionsProperties.map(option => <Option key={option.num} {...option} />) }
             </main>
         );
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        collection: state.collection,
-    };
-}
+CreateEmpty.propTypes = {
+    description: PropTypes.string.isRequired,
+};
 
-export default connect(mapStateToProps)(CreateEmpty);
+export default connect(
+    state => ({ description: state.createCollection.description }),
+)(CreateEmpty);
