@@ -6,7 +6,10 @@ import { connect } from 'react-redux';
 import { Button, Icon } from './../../elements';
 import { CreateCard, CreateEmptyHeader, Option, ToggleText } from './../../blocks';
 
-import { updateTitle } from '../../../reducers/create-collection.reducer';
+import {
+    updateTitle,
+    updateSwitcher,
+} from '../../../reducers/create-collection.reducer';
 
 import './create-empty.scss';
 
@@ -16,6 +19,8 @@ class CreateEmpty extends Component {
     handleTitleUpdate = (value) => {
         this.props.updateTitle(value);
     }
+
+    handleSwitcherUpdate = id => value => this.props.updateSwitcher(id)(value);
 
     render() {
         const {
@@ -30,12 +35,12 @@ class CreateEmpty extends Component {
 
         const optionsProperties = [
             {
-                num: 1,
+                id: 1,
                 option: 'Предлагать ссылки',
                 noticeText: 'Нотификация1',
             },
             {
-                num: 2,
+                id: 2,
                 option: 'Модерировать ссылки',
                 noticeText: 'Нотификация2',
             },
@@ -66,7 +71,13 @@ class CreateEmpty extends Component {
                         </div>
                     )
                 }
-                { optionsProperties.map(option => <Option key={option.num} {...option} />) }
+                { optionsProperties
+                    .map(option => (
+                        <Option
+                            callback={this.handleSwitcherUpdate(option.id)}
+                            key={option.id}
+                            {...option}
+                        />)) }
             </main>
         );
     }
@@ -75,9 +86,10 @@ class CreateEmpty extends Component {
 CreateEmpty.propTypes = {
     description: PropTypes.string.isRequired,
     updateTitle: PropTypes.func.isRequired,
+    updateSwitcher: PropTypes.func.isRequired,
 };
 
 export default connect(
     state => ({ description: state.createCollection.description }),
-    { updateTitle },
+    { updateTitle, updateSwitcher },
 )(CreateEmpty);

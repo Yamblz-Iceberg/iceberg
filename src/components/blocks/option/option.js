@@ -61,7 +61,7 @@ class Option extends Component {
                 >
                     { this.state.noticeVisible ? <Notice {...noticeProps} /> : '' }
                 </div>
-                <SwitchButton type="android" />
+                <SwitchButton callback={this.props.callback} type="android" />
             </div>
         );
     }
@@ -74,6 +74,7 @@ Option.defaultProps = {
 Option.propTypes = {
     option: PropTypes.string.isRequired,
     noticeText: PropTypes.string,
+    callback: PropTypes.func.isRequired,
 };
 
 export default Option;
