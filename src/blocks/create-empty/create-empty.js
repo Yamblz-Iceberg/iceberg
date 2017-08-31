@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-
 import { Button, Icon } from '../../blocks';
 import { CreateCard, Option, ToggleText } from '../index';
 import CreateEmptyHeader from './header/create-empty-header';
+
+import { cardBlue } from '../../variables.scss';
 
 import {
     updateTitle,
@@ -22,12 +23,21 @@ class CreateEmpty extends Component {
         this.state = {
             title: '',
         };
+        console.log(cardBlue);
     }
 
     setTitle = (title) => {
         this.setState({
             title,
         });
+    }
+
+    hexToRGB = (hex) => {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+
+        return `rgb(${r}, ${g}, ${b})`;
     }
 
     handleTitleUpdate = (value) => {
@@ -43,9 +53,12 @@ class CreateEmpty extends Component {
         const body = {
             description: this.props.description,
             name: this.props.title,
-            photo: 'sample.jpg',
+            photo: 'https://pp.userapi.com/c543100/v543100915/2fbfb/IoVG_UEW-yw.jpg',
+            color: this.hexToRGB(cardBlue),
             tags: ['59a7e38c7db98b35471fed6d', '59a7e38c7db98b35471fed67'],
         };
+
+        console.log(body);
 
         this.props.createCollection(body, this.props.token, this.changeRoute);
     };
