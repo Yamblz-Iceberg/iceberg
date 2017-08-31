@@ -18,3 +18,33 @@
 	text-align: center;
 	color: #777777;
 }
+
+.search-result__info {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.search-result__count {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 24px 18px 12px 18px;
+    width: 100%;
+    > p {
+        margin: 0;
+        color: #949494;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+}
+
+.search-result__list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-height: 100%;
+    overflow: auto;
+}

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Button, Icon } from '../../../blocks';
+import SearchResultItem from './../result-item/search-result-item';
 
 import './search-result.scss';
 
@@ -24,10 +25,22 @@ class SearchResult extends Component {
                 <Button text="Создать тему" icon={emptyButtonIcon} />
             </div>
         );
+        const result = search.result.length ? (
+            <div className="search-result__info">
+                <div className="search-result__count">
+                    <p>Найдено {search.result.length} подборки</p>
+                </div>
+                <div className="search-result__list">
+                    {
+                        search.result.map(item => (<SearchResultItem key={item.id} data={item} />))
+                    }
+                </div>
+            </div>
+        ) : emptyResult;
         return (
             <div className="search-container">
                 {
-                    search.text.length ? emptyResult : null
+                    search.text.length ? result : null
                 }
             </div>
         );
