@@ -62,13 +62,25 @@ class CollectionDetail extends Component {
 
                 <div className="collection-detail-tabs">
                     <Tabs tabs={tabs} />
-                    <Switch>
-                        <Route exact path="/collection-detail" />
-                        <Route path="/collection-detail/unread" />
-                        <Route path="/collection-detail/new" />
-                    </Switch>
                 </div>
-                <CollectionDetailLinks links={this.state.collection.links} />
+                <Switch>
+                    <Route
+                        exact
+                        path="/collection-detail"
+                        render={() => (
+                            <CollectionDetailLinks links={this.state.collection.links} />
+                        )}
+                    />
+                    <Route
+                        path="/collection-detail/:filter?"
+                        render={({ match }) => (
+                            <CollectionDetailLinks
+                                links={this.state.collection.links}
+                                filter={match.params.filter}
+                            />
+                        )}
+                    />
+                </Switch>
                 <div className="collection-detail__add-button">
                     <Button {...{
                         icon: <Icon iconName={'link'} />,
