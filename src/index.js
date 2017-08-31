@@ -13,6 +13,7 @@ import {
     CreateLink,
     Search,
     Home,
+    LinkPreview,
 } from './blocks';
 import reducer from './reducers';
 
@@ -42,6 +43,7 @@ function onDeviceReady() {
                     <Route path="/collection-detail" component={CollectionDetail} />
                     <Route path="/profile" component={AccountProfile} />
                     <Route path="/search" component={Search} />
+                    <Route path="/preview" component={LinkPreview} />
                     <Redirect from="/" to="/feed" />
                 </Switch>
             </Router>
