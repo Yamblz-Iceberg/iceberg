@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 
 import { Button, Icon } from '../../blocks';
 import { CreateCard, Option, ToggleText } from '../index';
@@ -34,6 +35,10 @@ class CreateEmpty extends Component {
         this.setTitle(value);
     }
 
+    changeRoute = () => {
+        this.props.history.push({ pathname: './feed' });
+    }
+
     handleSubmitData = () => {
         const body = {
             description: this.props.description,
@@ -42,7 +47,7 @@ class CreateEmpty extends Component {
             tags: ['59a7e38c7db98b35471fed6d', '59a7e38c7db98b35471fed67'],
         };
 
-        this.props.createCollection(body, this.props.token);
+        this.props.createCollection(body, this.props.token, this.changeRoute);
     };
 
     handleSwitcherUpdate = id => value => this.props.updateSwitcher(id, value);
@@ -121,6 +126,7 @@ CreateEmpty.propTypes = {
     data: PropTypes.object.isRequired,
     createCollection: PropTypes.func.isRequired,
     token: PropTypes.string.isRequired,
+    history: PropTypes.any.isRequired,
 };
 
 export default connect(
@@ -132,4 +138,4 @@ export default connect(
         token: state.app.token,
     }),
     { updateTitle, updateSwitcher, createCollection },
-)(CreateEmpty);
+)(withRouter(CreateEmpty));

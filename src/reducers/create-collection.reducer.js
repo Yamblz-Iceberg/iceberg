@@ -30,11 +30,11 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-export const createCollection = (data, token) => (
+export const createCollection = (data, token, callback) => (
     (dispatch) => {
         postCollection(data, token).then(() => {
             dispatch(clearCollection());
-        });
+        }).then(() => callback());
     }
 );
 
