@@ -11,6 +11,15 @@ class LimitedTextarea extends Component {
         };
     }
 
+    componentWillMount() {
+        const { initialText } = this.props;
+        if (initialText !== '') {
+            this.setState({
+                textContent: initialText,
+            });
+        }
+    }
+
     componentWillReceiveProps = (nextProps) => {
         if (this.props.resetTextContent !== nextProps.resetTextContent) {
             this.resetTextContent();
@@ -47,16 +56,22 @@ class LimitedTextarea extends Component {
                     onChange={this.handleChange}
                     ref={(input) => { this.input = input; }}
                     placeholder="Введите текст описания"
+                    value={this.state.textContent}
                 />
             </div>
         );
     }
 }
 
+LimitedTextarea.defaultProps = {
+    initialText: '',
+};
+
 LimitedTextarea.propTypes = {
     handleChange: PropTypes.func.isRequired,
     max: PropTypes.number.isRequired,
     resetTextContent: PropTypes.bool.isRequired,
+    initialText: PropTypes.string,
 };
 
 export default LimitedTextarea;

@@ -62,6 +62,12 @@ class CreateEmpty extends Component {
             },
         ];
 
+        const editDescriptionIcon = (
+            <NavLink to={'/create-description'} className="create-empty__edit-description">
+                <Icon iconName={'plus'} />
+            </NavLink>
+        );
+
         return (
             <main className="create-empty">
                 <CreateEmptyHeader
@@ -86,7 +92,10 @@ class CreateEmpty extends Component {
                     )
                     : (
                         <div className="create-empty__toggle-text">
-                            <ToggleText text={description} />
+                            <ToggleText
+                                text={description}
+                                component={editDescriptionIcon}
+                            />
                         </div>
                     )
                 }

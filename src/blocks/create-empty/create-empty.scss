@@ -9,4 +9,21 @@
         text-align: center;
         text-decoration: none;
     }
+    &__edit-description {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        bottom: -2px;
+        margin-left: 5px;
+        width: 20px;
+        height: 20px;
+    }
+    &__toggle-text {
+        .text-toggle {
+            &__text-wrapper {
+                position: relative;
+            }
+        }
+    }
 }

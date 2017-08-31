@@ -40,6 +40,7 @@ class CreateDescription extends Component {
                         max={1000}
                         handleChange={this.handleTextContentChange}
                         resetTextContent={this.state.resetText}
+                        initialText={this.props.description}
                     />
                 </div>
             </main>
@@ -49,9 +50,10 @@ class CreateDescription extends Component {
 
 CreateDescription.propTypes = {
     updateDescription: PropTypes.func.isRequired,
+    description: PropTypes.string.isRequired,
 };
 
 export default connect(
-    state => ({ description: state.description }),
+    state => ({ description: state.createCollection.description }),
     { updateDescription },
 )(CreateDescription);
