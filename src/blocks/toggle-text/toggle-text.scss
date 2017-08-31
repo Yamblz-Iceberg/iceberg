@@ -21,6 +21,9 @@
     &__icon {
         min-width: 24px;
         padding-top: 6px;
+        &--hide {
+            display: none;
+        }
     }
 }
 
