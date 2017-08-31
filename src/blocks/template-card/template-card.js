@@ -7,7 +7,7 @@ import { Icon, Avatar } from '../../blocks';
 
 const TemplateCard = ({ data }) => {
     const cardStyles = {
-        background: `${data.color} url(${data.photo})`,
+        background: `${data.background} url(${data.photo})`,
     };
 
     const avatarOptions = {

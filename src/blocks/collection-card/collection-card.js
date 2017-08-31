@@ -23,7 +23,7 @@ const CollectionCard = ({ data }) => {
 
     const tempCard = {
         component,
-        color: data.color,
+        background: data.color,
         photo: data.photo,
         userName: `${data.author.firstName} ${data.author.lastName}`,
         avatar: data.author.photo,
