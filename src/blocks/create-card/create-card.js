@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
+import { connect } from 'react-redux';
 
 import { cardBlue } from '../../variables.scss';
 import './create-card.scss';
@@ -34,7 +35,7 @@ class CreateCard extends Component {
                     tabIndex="0"
                     onKeyUp={this.maxNumberOfCharacters}
                     contentEditable
-                />
+                >{this.props.title}</div>
             </div>
         );
 
@@ -55,6 +56,9 @@ class CreateCard extends Component {
 
 CreateCard.propTypes = {
     data: PropTypes.object.isRequired,
+    title: PropTypes.string.isRequired,
 };
 
-export default CreateCard;
+export default connect(
+    state => ({ title: state.createCollection.title }),
+)(CreateCard);
