@@ -82,6 +82,18 @@ const iconsSizes = {
         width: '12px',
         height: '8px',
     },
+    edit: {
+        width: '16px',
+        height: '16px',
+    },
+    picture: {
+        width: '18px',
+        height: '18px',
+    },
+    lock: {
+        width: '16px',
+        height: '19px',
+    },
 };
 
 const Icon = (props) => {
