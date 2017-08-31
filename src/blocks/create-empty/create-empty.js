@@ -10,6 +10,7 @@ import CreateEmptyHeader from './header/create-empty-header';
 import {
     updateTitle,
     updateSwitcher,
+    createCollection,
 } from '../../reducers/create-collection.reducer';
 
 import './create-empty.scss';
@@ -33,7 +34,16 @@ class CreateEmpty extends Component {
         this.setTitle(value);
     }
 
-    handleSubmitData = e => e;
+    handleSubmitData = () => {
+        const body = {
+            description: this.props.description,
+            name: this.props.title,
+            photo: 'sample.jpg',
+            tags: ['59a7e38c7db98b35471fed6d', '59a7e38c7db98b35471fed67'],
+        };
+
+        this.props.createCollection(body, this.props.token);
+    };
 
     handleSwitcherUpdate = id => value => this.props.updateSwitcher(id, value);
 
@@ -108,6 +118,9 @@ CreateEmpty.propTypes = {
     user: PropTypes.string.isRequired,
     updateTitle: PropTypes.func.isRequired,
     updateSwitcher: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired,
+    createCollection: PropTypes.func.isRequired,
+    token: PropTypes.string.isRequired,
 };
 
 export default connect(
@@ -115,6 +128,8 @@ export default connect(
         description: state.createCollection.description,
         title: state.createCollection.title,
         user: state.user.data,
+        data: state.createCollection,
+        token: state.app.token,
     }),
-    { updateTitle, updateSwitcher },
+    { updateTitle, updateSwitcher, createCollection },
 )(CreateEmpty);
