@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Tabs, CollectionDetailLinks } from '../index';
+import { Tabs, CollectionDetailLinks, Button, Icon } from '../';
 import CollectionDetailInfo from './info/collection-detail-info';
 import CollectionDetailHeader from './header/collection-detail-header';
 import { collectionLoader } from '../../reducers/collection.reducer';
@@ -56,7 +56,7 @@ class CollectionDetail extends Component {
         ];
 
         return (
-            <div>
+            <div className="collection-detail">
                 <CollectionDetailHeader collectionTitle={this.state.collection.name} />
                 <CollectionDetailInfo collection={this.state.collection} />
 
@@ -69,6 +69,13 @@ class CollectionDetail extends Component {
                     </Switch>
                 </div>
                 <CollectionDetailLinks links={this.state.collection.links} />
+                <div className="collection-detail__add-button">
+                    <Button {...{
+                        icon: <Icon iconName={'link'} />,
+                        text: 'добавить ссылку',
+                    }}
+                    />
+                </div>
             </div>
         );
     }
