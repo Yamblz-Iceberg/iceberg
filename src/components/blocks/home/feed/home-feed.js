@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { CollectionCard, HashTape } from './../../blocks';
+import { CollectionCard, HashTape } from '../../index';
 
-import { loader } from '../../../reducers/feed.reducer';
+import { loader } from '../../../../reducers/feed.reducer';
 
-import './feed.scss';
+import './home-feed.scss';
 
-class Feed extends Component {
+class HomeFeed extends Component {
     componentDidMount() {
         this.props.loader();
     }
@@ -65,21 +65,21 @@ class Feed extends Component {
 
     render() {
         return (
-            <div className="feed-container">
+            <div className="home-feed-container">
                 { this.renderFeed(6, 3) }
             </div>
         );
     }
 }
 
-Feed.propTypes = {
+HomeFeed.propTypes = {
     collections: PropTypes.arrayOf(PropTypes.object.isRequired),
     tags: PropTypes.arrayOf(PropTypes.object.isRequired),
     loader: PropTypes.func.isRequired,
     history: PropTypes.any.isRequired,
 };
 
-Feed.defaultProps = {
+HomeFeed.defaultProps = {
     collections: [],
     tags: [],
 };
@@ -93,4 +93,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, { loader })(withRouter(Feed));
+export default connect(mapStateToProps, { loader })(withRouter(HomeFeed));

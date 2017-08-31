@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { Tabs, HomeHeader } from './../../blocks';
-import { Feed } from './../../parts';
-import { FloatingButton } from './../../elements';
-import { userLoader } from './../../../reducers/user.reducer';
+import { Tabs, HomeHeader } from '../index';
+import HomeFeed from './feed/home-feed';
+import { FloatingButton } from '../../elements/index';
+import { userLoader } from '../../../reducers/user.reducer';
 
 import './home.scss';
 
@@ -39,7 +39,7 @@ class Home extends Component {
                 <FloatingButton />
                 <Switch>
                     <Route exact path="/feed">
-                        <Feed />
+                        <HomeFeed />
                     </Route>
                     <Route path="/feed/new">
                         <h1>Новое</h1>

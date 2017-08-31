@@ -6,14 +6,13 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import {
-    Home,
-    Search,
-} from './components/pages';
-import { AccountProfile,
+    AccountProfile,
     CollectionDetail,
     CreateEmpty,
     CreateDescription,
     CreateLink,
+    Search,
+    Home,
 } from './components/blocks';
 import reducer from './reducers';
 

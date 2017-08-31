@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { SearchHeader, Modal } from './../../blocks';
-import { SearchResult } from './../../parts';
+import SearchHeader from './header/search-header';
+import SearchResult from './result/search-result';
+import { Modal } from '../index';
 
 import './search.scss';
 

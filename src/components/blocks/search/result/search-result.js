@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Button, Icon } from './../../elements';
+import { Button, Icon } from '../../../elements/index';
 
 import './search-result.scss';
 

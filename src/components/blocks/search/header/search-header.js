@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-import { actions } from './../../../reducers/search.reducer';
-import { actions as modalActions } from './../../../reducers/modal.reducer';
+import { actions } from '../../../../reducers/search.reducer';
+import { actions as modalActions } from '../../../../reducers/modal.reducer';
 
-import { Icon } from '../../elements';
+import { Icon } from '../../../elements/index';
 
 import './search-header.scss';
 
