@@ -79,7 +79,7 @@ class CreateEmpty extends Component {
 
         const editDescriptionIcon = (
             <NavLink to={'/create-description'} className="create-empty__edit-description">
-                <Icon iconName={'plus'} />
+                <Icon iconName={'edit'} />
             </NavLink>
         );
 
