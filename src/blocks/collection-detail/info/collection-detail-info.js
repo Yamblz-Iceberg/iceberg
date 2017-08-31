@@ -31,7 +31,7 @@ class CollectionDetailInfo extends Component {
 
     createLink = () => {
         this.props.history.push({ pathname: './create-link' });
-    }
+    };
 
     render() {
         const avatarOptions = {
