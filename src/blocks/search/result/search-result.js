@@ -25,7 +25,7 @@ class SearchResult extends Component {
                 <Button text="Создать тему" icon={emptyButtonIcon} />
             </div>
         );
-        const result = search.result ? (
+        const result = search.result.length ? (
             <div className="search-result__info">
                 <div className="search-result__count">
                     <p>Найдено {search.result.length} подборки</p>
