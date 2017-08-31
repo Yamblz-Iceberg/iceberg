@@ -39,12 +39,20 @@ class Home extends Component {
                 </div>
                 <FloatingButton />
                 <Switch>
-                    <Route exact path="/feed">
-                        <HomeFeed />
-                    </Route>
-                    <Route path="/feed/new">
-                        <h1>Новое</h1>
-                    </Route>
+                    <Route
+                        exact
+                        path="/feed"
+                        render={() => (
+                            <HomeFeed queryParam="rating" />
+                        )}
+                    />
+
+                    <Route
+                        path="/feed/new"
+                        render={() => (
+                            <HomeFeed queryParam="time" />
+                        )}
+                    />
                 </Switch>
             </main>
         );

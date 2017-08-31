@@ -10,7 +10,13 @@ import './home-feed.scss';
 
 class HomeFeed extends Component {
     componentDidMount() {
-        this.props.loader();
+        this.props.loader(this.props.queryParam);
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.queryParam !== prevProps.queryParam) {
+            this.props.loader(this.props.queryParam);
+        }
     }
 
     handlerOnClick(e, cardId) {
@@ -77,6 +83,7 @@ HomeFeed.propTypes = {
     tags: PropTypes.arrayOf(PropTypes.object.isRequired),
     loader: PropTypes.func.isRequired,
     history: PropTypes.any.isRequired,
+    queryParam: PropTypes.any.isRequired,
 };
 
 HomeFeed.defaultProps = {
