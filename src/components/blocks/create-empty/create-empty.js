@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Button, Icon } from './../../elements';
-import { CreateCard, CreateEmptyHeader, Option, ToggleText } from './../../blocks';
+import { Button, Icon } from '../../elements/index';
+import { CreateCard, Option, ToggleText } from '../index';
+import CreateEmptyHeader from './header/create-empty-header';
 
 import {
     updateTitle,

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-import { Icon, Button } from '../../elements';
+import { Icon, Button } from '../../../elements/index';
 
 import './create-link-header.scss';
 

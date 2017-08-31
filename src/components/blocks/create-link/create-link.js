@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { CreateLinkHeader } from './../../blocks';
-import { Button, Icon } from './../../elements';
+import CreateLinkHeader from './header/create-link-header';
+import { Button, Icon } from '../../elements/index';
 
 import './create-link.scss';
 
@@ -14,10 +14,10 @@ class CreateLink extends Component {
     }
     handleAdd = () => {
         alert('Еще не готово!');
-    }
+    };
     handleChangeUrl = (event) => {
         this.setState({ url: event.target.value });
-    }
+    };
     render() {
         const { collection } = this.props;
         const iconPlus = (

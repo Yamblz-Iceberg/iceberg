@@ -8,11 +8,13 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import {
     Home,
     Search,
+} from './components/pages';
+import { AccountProfile,
+    CollectionDetail,
     CreateEmpty,
     CreateDescription,
     CreateLink,
-} from './components/pages';
-import { AccountProfile, CollectionDetail } from './components/blocks';
+} from './components/blocks';
 import reducer from './reducers';
 
 import './styles.scss';
