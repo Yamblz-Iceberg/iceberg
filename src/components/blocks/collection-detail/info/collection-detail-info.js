@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
-import { CollectionDetailHeader, ToggleText } from '../../blocks';
-import { HashTag, Icon, Avatar, Button } from '../../elements';
+import { ToggleText } from '../../index';
+import { HashTag, Icon, Avatar, Button } from '../../../elements/index';
 
 import './collection-detail-info.scss';
 
@@ -48,8 +48,6 @@ class CollectionDetailInfo extends Component {
                             className="collection-detail-card__img"
                             style={{ backgroundImage: `url(${this.state.collection.photo})` }}
                         />
-
-                        <CollectionDetailHeader collectionTitle={this.state.collection.name} />
 
                         <div className="collection-detail-card__info">
                             <div>

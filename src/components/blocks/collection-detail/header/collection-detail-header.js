@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Icon } from '../../elements';
+import { Icon } from '../../../elements/index';
 
 import './collection-detail-header.scss';
 

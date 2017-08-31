@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { LinkCard } from '../../blocks';
+import { LinkCard } from '../../index';
 
 import './collection-detail-links.scss';
 

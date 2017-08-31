@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Tabs, CollectionDetailLinks } from '../../blocks';
-import { CollectionDetailInfo } from '../../parts';
+import { Tabs, CollectionDetailLinks } from '../index';
+import CollectionDetailInfo from './info/collection-detail-info';
+import CollectionDetailHeader from './header/collection-detail-header';
 import { collectionLoader } from '../../../reducers/collection.reducer';
 
 import './collection-detail.scss';
@@ -56,6 +57,7 @@ class CollectionDetail extends Component {
 
         return (
             <div>
+                <CollectionDetailHeader collectionTitle={this.state.collection.name} />
                 <CollectionDetailInfo collection={this.state.collection} />
 
                 <div className="collection-detail-tabs">

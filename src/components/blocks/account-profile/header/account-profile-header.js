@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Icon } from '../../elements';
+import { Icon } from '../../../elements';
 
-import './profile-header.scss';
+import './account-profile-header.scss';
 
 const ProfileHeader = () => (
     <header className="profile-header">

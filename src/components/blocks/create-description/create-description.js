@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { CreateDescriptionHeader, LimitedTextarea } from './../../blocks';
+import { LimitedTextarea } from '../';
+import CreateDescriptionHeader from './header/create-description-header';
 import { updateDescription } from '../../../reducers/create-collection.reducer';
 
 import './create-description.scss';

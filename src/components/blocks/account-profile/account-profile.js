@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { UserInfo, ProfileHeader, ListGroup } from './../../blocks';
+import ProfileHeader from './header/account-profile-header';
+import { UserInfo, ListGroup } from './../../blocks';
 
 const menuItems = [
     {

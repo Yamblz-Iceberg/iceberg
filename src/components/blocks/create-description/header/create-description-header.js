@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import { Icon } from '../../elements';
+import { Icon } from '../../../elements/index';
 
 import './create-description-header.scss';
 
