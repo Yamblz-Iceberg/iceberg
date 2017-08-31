@@ -13,7 +13,7 @@ import {
     CreateLink,
     Search,
     Home,
-} from './components/blocks';
+} from './blocks';
 import reducer from './reducers';
 
 import './styles.scss';
