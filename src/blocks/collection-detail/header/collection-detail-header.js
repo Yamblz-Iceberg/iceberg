@@ -16,7 +16,7 @@ class CollectionDetailHeader extends Component {
 
     handleGoBack = () => {
         this.props.history.goBack();
-    }
+    };
 
     render() {
         return (
