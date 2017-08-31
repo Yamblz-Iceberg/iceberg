@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 
 import { Button, Icon } from '../../blocks';
 import { CreateCard, Option, ToggleText } from '../index';
@@ -10,6 +11,7 @@ import CreateEmptyHeader from './header/create-empty-header';
 import {
     updateTitle,
     updateSwitcher,
+    createCollection,
 } from '../../reducers/create-collection.reducer';
 
 import './create-empty.scss';
@@ -33,7 +35,20 @@ class CreateEmpty extends Component {
         this.setTitle(value);
     }
 
-    handleSubmitData = e => e;
+    changeRoute = () => {
+        this.props.history.push({ pathname: './feed' });
+    }
+
+    handleSubmitData = () => {
+        const body = {
+            description: this.props.description,
+            name: this.props.title,
+            photo: 'sample.jpg',
+            tags: ['59a7e38c7db98b35471fed6d', '59a7e38c7db98b35471fed67'],
+        };
+
+        this.props.createCollection(body, this.props.token, this.changeRoute);
+    };
 
     handleSwitcherUpdate = id => value => this.props.updateSwitcher(id, value);
 
@@ -108,6 +123,10 @@ CreateEmpty.propTypes = {
     user: PropTypes.string.isRequired,
     updateTitle: PropTypes.func.isRequired,
     updateSwitcher: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired,
+    createCollection: PropTypes.func.isRequired,
+    token: PropTypes.string.isRequired,
+    history: PropTypes.any.isRequired,
 };
 
 export default connect(
@@ -115,6 +134,8 @@ export default connect(
         description: state.createCollection.description,
         title: state.createCollection.title,
         user: state.user.data,
+        data: state.createCollection,
+        token: state.app.token,
     }),
-    { updateTitle, updateSwitcher },
-)(CreateEmpty);
+    { updateTitle, updateSwitcher, createCollection },
+)(withRouter(CreateEmpty));
