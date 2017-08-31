@@ -23,7 +23,6 @@ class CreateEmpty extends Component {
         this.state = {
             title: '',
         };
-        console.log(cardBlue);
     }
 
     setTitle = (title) => {
@@ -57,8 +56,6 @@ class CreateEmpty extends Component {
             color: this.hexToRGB(cardBlue),
             tags: ['59a7e38c7db98b35471fed6d', '59a7e38c7db98b35471fed67'],
         };
-
-        console.log(body);
 
         this.props.createCollection(body, this.props.token, this.changeRoute);
     };
