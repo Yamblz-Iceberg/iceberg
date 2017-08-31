@@ -50,7 +50,7 @@ class HomeFeed extends Component {
             if (currentCollections.length === collectionsCount) {
                 const currentTags = tags.slice(tagsIndex, tagsIndex + tagsCount);
 
-                const key = currentTags[0]._id + currentTags[1]._id;
+                const key = Math.random().toString(36);
                 feedToRender.push(
                     <div className="hash-tape__container" key={key}>
                         <HashTape hashes={currentTags} />
