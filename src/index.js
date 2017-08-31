@@ -6,14 +6,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import {
-    Home,
     AccountProfile,
     CollectionDetail,
-    Search,
     CreateEmpty,
     CreateDescription,
     CreateLink,
-} from './components/pages';
+    Search,
+    Home,
+} from './blocks';
 import reducer from './reducers';
 
 import './styles.scss';
