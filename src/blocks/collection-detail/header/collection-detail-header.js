@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+
 import { Icon } from '../../../blocks';
 
 import './collection-detail-header.scss';
@@ -13,6 +14,10 @@ class CollectionDetailHeader extends Component {
         };
     }
 
+    handleGoBack = () => {
+        this.props.history.goBack();
+    }
+
     render() {
         return (
             <header
@@ -21,9 +26,9 @@ class CollectionDetailHeader extends Component {
             >
                 <div className="collection-detail-header__container">
                     <div className="collection-detail-header__block">
-                        <Link to="/feed">
+                        <span onClick={this.handleGoBack}>
                             <Icon iconName={'arrow-back'} iconColor={this.state.fixedHeader ? '#000' : '#fff'} />
-                        </Link>
+                        </span>
                         <h4 className="collection-detail-header__title">
                             {this.state.fixedHeader === true ? this.props.collectionTitle : false}
                         </h4>
@@ -39,6 +44,7 @@ class CollectionDetailHeader extends Component {
 
 CollectionDetailHeader.propTypes = {
     collectionTitle: PropTypes.string.isRequired,
+    history: PropTypes.any.isRequired,
 };
 
-export default CollectionDetailHeader;
+export default withRouter(CollectionDetailHeader);
