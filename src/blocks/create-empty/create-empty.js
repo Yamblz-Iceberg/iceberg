@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-
 import { Button, Icon } from '../../blocks';
 import { CreateCard, Option, ToggleText } from '../index';
 import CreateEmptyHeader from './header/create-empty-header';
+
+import { cardBlue } from '../../variables.scss';
 
 import {
     updateTitle,
@@ -30,6 +31,14 @@ class CreateEmpty extends Component {
         });
     }
 
+    hexToRGB = (hex) => {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+
+        return `rgb(${r}, ${g}, ${b})`;
+    }
+
     handleTitleUpdate = (value) => {
         this.props.updateTitle(value);
         this.setTitle(value);
@@ -43,7 +52,8 @@ class CreateEmpty extends Component {
         const body = {
             description: this.props.description,
             name: this.props.title,
-            photo: 'sample.jpg',
+            photo: 'https://pp.userapi.com/c543100/v543100915/2fbfb/IoVG_UEW-yw.jpg',
+            color: this.hexToRGB(cardBlue),
             tags: ['59a7e38c7db98b35471fed6d', '59a7e38c7db98b35471fed67'],
         };
 
@@ -77,6 +87,12 @@ class CreateEmpty extends Component {
             },
         ];
 
+        const editDescriptionIcon = (
+            <NavLink to={'/create-description'} className="create-empty__edit-description">
+                <Icon iconName={'edit'} />
+            </NavLink>
+        );
+
         return (
             <main className="create-empty">
                 <CreateEmptyHeader
@@ -101,7 +117,10 @@ class CreateEmpty extends Component {
                     )
                     : (
                         <div className="create-empty__toggle-text">
-                            <ToggleText text={description} />
+                            <ToggleText
+                                text={description}
+                                component={editDescriptionIcon}
+                            />
                         </div>
                     )
                 }

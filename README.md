@@ -73,6 +73,9 @@
 - question
 - flash
 - arrow-more--popup
+- edit
+- picture
+- lock
 
 
 ### Запуск приложения
