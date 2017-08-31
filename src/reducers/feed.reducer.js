@@ -18,7 +18,7 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-const loader = queryParam => (
+const feedLoader = queryParam => (
     (dispatch) => {
         fetchFeed(queryParam).then((feed) => {
             dispatch(loadFeed(feed));
@@ -26,4 +26,4 @@ const loader = queryParam => (
     }
 );
 
-export { reducer, loader };
+export { reducer, feedLoader };
