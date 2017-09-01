@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { Icon } from '../../../blocks';
+
+import { actions as linkActions } from './../../../reducers/link.reducer';
 
 import './link-preview-header.scss';
 
 class LinkPreviewHeader extends Component {
     handleGoBack = () => {
+        this.props.closeUrl();
         this.props.history.goBack();
     }
     render() {
@@ -26,6 +30,7 @@ class LinkPreviewHeader extends Component {
 
 LinkPreviewHeader.propTypes = {
     history: PropTypes.any.isRequired,
+    closeUrl: PropTypes.func.isRequired,
 };
 
-export default withRouter(LinkPreviewHeader);
+export default connect(null, { ...linkActions })(withRouter(LinkPreviewHeader));
