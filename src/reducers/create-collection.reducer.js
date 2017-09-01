@@ -52,23 +52,16 @@ const reducer = (state = initialState, action) => {
         };
     }
     case EDIT_HASHTAG: {
-        let i;
+        const update = (items, item) => {
+            const editedArray = [].concat(items);
+            editedArray[items.findIndex(x => x.id === item.id)] = item;
 
-        const editedHashTag = state.hashTags.find((hashTag, iter) => {
-            if (hashTag.id === action.payload.id) {
-                i = iter;
-                return true;
-            }
-            return false;
-        });
-        editedHashTag.text = action.payload.text;
-
-        const editedArray = state.hashTags.concat([]);
-        editedArray[i] = editedHashTag;
+            return editedArray;
+        };
 
         return {
             ...state,
-            hashTags: editedArray,
+            hashTags: update([...state.hashTags], action.payload),
         };
     }
     case CLEAR_COLLECTION:
