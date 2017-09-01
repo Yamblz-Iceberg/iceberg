@@ -28,4 +28,4 @@ export { default as RatingInfo } from './rating-info';
 export { default as SwitchButton } from './switch-button';
 export { default as FloatingButton } from './floating-button';
 export { default as Notice } from './notice';
-
+export { default as CreateHashTag } from './create-hash-tag';

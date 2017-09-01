@@ -1,0 +1,24 @@
+@import './../../variables';
+
+.create-hash-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 12px;
+    height: 30px;
+    border: none;
+    border-radius: 50px;
+    background-color: $dark-blue;
+    color: white;
+
+    &__hashtag-input {
+        width: 140px;
+        background-color: transparent;
+        color: white;
+        &:focus::placeholder {
+            color: transparent;
+        }
+        &::placeholder {
+            color: white;
+        }
+    }
+}
