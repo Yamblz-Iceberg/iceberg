@@ -10,37 +10,43 @@ import './search-result.scss';
 class SearchResult extends Component {
     constructor(props) {
         super(props);
-        const { search } = this.props;
-        this.state = search;
+        const { result } = this.props;
+        this.state = result;
     }
 
     render() {
-        const { search } = this.props;
+        const { result, searchText } = this.props;
+
         const emptyButtonIcon = (
             <Icon iconName={'themes'} />
         );
+
         const emptyResult = (
             <div className="search-result__empty-block">
                 <p className="search-result__message">Мы не нашли точных результатов. Создайте тему и люди помогут</p>
                 <Button text="Создать тему" icon={emptyButtonIcon} />
             </div>
         );
-        const result = search.result.length ? (
+
+        const resultToRender = result.collections.length ? (
             <div className="search-result__info">
                 <div className="search-result__count">
-                    <p>Найдено {search.result.length} подборки</p>
+                    <p>Найдено {result.collections.length} подборки</p>
                 </div>
                 <div className="search-result__list">
                     {
-                        search.result.map(item => (<SearchResultItem key={item.id} data={item} />))
+                        result.collections.map(item => (
+                            <SearchResultItem key={item.id} data={item} />
+                        ))
                     }
                 </div>
             </div>
         ) : emptyResult;
+
         return (
             <div className="search-container">
                 {
-                    search.text.length ? result : null
+                    searchText.length ? resultToRender : null
                 }
             </div>
         );
@@ -48,16 +54,20 @@ class SearchResult extends Component {
 }
 
 SearchResult.propTypes = {
-    search: PropTypes.object,
+    searchText: PropTypes.string.isRequired,
+    result: PropTypes.object.isRequired,
 };
 
 SearchResult.defaultProps = {
-    search: {},
+    result: {
+        collections: [],
+    },
 };
 
 function mapStateToProps(state) {
     return {
-        search: state.search,
+        searchText: state.search.text,
+        result: state.search.result,
     };
 }
 
