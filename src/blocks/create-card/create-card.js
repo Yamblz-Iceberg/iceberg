@@ -113,9 +113,9 @@ class CreateCard extends Component {
                         className="create-card__input"
                         onChange={this.handleTitleChange}
                         value={this.props.title}
-                        rows="3"
+                        rows="4"
                         maxLength="50"
-                        placeholder="Название темы"
+                        placeholder="Введите название темы"
                     />
                 </div>
 
