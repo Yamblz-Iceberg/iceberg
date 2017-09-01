@@ -11,6 +11,7 @@
         background-position: 50%;
         background-repeat: no-repeat;
         position: relative;
+        flex-shrink: 0;
         &::after {
             content: '';
             display: block;
