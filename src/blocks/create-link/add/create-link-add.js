@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button, Icon } from '../../../blocks';
 
+import './create-link-add.scss';
+
 class CreateLinkAdd extends Component {
     constructor(props) {
         super(props);
@@ -16,6 +18,15 @@ class CreateLinkAdd extends Component {
     };
     handleChangeUrl = (event) => {
         this.setState({ url: event.target.value });
+        const linkAdded = /^[a-z0-9]+:\/\//.test(event.target.value) && event.target.value.length > 10;
+        this.setState({ linkAdded });
+    };
+    clearLink = () => {
+        this.setState({
+            ...this.state,
+            url: '',
+            linkAdded: false,
+        });
     };
     render() {
         return (
@@ -28,7 +39,11 @@ class CreateLinkAdd extends Component {
                         onChange={this.handleChangeUrl}
                         autoFocus
                     />
-                    <Icon iconName={'link'} iconColor="#d3d3d3" iconWidth="24" iconHeight="24" />
+                    {
+                        this.state.linkAdded
+                            ? <span className="create-link__close-icon" onClick={this.clearLink}><Icon iconName={'close'} /></span>
+                            : <Icon iconName={'link'} iconColor="#d3d3d3" />
+                    }
                 </div>
                 <Button
                     type="light"
