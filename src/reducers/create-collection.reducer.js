@@ -31,7 +31,7 @@ const reducer = (state = initialState, action) => {
     case UPDATE_SWITCHER:
         return { ...state, options: { ...state.options, ...action.payload } };
     case ADD_HASHTAG: {
-        const id = state.hashTags.length;
+        const id = Math.random();
 
         return {
             ...state,
