@@ -7,6 +7,20 @@
     border-radius: 10px;
     padding: 16px;
     box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.3);
+    background-position: center!important;
+
+    &__overlay {
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: linear-gradient(-180deg, rgba(0, 0, 0, 0) 67%, #000000 92%, rgb(0, 0, 0) 130%), linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, #000000 28%, rgba(14, 14, 14, 0.95) 40%, rgba(255, 255, 255, 0) 100%);
+        opacity: 0.6;
+        z-index: 1;
+        border-radius: 10px;
+    }
 
     &:before, &:after {
         content: '';
@@ -36,6 +50,7 @@
 }
 
 .template-card-footer {
+    z-index: 2;
     display: flex;
     justify-content: space-between;
 
