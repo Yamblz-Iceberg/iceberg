@@ -6,12 +6,14 @@ import { connect } from 'react-redux';
 import { LinkCard } from '../../index';
 
 import { actions as linkActions } from './../../../reducers/link.reducer';
+import { actions as modalActions } from '../../../reducers/modal.reducer';
 
 import './collection-detail-links.scss';
 
 class CollectionDetailLinks extends Component {
     constructor(props) {
         super(props);
+        console.log(this.props);
         this.state = {
             links: [],
             filter: '',
@@ -40,7 +42,7 @@ class CollectionDetailLinks extends Component {
                     () => {},
                     // error
                     () => {
-                        alert(`Бяда! Не могу открыть ссылку: ${href}`);
+                        this.props.showModal('ERROR_MESSAGE');
                     });
                 } else {
                     window.open(href);
@@ -74,6 +76,7 @@ class CollectionDetailLinks extends Component {
 CollectionDetailLinks.propTypes = {
     links: PropTypes.array.isRequired,
     filter: PropTypes.string,
+    showModal: PropTypes.func.isRequired,
 };
 
 CollectionDetailLinks.defaultProps = {
@@ -87,4 +90,5 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps, { ...linkActions })(withRouter(CollectionDetailLinks));
+export default
+connect(mapStateToProps, { ...linkActions, ...modalActions })(withRouter(CollectionDetailLinks));

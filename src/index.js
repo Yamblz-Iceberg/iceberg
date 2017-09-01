@@ -14,6 +14,7 @@ import {
     Search,
     Home,
     LinkPreview,
+    Modal,
 } from './blocks';
 import reducer from './reducers';
 
@@ -35,17 +36,20 @@ function onDeviceReady() {
     render(
         <Provider store={store}>
             <Router>
-                <Switch>
-                    <Route path="/feed" component={Home} />
-                    <Route path="/create-link" component={CreateLink} />
-                    <Route path="/create-empty" component={CreateEmpty} />
-                    <Route path="/create-description" component={CreateDescription} />
-                    <Route path="/collection-detail" component={CollectionDetail} />
-                    <Route path="/profile" component={AccountProfile} />
-                    <Route path="/search" component={Search} />
-                    <Route path="/preview" component={LinkPreview} />
-                    <Redirect from="/" to="/feed" />
-                </Switch>
+                <div>
+                    <Modal />
+                    <Switch>
+                        <Route path="/feed" component={Home} />
+                        <Route path="/create-link" component={CreateLink} />
+                        <Route path="/create-empty" component={CreateEmpty} />
+                        <Route path="/create-description" component={CreateDescription} />
+                        <Route path="/collection-detail" component={CollectionDetail} />
+                        <Route path="/profile" component={AccountProfile} />
+                        <Route path="/search" component={Search} />
+                        <Route path="/preview" component={LinkPreview} />
+                        <Redirect from="/" to="/feed" />
+                    </Switch>
+                </div>
             </Router>
         </Provider>,
         document.getElementById('app'),
