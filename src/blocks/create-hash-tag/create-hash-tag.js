@@ -44,6 +44,7 @@ class CreateHashTag extends Component {
             initText,
             tagChangeCallback,
             tagAddCallback,
+            tagDeleteCallback,
         } = this.props;
 
         const { text, created } = this.state;
@@ -58,7 +59,7 @@ class CreateHashTag extends Component {
                     placeholder={initText}
                 />
                 {(text !== '') && (
-                    <span onClick={!created ? tagAddCallback : 'test'}>
+                    <span onClick={!created ? tagAddCallback : tagDeleteCallback}>
                         <Icon
                             iconName={!created ? 'plus' : 'close'}
                             iconColor={'#fff'}
@@ -75,6 +76,7 @@ CreateHashTag.propTypes = {
     initText: PropTypes.string.isRequired,
     tagAddCallback: PropTypes.func.isRequired,
     tagChangeCallback: PropTypes.func.isRequired,
+    tagDeleteCallback: PropTypes.func.isRequired,
 };
 
 export default CreateHashTag;
