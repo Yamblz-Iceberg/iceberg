@@ -7,7 +7,8 @@ import { Icon, Avatar } from '../../blocks';
 
 const TemplateCard = ({ data }) => {
     const cardStyles = {
-        background: `${data.background} url(${data.photo})`,
+        background: `url(${data.photo})`,
+        backgroundColor: data.background,
     };
 
     const avatarOptions = {
@@ -38,6 +39,8 @@ const TemplateCard = ({ data }) => {
                     </div>
                 </div>
             </div>
+
+            { data.photo ? <div className="template-card__overlay" /> : null }
         </div>
     );
 };

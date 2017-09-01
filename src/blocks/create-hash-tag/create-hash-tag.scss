@@ -1,0 +1,43 @@
+@import './../../variables';
+
+.create-hash-tag {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 0 12px;
+    height: 30px;
+    border: none;
+    border-radius: 50px;
+    background-color: $dark-blue;
+    color: white;
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &__icon-wrapper {
+        position: absolute;
+        right: 10px;
+        display: inline-flex;
+        justify-content: center;
+        width: 25px;
+        height: 25px;
+    }
+
+    &__hashtag-input {
+        padding-right: 20px;
+        width: 132px;
+        background-color: transparent;
+        color: white;
+        &[value=""] {
+            padding-right: 0;
+        }
+        &:focus::placeholder {
+            color: transparent;
+        }
+        &::placeholder {
+            color: white;
+        }
+    }
+}
