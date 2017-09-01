@@ -4,13 +4,19 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { CollectionCard, HashTape } from '../../index';
 
-import { loader } from '../../../reducers/feed.reducer';
+import { feedLoader } from '../../../reducers/feed.reducer';
 
 import './home-feed.scss';
 
 class HomeFeed extends Component {
     componentDidMount() {
-        this.props.loader();
+        this.props.feedLoader(this.props.queryParam);
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.queryParam !== prevProps.queryParam) {
+            this.props.feedLoader(this.props.queryParam);
+        }
     }
 
     handlerOnClick(e, cardId) {
@@ -75,8 +81,9 @@ class HomeFeed extends Component {
 HomeFeed.propTypes = {
     collections: PropTypes.arrayOf(PropTypes.object.isRequired),
     tags: PropTypes.arrayOf(PropTypes.object.isRequired),
-    loader: PropTypes.func.isRequired,
+    feedLoader: PropTypes.func.isRequired,
     history: PropTypes.any.isRequired,
+    queryParam: PropTypes.any.isRequired,
 };
 
 HomeFeed.defaultProps = {
@@ -93,4 +100,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, { loader })(withRouter(HomeFeed));
+export default connect(mapStateToProps, { feedLoader })(withRouter(HomeFeed));

@@ -1,2 +1,3 @@
-export const fetchFeed = () => fetch('https://iceberg-project.herokuapp.com/feed')
-    .then(res => res.json());
+export const fetchFeed = queryParam =>
+    fetch(`https://iceberg-project.herokuapp.com/feed?sort=${queryParam}`)
+        .then(res => res.json());

@@ -101,7 +101,7 @@ const Icon = (props) => {
     const iconHeight = props.iconHeight !== '' ? props.iconHeight : iconsSizes[props.iconName].height;
     const url = window.cordova !== undefined
         ? `${window.cordova.file.applicationDirectory}www/assets/svg/icons-sprite.svg`
-        : 'assets/svg/icons-sprite.svg';
+        : '/assets/svg/icons-sprite.svg';
     return (
         <svg
             width={iconWidth}

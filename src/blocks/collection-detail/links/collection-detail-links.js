@@ -14,6 +14,7 @@ class CollectionDetailLinks extends Component {
         super(props);
         this.state = {
             links: [],
+            filter: '',
         };
     }
 
@@ -27,9 +28,16 @@ class CollectionDetailLinks extends Component {
     }
 
     render() {
+        const filteredLinks = this.state.links.filter((link) => {
+            if (this.props.filter !== '') {
+                return link.name.length > 60;
+            }
+            return link;
+        });
         return (
             <section className="collection-detail-links">
-                {this.state.links.map(link => (
+
+                {filteredLinks.map(link => (
                     <div className="collection-detail-links__item" key={link._id} onClick={e => this.handlerOnClick(e, link)}>
                         <LinkCard data={link} />
                     </div>
@@ -43,6 +51,11 @@ CollectionDetailLinks.propTypes = {
     links: PropTypes.array.isRequired,
     history: PropTypes.any.isRequired,
     openUrl: PropTypes.func.isRequired,
+    filter: PropTypes.string,
+};
+
+CollectionDetailLinks.defaultProps = {
+    filter: '',
 };
 
 function mapStateToProps(state) {
