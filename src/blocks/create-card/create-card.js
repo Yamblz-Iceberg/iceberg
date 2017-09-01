@@ -7,7 +7,7 @@ import './create-card.scss';
 
 import { CreateHashTag } from './../../blocks';
 import { TemplateCard } from './..';
-import { addHashTag, deleteHashTag } from '../../reducers/create-collection.reducer';
+import { addHashTag, deleteHashTag, editHashTag } from '../../reducers/create-collection.reducer';
 
 class CreateCard extends Component {
     constructor() {
@@ -65,6 +65,10 @@ class CreateCard extends Component {
         this.setTagText('');
     }
 
+    handleEditTag = id => (event) => {
+        this.props.editHashTag(id, event.target.value);
+    }
+
     handleDeleteTag = id => () => {
         this.props.deleteHashTag(id);
     }
@@ -94,7 +98,7 @@ class CreateCard extends Component {
                         text={hashTag.text}
                         initText={initText}
                         key={hashTag.id}
-                        tagChangeCallback={this.handleHashTagChange}
+                        tagChangeCallback={this.handleEditTag(hashTag.id)}
                         tagAddCallback={this.handleAddTag}
                         tagDeleteCallback={this.handleDeleteTag(hashTag.id)}
                     />))
@@ -136,6 +140,7 @@ CreateCard.propTypes = {
     hashTags: PropTypes.array.isRequired,
     addHashTag: PropTypes.func.isRequired,
     deleteHashTag: PropTypes.func.isRequired,
+    editHashTag: PropTypes.func.isRequired,
 };
 
 export default connect(
@@ -143,5 +148,5 @@ export default connect(
         title: state.createCollection.title,
         hashTags: state.createCollection.hashTags,
     }),
-    { addHashTag, deleteHashTag },
+    { addHashTag, deleteHashTag, editHashTag },
 )(CreateCard);

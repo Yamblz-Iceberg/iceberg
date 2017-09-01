@@ -3,17 +3,32 @@
 .create-hash-tag {
     display: inline-flex;
     align-items: center;
+    position: relative;
+    margin-right: 5px;
+    margin-bottom: 5px;
     padding: 0 12px;
     height: 30px;
     border: none;
     border-radius: 50px;
     background-color: $dark-blue;
     color: white;
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &__icon-wrapper {
+        position: absolute;
+        right: 10px;
+    }
 
     &__hashtag-input {
-        width: 140px;
+        padding-right: 15px;
+        width: 132px;
         background-color: transparent;
         color: white;
+        &[value=""] {
+            padding-right: 0;
+        }
         &:focus::placeholder {
             color: transparent;
         }
