@@ -17,7 +17,7 @@ const LinkCard = ({ data }) => {
         photo: data.userAdded.photo,
     };
 
-    return (<a className="link-card" href={data.url} style={cardStyles}>
+    return (<div className="link-card" style={cardStyles}>
         <div className="link-card__header">
             <div className="link-card__user">
                 <Avatar {...avatarOptions} />
@@ -54,7 +54,7 @@ const LinkCard = ({ data }) => {
                 <span>{data.savedTimesCount}</span>
             </div>
         </div>
-    </a>);
+    </div>);
 };
 
 LinkCard.propTypes = {

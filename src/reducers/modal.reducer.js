@@ -20,8 +20,15 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-const hideModal = () => ({ type: HIDE_MODAL });
-const showModal = text => ({ type: SHOW_MODAL, modalType: text });
+const hideModal = () => {
+    document.body.removeEventListener('touchmove', (e) => { e.preventDefault(); });
+    return { type: HIDE_MODAL };
+};
+const showModal = (text) => {
+    // TODO: придумать что-нибудь красивое с блокировкой скрола
+    document.body.addEventListener('touchmove', (e) => { e.preventDefault(); });
+    return { type: SHOW_MODAL, modalType: text };
+};
 
 const actions = {
     hideModal,
