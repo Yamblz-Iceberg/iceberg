@@ -19,9 +19,20 @@
         display: block;
         font-weight: 500;
         margin-left: 25px;
+        max-width: calc(100% - 100px);
         text-overflow: ellipsis;
-        max-width: 144px;
         white-space: nowrap;
         overflow: hidden;
+    }
+    button {
+        display: none;
+    }
+    &--show-button {
+        .create-link-header__title {
+            max-width: 144px;
+        }
+        button {
+            display: initial;
+        }
     }
 }

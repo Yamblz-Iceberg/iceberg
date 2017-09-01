@@ -10,7 +10,7 @@ const Button = ({ type, size, icon, text, background, isDisabled, onClick }) => 
         className={`button
         ${size !== null ? `button--${size}` : ''}
         ${type !== null ? `button--${type}` : ''}
-        ${isDisabled !== false ? 'button--disable' : ''}`
+        ${isDisabled === true ? 'button--disable' : ''}`
         }
         onClick={onClick}
         disabled={isDisabled}

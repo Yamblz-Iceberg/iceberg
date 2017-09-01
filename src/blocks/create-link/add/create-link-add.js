@@ -8,6 +8,7 @@ class CreateLinkAdd extends Component {
         super(props);
         this.state = {
             url: '',
+            linkAdded: false,
         };
     }
     handleAdd = () => {
@@ -34,6 +35,7 @@ class CreateLinkAdd extends Component {
                     size="medium"
                     text="далее"
                     onClick={this.handleAdd}
+                    isDisabled={!this.state.linkAdded}
                 />
             </div>
         );

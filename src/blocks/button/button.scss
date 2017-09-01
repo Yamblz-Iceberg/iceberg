@@ -1,3 +1,5 @@
+@import "../../variables";
+
 .button {
     display: flex;
     align-items: center;
@@ -14,6 +16,16 @@
         font-weight: 500;
         text-transform: uppercase;
     }
+    //TODO убрать important, когда уберем инлайненные стили
+    &--light {
+        background: transparent!important;
+        border: 2px solid $border-gray;
+        color: #000;
+    }
+    &--disable {
+        background: #e6e6e6!important;
+        color: #666;
+    }
     &--small {
         height: 36px;
         padding-left: 16px;
@@ -23,19 +35,14 @@
         display: flex;
         justify-content: center;
         width: 122px;
+        color: #000;
+        &.button--disable {
+            background: transparent!important;
+            color: rgba(0, 0, 0, 0.24);
+        }
     }
     &--max-width {
         width: 100%;
         justify-content: center;
-    }
-    //TODO убрать important, когда уберем инлайненные стили
-    &--light {
-        background: transparent!important;
-        border: 2px solid #d3d3d3;
-        color: #000;
-    }
-    &--disable {
-        background: #e6e6e6!important;
-        color: #666;
     }
 }

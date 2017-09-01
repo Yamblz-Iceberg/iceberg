@@ -15,12 +15,18 @@ class AddLinkHeader extends Component {
     }
     handleGoBack = () => {
         this.props.history.goBack();
-    }
+    };
 
     render() {
         const isDisabled = true;
+        console.log(this.props.history.location);
         return (
-            <header className="create-link-header">
+            <header
+                className={`create-link-header
+                ${this.props.history.location.pathname.indexOf('/load') > -1
+                ? 'create-link-header--show-button'
+                : ''}`}
+            >
                 <div className="create-link-header__container">
                     <div className="create-link-header__block">
                         <span onClick={this.handleGoBack}>
