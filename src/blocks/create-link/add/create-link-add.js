@@ -31,9 +31,8 @@ class CreateLinkAdd extends Component {
                 </div>
                 <Button
                     type="light"
-                    size="max-width"
+                    size="medium"
                     text="далее"
-                    icon={<Icon iconName={'plus'} />}
                     onClick={this.handleAdd}
                 />
             </div>
