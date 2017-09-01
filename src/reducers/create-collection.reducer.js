@@ -6,6 +6,7 @@ const UPDATE_SWITCHER = 'UPDATE_SWITCHER';
 const CLEAR_COLLECTION = 'CLEAR_COLLECTION';
 const ADD_HASHTAG = 'ADD_HASHTAG';
 const DELETE_HASHTAG = 'DELETE_HASHTAG';
+const EDIT_HASHTAG = 'EDIT_HASHTAG';
 
 const initialState = {
     description: '',
@@ -19,6 +20,7 @@ const updateSwitcher = (id, status) => ({ type: UPDATE_SWITCHER, payload: { [id]
 const clearCollection = () => ({ type: CLEAR_COLLECTION });
 const addHashTag = text => ({ type: ADD_HASHTAG, payload: text });
 const deleteHashTag = id => ({ type: DELETE_HASHTAG, payload: id });
+const editHashTag = (id, text) => ({ type: EDIT_HASHTAG, payload: { id, text } });
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -49,6 +51,26 @@ const reducer = (state = initialState, action) => {
             hashTags: filteredArray,
         };
     }
+    case EDIT_HASHTAG: {
+        let i;
+
+        const editedHashTag = state.hashTags.find((hashTag, iter) => {
+            if (hashTag.id === action.payload.id) {
+                i = iter;
+                return true;
+            }
+            return false;
+        });
+        editedHashTag.text = action.payload.text;
+
+        const editedArray = state.hashTags.concat([]);
+        editedArray[i] = editedHashTag;
+
+        return {
+            ...state,
+            hashTags: editedArray,
+        };
+    }
     case CLEAR_COLLECTION:
         return { initialState };
     default:
@@ -71,4 +93,5 @@ export {
     updateSwitcher,
     addHashTag,
     deleteHashTag,
+    editHashTag,
 };
