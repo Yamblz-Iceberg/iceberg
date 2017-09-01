@@ -3,36 +3,51 @@ import PropTypes from 'prop-types';
 
 import './collection-card.scss';
 
-import { HashTag } from './../../blocks';
-import { TemplateCard } from './..';
+import { HashTag, Avatar, Icon } from './../../blocks';
 
 const CollectionCard = ({ data }) => {
     const hashes = data.tags;
+    const cardStyles = {
+        background: `${data.color} url(${data.photo})`,
+    };
 
-    const component = (
-        <div className="collection-card">
-            { hashes.map(hash => (
-                <HashTag
-                    name={hash.name}
-                    size={'small'}
-                    key={hash._id}
-                />)) }
-            <h2 className="collection-card__title">{data.name}</h2>
-        </div>
-    );
-
-    const tempCard = {
-        component,
-        background: data.color,
-        photo: data.photo,
-        userName: `${data.author.firstName} ${data.author.lastName}`,
-        avatar: data.author.photo,
-        linksCount: data.linksCount,
-        savedTimesCount: data.savedTimesCount,
+    const avatarOptions = {
+        size: '25',
+        photo: data.avatar,
+        iconColor: '#fff',
     };
 
     return (
-        <TemplateCard data={tempCard} />
+        <div className="collection-card" style={cardStyles}>
+            <div>
+                { hashes.map(hash => (
+                    <HashTag
+                        name={hash.name}
+                        size={'small'}
+                        key={hash._id}
+                    />)) }
+                <h2 className="collection-card__title">{data.name}</h2>
+            </div>
+
+            <div className="collection-card-footer">
+
+                <div className="collection-card-footer__user">
+                    <Avatar {...avatarOptions} />
+                    <span className="collection-card-footer__user-name">{`${data.author.firstName} ${data.author.lastName}`}</span>
+                </div>
+
+                <div className="collection-card-footer__actions">
+                    <div className="collection-card-footer__link-action">
+                        <Icon iconName={'link'} iconColor={'#fff'} />
+                        <span>{data.linksCount}</span>
+                    </div>
+                    <div className="collection-card-footer__save-action">
+                        <Icon iconName={'save-big'} iconColor={'#fff'} />
+                        <span>{data.savedTimesCount}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 };
 

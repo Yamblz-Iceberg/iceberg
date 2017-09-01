@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 
-import { cardBlue } from '../../variables.scss';
 import './create-card.scss';
 
-import { CreateHashTag } from './../../blocks';
-import { TemplateCard } from './..';
+import { CreateHashTag, Avatar, Icon } from './../../blocks';
 import { addHashTag, deleteHashTag, editHashTag } from '../../reducers/create-collection.reducer';
 
 class CreateCard extends Component {
@@ -68,62 +66,78 @@ class CreateCard extends Component {
     }
 
     handleTitleChange = (event) => {
-        console.log(event.target.value);
         this.props.data.callback(event.target.value);
     }
 
     render() {
-        const { userName, avatar } = this.props.data;
+        const {
+            userName,
+            avatar,
+        } = this.props.data;
 
         const {
             currentHashTagText,
             hashTags,
         } = this.state;
 
-        const initText = '+ Добавить категорию';
-
-        const component = (
-            <div className="create-card">
-                { hashTags.length > 0 && hashTags.map(hashTag => (
-                    <CreateHashTag
-                        initText={initText}
-                        text={hashTag.text}
-                        key={hashTag.id}
-                        tagChangeCallback={event => this.handleEditTag(hashTag.id, event)}
-                        tagAddCallback={this.handleAddTag}
-                        tagDeleteCallback={() => this.handleDeleteTag(hashTag.id)}
-                    />))
-                }
-                { hashTags.length < 4 && (
-                    <CreateHashTag
-                        initText={initText}
-                        text={currentHashTagText}
-                        tagChangeCallback={this.handleHashTagChange}
-                        tagAddCallback={this.handleAddTag}
-                    />)
-                }
-                <textarea
-                    className="create-card__input"
-                    onChange={this.handleTitleChange}
-                    value={this.props.title}
-                    rows="3"
-                    maxLength="50"
-                    placeholder="Название темы"
-                />
-            </div>
-        );
-
-        const tempCard = {
-            component,
-            background: cardBlue,
-            userName,
-            avatar,
-            linksCount: 0,
-            savedTimesCount: 0,
+        const avatarOptions = {
+            size: '25',
+            photo: avatar,
+            iconColor: '#fff',
         };
 
+        const initText = '+ Добавить категорию';
+
         return (
-            <TemplateCard data={tempCard} />
+            <div className="create-card">
+                <div>
+                    { hashTags.length > 0 && hashTags.map(hashTag => (
+                        <CreateHashTag
+                            initText={initText}
+                            text={hashTag.text}
+                            key={hashTag.id}
+                            tagChangeCallback={event => this.handleEditTag(hashTag.id, event)}
+                            tagAddCallback={this.handleAddTag}
+                            tagDeleteCallback={() => this.handleDeleteTag(hashTag.id)}
+                        />))
+                    }
+                    { hashTags.length < 4 && (
+                        <CreateHashTag
+                            initText={initText}
+                            text={currentHashTagText}
+                            tagChangeCallback={this.handleHashTagChange}
+                            tagAddCallback={this.handleAddTag}
+                        />)
+                    }
+                    <textarea
+                        className="create-card__input"
+                        onChange={this.handleTitleChange}
+                        value={this.props.title}
+                        rows="3"
+                        maxLength="50"
+                        placeholder="Название темы"
+                    />
+                </div>
+
+                <div className="create-card-footer">
+
+                    <div className="create-card-footer__user">
+                        <Avatar {...avatarOptions} />
+                        <span className="create-card-footer__user-name">{userName}</span>
+                    </div>
+
+                    <div className="create-card-footer__actions">
+                        <div className="create-card-footer__link-action">
+                            <Icon iconName={'link'} iconColor={'#fff'} />
+                            <span>{0}</span>
+                        </div>
+                        <div className="create-card-footer__save-action">
+                            <Icon iconName={'save-big'} iconColor={'#fff'} />
+                            <span>{0}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         );
     }
 }
