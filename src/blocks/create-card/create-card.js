@@ -67,13 +67,9 @@ class CreateCard extends Component {
         this.props.deleteHashTag(id);
     }
 
-    maxNumberOfCharacters = (event) => {
-        // "event.keyCode !== 8" для backspace
-        if (event.target.textContent.length > 50 && event.keyCode !== 8) {
-            event.preventDefault();
-        }
-
-        this.props.data.callback(event.target.textContent);
+    handleTitleChange = (event) => {
+        console.log(event.target.value);
+        this.props.data.callback(event.target.value);
     }
 
     render() {
@@ -106,13 +102,14 @@ class CreateCard extends Component {
                         tagAddCallback={this.handleAddTag}
                     />)
                 }
-                <div
+                <textarea
                     className="create-card__input"
-                    role="textbox"
-                    tabIndex="0"
-                    onKeyUp={this.maxNumberOfCharacters}
-                    contentEditable
-                >{this.props.title}</div>
+                    onChange={this.handleTitleChange}
+                    value={this.props.title}
+                    rows="3"
+                    maxLength="50"
+                    placeholder="Название темы"
+                />
             </div>
         );
 

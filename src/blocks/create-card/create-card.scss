@@ -21,14 +21,17 @@
         font-weight: 700;
         font-size: 28px;
         border: none;
-        border-bottom: 2px solid $light-blue;
         background-color: transparent;
         color: white;
         outline: none;
+        resize: none;
         
-        &:empty:before {
-            color: #fff;
-            content: 'Название темы'
+        &:fixed::placeholder {
+            color: transparent;
+        }
+
+        &::placeholder {
+            color: white;
         }
     }
 
