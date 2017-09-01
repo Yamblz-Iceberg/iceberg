@@ -17,30 +17,38 @@ class LinkPreview extends Component {
         const { url } = this.props.link;
         let template = <p>Ссылка: <span onClick={this.onClickUrl}>{url}</span></p>;
         if (window.cordova) {
-            let inAppBrowserRef;
-            const loadStartCallBack = () => {};
-            const loadStopCallBack = () => {
-                if (inAppBrowserRef !== undefined) {
-                    inAppBrowserRef.show();
-                }
+            // let inAppBrowserRef;
+            const openUrl = (href, readerMode) => {
+                window.SafariViewController.isAvailable((available) => {
+                    if (available) {
+                        window.SafariViewController.show({
+                            url: href,
+                            hidden: false,
+                            animated: false,
+                            transition: 'curl',
+                            enterReaderModeIfAvailable: readerMode,
+                            tintColor: '#fff',
+                            barColor: '#000',
+                            controlTintColor: '#ffffff',
+                        },
+                        (result) => {
+                            if (result.event === 'opened') {
+                                console.log('opened');
+                            } else if (result.event === 'loaded') {
+                                console.log('loaded');
+                            } else if (result.event === 'closed') {
+                                console.log('closed');
+                            }
+                        },
+                        (err) => {
+                            console.log(err);
+                        });
+                    } else {
+                        window.open(url, '_blank', 'location=yes');
+                    }
+                });
             };
-            const loadErrorCallBack = () => {
-                const scriptErrorMesssage =
-                    `alert("Бяда! Не удалось открыть ссылку '${url}'.")`;
-                inAppBrowserRef.executeScript({ code: scriptErrorMesssage });
-                inAppBrowserRef.close();
-                inAppBrowserRef = undefined;
-            };
-            const show = (href) => {
-                const target = '_blank';
-                const options = 'location=yes,hidden=yes';
-                inAppBrowserRef = window.cordova.InAppBrowser
-                    .open(href, target, options);
-                inAppBrowserRef.addEventListener('loadstart', loadStartCallBack);
-                inAppBrowserRef.addEventListener('loadstop', loadStopCallBack);
-                inAppBrowserRef.addEventListener('loaderror', loadErrorCallBack);
-            };
-            show(url);
+            openUrl(url);
         } else {
             template = (<p>Ссылка: <a href={url}>{url}</a></p>);
         }

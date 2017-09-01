@@ -21,10 +21,34 @@ class CollectionDetailLinks extends Component {
     componentWillReceiveProps(props) {
         this.setState({ links: props.links });
     }
-
-    handlerOnClick(e, link) {
-        this.props.openUrl(link);
-        this.props.history.push({ pathname: './preview' });
+    /* eslint class-methods-use-this: ["error", { "exceptMethods": ["openLink"] }] */
+    openLink(href, readerMode) {
+        if (window.cordova) {
+            window.SafariViewController.isAvailable((available) => {
+                if (available) {
+                    window.SafariViewController.show({
+                        url: href,
+                        hidden: false,
+                        animated: false,
+                        transition: 'curl',
+                        enterReaderModeIfAvailable: readerMode,
+                        tintColor: '#fff',
+                        barColor: '#000',
+                        controlTintColor: '#ffffff',
+                    },
+                    // success
+                    () => {},
+                    // error
+                    () => {
+                        alert(`Бяда! Не могу открыть ссылку: ${href}`);
+                    });
+                } else {
+                    window.open(href);
+                }
+            });
+        } else {
+            window.open(href);
+        }
     }
 
     render() {
@@ -38,7 +62,7 @@ class CollectionDetailLinks extends Component {
             <section className="collection-detail-links">
 
                 {filteredLinks.map(link => (
-                    <div className="collection-detail-links__item" key={link._id} onClick={e => this.handlerOnClick(e, link)}>
+                    <div className="collection-detail-links__item" key={link._id} onClick={() => this.openLink(link.url)}>
                         <LinkCard data={link} />
                     </div>
                 ))}
@@ -49,8 +73,6 @@ class CollectionDetailLinks extends Component {
 
 CollectionDetailLinks.propTypes = {
     links: PropTypes.array.isRequired,
-    history: PropTypes.any.isRequired,
-    openUrl: PropTypes.func.isRequired,
     filter: PropTypes.string,
 };
 

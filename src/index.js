@@ -52,5 +52,5 @@ function onDeviceReady() {
     );
 }
 
-// document.addEventListener('deviceready', onDeviceReady);
-onDeviceReady();
+document.addEventListener('deviceready', onDeviceReady);
+// onDeviceReady();
