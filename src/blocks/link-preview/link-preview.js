@@ -6,7 +6,7 @@ import LinkPreviewHeader from './header/link-preview-header';
 import LinkPreviewFooter from './footer/link-preview-footer';
 
 import './link-preview.scss';
-
+// TODO: решить что делать с этим окном: быть ему или не быть - вот в чем вопрос.
 class LinkPreview extends Component {
     onClickUrl = () => {
         const target = '_system';
