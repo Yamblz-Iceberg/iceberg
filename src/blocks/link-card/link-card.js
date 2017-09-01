@@ -11,7 +11,6 @@ const LinkCard = ({ data }) => {
         backgroundColor: variables.blue,
         backgroundImage: `url('${data.photo}')`,
     };
-
     const avatarOptions = {
         size: '25',
         iconColor: '#fff',

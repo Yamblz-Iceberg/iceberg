@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button, Icon } from '../../../blocks';
+import CreateLinkHeader from '../header/create-link-header';
 
 import './create-link-add.scss';
 
@@ -14,7 +15,7 @@ class CreateLinkAdd extends Component {
         };
     }
     handleAdd = () => {
-        this.props.history.push('/create-link/load-link');
+        this.props.history.push({ pathname: '/create-link/load-link', state: this.state.url });
     };
     handleChangeUrl = (event) => {
         this.setState({ url: event.target.value });
@@ -30,35 +31,39 @@ class CreateLinkAdd extends Component {
     };
     render() {
         return (
-            <div className="create-link__body">
-                <div className="create-link__input-wrap">
-                    <input
-                        type="text"
-                        value={this.state.url}
-                        placeholder="Вставьте ссылку сюда"
-                        onChange={this.handleChangeUrl}
-                        autoFocus
+            <main className="create-link-add">
+                <CreateLinkHeader collectionTitle={this.props.collectionTitle} />
+                <section className="create-link-add__body">
+                    <div className="create-link-add__input-wrap">
+                        <input
+                            type="text"
+                            value={this.state.url}
+                            placeholder="Вставьте ссылку сюда"
+                            onChange={this.handleChangeUrl}
+                            autoFocus
+                        />
+                        {
+                            this.state.linkAdded
+                                ? <span className="create-link-add__close-icon" onClick={this.clearLink}><Icon iconName={'close'} /></span>
+                                : <Icon iconName={'link'} iconColor="#d3d3d3" />
+                        }
+                    </div>
+                    <Button
+                        type="light"
+                        size="medium"
+                        text="далее"
+                        onClick={this.handleAdd}
+                        isDisabled={!this.state.linkAdded}
                     />
-                    {
-                        this.state.linkAdded
-                            ? <span className="create-link__close-icon" onClick={this.clearLink}><Icon iconName={'close'} /></span>
-                            : <Icon iconName={'link'} iconColor="#d3d3d3" />
-                    }
-                </div>
-                <Button
-                    type="light"
-                    size="medium"
-                    text="далее"
-                    onClick={this.handleAdd}
-                    isDisabled={!this.state.linkAdded}
-                />
-            </div>
+                </section>
+            </main>
         );
     }
 }
 
 
 CreateLinkAdd.propTypes = {
+    collectionTitle: PropTypes.string.isRequired,
     history: PropTypes.any.isRequired,
 };
 

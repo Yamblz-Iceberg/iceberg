@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { addLinkToCollection } from '../../../reducers/link.reducer';
 
 import { Icon, Button } from '../../../blocks';
 
 import './create-link-header.scss';
 
 class AddLinkHeader extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            fixedHeader: false,
-        };
-    }
     handleGoBack = () => {
         this.props.history.goBack();
     };
+    addLink = () => {
+        this.props.addLinkToCollection(
+            this.props.collection._id,
+            this.props.link._id,
+            this.props.token,
+            this.props.history.push('/feed'),
+        );
+    };
 
     render() {
-        const isDisabled = true;
-        console.log(this.props.history.location);
         return (
             <header
                 className={`create-link-header
@@ -36,8 +38,12 @@ class AddLinkHeader extends Component {
                             {this.props.collectionTitle}
                         </h4>
                     </div>
-                    <div className="create-link-header__block">
-                        <Button text="Добавить" size="small" isDisabled={isDisabled} />
+                    <div className="create-link-header__block" onClick={this.addLink}>
+                        <Button
+                            text="Добавить"
+                            size="small"
+                            isDisabled={this.props.collectionTitle.length === 0}
+                        />
                     </div>
                 </div>
             </header>
@@ -47,7 +53,18 @@ class AddLinkHeader extends Component {
 
 AddLinkHeader.propTypes = {
     collectionTitle: PropTypes.string.isRequired,
+    collection: PropTypes.object.isRequired,
+    link: PropTypes.object.isRequired,
+    token: PropTypes.string.isRequired,
+    addLinkToCollection: PropTypes.func.isRequired,
     history: PropTypes.any.isRequired,
 };
 
-export default withRouter(AddLinkHeader);
+export default connect(
+    state => ({
+        token: state.app.token,
+        link: state.link.result,
+        collection: state.collection,
+    }),
+    { addLinkToCollection },
+)(withRouter(AddLinkHeader));

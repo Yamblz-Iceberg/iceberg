@@ -3,17 +3,21 @@ import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import CreateLinkHeader from './header/create-link-header';
 import CreateLinkAdd from './add/create-link-add';
 import CreateLinkLoad from './load/create-link-load';
 
 import './create-link.scss';
 
 const CreateLink = props => (
-    <div className="create-link__container">
-        <CreateLinkHeader collectionTitle={props.collection.name} />
+    <div className="create-link">
         <Switch>
-            <Route exact path="/create-link/" component={CreateLinkAdd} />
+            <Route
+                exact
+                path="/create-link/"
+                render={() =>
+                    <CreateLinkAdd collectionTitle={props.collection.name} />
+                }
+            />
             <Route path="/create-link/load-link" component={CreateLinkLoad} />
         </Switch>
     </div>

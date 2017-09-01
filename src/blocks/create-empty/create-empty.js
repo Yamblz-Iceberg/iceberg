@@ -29,7 +29,7 @@ class CreateEmpty extends Component {
         this.setState({
             title,
         });
-    }
+    };
 
     hexToRGB = (hex) => {
         const r = parseInt(hex.slice(1, 3), 16);
@@ -37,16 +37,16 @@ class CreateEmpty extends Component {
         const b = parseInt(hex.slice(5, 7), 16);
 
         return `rgb(${r}, ${g}, ${b})`;
-    }
+    };
 
     handleTitleUpdate = (value) => {
         this.props.updateTitle(value);
         this.setTitle(value);
-    }
+    };
 
     changeRoute = () => {
         this.props.history.push({ pathname: './feed' });
-    }
+    };
 
     handleSubmitData = () => {
         const body = {

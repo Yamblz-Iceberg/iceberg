@@ -1,16 +1,13 @@
-.create-link {
-    &__container {
-        display: flex;
-        height: 100%;
-        flex-direction: column;
-    }
-
+.create-link-add {
+    width: 100%;
+    height: 100%;
     &__body {
         display: flex;
         flex-grow: 1;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        height: 100%;
         padding: 20px;
     }
 
