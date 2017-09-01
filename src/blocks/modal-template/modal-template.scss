@@ -1,10 +1,11 @@
 .modal {
     &__wrap {
-        position: absolute;
+        position: fixed;
         top: 0;
         bottom: 0;
         left: 0;
         right: 0;
+        padding: 20px;
         background-color: rgba(0, 0, 0, .2);
         z-index: 1000;
         display: flex;
@@ -15,7 +16,8 @@
     &__container {
         display: flex;
         flex-direction: column;
-        width: 320px;
+        width: 100%;
+        max-width: 320px;
         max-height: 440px;
         border-radius: 10px;
         background-color: #fff;
