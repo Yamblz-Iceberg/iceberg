@@ -16,7 +16,6 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <allow-intent href="*" />
-    <allow-navigation href="*" iframe="true" />
     <platform name="android">
         <allow-intent href="market:*" />
     </platform>

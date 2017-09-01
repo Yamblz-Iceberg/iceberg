@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 import { LinkCard } from '../../index';
 
-import { actions as linkActions } from './../../../reducers/link.reducer';
 import { actions as modalActions } from '../../../reducers/modal.reducer';
 
 import './collection-detail-links.scss';
@@ -13,7 +12,6 @@ import './collection-detail-links.scss';
 class CollectionDetailLinks extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props);
         this.state = {
             links: [],
             filter: '',
@@ -91,4 +89,4 @@ function mapStateToProps(state) {
 
 
 export default
-connect(mapStateToProps, { ...linkActions, ...modalActions })(withRouter(CollectionDetailLinks));
+connect(mapStateToProps, { ...modalActions })(withRouter(CollectionDetailLinks));

@@ -17,7 +17,6 @@ class LinkPreview extends Component {
         const { url } = this.props.link;
         let template = <p>Ссылка: <span onClick={this.onClickUrl}>{url}</span></p>;
         if (window.cordova) {
-            // let inAppBrowserRef;
             const openUrl = (href, readerMode) => {
                 window.SafariViewController.isAvailable((available) => {
                     if (available) {
@@ -30,18 +29,6 @@ class LinkPreview extends Component {
                             tintColor: '#fff',
                             barColor: '#000',
                             controlTintColor: '#ffffff',
-                        },
-                        (result) => {
-                            if (result.event === 'opened') {
-                                console.log('opened');
-                            } else if (result.event === 'loaded') {
-                                console.log('loaded');
-                            } else if (result.event === 'closed') {
-                                console.log('closed');
-                            }
-                        },
-                        (err) => {
-                            console.log(err);
                         });
                     } else {
                         window.open(url, '_blank', 'location=yes');

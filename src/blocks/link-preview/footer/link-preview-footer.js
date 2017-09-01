@@ -6,9 +6,7 @@ import { Icon } from '../../../blocks';
 import './link-preview-footer.scss';
 
 class LinkPreviewFooter extends Component {
-    handleLike= () => {
-        alert('Like bled!');
-    }
+    handleLike= () => {}
     render() {
         const { likes, savedTimesCount } = this.props.link;
         return (<footer className="link-preview-footer">
