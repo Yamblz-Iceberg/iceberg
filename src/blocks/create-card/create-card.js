@@ -13,11 +13,8 @@ class CreateCard extends Component {
     constructor() {
         super();
         this.state = {
-            hashTag: {
-                initText: '+ Добавить категорию',
-                text: '',
-                hashTags: [],
-            },
+            currentHashTagText: '',
+            hashTags: [],
         };
     }
 
@@ -26,29 +23,20 @@ class CreateCard extends Component {
     }
 
     componentWillReceiveProps = (nextProps) => {
-        const thisHashTags = JSON.stringify(this.props.hashTags);
-        const nextHashTags = JSON.stringify(nextProps.hashTags);
-
-        if (thisHashTags !== nextHashTags) {
+        if (this.props.hashTags !== nextProps.hashTags) {
             this.setHashTags(nextProps.hashTags);
         }
     }
 
     setTagText = (text) => {
         this.setState({
-            hashTag: {
-                ...this.state.hashTag,
-                text,
-            },
+            currentHashTagText: text,
         });
     }
 
     setHashTags = (hashTags) => {
         this.setState({
-            hashTag: {
-                ...this.state.hashTag,
-                hashTags,
-            },
+            hashTags,
         });
     }
 
@@ -58,18 +46,24 @@ class CreateCard extends Component {
 
     handleAddTag = () => {
         const {
-            text,
-        } = this.state.hashTag;
+            currentHashTagText,
+        } = this.state;
 
-        this.props.addHashTag(text);
+        this.props.addHashTag(currentHashTagText);
         this.setTagText('');
     }
 
-    handleEditTag = id => (event) => {
-        this.props.editHashTag(id, event.target.value);
+    handleEditTag = (id, event) => {
+        const { value } = event.target;
+
+        if (value === '') {
+            this.props.deleteHashTag(id);
+        } else {
+            this.props.editHashTag(id, event.target.value);
+        }
     }
 
-    handleDeleteTag = id => () => {
+    handleDeleteTag = (id) => {
         this.props.deleteHashTag(id);
     }
 
@@ -86,29 +80,32 @@ class CreateCard extends Component {
         const { userName, avatar } = this.props.data;
 
         const {
-            text,
-            initText,
+            currentHashTagText,
             hashTags,
-        } = this.state.hashTag;
+        } = this.state;
+
+        const initText = '+ Добавить категорию';
 
         const component = (
             <div className="create-card">
                 { hashTags.length > 0 && hashTags.map(hashTag => (
                     <CreateHashTag
-                        text={hashTag.text}
                         initText={initText}
+                        text={hashTag.text}
                         key={hashTag.id}
-                        tagChangeCallback={this.handleEditTag(hashTag.id)}
+                        tagChangeCallback={event => this.handleEditTag(hashTag.id, event)}
                         tagAddCallback={this.handleAddTag}
-                        tagDeleteCallback={this.handleDeleteTag(hashTag.id)}
+                        tagDeleteCallback={() => this.handleDeleteTag(hashTag.id)}
                     />))
                 }
-                <CreateHashTag
-                    text={text}
-                    initText={initText}
-                    tagChangeCallback={this.handleHashTagChange}
-                    tagAddCallback={this.handleAddTag}
-                />
+                { hashTags.length < 4 && (
+                    <CreateHashTag
+                        initText={initText}
+                        text={currentHashTagText}
+                        tagChangeCallback={this.handleHashTagChange}
+                        tagAddCallback={this.handleAddTag}
+                    />)
+                }
                 <div
                     className="create-card__input"
                     role="textbox"

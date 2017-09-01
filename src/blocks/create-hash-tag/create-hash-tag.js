@@ -57,6 +57,7 @@ class CreateHashTag extends Component {
                     className="create-hash-tag__hashtag-input"
                     onChange={tagChangeCallback}
                     placeholder={initText}
+                    maxLength="17"
                 />
                 {(text !== '') && (
                     <span
