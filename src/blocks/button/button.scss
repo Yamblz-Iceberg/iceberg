@@ -14,4 +14,28 @@
         font-weight: 500;
         text-transform: uppercase;
     }
+    &--small {
+        height: 36px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    &--medium {
+        display: flex;
+        justify-content: center;
+        width: 122px;
+    }
+    &--max-width {
+        width: 100%;
+        justify-content: center;
+    }
+    //TODO убрать important, когда уберем инлайненные стили
+    &--light {
+        background: transparent!important;
+        border: 2px solid #d3d3d3;
+        color: #000;
+    }
+    &--disable {
+        background: #e6e6e6!important;
+        color: #666;
+    }
 }
