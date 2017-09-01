@@ -54,6 +54,8 @@ const LinkCard = ({ data }) => {
                 <span>{data.savedTimesCount}</span>
             </div>
         </div>
+
+        <div className="link-card__overlay" />
     </div>);
 };
 
