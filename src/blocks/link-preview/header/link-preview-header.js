@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
 
 import { Icon } from '../../../blocks';
-
-import { actions as linkActions } from './../../../reducers/link.reducer';
 
 import './link-preview-header.scss';
 
@@ -33,4 +30,4 @@ LinkPreviewHeader.propTypes = {
     closeUrl: PropTypes.func.isRequired,
 };
 
-export default connect(null, { ...linkActions })(withRouter(LinkPreviewHeader));
+export default (withRouter(LinkPreviewHeader));

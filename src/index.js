@@ -36,7 +36,7 @@ function onDeviceReady() {
     render(
         <Provider store={store}>
             <Router>
-                <div>
+                <div className="home__wrapper">
                     <Modal />
                     <Switch>
                         <Route path="/feed" component={Home} />
@@ -56,5 +56,5 @@ function onDeviceReady() {
     );
 }
 
-document.addEventListener('deviceready', onDeviceReady);
-// onDeviceReady();
+// document.addEventListener('deviceready', onDeviceReady);
+onDeviceReady();

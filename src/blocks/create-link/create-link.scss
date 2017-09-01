@@ -1,27 +1,5 @@
-.create-link__container {
+.create-link {
     display: flex;
     height: 100%;
     flex-direction: column;
-}
-
-.create-link__body {
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-.create-link__input-wrap {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    border-bottom: 1px solid #d8d8d8;
-    margin-bottom: 48px;
-    padding: 6px 0;
-    > input {
-        font-size: 18px;
-        flex-grow: 1;
-    }
 }

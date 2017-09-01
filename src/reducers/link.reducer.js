@@ -1,26 +1,46 @@
-const OPEN_URL = 'OPEN_URL';
-const CLOSE_URL = 'CLOSE_URL';
+import { postLink, postLinkToCollection } from './../services/link.service';
+
+const ADD_LINK = 'ADD_LINK';
+const PUSH_LINK_TO_COLLECTION = 'PUSH_LINK_TO_COLLECTION';
+
 const initialState = {
-    url: '',
+    result: {
+        url: '',
+        title: '',
+        photo: '',
+        favicon: '',
+    },
+    created: false,
 };
+
+const addLink = res => ({ type: ADD_LINK, payload: res });
+const pushLinkToCollection = () => ({ type: PUSH_LINK_TO_COLLECTION });
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-    case OPEN_URL:
+    case ADD_LINK:
         return { ...state, ...action.payload };
-    case CLOSE_URL:
-        return initialState;
+    case PUSH_LINK_TO_COLLECTION:
+        return state;
     default:
         return state;
     }
 };
 
-const openUrl = data => ({ type: OPEN_URL, payload: data });
-const closeUrl = () => ({ type: CLOSE_URL });
+export const createLink = (data, token) => (
+    (dispatch) => {
+        postLink(data, token).then((res) => {
+            dispatch(addLink(res));
+        });
+    }
+);
 
-const actions = {
-    openUrl,
-    closeUrl,
-};
+export const addLinkToCollection = (collectionId, linkId, token, callback) => (
+    (dispatch) => {
+        postLinkToCollection(collectionId, linkId, token).then(() => {
+            dispatch(pushLinkToCollection());
+        }).then(() => callback);
+    }
+);
 
-export { reducer, actions };
+export { reducer };
