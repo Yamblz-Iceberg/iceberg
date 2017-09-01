@@ -13,13 +13,13 @@ const CollectionCard = ({ data }) => {
 
     const avatarOptions = {
         size: '25',
-        photo: data.avatar,
+        photo: data.author.photo,
         iconColor: '#fff',
     };
 
     return (
         <div className="collection-card" style={cardStyles}>
-            <div>
+            <div className="collection-card__header">
                 { hashes.map(hash => (
                     <HashTag
                         name={hash.name}
@@ -30,7 +30,6 @@ const CollectionCard = ({ data }) => {
             </div>
 
             <div className="collection-card-footer">
-
                 <div className="collection-card-footer__user">
                     <Avatar {...avatarOptions} />
                     <span className="collection-card-footer__user-name">{`${data.author.firstName} ${data.author.lastName}`}</span>
@@ -47,6 +46,8 @@ const CollectionCard = ({ data }) => {
                     </div>
                 </div>
             </div>
+
+            { data.photo ? <div className="collection-card__overlay" /> : null }
         </div>
     );
 };
