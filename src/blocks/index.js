@@ -3,7 +3,6 @@ export { default as HashTape } from './hash-tape';
 export { default as UserInfo } from './user-info';
 export { default as CollectionCard } from './collection-card';
 export { default as LinkCard } from './link-card';
-export { default as TemplateCard } from './template-card';
 export { default as ListGroup } from './list-group';
 export { default as CreateCard } from './create-card';
 export { default as Option } from './option';
