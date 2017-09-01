@@ -23,22 +23,25 @@
     }
 
     &__input {
-        margin-top: 20px;
-        margin-bottom: 10px;
+        margin-top: 15px;
+        margin-bottom: 0;
         padding-right: 10px;
-        padding-bottom: 5px;
+        padding-bottom: 0;
         width: 100%;
         font-weight: 700;
         font-size: 28px;
         border: none;
-        border-bottom: 2px solid $light-blue;
         background-color: transparent;
         color: white;
         outline: none;
+        resize: none;
         
-        &:empty:before {
-            color: #fff;
-            content: 'Название темы'
+        &:focus::placeholder {
+            color: transparent;
+        }
+
+        &::placeholder {
+            color: white;
         }
     }
 
