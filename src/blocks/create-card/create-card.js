@@ -13,6 +13,7 @@ class CreateCard extends Component {
         this.state = {
             currentHashTagText: '',
             hashTags: [],
+            canCreateTag: false,
         };
     }
 
@@ -42,6 +43,10 @@ class CreateCard extends Component {
         this.setTagText(event.target.value);
     }
 
+    handleTitleChange = (event) => {
+        this.props.data.callback(event.target.value);
+    }
+
     handleAddTag = () => {
         const {
             currentHashTagText,
@@ -65,10 +70,6 @@ class CreateCard extends Component {
         this.props.deleteHashTag(id);
     }
 
-    handleTitleChange = (event) => {
-        this.props.data.callback(event.target.value);
-    }
-
     render() {
         const {
             userName,
@@ -78,6 +79,7 @@ class CreateCard extends Component {
         const {
             currentHashTagText,
             hashTags,
+            canCreateTag,
         } = this.state;
 
         const avatarOptions = {
@@ -91,24 +93,33 @@ class CreateCard extends Component {
         return (
             <div className="create-card">
                 <div>
-                    { hashTags.length > 0 && hashTags.map(hashTag => (
-                        <CreateHashTag
-                            initText={initText}
-                            text={hashTag.text}
-                            key={hashTag.id}
-                            tagChangeCallback={event => this.handleEditTag(hashTag.id, event)}
-                            tagAddCallback={this.handleAddTag}
-                            tagDeleteCallback={() => this.handleDeleteTag(hashTag.id)}
-                        />))
-                    }
-                    { hashTags.length < 4 && (
-                        <CreateHashTag
-                            initText={initText}
-                            text={currentHashTagText}
-                            tagChangeCallback={this.handleHashTagChange}
-                            tagAddCallback={this.handleAddTag}
-                        />)
-                    }
+                    <div className="create-card__hashtags-wrapper">
+                        { hashTags.length > 0 && hashTags.map(hashTag => (
+                            <CreateHashTag
+                                initText={initText}
+                                text={hashTag.text}
+                                key={hashTag.id}
+                                tagChangeCallback={event => this.handleEditTag(hashTag.id, event)}
+                                tagAddCallback={this.handleAddTag}
+                                tagDeleteCallback={() => this.handleDeleteTag(hashTag.id)}
+                            />))
+                        }
+                        { ((canCreateTag && hashTags.length < 4) || hashTags.length === 0) && (
+                            <CreateHashTag
+                                initText={initText}
+                                text={currentHashTagText}
+                                tagChangeCallback={this.handleHashTagChange}
+                                tagAddCallback={this.handleAddTag}
+                            />)
+                        }
+                        { (!canCreateTag && hashTags.length > 0 && hashTags.length < 4) && (
+                            <button
+                                className="create-card__add-button"
+                            >
+                                <Icon iconName="plus" iconColor="#fff" />
+                            </button>
+                        ) }
+                    </div>
                     <textarea
                         className="create-card__input"
                         onChange={this.handleTitleChange}
