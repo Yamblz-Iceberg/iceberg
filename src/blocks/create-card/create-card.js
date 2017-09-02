@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import './create-card.scss';
 
 import { CreateHashTag, Avatar, Icon } from './../../blocks';
-import { addHashTag, deleteHashTag, editHashTag } from '../../reducers/create-collection.reducer';
+import { addHashTag, deleteHashTag, editHashTag, addImage } from '../../reducers/create-collection.reducer';
+
+import { actions as modalActions } from './../../reducers/modal.reducer';
 
 class CreateCard extends Component {
     constructor() {
@@ -14,6 +16,8 @@ class CreateCard extends Component {
             currentHashTagText: '',
             hashTags: [],
             canCreateTag: false,
+            cardStyles: {},
+            imageStatus: 'none',
         };
     }
 
@@ -82,7 +86,54 @@ class CreateCard extends Component {
     }
 
     handleUploadPicture = () => {
-        alert('Yep');
+        /* eslint-disable */
+        const uploadPhoto = (imageURI) => {
+            const options = new FileUploadOptions();
+            const ft = new FileTransfer();
+            options.fileKey = 'photo';
+            options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+            options.mimeType = 'image/jpeg';
+            const params = {};
+            options.params = params;
+            options.chunkedMode = false;
+            this.setState({
+                imageStatus: 'uploading',
+            });
+            ft.upload(imageURI, 'https://iceberg-project.herokuapp.com/upload', (result) => {
+                if (result.response) {
+                    try {
+                        const data = JSON.parse(result.response);
+                        this.setState({
+                            cardStyles: {
+                                backgroundImage: `url(${data.fileName})`,
+                                backgroundColor: data.mainColor,
+                            },
+                            imageStatus: 'uploaded',
+                        });
+                        this.props.addImage({ color: data.mainColor, photo: data.backgroundImage });
+                    } catch (e) {
+                        this.props.showModal('ERROR_MESSAGE');
+                    }
+                }
+            }, (error) => {
+                this.setState({
+                    imageStatus: 'none',
+                });
+                console.log(error);
+                this.props.showModal('ERROR_MESSAGE');
+            }, options);
+        };
+
+        navigator.camera.getPicture(
+            (img) => { uploadPhoto(img); },
+            () => {},
+            {
+                quality: 20,
+                destinationType: navigator.camera.DestinationType.FILE_URI,
+                encodingType: navigator.camera.EncodingType.JPEG,
+                sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+            },
+        );
     }
 
     render() {
@@ -104,9 +155,21 @@ class CreateCard extends Component {
         };
 
         const initText = '+ Добавить категорию';
+        let buttonImageUploadTitle;
+        switch (this.state.imageStatus) {
+        case 'uploading':
+            buttonImageUploadTitle = 'Загрузка';
+            break;
+        case 'uploaded':
+            buttonImageUploadTitle = 'Изменить обложку';
+            break;
+        default:
+            buttonImageUploadTitle = 'Добавить обложку';
+            break;
+        }
 
         return (
-            <div className="create-card">
+            <div className="create-card" style={this.state.cardStyles}>
                 <div>
                     <div className="create-card__hashtags-wrapper">
                         { hashTags.length > 0 && hashTags.map(hashTag => (
@@ -144,10 +207,20 @@ class CreateCard extends Component {
                         maxLength="50"
                         placeholder="Введите название темы"
                     />
-                    <div className="create-card__upload-photo-container" onClick={this.handleUploadPicture}>
-                        <Icon iconName="picture" iconColor="#fff" iconWidth="24" iconHeight="24" />
-                        <p className="create-card__upload-photo-title">Добавить обложку</p>
-                    </div>
+                    {
+                        window.cordova ? (
+                            <div className="create-card__upload-photo-container" onClick={this.state.uploading ? () => {} : this.handleUploadPicture}>
+                                <Icon iconName="picture" iconColor="#fff" iconWidth="24" iconHeight="24" />
+                                <p className="create-card__upload-photo-title">{ buttonImageUploadTitle }</p>
+                            </div>
+                        ) :
+                            (
+                                <div className="create-card__upload-photo-container">
+                                    <Icon iconName="picture" iconColor="#fff" iconWidth="24" iconHeight="24" />
+                                    <p className="create-card__upload-photo-title">Не доступно в браузере</p>
+                                </div>
+                            )
+                    }
                 </div>
 
                 <div className="create-card-footer">
@@ -180,6 +253,8 @@ CreateCard.propTypes = {
     addHashTag: PropTypes.func.isRequired,
     deleteHashTag: PropTypes.func.isRequired,
     editHashTag: PropTypes.func.isRequired,
+    showModal: PropTypes.func.isRequired,
+    addImage: PropTypes.func.isRequired,
 };
 
 export default connect(
@@ -187,5 +262,5 @@ export default connect(
         title: state.createCollection.title,
         hashTags: state.createCollection.hashTags,
     }),
-    { addHashTag, deleteHashTag, editHashTag },
+    { addHashTag, deleteHashTag, editHashTag, addImage, ...modalActions },
 )(CreateCard);

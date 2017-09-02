@@ -7,6 +7,7 @@ const CLEAR_COLLECTION = 'CLEAR_COLLECTION';
 const ADD_HASHTAG = 'ADD_HASHTAG';
 const DELETE_HASHTAG = 'DELETE_HASHTAG';
 const EDIT_HASHTAG = 'EDIT_HASHTAG';
+const ADD_IMAGE = 'ADD_IMAGE';
 
 const initialState = {
     description: '',
@@ -30,6 +31,13 @@ const reducer = (state = initialState, action) => {
         return { ...state, title: action.payload };
     case UPDATE_SWITCHER:
         return { ...state, options: { ...state.options, ...action.payload } };
+    case ADD_IMAGE: {
+        return {
+            ...state,
+            color: action.color,
+            photo: action.photo,
+        };
+    }
     case ADD_HASHTAG: {
         const id = Math.random();
 
@@ -70,6 +78,8 @@ const reducer = (state = initialState, action) => {
         return state;
     }
 };
+
+export const addImage = data => ({ type: ADD_IMAGE, color: data.color, photo: data.photo });
 
 export const createCollection = (data, token, callback) => (
     (dispatch) => {
