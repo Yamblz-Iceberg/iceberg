@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 
 import './create-card.scss';
+import { cardBlue } from './../../variables.scss';
 
 import { CreateHashTag, Icon, CardFooter } from './../../blocks';
 
@@ -23,12 +24,25 @@ class CreateCard extends Component {
 
     componentWillMount = () => {
         this.setHashTags(this.props.hashTags);
+        this.setCardStyles(this.props.color, this.props.photo);
     }
 
     componentWillReceiveProps = (nextProps) => {
         if (this.props.hashTags !== nextProps.hashTags) {
             this.setHashTags(nextProps.hashTags);
         }
+        if (this.props.color !== nextProps.color || this.props.photo !== nextProps.photo) {
+            this.setCardStyles(nextProps.color, nextProps.photo);
+        }
+    }
+
+    setCardStyles = (color, photo) => {
+        this.setState({
+            cardStyles: {
+                backgroundColor: color,
+                backgroundImage: `url(${photo})`,
+            },
+        });
     }
 
     setTagText = (text) => {
@@ -103,14 +117,11 @@ class CreateCard extends Component {
                 if (result.response) {
                     try {
                         const data = JSON.parse(result.response);
+                        // this.setCardStyles(data.mainColor, data.fileName)
                         this.setState({
-                            cardStyles: {
-                                backgroundImage: `url(${data.fileName})`,
-                                backgroundColor: data.mainColor,
-                            },
                             imageStatus: 'uploaded',
                         });
-                        this.props.addImage({ color: data.mainColor, photo: data.backgroundImage });
+                        this.props.addImage({ color: data.mainColor, photo: data.fileName });
                     } catch (e) {
                         this.props.showModal('ERROR_MESSAGE');
                     }
@@ -155,16 +166,13 @@ class CreateCard extends Component {
         };
 
         const initText = '+ Добавить категорию';
-        let buttonImageUploadTitle;
+        let uploaderImg;
         switch (this.state.imageStatus) {
         case 'uploading':
-            buttonImageUploadTitle = 'Загрузка';
-            break;
-        case 'uploaded':
-            buttonImageUploadTitle = 'Изменить обложку';
+            uploaderImg = (<div className="create-card__preloader" />);
             break;
         default:
-            buttonImageUploadTitle = 'Добавить обложку';
+            uploaderImg = (<Icon iconName="picture" iconColor="#fff" iconWidth="24" iconHeight="24" />);
             break;
         }
 
@@ -210,8 +218,7 @@ class CreateCard extends Component {
                     {
                         window.cordova ? (
                             <div className="create-card__upload-photo-container" onClick={this.state.uploading ? () => {} : this.handleUploadPicture}>
-                                <Icon iconName="picture" iconColor="#fff" iconWidth="24" iconHeight="24" />
-                                <p className="create-card__upload-photo-title">{ buttonImageUploadTitle }</p>
+                                <div className="create-card__upload-photo-wrap">{ uploaderImg }</div>
                             </div>
                         ) :
                             (
@@ -239,6 +246,8 @@ class CreateCard extends Component {
 CreateCard.defaultProps = {
     title: '',
     hashTags: [],
+    color: cardBlue,
+    photo: '',
 };
 
 CreateCard.propTypes = {
@@ -250,12 +259,16 @@ CreateCard.propTypes = {
     editHashTag: PropTypes.func.isRequired,
     showModal: PropTypes.func.isRequired,
     addImage: PropTypes.func.isRequired,
+    color: PropTypes.string,
+    photo: PropTypes.string,
 };
 
 export default connect(
     state => ({
         title: state.createCollection.title,
         hashTags: state.createCollection.hashTags,
+        color: state.createCollection.color,
+        photo: state.createCollection.photo,
     }),
     { addHashTag, deleteHashTag, editHashTag, addImage, ...modalActions },
 )(CreateCard);

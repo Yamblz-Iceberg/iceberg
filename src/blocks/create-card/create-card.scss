@@ -11,6 +11,7 @@
     box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.3);
     background-color: $card-blue;
     background-size: cover;
+    background-position: center;
 
     &__hashtags-wrapper {
         display: flex;
@@ -70,19 +71,33 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: row;
-        background-color: rgba(255, 255, 255, .15);
-        border-radius: 42px;
-        padding: 14px 24px;
-        color: #fff;
+        align-content: center;
         margin: 20px;
     }
 
-    &__upload-photo-title {
-        text-transform: uppercase;
-        margin: 0;
-        font-size: 14px;
-        padding-left: 14px;
+    &__upload-photo-wrap {
+        display: flex;
+        background-color: rgba(255, 255, 255, .15);
+        border-radius: 50%;
+        padding: 14px;
+    }
+
+    &__preloader {
+        width: 25px;
+        height: 25px;
+        border: 2px solid #fff;
+        border-top-color: transparent;
+        border-radius: 25px;
+        animation: spin 1s infinite linear;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
     }
 }
 

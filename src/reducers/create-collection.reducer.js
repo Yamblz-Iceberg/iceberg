@@ -13,6 +13,8 @@ const initialState = {
     description: '',
     title: '',
     hashTags: [],
+    color: '',
+    photo: '',
 };
 
 const updateDescription = description => ({ type: UPDATE_DESCRIPTION, payload: description });
@@ -73,7 +75,7 @@ const reducer = (state = initialState, action) => {
         };
     }
     case CLEAR_COLLECTION:
-        return { initialState };
+        return initialState;
     default:
         return state;
     }
