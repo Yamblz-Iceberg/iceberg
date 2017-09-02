@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { createLink, clearLink } from '../../../reducers/link.reducer';
 import { LinkCard, Button, Icon } from '../../../blocks';
 import CreateLinkHeader from '../header/create-link-header';
-import CreateLinkComment from '../comment/create-link-comment';
-
 
 import './create-link-load.scss';
 
@@ -58,12 +56,6 @@ class CreateLinkLoad extends Component {
         cardLink.comment = this.state.comment;
         return (
             <main>
-                <Route
-                    path="/create-link/load-link/add-comment"
-                    render={() =>
-                        <CreateLinkComment />
-                    }
-                />
                 <CreateLinkHeader
                     title={this.state.link.name}
                     showAddButton={showAddButton}
