@@ -32,7 +32,7 @@ class CreateLinkAdd extends Component {
     render() {
         return (
             <main className="create-link-add">
-                <CreateLinkHeader collectionTitle={this.props.collectionTitle} />
+                <CreateLinkHeader title={this.props.collectionTitle} />
                 <section className="create-link-add__body">
                     <div className="create-link-add__input-wrap">
                         <input

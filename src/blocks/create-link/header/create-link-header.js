@@ -25,7 +25,7 @@ class AddLinkHeader extends Component {
         return (
             <header
                 className={`create-link-header
-                ${this.props.history.location.pathname.indexOf('/load') > -1
+                ${this.props.history.location.pathname === '/create-link/load-link'
                 ? 'create-link-header--show-button'
                 : ''}`}
             >
@@ -35,14 +35,14 @@ class AddLinkHeader extends Component {
                             <Icon iconName={'arrow-back'} iconColor="#000" />
                         </span>
                         <h4 className="create-link-header__title">
-                            {this.props.collectionTitle}
+                            {this.props.title}
                         </h4>
                     </div>
-                    <div className="create-link-header__block" onClick={this.addLink}>
+                    <div className="create-link-header__block create-link-header__button" onClick={this.addLink}>
                         <Button
                             text="Добавить"
                             size="small"
-                            isDisabled={this.props.collectionTitle.length === 0}
+                            isDisabled={this.props.title.length === 0}
                         />
                     </div>
                 </div>
@@ -52,7 +52,7 @@ class AddLinkHeader extends Component {
 }
 
 AddLinkHeader.propTypes = {
-    collectionTitle: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     collection: PropTypes.object.isRequired,
     link: PropTypes.object.isRequired,
     token: PropTypes.string.isRequired,

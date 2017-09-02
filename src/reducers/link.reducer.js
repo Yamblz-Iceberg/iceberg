@@ -1,6 +1,7 @@
 import { postLink, postLinkToCollection } from './../services/link.service';
 
 const ADD_LINK = 'ADD_LINK';
+const ADD_COMMENT = 'ADD_COMMENT';
 const PUSH_LINK_TO_COLLECTION = 'PUSH_LINK_TO_COLLECTION';
 
 const initialState = {
@@ -11,15 +12,19 @@ const initialState = {
         favicon: '',
     },
     created: false,
+    comment: '',
 };
 
 const addLink = res => ({ type: ADD_LINK, payload: res });
+const addComment = comment => ({ type: ADD_COMMENT, payload: comment });
 const pushLinkToCollection = () => ({ type: PUSH_LINK_TO_COLLECTION });
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
     case ADD_LINK:
         return { ...state, ...action.payload };
+    case ADD_COMMENT:
+        return { ...state, comment: action.payload };
     case PUSH_LINK_TO_COLLECTION:
         return state;
     default:
@@ -43,4 +48,4 @@ export const addLinkToCollection = (collectionId, linkId, token, callback) => (
     }
 );
 
-export { reducer };
+export { reducer, addComment };
