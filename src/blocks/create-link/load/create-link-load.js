@@ -35,7 +35,7 @@ class CreateLinkLoad extends Component {
             user: props.user,
         });
     }
-    addDescription = () => {
+    addComment = () => {
         this.props.history.push('./load-link/add-comment');
     };
     render() {
@@ -46,7 +46,7 @@ class CreateLinkLoad extends Component {
                 icon={<Icon iconName="plus" />}
                 background="#fff"
                 size="max-width"
-                onClick={this.addDescription}
+                onClick={this.addComment}
             />
         );
         const cardLink = this.state.link;
@@ -69,6 +69,11 @@ class CreateLinkLoad extends Component {
                         button={this.state.comment.length === 0
                         && this.state.link.name.length > 0 ? linkButton() : null}
                         showFooter={showFooter}
+                        editIcon={
+                            <span onClick={this.addComment}>
+                                <Icon iconName={'edit'} />
+                            </span>
+                        }
                     />
                 </section>
             </main>

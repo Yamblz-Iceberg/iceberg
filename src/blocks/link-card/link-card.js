@@ -6,7 +6,7 @@ import { Icon, Avatar } from '../../blocks';
 import './link-card.scss';
 import variables from './../../variables.scss';
 
-const LinkCard = ({ data, button, showFooter }) => {
+const LinkCard = ({ data, button, showFooter, editIcon }) => {
     const cardStyles = {
         backgroundColor: variables.blue,
         backgroundImage: `url('${data.photo}')`,
@@ -37,7 +37,9 @@ const LinkCard = ({ data, button, showFooter }) => {
             {
                 data.comment && data.comment.length ?
                     <blockquote className="link-card__comment">
-                        <p>{data.comment}</p>
+                        <p>{data.comment}
+                            {editIcon}
+                        </p>
                     </blockquote>
                     : null
             }
@@ -66,6 +68,7 @@ LinkCard.propTypes = {
     data: PropTypes.object.isRequired,
     button: PropTypes.any,
     showFooter: PropTypes.bool,
+    editIcon: PropTypes.object.isRequired,
 };
 
 LinkCard.defaultProps = {
