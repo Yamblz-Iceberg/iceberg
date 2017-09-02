@@ -39,6 +39,12 @@ class CreateCard extends Component {
         });
     }
 
+    setCanCreate = (status) => {
+        this.setState({
+            canCreateTag: status,
+        });
+    }
+
     handleHashTagChange = (event) => {
         this.setTagText(event.target.value);
     }
@@ -54,6 +60,11 @@ class CreateCard extends Component {
 
         this.props.addHashTag(currentHashTagText);
         this.setTagText('');
+        this.setCanCreate(false);
+    }
+
+    handleAddButtonClick = () => {
+        this.setCanCreate(true);
     }
 
     handleEditTag = (id, event) => {
@@ -115,6 +126,7 @@ class CreateCard extends Component {
                         { (!canCreateTag && hashTags.length > 0 && hashTags.length < 4) && (
                             <button
                                 className="create-card__add-button"
+                                onClick={this.handleAddButtonClick}
                             >
                                 <Icon iconName="plus" iconColor="#fff" />
                             </button>
