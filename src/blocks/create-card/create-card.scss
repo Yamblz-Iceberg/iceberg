@@ -86,44 +86,6 @@
     }
 }
 
-.create-card-footer {
-    display: flex;
-    justify-content: space-between;
-
-    &__user {
-        display: flex;
-        align-content: center;
-        width: 50%;
-    }
-
-    &__user-name {
-        display: inline-block;
-        align-items: center;
-        margin-left: 8px;
-        color: #fff;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        line-height: 25px;
-    }
-
-    &__actions {
-        display: flex;
-        color: #fff;
-        width: 50%;
-        justify-content: flex-end;
-    }
-
-    &__link-action {
-        margin-right: 20px;
-    }
-
-    &__save-action, &__link-action {
-        display: flex;
-        align-items: center;
-
-        & > span {
-            margin-left: 5px;
-        }
-    }
+.create-card__footer {
+    opacity: 0.3;
 }
