@@ -3,13 +3,14 @@ import { withRouter } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 import { ToggleText } from '../../index';
-import { HashTag, Icon, Avatar, Button } from '../../../blocks';
+import { HashTag, Icon, Button, CardFooter } from '../../../blocks';
 
 import './collection-detail-info.scss';
 
 class CollectionDetailInfo extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             showAllText: false,
             collection: {
@@ -22,6 +23,8 @@ class CollectionDetailInfo extends Component {
                 },
                 name: '',
                 tags: [],
+                links: [],
+                savedTimesCount: 0,
             },
         };
     }
@@ -34,11 +37,17 @@ class CollectionDetailInfo extends Component {
     };
 
     render() {
+        const collection = this.state.collection;
+
+        console.log(collection);
+
         const avatarOptions = {
             size: '25',
-            photo: this.state.collection.author.photo,
+            photo: collection.author.photo,
             iconColor: '#fff',
         };
+
+        const userName = `${collection.author.firstName} ${collection.author.lastName}`;
 
         return (
             <section>
@@ -46,40 +55,29 @@ class CollectionDetailInfo extends Component {
                     <div className="collection-detail-card">
                         <div
                             className="collection-detail-card__img"
-                            style={{ backgroundImage: `url(${this.state.collection.photo})` }}
+                            style={{ backgroundImage: `url(${collection.photo})` }}
                         />
 
                         <div className="collection-detail-card__info">
-                            <div>
-                                {this.state.collection.tags.map(hash => (
+                            <div className="collection-detail-card__header">
+                                {collection.tags.map(hash => (
                                     <HashTag
                                         {...hash}
                                         size={'small'}
                                         key={hash._id}
                                     />)) }
-                                <h2 className="collection-detail-card__title">{ this.state.collection.name }</h2>
+                                <h2 className="collection-detail-card__title">{ collection.name }</h2>
                             </div>
 
-                            <div className="template-card-footer">
-                                <div className="template-card-footer__user">
-                                    <Avatar {...avatarOptions} />
-                                    <span className="template-card-footer__user-name">
-                                        {`${this.state.collection.author.firstName} ${this.state.collection.author.lastName}`}
-                                    </span>
-                                </div>
-
-                                <div className="template-card-footer__actions">
-                                    <div className="template-card-footer__link-action">
-                                        <Icon iconName={'link'} iconColor={'#fff'} />
-                                        <span>{10}</span>
-                                    </div>
-                                    <div className="template-card-footer__save-action">
-                                        <Icon iconName={'save-big'} iconColor={'#fff'} />
-                                        <span>{16}</span>
-                                    </div>
-                                </div>
-                            </div>
+                            <CardFooter
+                                avatarOptions={avatarOptions}
+                                userName={userName}
+                                linksCount={collection.links.length}
+                                savedTimesCount={collection.savedTimesCount}
+                            />
                         </div>
+
+                        <div className="collection-detail-card__overlay" />
                     </div>
 
                     <ToggleText text={this.state.collection.description} />
