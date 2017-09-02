@@ -16,7 +16,7 @@
     &:hover {
         text-decoration: none;
     }
-    &-active {
+    &--active {
         color: #000;
         &::after {
             content: '';
