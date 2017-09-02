@@ -6,7 +6,7 @@ import { Icon, Avatar } from '../../blocks';
 import './link-card.scss';
 import variables from './../../variables.scss';
 
-const LinkCard = ({ data }) => {
+const LinkCard = ({ data, button, showFooter }) => {
     const cardStyles = {
         backgroundColor: variables.blue,
         backgroundImage: `url('${data.photo}')`,
@@ -39,21 +39,24 @@ const LinkCard = ({ data }) => {
                     <blockquote className="link-card__comment">
                         <p>{data.comment}</p>
                     </blockquote>
-                    :
-                    null
+                    : null
             }
         </div>
-
-        <div className="link-card__footer">
-            <div className="link-card__block">
-                <Icon iconName={'like-big'} iconColor={'#fff'} />
-                <span>{data.likes}</span>
-            </div>
-            <div className="link-card__block">
-                <Icon iconName={'save-big'} iconColor={'#fff'} />
-                <span>{data.savedTimesCount}</span>
-            </div>
-        </div>
+        { button }
+        {
+            showFooter === true ?
+                <div className="link-card__footer">
+                    <div className="link-card__block">
+                        <Icon iconName={'like-big'} iconColor={'#fff'} />
+                        <span>{data.likes}</span>
+                    </div>
+                    <div className="link-card__block">
+                        <Icon iconName={'save-big'} iconColor={'#fff'} />
+                        <span>{data.savedTimesCount}</span>
+                    </div>
+                </div>
+                : null
+        }
 
         <div className="link-card__overlay" />
     </div>);
@@ -61,6 +64,13 @@ const LinkCard = ({ data }) => {
 
 LinkCard.propTypes = {
     data: PropTypes.object.isRequired,
+    button: PropTypes.any,
+    showFooter: PropTypes.bool,
+};
+
+LinkCard.defaultProps = {
+    button: null,
+    showFooter: true,
 };
 
 export default LinkCard;

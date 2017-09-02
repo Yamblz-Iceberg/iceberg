@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { createLink } from '../../../reducers/link.reducer';
-import { LinkCard } from '../../index';
+import { LinkCard, Button, Icon } from '../../../blocks';
 import CreateLinkHeader from '../header/create-link-header';
 
 import './create-link-load.scss';
@@ -16,6 +16,7 @@ class CreateLinkLoad extends Component {
                 name: '',
             },
             user: {},
+            comment: '',
             isCreated: false,
         };
     }
@@ -31,7 +32,20 @@ class CreateLinkLoad extends Component {
             user: props.user,
         });
     }
+    addDescription = () => {
+        this.props.history.push('./add-description');
+    };
     render() {
+        const showFooter = false;
+        const linkButton = () => (
+            <Button
+                text="комментарий"
+                icon={<Icon iconName="plus" />}
+                background="#fff"
+                size="max-width"
+                onClick={this.addDescription}
+            />
+        );
         const cardLink = this.state.link;
         cardLink.userAdded = this.state.user;
         return (
@@ -40,7 +54,11 @@ class CreateLinkLoad extends Component {
                     collectionTitle={this.state.link.name}
                 />
                 <section className="create-link-load">
-                    <LinkCard data={cardLink} />
+                    <LinkCard
+                        data={cardLink}
+                        button={this.state.comment.length === 0 ? linkButton() : null}
+                        showFooter={showFooter}
+                    />
                 </section>
             </main>
         );
