@@ -54,5 +54,9 @@ function onDeviceReady() {
     );
 }
 
-// document.addEventListener('deviceready', onDeviceReady);
-onDeviceReady();
+if (typeof window.cordova !== 'undefined') {
+    document.addEventListener('deviceready', onDeviceReady);
+} else {
+    // for browser
+    onDeviceReady();
+}
