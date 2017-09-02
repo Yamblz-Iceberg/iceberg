@@ -20,16 +20,16 @@ class CreateDescription extends Component {
         this.setState({
             resetText: flag,
         });
-    }
+    };
 
     resetTextContent = () => {
         this.setTextContent(!this.state.resetText);
         this.props.updateDescription('');
-    }
+    };
 
     handleTextContentChange = (value) => {
         this.props.updateDescription(value);
-    }
+    };
 
     render() {
         return (
