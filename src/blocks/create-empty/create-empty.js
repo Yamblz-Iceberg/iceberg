@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { Button, Icon } from '../../blocks';
 import { CreateCard, Option, ToggleText } from '../index';
 import CreateEmptyHeader from './header/create-empty-header';
 
-import { cardBlue } from '../../variables.scss';
-
 import {
     updateTitle,
     updateSwitcher,
-    createCollection,
 } from '../../reducers/create-collection.reducer';
 
 import './create-empty.scss';
@@ -31,33 +28,9 @@ class CreateEmpty extends Component {
         });
     };
 
-    hexToRGB = (hex) => {
-        const r = parseInt(hex.slice(1, 3), 16);
-        const g = parseInt(hex.slice(3, 5), 16);
-        const b = parseInt(hex.slice(5, 7), 16);
-
-        return `rgb(${r}, ${g}, ${b})`;
-    };
-
     handleTitleUpdate = (value) => {
         this.props.updateTitle(value);
         this.setTitle(value);
-    };
-
-    changeRoute = () => {
-        this.props.history.push({ pathname: './feed' });
-    };
-
-    handleSubmitData = () => {
-        const body = {
-            description: this.props.description,
-            name: this.props.title,
-            photo: 'https://pp.userapi.com/c543100/v543100915/2fbfb/IoVG_UEW-yw.jpg',
-            color: this.hexToRGB(cardBlue),
-            tags: ['59a7e38c7db98b35471fed6d', '59a7e38c7db98b35471fed67'],
-        };
-
-        this.props.createCollection(body, this.props.token, this.changeRoute);
     };
 
     handleSwitcherUpdate = id => value => this.props.updateSwitcher(id, value);
@@ -95,9 +68,7 @@ class CreateEmpty extends Component {
 
         return (
             <main className="create-empty">
-                <CreateEmptyHeader
-                    submitCallback={this.handleSubmitData}
-                />
+                <CreateEmptyHeader />
                 <div className="create-empty__card-wrapper">
                     <CreateCard data={createCardProps} />
                 </div>
@@ -135,16 +106,18 @@ class CreateEmpty extends Component {
     }
 }
 
+CreateEmpty.defaultProps = {
+    description: '',
+    title: '',
+};
+
 CreateEmpty.propTypes = {
-    description: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    user: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    title: PropTypes.string,
+    user: PropTypes.object.isRequired,
     updateTitle: PropTypes.func.isRequired,
     updateSwitcher: PropTypes.func.isRequired,
     data: PropTypes.object.isRequired,
-    createCollection: PropTypes.func.isRequired,
-    token: PropTypes.string.isRequired,
-    history: PropTypes.any.isRequired,
 };
 
 export default connect(
@@ -153,7 +126,6 @@ export default connect(
         title: state.createCollection.title,
         user: state.user.data,
         data: state.createCollection,
-        token: state.app.token,
     }),
-    { updateTitle, updateSwitcher, createCollection },
-)(withRouter(CreateEmpty));
+    { updateTitle, updateSwitcher },
+)(CreateEmpty);
