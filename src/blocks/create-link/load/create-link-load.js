@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { createLink } from '../../../reducers/link.reducer';
+import { createLink, clearLink } from '../../../reducers/link.reducer';
 import { LinkCard, Button, Icon } from '../../../blocks';
 import CreateLinkHeader from '../header/create-link-header';
 import CreateLinkComment from '../comment/create-link-comment';
@@ -35,10 +35,14 @@ class CreateLinkLoad extends Component {
             user: props.user,
         });
     }
+    componentWillUnmount() {
+        this.props.clearLink();
+    }
     addComment = () => {
         this.props.history.push('./load-link/add-comment');
     };
     render() {
+        const showAddButton = true;
         const showFooter = false;
         const linkButton = () => (
             <Button
@@ -62,6 +66,7 @@ class CreateLinkLoad extends Component {
                 />
                 <CreateLinkHeader
                     title={this.state.link.name}
+                    showAddButton={showAddButton}
                 />
                 <section className="create-link-load">
                     <LinkCard
@@ -83,6 +88,7 @@ class CreateLinkLoad extends Component {
 
 CreateLinkLoad.propTypes = {
     createLink: PropTypes.func.isRequired,
+    clearLink: PropTypes.func.isRequired,
     token: PropTypes.string.isRequired,
     history: PropTypes.any.isRequired,
     link: PropTypes.object.isRequired,
@@ -103,5 +109,5 @@ export default connect(
         comment: state.link.comment,
         isCreated: state.link.created,
     }),
-    { createLink },
+    { createLink, clearLink },
 )(withRouter(CreateLinkLoad));

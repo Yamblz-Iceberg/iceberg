@@ -32,11 +32,13 @@ class CreateLinkComment extends Component {
     };
 
     render() {
+        const showAddButton = false;
         return (
             <main className="add-comment">
                 <CreateLinkHeader
                     callback={this.resetTextContent}
                     title="комментарий"
+                    showAddButton={showAddButton}
                 />
                 <div className="add-comment__limited-textarea">
                     <LimitedTextarea

@@ -17,6 +17,7 @@ class AddLinkHeader extends Component {
             this.props.collection._id,
             this.props.link._id,
             this.props.token,
+            this.props.comment,
             this.props.history.push('/feed'),
         );
     };
@@ -25,7 +26,7 @@ class AddLinkHeader extends Component {
         return (
             <header
                 className={`create-link-header
-                ${this.props.history.location.pathname === '/create-link/load-link'
+                ${this.props.showAddButton
                 ? 'create-link-header--show-button'
                 : ''}`}
             >
@@ -53,17 +54,24 @@ class AddLinkHeader extends Component {
 
 AddLinkHeader.propTypes = {
     title: PropTypes.string.isRequired,
+    showAddButton: PropTypes.bool.isRequired,
     collection: PropTypes.object.isRequired,
     link: PropTypes.object.isRequired,
+    comment: PropTypes.string,
     token: PropTypes.string.isRequired,
     addLinkToCollection: PropTypes.func.isRequired,
     history: PropTypes.any.isRequired,
+};
+
+AddLinkHeader.defaultProps = {
+    comment: '',
 };
 
 export default connect(
     state => ({
         token: state.app.token,
         link: state.link.result,
+        comment: state.link.comment,
         collection: state.collection,
     }),
     { addLinkToCollection },

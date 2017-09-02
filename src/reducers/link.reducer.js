@@ -2,6 +2,7 @@ import { postLink, postLinkToCollection } from './../services/link.service';
 
 const ADD_LINK = 'ADD_LINK';
 const ADD_COMMENT = 'ADD_COMMENT';
+const CLEAR_LINK = 'CLEAR_LINK';
 const PUSH_LINK_TO_COLLECTION = 'PUSH_LINK_TO_COLLECTION';
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
 
 const addLink = res => ({ type: ADD_LINK, payload: res });
 const addComment = comment => ({ type: ADD_COMMENT, payload: comment });
+const clearLink = () => ({ type: CLEAR_LINK });
 const pushLinkToCollection = () => ({ type: PUSH_LINK_TO_COLLECTION });
 
 const reducer = (state = initialState, action) => {
@@ -27,6 +29,8 @@ const reducer = (state = initialState, action) => {
         return { ...state, comment: action.payload };
     case PUSH_LINK_TO_COLLECTION:
         return state;
+    case CLEAR_LINK:
+        return { ...initialState };
     default:
         return state;
     }
@@ -40,12 +44,12 @@ export const createLink = (data, token) => (
     }
 );
 
-export const addLinkToCollection = (collectionId, linkId, token, callback) => (
+export const addLinkToCollection = (collectionId, linkId, token, comment, callback) => (
     (dispatch) => {
-        postLinkToCollection(collectionId, linkId, token).then(() => {
+        postLinkToCollection(collectionId, linkId, token, comment).then(() => {
             dispatch(pushLinkToCollection());
         }).then(() => callback);
     }
 );
 
-export { reducer, addComment };
+export { reducer, addComment, clearLink };

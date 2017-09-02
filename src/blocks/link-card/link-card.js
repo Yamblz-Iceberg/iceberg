@@ -68,11 +68,12 @@ LinkCard.propTypes = {
     data: PropTypes.object.isRequired,
     button: PropTypes.any,
     showFooter: PropTypes.bool,
-    editIcon: PropTypes.object.isRequired,
+    editIcon: PropTypes.object,
 };
 
 LinkCard.defaultProps = {
     button: null,
+    editIcon: null,
     showFooter: true,
 };
 
