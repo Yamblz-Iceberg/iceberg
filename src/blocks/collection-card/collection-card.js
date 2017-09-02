@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './collection-card.scss';
 
-import { HashTag, Avatar, Icon } from './../../blocks';
+import { HashTag, CardFooter } from './../../blocks';
 
 const CollectionCard = ({ data }) => {
     const hashes = data.tags;
@@ -17,6 +17,8 @@ const CollectionCard = ({ data }) => {
         iconColor: '#fff',
     };
 
+    const userName = `${data.author.firstName} ${data.author.lastName}`;
+
     return (
         <div className="collection-card" style={cardStyles}>
             <div className="collection-card__header">
@@ -29,23 +31,12 @@ const CollectionCard = ({ data }) => {
                 <h2 className="collection-card__title">{data.name}</h2>
             </div>
 
-            <div className="collection-card-footer">
-                <div className="collection-card-footer__user">
-                    <Avatar {...avatarOptions} />
-                    <span className="collection-card-footer__user-name">{`${data.author.firstName} ${data.author.lastName}`}</span>
-                </div>
-
-                <div className="collection-card-footer__actions">
-                    <div className="collection-card-footer__link-action">
-                        <Icon iconName={'link'} iconColor={'#fff'} />
-                        <span>{data.linksCount}</span>
-                    </div>
-                    <div className="collection-card-footer__save-action">
-                        <Icon iconName={'save-big'} iconColor={'#fff'} />
-                        <span>{data.savedTimesCount}</span>
-                    </div>
-                </div>
-            </div>
+            <CardFooter
+                avatarOptions={avatarOptions}
+                userName={userName}
+                linksCount={data.linksCount}
+                savedTimesCount={data.savedTimesCount}
+            />
 
             { data.photo ? <div className="collection-card__overlay" /> : null }
         </div>
