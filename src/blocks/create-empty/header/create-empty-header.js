@@ -26,24 +26,21 @@ class CreateEmptyHeader extends Component {
     componentWillReceiveProps = (nextProps) => {
         const {
             title: currTitle,
-            description: currDescription,
             hashTags: currHashTags,
         } = this.props;
-        const { title, description, hashTags } = nextProps;
+        const { title, hashTags } = nextProps;
 
         if ((title && currTitle !== title) ||
-            (description && currDescription !== description) ||
             (hashTags && currHashTags !== hashTags)
         ) {
             this.setSubmitStatus(nextProps);
         }
     }
 
-    setSubmitStatus = ({ title, description, hashTags }) => {
+    setSubmitStatus = ({ title, hashTags }) => {
         this.setState({
             submitStatus: (
                 title.length > 4 &&
-                description.length > 0 &&
                 hashTags.length > 0
             ),
         });
