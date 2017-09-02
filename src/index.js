@@ -9,7 +9,6 @@ import {
     AccountProfile,
     CollectionDetail,
     CreateEmpty,
-    CreateDescription,
     CreateLink,
     Search,
     Home,
@@ -42,7 +41,6 @@ function onDeviceReady() {
                         <Route path="/feed" component={Home} />
                         <Route path="/create-link" component={CreateLink} />
                         <Route path="/create-empty" component={CreateEmpty} />
-                        <Route path="/create-description" component={CreateDescription} />
                         <Route path="/collection-detail" component={CollectionDetail} />
                         <Route path="/profile" component={AccountProfile} />
                         <Route path="/search" component={Search} />
