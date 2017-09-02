@@ -23,7 +23,7 @@ class HomeFeed extends Component {
         if (e.target.className !== 'hash-tag'
             && e.target.className !== 'template-card-footer__user'
             && e.target.className !== 'template-card-footer__actions') {
-            this.props.history.push({ pathname: './collection-detail', state: cardId });
+            this.props.history.push({ pathname: '/collection-detail', state: cardId });
         }
     }
 
