@@ -81,6 +81,10 @@ class CreateCard extends Component {
         this.props.deleteHashTag(id);
     }
 
+    handleUploadPicture = () => {
+        alert('Yep');
+    }
+
     render() {
         const {
             userName,
@@ -140,6 +144,10 @@ class CreateCard extends Component {
                         maxLength="50"
                         placeholder="Введите название темы"
                     />
+                    <div className="create-card__upload-photo-container" onClick={this.handleUploadPicture}>
+                        <Icon iconName="picture" iconColor="#fff" iconWidth="24" iconHeight="24" />
+                        <p className="create-card__upload-photo-title">Добавить обложку</p>
+                    </div>
                 </div>
 
                 <div className="create-card-footer">

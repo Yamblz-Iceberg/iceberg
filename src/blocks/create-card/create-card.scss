@@ -64,6 +64,25 @@
     &__text {
         margin-right: 5px;
     }
+
+    &__upload-photo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        background-color: rgba(255, 255, 255, .15);
+        border-radius: 42px;
+        padding: 14px 24px;
+        color: #fff;
+        margin: 20px;
+    }
+
+    &__upload-photo-title {
+        text-transform: uppercase;
+        margin: 0;
+        font-size: 14px;
+        padding-left: 14px;
+    }
 }
 
 .create-card-footer {
