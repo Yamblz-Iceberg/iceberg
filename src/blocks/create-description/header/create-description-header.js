@@ -34,7 +34,7 @@ class CreateDescriptionHeader extends Component {
                 <span onClick={this.goBack}>
                     <Icon iconName={'arrow-back'} />
                 </span>
-                <h4 className="create-description-header__title">Описание</h4>
+                <h4 className="create-description-header__title">{this.props.title}</h4>
                 <span onClick={this.toggleMenu}>
                     <Icon iconName={'more-vert'} />
                 </span>
@@ -55,6 +55,7 @@ class CreateDescriptionHeader extends Component {
 CreateDescriptionHeader.propTypes = {
     callback: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
+    title: PropTypes.string.isRequired,
 };
 
 export default withRouter(CreateDescriptionHeader);
