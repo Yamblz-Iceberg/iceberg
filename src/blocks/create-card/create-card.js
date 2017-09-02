@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import './create-card.scss';
 
-import { CreateHashTag, Avatar, Icon } from './../../blocks';
+import { CreateHashTag, Icon, CardFooter } from './../../blocks';
 import { addHashTag, deleteHashTag, editHashTag } from '../../reducers/create-collection.reducer';
 
 class CreateCard extends Component {
@@ -142,23 +142,13 @@ class CreateCard extends Component {
                     />
                 </div>
 
-                <div className="create-card-footer">
-
-                    <div className="create-card-footer__user">
-                        <Avatar {...avatarOptions} />
-                        <span className="create-card-footer__user-name">{userName}</span>
-                    </div>
-
-                    <div className="create-card-footer__actions">
-                        <div className="create-card-footer__link-action">
-                            <Icon iconName={'link'} iconColor={'#fff'} />
-                            <span>{0}</span>
-                        </div>
-                        <div className="create-card-footer__save-action">
-                            <Icon iconName={'save-big'} iconColor={'#fff'} />
-                            <span>{0}</span>
-                        </div>
-                    </div>
+                <div className="create-card__footer">
+                    <CardFooter
+                        avatarOptions={avatarOptions}
+                        userName={userName}
+                        linksCount={0}
+                        savedTimesCount={0}
+                    />
                 </div>
             </div>
         );
