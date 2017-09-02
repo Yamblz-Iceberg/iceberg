@@ -50,11 +50,13 @@ class CreateEmptyHeader extends Component {
         this.props.history.push({ pathname: './feed' });
     };
 
-    hexToRGB = (hex) => {
-        const r = parseInt(hex.slice(1, 3), 16);
-        const g = parseInt(hex.slice(3, 5), 16);
-        const b = parseInt(hex.slice(5, 7), 16);
-
+    hexToRGB = (color) => {
+        if (!color.match(/^#[0-9a-f]{3,6}$/i)) {
+            return color;
+        }
+        const r = parseInt(color.slice(1, 3), 16);
+        const g = parseInt(color.slice(3, 5), 16);
+        const b = parseInt(color.slice(5, 7), 16);
         return `rgb(${r}, ${g}, ${b})`;
     };
 
@@ -62,8 +64,8 @@ class CreateEmptyHeader extends Component {
         const body = {
             description: this.props.description,
             name: this.props.title,
-            photo: 'https://pp.userapi.com/c543100/v543100915/2fbfb/IoVG_UEW-yw.jpg',
-            color: this.hexToRGB(cardBlue),
+            photo: this.props.photo,
+            color: this.props.color,
             tags: ['59a7e38c7db98b35471fed6d', '59a7e38c7db98b35471fed67'],
         };
 
@@ -91,10 +93,14 @@ CreateEmptyHeader.defaultProps = {
     title: '',
     description: '',
     hashTags: [],
+    photo: '',
+    color: cardBlue,
 };
 
 CreateEmptyHeader.propTypes = {
     title: PropTypes.string,
+    photo: PropTypes.string,
+    color: PropTypes.string,
     description: PropTypes.string,
     hashTags: PropTypes.array,
     token: PropTypes.string.isRequired,
@@ -108,6 +114,8 @@ export default connect(
         description: state.createCollection.description,
         hashTags: state.createCollection.hashTags,
         token: state.app.token,
+        color: state.createCollection.color,
+        photo: state.createCollection.photo,
     }),
     { createCollection },
 )(withRouter(CreateEmptyHeader));
