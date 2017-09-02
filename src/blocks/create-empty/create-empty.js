@@ -97,7 +97,6 @@ class CreateEmpty extends Component {
             <main className="create-empty">
                 <CreateEmptyHeader
                     submitCallback={this.handleSubmitData}
-                    title={this.state.title}
                 />
                 <div className="create-empty__card-wrapper">
                     <CreateCard data={createCardProps} />

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Icon } from '../../../blocks';
 
 import './create-empty-header.scss';
@@ -13,10 +14,33 @@ class CreateEmptyHeader extends Component {
         };
     }
 
+    componentWillMount = () => {
+        this.setSubmitStatus(this.props);
+    }
+
     componentWillReceiveProps = (nextProps) => {
+        const {
+            title: currTitle,
+            description: currDescription,
+            hashTags: currHashTags,
+        } = this.props;
+        const { title, description, hashTags } = nextProps;
+
+        if ((currTitle !== title) ||
+            (currDescription !== description) ||
+            (currHashTags !== hashTags)
+        ) {
+            this.setSubmitStatus(nextProps);
+        }
+    }
+
+    setSubmitStatus = ({ title, description, hashTags }) => {
         this.setState({
-            // 5 - минимальное количество символов
-            submitStatus: nextProps.title.length > 5,
+            submitStatus: (
+                title.length > 4 &&
+                description.length > 0 &&
+                hashTags.length > 0
+            ),
         });
     }
 
@@ -41,6 +65,14 @@ class CreateEmptyHeader extends Component {
 CreateEmptyHeader.propTypes = {
     submitCallback: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    hashTags: PropTypes.array.isRequired,
 };
 
-export default CreateEmptyHeader;
+export default connect(
+    state => ({
+        title: state.createCollection.title,
+        description: state.createCollection.description,
+        hashTags: state.createCollection.hashTags,
+    }),
+)(CreateEmptyHeader);
