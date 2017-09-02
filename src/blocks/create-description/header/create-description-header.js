@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Icon } from '../../../blocks';
 
 import './create-description-header.scss';
@@ -17,19 +17,23 @@ class CreateDescriptionHeader extends Component {
         this.setState({
             menuOpened: !this.state.menuOpened,
         });
-    }
+    };
 
     clearTextArea = () => {
         this.toggleMenu();
         this.props.callback();
-    }
+    };
+
+    goBack = () => {
+        this.props.history.goBack();
+    };
 
     render() {
         return (
             <header className="create-description-header">
-                <NavLink to={'/create-empty'}>
+                <span onClick={this.goBack}>
                     <Icon iconName={'arrow-back'} />
-                </NavLink>
+                </span>
                 <h4 className="create-description-header__title">Описание</h4>
                 <span onClick={this.toggleMenu}>
                     <Icon iconName={'more-vert'} />
@@ -50,6 +54,7 @@ class CreateDescriptionHeader extends Component {
 
 CreateDescriptionHeader.propTypes = {
     callback: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
 };
 
-export default CreateDescriptionHeader;
+export default withRouter(CreateDescriptionHeader);

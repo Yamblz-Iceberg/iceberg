@@ -75,7 +75,7 @@ const reducer = (state = initialState, action) => {
         };
     }
     case CLEAR_COLLECTION:
-        return initialState;
+        return { ...initialState };
     default:
         return state;
     }

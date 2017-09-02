@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { Button, Icon } from '../../blocks';
-import { CreateCard, Option, ToggleText } from '../index';
+import { CreateCard, CreateDescription, Option, ToggleText } from '../../blocks';
 import CreateEmptyHeader from './header/create-empty-header';
 
 import {
@@ -61,47 +61,56 @@ class CreateEmpty extends Component {
         ];
 
         const editDescriptionIcon = (
-            <NavLink to={'/create-description'} className="create-empty__edit-description">
+            <NavLink to={'/create-empty/add-description'} className="create-empty__edit-description">
                 <Icon iconName={'edit'} />
             </NavLink>
         );
 
         return (
-            <main className="create-empty">
-                <CreateEmptyHeader />
-                <div className="create-empty__card-wrapper">
-                    <CreateCard data={createCardProps} />
-                </div>
-                {description === ''
-                    ? (
-                        <NavLink
-                            to={'/create-description'}
-                            className="create-empty__add-description"
-                        >
-                            <Button
-                                icon={<Icon iconName={'plus'} />}
-                                text="Добавить описание"
-                                background="rgba(255,255,255, 0)"
-                            />
-                        </NavLink>
-                    )
-                    : (
-                        <div className="create-empty__toggle-text">
-                            <ToggleText
-                                text={description}
-                                component={editDescriptionIcon}
-                            />
-                        </div>
-                    )
-                }
-                { optionsProperties
-                    .map(option => (
-                        <Option
-                            callback={this.handleSwitcherUpdate(option.id)}
-                            key={option.id}
-                            {...option}
-                        />)) }
-            </main>
+            <div>
+                <Route
+                    exact
+                    path="/create-empty/add-description"
+                    render={() =>
+                        <CreateDescription maxTextLength={300} headerTitle="описание" />
+                    }
+                />
+                <main className="create-empty">
+                    <CreateEmptyHeader />
+                    <div className="create-empty__card-wrapper">
+                        <CreateCard data={createCardProps} />
+                    </div>
+                    {description === ''
+                        ? (
+                            <NavLink
+                                to={'/create-empty/add-description'}
+                                className="create-empty__add-description"
+                            >
+                                <Button
+                                    icon={<Icon iconName={'plus'} />}
+                                    text="Добавить описание"
+                                    background="rgba(255,255,255, 0)"
+                                />
+                            </NavLink>
+                        )
+                        : (
+                            <div className="create-empty__toggle-text">
+                                <ToggleText
+                                    text={description}
+                                    component={editDescriptionIcon}
+                                />
+                            </div>
+                        )
+                    }
+                    { optionsProperties
+                        .map(option => (
+                            <Option
+                                callback={this.handleSwitcherUpdate(option.id)}
+                                key={option.id}
+                                {...option}
+                            />)) }
+                </main>
+            </div>
         );
     }
 }

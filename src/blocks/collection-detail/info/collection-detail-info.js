@@ -39,8 +39,6 @@ class CollectionDetailInfo extends Component {
     render() {
         const collection = this.state.collection;
 
-        console.log(collection);
-
         const avatarOptions = {
             size: '25',
             photo: collection.author.photo,

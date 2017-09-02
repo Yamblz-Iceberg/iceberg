@@ -65,6 +65,10 @@
             margin-left: 5px;
         }
     }
+    button {
+        margin-bottom: 40px;
+        z-index: 2;
+    }
 }
 
 .link-card__header {
@@ -87,12 +91,16 @@
     width: 225px;
     height: 100px;
     position: absolute;
-    bottom: 16px;
+    bottom: 56px;
     right: -12px;
     > p {
+        display: flex;
         margin: 0;
         padding: 0;
         font-size: 14px;
+        > span {
+            margin-left: 5px;
+        }
     }
     &::before {
         content: '‘‘';
