@@ -25,22 +25,22 @@ class LimitedTextarea extends Component {
             this.resetTextContent();
             this.setTextContent();
         }
-    }
+    };
 
     setTextContent = () => {
         this.setState({
             textContent: this.input.value,
         });
-    }
+    };
 
     resetTextContent = () => {
         this.input.value = '';
-    }
+    };
 
     handleChange = (e) => {
         this.setTextContent();
         this.props.handleChange(e.target.value);
-    }
+    };
 
     render() {
         const { max } = this.props;
@@ -57,6 +57,7 @@ class LimitedTextarea extends Component {
                     ref={(input) => { this.input = input; }}
                     placeholder="Введите текст описания"
                     value={this.state.textContent}
+                    autoFocus
                 />
             </div>
         );
