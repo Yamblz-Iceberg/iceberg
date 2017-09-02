@@ -165,10 +165,15 @@ class CreateCard extends Component {
     }
 }
 
+CreateCard.defaultProps = {
+    title: '',
+    hashTags: [],
+};
+
 CreateCard.propTypes = {
     data: PropTypes.object.isRequired,
-    title: PropTypes.string.isRequired,
-    hashTags: PropTypes.array.isRequired,
+    title: PropTypes.string,
+    hashTags: PropTypes.array,
     addHashTag: PropTypes.func.isRequired,
     deleteHashTag: PropTypes.func.isRequired,
     editHashTag: PropTypes.func.isRequired,
