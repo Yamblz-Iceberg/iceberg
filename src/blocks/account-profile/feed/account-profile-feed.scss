@@ -1,0 +1,20 @@
+.account-profile-feed__empty-block {
+    padding: 16px;
+    text-align: center;
+    > .button {
+        margin: auto;
+    }
+}
+
+.account-profile-feed__message {
+    font-size: 18px;
+	line-height: 26px;
+	text-align: center;
+	color: #777777;
+}
+
+.account-profile-feed__list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
