@@ -22,7 +22,12 @@ class Tabs extends Component {
 
     animateUnderline = () => {
         const activeListItemPosition = this.activeListItem.offsetLeft;
-        this.underline.style.left = `${activeListItemPosition}px`;
+        const activeListItemWidth = this.activeListItem.offsetWidth;
+
+        this.underline.style.cssText = `
+            left:${activeListItemPosition}px;
+            width:${activeListItemWidth}px;
+        `;
     }
 
     render() {
@@ -31,7 +36,10 @@ class Tabs extends Component {
         return (
             <div className="tabs-container">
                 <ul className="tabs__list">
-                    <div className="tabs__underlining" ref={(underline) => { this.underline = underline; }} />
+                    <div
+                        className="tabs__underlining"
+                        ref={(underline) => { this.underline = underline; }}
+                    />
                     { tabs.length > 0 && tabs.map((tab) => {
                         const isItemActive = history.location.pathname === tab.linkTo;
                         const itemProps = {

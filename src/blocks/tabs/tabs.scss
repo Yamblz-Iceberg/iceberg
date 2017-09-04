@@ -44,6 +44,6 @@
         width: 50%;
         height: 3px;
         background-color: $main-yellow;
-        transition: left .5s;
+        transition: left .5s, width .5s;
     }
 }
