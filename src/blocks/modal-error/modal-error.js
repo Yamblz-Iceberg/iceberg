@@ -11,11 +11,12 @@ class ModalError extends Component {
         this.props.hideModal()
     );
     render() {
+        const { title = 'Ошибка', text = 'Ой, что-то пошло не так!', buttonText = 'Понятно' } = this.props.modal.modalProps;
         const content = (<div>
-            <h3 className="modal__title">Произошла ошибка</h3>
-            <p className="modal__text">Попробуйте подождать или перезапустите приложение и попробуйте еше раз</p>
+            <h3 className="modal__title">{title}</h3>
+            <p className="modal__text">{text}</p>
             <div className="modal__buttons-block">
-                <Button type={'light'} text={'Подождать'} onClick={this.handleClose} />
+                <Button type={'light'} text={buttonText} onClick={this.handleClose} />
             </div>
         </div>);
         return (<ModalTemplate content={content} />);
@@ -30,6 +31,7 @@ function mapStateToProps(state) {
 
 ModalError.propTypes = {
     hideModal: PropTypes.func.isRequired,
+    modal: PropTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps, { ...actions })(ModalError);
