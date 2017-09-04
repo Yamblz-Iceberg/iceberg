@@ -11,7 +11,7 @@ export const postLink = (data, token) => {
     }).then(res => res.json());
 };
 
-export const postLinkToCollection = (collectionId, linkId, token, comment) => {
+export const postLinkToCollection = (collectionId, linkId, token, description) => {
     const headers = new Headers({
         Authorization: token,
         'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ export const postLinkToCollection = (collectionId, linkId, token, comment) => {
 
     return fetch(`https://iceberg-project.herokuapp.com/collections/addLink/${collectionId}/${linkId}`, {
         method: 'post',
-        body: JSON.stringify({ description: comment }),
+        body: JSON.stringify({ description }),
         headers,
     });
 };

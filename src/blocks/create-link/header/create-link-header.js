@@ -17,7 +17,7 @@ class AddLinkHeader extends Component {
             this.props.collection._id,
             this.props.link._id,
             this.props.token,
-            this.props.comment,
+            this.props.description,
             this.props.history.push('/feed'),
         );
     };
@@ -57,21 +57,21 @@ AddLinkHeader.propTypes = {
     showAddButton: PropTypes.bool.isRequired,
     collection: PropTypes.object.isRequired,
     link: PropTypes.object.isRequired,
-    comment: PropTypes.string,
+    description: PropTypes.string,
     token: PropTypes.string.isRequired,
     addLinkToCollection: PropTypes.func.isRequired,
     history: PropTypes.any.isRequired,
 };
 
 AddLinkHeader.defaultProps = {
-    comment: '',
+    description: '',
 };
 
 export default connect(
     state => ({
         token: state.app.token,
         link: state.link.result,
-        comment: state.link.comment,
+        description: state.link.description,
         collection: state.collection,
     }),
     { addLinkToCollection },

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { createLink, clearLink } from '../../../reducers/link.reducer';
+import { createLink } from '../../../reducers/link.reducer';
 import { LinkCard, Button, Icon } from '../../../blocks';
 import CreateLinkHeader from '../header/create-link-header';
 
@@ -16,7 +16,7 @@ class CreateLinkLoad extends Component {
                 name: '',
             },
             user: {},
-            comment: '',
+            description: '',
             isCreated: false,
         };
     }
@@ -32,13 +32,10 @@ class CreateLinkLoad extends Component {
         this.setState({
             ...this.state,
             link: props.link,
-            comment: props.comment,
+            description: props.description,
             isCreated: props.isCreated,
             user: props.user,
         });
-    }
-    componentWillUnmount() {
-        this.props.clearLink();
     }
     addComment = () => {
         this.props.history.push('./load-link/add-comment');
@@ -57,7 +54,7 @@ class CreateLinkLoad extends Component {
         );
         const cardLink = this.state.link;
         cardLink.userAdded = this.state.user;
-        cardLink.comment = this.state.comment;
+        cardLink.description = this.state.description;
         return (
             <main>
                 <CreateLinkHeader
@@ -67,7 +64,7 @@ class CreateLinkLoad extends Component {
                 <section className="create-link-load">
                     <LinkCard
                         data={cardLink}
-                        button={this.state.comment.length === 0
+                        button={this.state.description.length === 0
                         && this.state.link.name.length > 0 ? linkButton() : null}
                         showFooter={showFooter}
                         editIcon={
@@ -84,17 +81,16 @@ class CreateLinkLoad extends Component {
 
 CreateLinkLoad.propTypes = {
     createLink: PropTypes.func.isRequired,
-    clearLink: PropTypes.func.isRequired,
     token: PropTypes.string.isRequired,
     history: PropTypes.any.isRequired,
     link: PropTypes.object.isRequired,
     isCreated: PropTypes.bool.isRequired,
     user: PropTypes.object.isRequired,
-    comment: PropTypes.string,
+    description: PropTypes.string,
 };
 
 CreateLinkLoad.defaultProps = {
-    comment: '',
+    description: '',
 };
 
 export default connect(
@@ -102,8 +98,8 @@ export default connect(
         token: state.app.token,
         user: state.user.data,
         link: state.link.result,
-        comment: state.link.comment,
+        description: state.link.description,
         isCreated: state.link.created,
     }),
-    { createLink, clearLink },
+    { createLink },
 )(withRouter(CreateLinkLoad));
