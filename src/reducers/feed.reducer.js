@@ -18,9 +18,9 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-const feedLoader = queryParam => (
+const feedLoader = (queryParam, token) => (
     (dispatch) => {
-        fetchFeed(queryParam).then((feed) => {
+        fetchFeed(queryParam, token).then((feed) => {
             dispatch(loadFeed(feed));
         });
     }

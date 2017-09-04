@@ -30,7 +30,7 @@ class SearchHeader extends Component {
 
     loadResult = () => {
         if (this.props.search.text !== '') {
-            this.props.searchResultLoader(this.props.search.text);
+            this.props.searchResultLoader(this.props.search.text, this.props.token);
         }
     }
 
@@ -74,11 +74,13 @@ SearchHeader.propTypes = {
     searchResultLoader: PropTypes.func.isRequired,
     showModal: PropTypes.func.isRequired,
     history: PropTypes.any.isRequired,
+    token: PropTypes.string.isRequired,
 };
 
 function mapStateToProps(state) {
     return {
         search: state.search,
+        token: state.app.token,
     };
 }
 

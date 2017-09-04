@@ -29,7 +29,7 @@ class CollectionDetail extends Component {
         };
     }
     componentDidMount() {
-        this.props.collectionLoader(this.props.location.state);
+        this.props.collectionLoader(this.props.location.state, this.props.token);
     }
 
     componentWillReceiveProps(props) {
@@ -97,9 +97,13 @@ CollectionDetail.propTypes = {
     collection: PropTypes.object.isRequired,
     collectionLoader: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
+    token: PropTypes.string.isRequired,
 };
 
 export default connect(
-    state => ({ collection: state.collection }),
+    state => ({
+        collection: state.collection,
+        token: state.app.token,
+    }),
     { collectionLoader },
 )(CollectionDetail);
