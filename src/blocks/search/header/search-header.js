@@ -58,6 +58,18 @@ class SearchHeader extends Component {
         this.props.history.goBack();
     }
 
+    renderClearBlock() {
+        if (this.props.search.text !== '') {
+            return (
+                <div className="search-header__block" onClick={this.handleClearSearch}>
+                    <Icon iconName={'close'} />
+                </div>
+            );
+        }
+
+        return null;
+    }
+
     render() {
         return (
             <header className="search-header">
@@ -68,9 +80,7 @@ class SearchHeader extends Component {
                     <div className="search-header__input-block">
                         <input type="text" className="search-header__input" placeholder="Поиск" value={this.state.text} onChange={this.handleChangeSearch} autoFocus />
                     </div>
-                    <div className="search-header__block" onClick={this.handleClearSearch}>
-                        <Icon iconName={'close'} />
-                    </div>
+                    { this.renderClearBlock() }
                 </div>
             </header>
         );
