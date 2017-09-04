@@ -37,6 +37,7 @@ class Tabs extends Component {
                         const itemProps = {
                             className: `tab__item ${isItemActive ? 'tabs__item--active' : ''}`,
                             key: `${tab.id}`,
+                            onClick: tab.onClick,
                         };
 
                         if (isItemActive) {

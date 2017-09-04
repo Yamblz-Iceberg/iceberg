@@ -94,6 +94,18 @@ const iconsSizes = {
         width: '16px',
         height: '19px',
     },
+    filter: {
+        width: '20px',
+        height: '18px',
+    },
+    dropdown: {
+        width: '10px',
+        height: '5px',
+    },
+    'double-links': {
+        width: '145px',
+        height: '145px',
+    },
 };
 
 const Icon = (props) => {

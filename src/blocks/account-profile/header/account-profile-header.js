@@ -9,14 +9,15 @@ const ProfileHeader = () => (
         <div className="profile-header__container">
             <div className="profile-header__block">
                 <NavLink to={'/feed'}>
-                    <Icon iconName={'arrow-back'} iconHeight="16" iconWidth="16" />
+                    <Icon iconName="arrow-back" iconColor="#fff" iconHeight="16" iconWidth="16" />
                 </NavLink>
             </div>
             <div className="profile-header__block">
                 <NavLink to={'/profile'}>
                     <Icon
                         className="home-header__icon-settings"
-                        iconName={'settings'}
+                        iconName="settings"
+                        iconColor="#fff"
                         iconHeight="20"
                         iconWidth="20"
                     />

@@ -15,7 +15,7 @@ import './modal-template.scss';
 class ModalTemplate extends Component {
     hideModal = () => {
         this.props.hideModal();
-    }
+    };
     render() {
         const { content } = this.props;
         return (<div className="modal__wrap">

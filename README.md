@@ -76,6 +76,9 @@
 - edit
 - picture
 - lock
+- filter
+- dropdown
+- double-links
 
 
 ### Запуск приложения
