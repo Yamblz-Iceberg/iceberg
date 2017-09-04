@@ -4,20 +4,16 @@ import PropTypes from 'prop-types';
 import './tabs.scss';
 
 class Tabs extends Component {
-    constructor() {
-        super();
-        this.state = {
-            underliningStyles: {
-                left: 0,
-            },
-        };
+    componentDidMount = () => {
+        this.animateUnderline();
     }
 
-    setUnderliningPosition(position) {
-        this.setState({
-            ...this.state.underliningStyles,
-            underliningStyles: position,
-        });
+    componentDidUpdate = () => {
+        this.animateUnderline();
+    }
+
+    refItemListActive = (listItem) => {
+        this.activeListItem = listItem;
     }
 
     goTo = (linkTo) => {
@@ -25,10 +21,8 @@ class Tabs extends Component {
     }
 
     animateUnderline = () => {
-        setTimeout(() => {
-            const tabLinkActive = document.querySelector('.tab__link--active');
-            this.setUnderliningPosition({ left: tabLinkActive.offsetLeft });
-        }, 0);
+        const activeListItemPosition = this.activeListItem.offsetLeft;
+        this.underline.style.left = `${activeListItemPosition}px`;
     }
 
     render() {
@@ -37,22 +31,27 @@ class Tabs extends Component {
         return (
             <div className="tabs-container">
                 <ul className="tabs__list">
-                    <div className="tabs__underlining" style={this.state.underliningStyles} />
-                    { tabs.length > 0 && tabs.map(tab => (
-                        <li
-                            className={`tabs__item
-                                ${history.location.pathname === tab.linkTo
-                            ? 'tabs__item--active'
-                            : ''}
-                            `}
-                            key={tab.id}
-                        >
-                            <span
-                                className="tabs__link"
-                                onClick={() => this.goTo(tab.linkTo)}
-                            >{tab.title}</span>
-                        </li>))
-                    }
+                    <div className="tabs__underlining" ref={(underline) => { this.underline = underline; }} />
+                    { tabs.length > 0 && tabs.map((tab) => {
+                        const isItemActive = history.location.pathname === tab.linkTo;
+                        const itemProps = {
+                            className: `tab__item ${isItemActive ? 'tabs__item--active' : ''}`,
+                            key: `${tab.id}`,
+                        };
+
+                        if (isItemActive) {
+                            itemProps.ref = this.refItemListActive;
+                        }
+
+                        return (
+                            <li {...itemProps}>
+                                <span
+                                    className="tabs__link"
+                                    onClick={() => this.goTo(tab.linkTo)}
+                                >{tab.title}</span>
+                            </li>
+                        );
+                    })}
                 </ul>
             </div>
         );

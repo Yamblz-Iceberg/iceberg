@@ -33,6 +33,7 @@
         
         > * {
             flex-grow: 1;
+            list-style-type: none;
             text-align: center;
         }
     }
@@ -40,7 +41,6 @@
     &__underlining {
         position: absolute;
         bottom: 0;
-        left: 0;
         width: 50%;
         height: 3px;
         background-color: $main-yellow;
