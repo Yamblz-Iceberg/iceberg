@@ -3,32 +3,20 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import ProfileHeader from './header/account-profile-header';
-import { UserInfo, ListGroup } from './../../blocks';
+import { UserInfo, Tabs } from './../../blocks';
 
-const menuItems = [
+import './account-profile.scss';
+
+const tabs = [
     {
         id: 1,
-        title: 'Ссылок посоветовано',
+        title: 'Подборки',
         linkTo: '/profile',
-        info: 38,
     },
     {
         id: 2,
-        title: 'Тем создано',
-        linkTo: '/profile',
-        info: 5,
-    },
-    {
-        id: 3,
-        title: 'Темы сохранено себе',
-        linkTo: '/profile',
-        info: 3,
-    },
-    {
-        id: 4,
-        title: 'Ссылок сохранено себе',
-        linkTo: '/profile',
-        info: 16,
+        title: 'Ссылки',
+        linkTo: '/profile/links',
     },
 ];
 
@@ -36,10 +24,12 @@ class AccountProfile extends Component {
     onElementClick = e => (e);
     render() {
         const { user } = this.props;
-        return (<div className="main-wrap">
+        return (<div className="account-profile-wrap">
             <ProfileHeader />
             <UserInfo user={user} />
-            <ListGroup items={menuItems} />
+            <div className="account-profile__tabs-wrap">
+                <Tabs tabs={tabs} />
+            </div>
         </div>);
     }
 }
