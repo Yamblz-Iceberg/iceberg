@@ -13,11 +13,11 @@ const initialState = {
         favicon: '',
     },
     created: false,
-    comment: '',
+    description: '',
 };
 
 const addLink = res => ({ type: ADD_LINK, payload: res });
-const addComment = comment => ({ type: ADD_COMMENT, payload: comment });
+const addComment = description => ({ type: ADD_COMMENT, payload: description });
 const clearLink = () => ({ type: CLEAR_LINK });
 const pushLinkToCollection = () => ({ type: PUSH_LINK_TO_COLLECTION });
 
@@ -26,7 +26,7 @@ const reducer = (state = initialState, action) => {
     case ADD_LINK:
         return { ...state, ...action.payload };
     case ADD_COMMENT:
-        return { ...state, comment: action.payload };
+        return { ...state, description: action.payload };
     case PUSH_LINK_TO_COLLECTION:
         return state;
     case CLEAR_LINK:
@@ -44,9 +44,10 @@ export const createLink = (data, token) => (
     }
 );
 
-export const addLinkToCollection = (collectionId, linkId, token, comment, callback) => (
+export const addLinkToCollection = (collectionId, linkId, token, description, callback) => (
     (dispatch) => {
-        postLinkToCollection(collectionId, linkId, token, comment).then(() => {
+        console.log('addLinkToCollection', description);
+        postLinkToCollection(collectionId, linkId, token, description).then(() => {
             dispatch(pushLinkToCollection());
         }).then(() => callback);
     }

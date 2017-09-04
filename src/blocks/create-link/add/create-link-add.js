@@ -8,6 +8,7 @@ import CreateLinkHeader from '../header/create-link-header';
 import { actions as modalActions } from '../../../reducers/modal.reducer';
 
 import './create-link-add.scss';
+import { clearLink } from '../../../reducers/link.reducer';
 
 class CreateLinkAdd extends Component {
     constructor(props) {
@@ -17,6 +18,9 @@ class CreateLinkAdd extends Component {
             linkAdded: false,
             collection: props.collection,
         };
+    }
+    componentDidMount() {
+        this.props.clearLink();
     }
     handleAdd = () => {
         const enteredLink = this.state.url;
@@ -40,7 +44,7 @@ class CreateLinkAdd extends Component {
         const linkAdded = event.target.value.length > 4;
         this.setState({ linkAdded });
     };
-    clearLink = () => {
+    clearLinkInput = () => {
         this.setState({
             ...this.state,
             url: '',
@@ -66,7 +70,7 @@ class CreateLinkAdd extends Component {
                         />
                         {
                             this.state.linkAdded
-                                ? <span className="create-link-add__close-icon" onClick={this.clearLink}><Icon iconName={'close'} /></span>
+                                ? <span className="create-link-add__close-icon" onClick={this.clearLinkInput}><Icon iconName={'close'} /></span>
                                 : <Icon iconName={'link'} iconColor="#d3d3d3" />
                         }
                     </div>
@@ -88,9 +92,10 @@ CreateLinkAdd.propTypes = {
     collection: PropTypes.object.isRequired,
     history: PropTypes.any.isRequired,
     showModal: PropTypes.func.isRequired,
+    clearLink: PropTypes.func.isRequired,
 };
 
 export default connect(
     state => ({ collection: state.collection }),
-    { ...modalActions },
+    { ...modalActions, clearLink },
 )(withRouter(CreateLinkAdd));
