@@ -36,7 +36,7 @@ class SearchResult extends Component {
                 <div className="search-result__list">
                     {
                         result.collections.map(item => (
-                            <SearchResultItem key={item.id} data={item} />
+                            <SearchResultItem key={item._id} data={item} />
                         ))
                     }
                 </div>

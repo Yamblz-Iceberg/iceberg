@@ -25,9 +25,9 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-const searchResultLoader = searchText => (
+const searchResultLoader = (searchText, token) => (
     (dispatch) => {
-        fetchSearchResult(searchText).then((result) => {
+        fetchSearchResult(searchText, token).then((result) => {
             dispatch(loadSearchResult(result));
         });
     }

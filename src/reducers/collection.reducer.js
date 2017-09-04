@@ -21,9 +21,9 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-const collectionLoader = collectionId => (
+const collectionLoader = (collectionId, token) => (
     (dispatch) => {
-        fetchCollection(collectionId).then((res) => {
+        fetchCollection(collectionId, token).then((res) => {
             dispatch(loadCollection(res.collection));
         });
     }
