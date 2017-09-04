@@ -21,7 +21,11 @@ class CreateLinkLoad extends Component {
         };
     }
     componentDidMount() {
-        const data = { link: this.props.history.location.state };
+        const enteredUrl = this.props.history.location.state;
+        const linkUrl = (enteredUrl.startsWith('http://') || enteredUrl.startsWith('https://'))
+            ? enteredUrl
+            : `http://${enteredUrl}`;
+        const data = { link: linkUrl };
         this.props.createLink(data, this.props.token);
     }
     componentWillReceiveProps(props) {
