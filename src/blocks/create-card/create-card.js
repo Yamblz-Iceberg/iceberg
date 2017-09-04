@@ -224,7 +224,7 @@ class CreateCard extends Component {
                             (
                                 <div className="create-card__upload-photo-container">
                                     <Icon iconName="picture" iconColor="#fff" iconWidth="24" iconHeight="24" />
-                                    <p className="create-card__upload-photo-title">Не доступно в браузере</p>
+                                    <p className="create-card__upload-photo-title">Недоступно в браузере</p>
                                 </div>
                             )
                     }
