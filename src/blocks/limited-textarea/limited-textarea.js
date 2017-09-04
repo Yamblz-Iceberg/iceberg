@@ -43,7 +43,7 @@ class LimitedTextarea extends Component {
     };
 
     handleFocusTextarea = (e) => {
-        const textLength = e.value.length;
+        const textLength = e.target.value.length;
         e.target.setSelectionRange(textLength, textLength);
     };
 
