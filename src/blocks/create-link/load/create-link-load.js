@@ -22,7 +22,7 @@ class CreateLinkLoad extends Component {
     }
     componentDidMount() {
         const enteredUrl = this.props.history.location.state;
-        const linkUrl = (enteredUrl.indexOf('http://') > -1 || enteredUrl.indexOf('https://') > -1)
+        const linkUrl = (enteredUrl.startsWith('http://') || enteredUrl.startsWith('https://'))
             ? enteredUrl
             : `http://${enteredUrl}`;
         const data = { link: linkUrl };
