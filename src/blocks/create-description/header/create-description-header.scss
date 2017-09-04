@@ -9,6 +9,9 @@
     position: fixed;
     width: 100%;
     z-index: 1000;
+    &__back {
+        transform: rotate(180deg);
+    }
     &__title {
         margin-right: auto;
         margin-left: 28px;
