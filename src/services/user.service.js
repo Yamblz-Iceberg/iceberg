@@ -16,6 +16,15 @@ export const fetchSavedCollections = (token) => {
         .then(res => res.json());
 };
 
+export const fetchMyCollections = (token) => {
+    const headers = new Headers({
+        Authorization: token,
+    });
+
+    return fetch('https://iceberg-project.herokuapp.com/users/bookmarks/myCollections/', { headers })
+        .then(res => res.json());
+};
+
 export const fetchSavedLinks = (token) => {
     const headers = new Headers({
         Authorization: token,

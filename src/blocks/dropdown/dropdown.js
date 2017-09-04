@@ -13,9 +13,14 @@ class Dropdown extends Component {
             istVisible: false,
         };
     }
-
-    componentWillMount() {
-
+    /* eslint-disable */
+    componentWillReceiveProps(prevProps) {
+        console.log(prevProps.items[0].name !== this.props.items[0].name);
+        console.log(prevProps.items[0].name, this.props.items[0].name);
+        if (prevProps.items[0].name !== this.props.items[0].name) {
+            this.select(prevProps.items[0]);
+        }
+        debugger;
     }
 
     select = (item) => {
@@ -50,6 +55,7 @@ Dropdown.propTypes = {
     items: PropTypes.arrayOf(PropTypes.shape({
         title: PropTypes.string.isRequired,
         id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
     })),
     selected: PropTypes.string,
     onSelect: PropTypes.func.isRequired,

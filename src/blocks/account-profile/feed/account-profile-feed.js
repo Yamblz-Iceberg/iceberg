@@ -7,8 +7,9 @@ import ProfileFilter from './../filter/account-profile-filter';
 import './account-profile-feed.scss';
 
 class AccountProfileFeed extends Component {
+    co = () => {};
     render() {
-        const { data, type } = this.props;
+        const { data, type, filterItems } = this.props;
         const emptyResult = (
             <div className="account-profile-feed__empty-block">
                 <p className="account-profile-feed__message">Здесь пока пусто</p>
@@ -16,7 +17,6 @@ class AccountProfileFeed extends Component {
         );
         const resultToRender = data.length ? (
             <div>
-                <ProfileFilter />
                 <div className="account-profile-feed__list">
                     {
                         data.map(item => (
@@ -27,13 +27,19 @@ class AccountProfileFeed extends Component {
             </div>
         ) : emptyResult;
 
-        return resultToRender;
+        return (
+            <div>
+                <ProfileFilter items={filterItems} />
+                {resultToRender}
+            </div>
+        );
     }
 }
 
 AccountProfileFeed.propTypes = {
     data: PropTypes.array,
     type: PropTypes.string.isRequired,
+    filterItems: PropTypes.array.isRequired,
 };
 
 AccountProfileFeed.defaultProps = {
