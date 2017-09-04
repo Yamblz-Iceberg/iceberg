@@ -6,6 +6,7 @@ import './tab-item.scss';
 class TabItem extends Component {
     goTo = () => {
         this.props.history.replace(this.props.linkTo);
+        if (this.props.onClick) this.props.onClick();
     };
     render() {
         return (
@@ -28,6 +29,11 @@ TabItem.propTypes = {
     linkTo: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     history: PropTypes.object.isRequired,
+    onClick: PropTypes.func,
+};
+
+TabItem.defaultProps = {
+    onClick: null,
 };
 
 export default withRouter(TabItem);

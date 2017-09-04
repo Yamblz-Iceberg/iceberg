@@ -7,7 +7,13 @@ const Tabs = ({ tabs }) => (
     <div className="tabs-container">
         <ul className="tabs__list">
             {
-                tabs.map(tab => <TabItem key={tab.id} title={tab.title} linkTo={tab.linkTo} />)
+                tabs.map(tab => (<TabItem
+                    key={tab.id}
+                    title={tab.title}
+                    linkTo={tab.linkTo}
+                    onClick={tab.onClick}
+                />),
+                )
             }
         </ul>
     </div>

@@ -1,14 +1,21 @@
+@import './../../variables.scss';
+
 .rating-info-wrap {
     display: inline-block;
 }
 
 .rating-info {
     display: flex;
-    border-radius: 2px;
-    border: 1px solid #e0e0e0;
-    padding: 4px 8px;
+    align-items: center;
+    justify-content: center;
+    background-color: $card-blue;
+    border-radius: 50%;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
     &_count {
         font-size: 14px;
         font-weight: bold;
+        color: #fff;
     }
 }
