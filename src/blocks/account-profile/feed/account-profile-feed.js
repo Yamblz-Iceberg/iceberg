@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import AccountProfileFeedItem from './../feed-item/account-profile-feed-item';
+import ProfileFilter from './../filter/account-profile-filter';
 
 import './account-profile-feed.scss';
 
@@ -14,12 +15,15 @@ class AccountProfileFeed extends Component {
             </div>
         );
         const resultToRender = data.length ? (
-            <div className="account-profile-feed__list">
-                {
-                    data.map(item => (
-                        <AccountProfileFeedItem key={item._id} data={item} type={type} />
-                    ))
-                }
+            <div>
+                <ProfileFilter />
+                <div className="account-profile-feed__list">
+                    {
+                        data.map(item => (
+                            <AccountProfileFeedItem key={item._id} data={item} type={type} />
+                        ))
+                    }
+                </div>
             </div>
         ) : emptyResult;
 

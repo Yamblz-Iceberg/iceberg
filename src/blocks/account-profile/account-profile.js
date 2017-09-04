@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import ProfileHeader from './header/account-profile-header';
-import ProfileFilter from './filter/account-profile-filter';
 import ProfileFeed from './feed/account-profile-feed';
 import { UserInfo, Tabs } from './../../blocks';
 
@@ -52,7 +51,6 @@ class AccountProfile extends Component {
             <div className="account-profile__tabs-wrap">
                 <Tabs tabs={tabs} />
             </div>
-            <ProfileFilter />
             <ProfileFeed data={data} type={typeToFeed} />
         </div>);
     }
