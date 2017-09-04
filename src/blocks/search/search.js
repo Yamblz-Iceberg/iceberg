@@ -7,18 +7,28 @@ import SearchResult from './result/search-result';
 import './search.scss';
 
 class Search extends Component {
-    onElementClick = e => (e);
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isLoading: false,
+        };
+    }
+
     render() {
-        return (<div className="search-wrap">
-            <SearchHeader />
-            <SearchResult />
-        </div>);
+        return (
+            <div className="search-wrap">
+                <SearchHeader />
+                <SearchResult />
+            </div>
+        );
     }
 }
 
 function mapStateToProps(state) {
     return {
-        user: state.user.data,
+        search: state.search,
+        token: state.app.token,
     };
 }
 

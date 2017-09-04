@@ -7,6 +7,7 @@ import { reducer as collection } from './collection.reducer';
 import { reducer as createCollection } from './create-collection.reducer';
 import { reducer as modal } from './modal.reducer';
 import { reducer as link } from './link.reducer';
+import { reducer as loader } from './loader.reducer';
 
 export default combineReducers({
     feed,
@@ -17,4 +18,5 @@ export default combineReducers({
     createCollection,
     modal,
     link,
+    loader,
 });
