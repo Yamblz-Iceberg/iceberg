@@ -8,19 +8,8 @@ const initialState = {
     data: {},
     typeToFeed: 'collections',
     archive: {
-        savedCollections: [
-            {
-                id: 1,
-                name: 'Test',
-                linksCount: 5,
-            },
-        ],
-        savedLinks: [
-            {
-                id: 1,
-                name: 'Test Link',
-            },
-        ],
+        savedCollections: [],
+        savedLinks: [],
     },
 };
 

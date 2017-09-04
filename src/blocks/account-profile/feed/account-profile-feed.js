@@ -13,7 +13,6 @@ class AccountProfileFeed extends Component {
                 <p className="account-profile-feed__message">Здесь пока пусто</p>
             </div>
         );
-
         const resultToRender = data.length ? (
             <div className="account-profile-feed__list">
                 {
