@@ -1,12 +1,49 @@
-.tabs__list {
-    padding: 0;
-    margin: 0;
-    letter-spacing: normal;
-    display: flex;
-    flex-direction: row;
-    
-    > * {
-        flex-grow: 1;
-        text-align: center;
+@import '../../variables';
+
+.tabs {
+    &__item {
+        display: inline-block;
+        &:hover {
+            text-decoration: none;
+        }
+        &--active {
+            .tabs__link {
+                color: black;
+            }
+        }
+    }
+
+    &__link {
+        display: block;
+        text-decoration: none;
+        text-transform: uppercase;
+        color: #949494;
+        font-size: 12px;
+        padding: 9px 0;
+        font-weight: 500;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        margin: 0;
+        padding: 0;
+        letter-spacing: normal;
+        
+        > * {
+            flex-grow: 1;
+            list-style-type: none;
+            text-align: center;
+        }
+    }
+
+    &__underlining {
+        position: absolute;
+        bottom: 0;
+        width: 50%;
+        height: 3px;
+        background-color: $main-yellow;
+        transition: left .5s;
     }
 }
