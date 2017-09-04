@@ -39,6 +39,13 @@ class CreateHashTag extends Component {
         });
     }
 
+    handleBlurInput = () => {
+        // Создавать тег при потере фокуса, если он еще не создан
+        if (!this.state.created) {
+            this.props.tagAddCallback();
+        }
+    }
+
     render() {
         const {
             initText,
@@ -56,6 +63,7 @@ class CreateHashTag extends Component {
                     value={text}
                     className="create-hash-tag__hashtag-input"
                     onChange={tagChangeCallback}
+                    onBlur={this.handleBlurInput}
                     placeholder={initText}
                     maxLength="17"
                 />
