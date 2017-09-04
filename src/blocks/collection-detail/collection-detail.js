@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Tabs, CollectionDetailLinks, Button, Icon } from '../';
@@ -35,6 +35,10 @@ class CollectionDetail extends Component {
     componentWillReceiveProps(props) {
         this.setState({ collection: props.collection });
     }
+
+    createLink = () => {
+        this.props.history.push({ pathname: './create-link' });
+    };
 
     render() {
         const tabs = [
@@ -81,12 +85,8 @@ class CollectionDetail extends Component {
                         )}
                     />
                 </Switch>
-                <div className="collection-detail__add-button">
-                    <Button {...{
-                        icon: <Icon iconName={'link'} />,
-                        text: 'добавить ссылку',
-                    }}
-                    />
+                <div className="collection-detail__add-button" onClick={this.createLink} >
+                    <Button icon={<Icon iconName={'link'} />} text="добавить ссылку" />
                 </div>
             </div>
         );
@@ -98,6 +98,7 @@ CollectionDetail.propTypes = {
     collectionLoader: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     token: PropTypes.string.isRequired,
+    history: PropTypes.object.isRequired,
 };
 
 export default connect(
@@ -106,4 +107,4 @@ export default connect(
         token: state.app.token,
     }),
     { collectionLoader },
-)(CollectionDetail);
+)(withRouter(CollectionDetail));
