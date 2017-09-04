@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button, Icon } from '../../../blocks';
+import { compareLinks } from '../../../utils/shared-functions';
 import CreateLinkHeader from '../header/create-link-header';
 
 import './create-link-add.scss';
@@ -12,9 +14,17 @@ class CreateLinkAdd extends Component {
         this.state = {
             url: '',
             linkAdded: false,
+            collection: props.collection,
         };
     }
     handleAdd = () => {
+        const enteredLink = this.state.url;
+        const linksInCollection = this.state.collection.links;
+        const linkExist =
+            linksInCollection.filter(link => compareLinks(link.url, enteredLink)).length > 0;
+        if (linkExist) {
+            // show modal
+        }
         this.props.history.push({ pathname: '/create-link/load-link', state: this.state.url });
     };
     handleChangeUrl = (event) => {
@@ -34,7 +44,7 @@ class CreateLinkAdd extends Component {
         return (
             <main className="create-link-add">
                 <CreateLinkHeader
-                    title={this.props.collectionTitle}
+                    title={this.props.collection.name}
                     showAddButton={showAddButton}
                 />
                 <section className="create-link-add__body">
@@ -67,8 +77,10 @@ class CreateLinkAdd extends Component {
 
 
 CreateLinkAdd.propTypes = {
-    collectionTitle: PropTypes.string.isRequired,
+    collection: PropTypes.object.isRequired,
     history: PropTypes.any.isRequired,
 };
 
-export default withRouter(CreateLinkAdd);
+export default connect(
+    state => ({ collection: state.collection }),
+)(withRouter(CreateLinkAdd));
