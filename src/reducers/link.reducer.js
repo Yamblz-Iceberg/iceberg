@@ -46,7 +46,6 @@ export const createLink = (data, token) => (
 
 export const addLinkToCollection = (collectionId, linkId, token, description, callback) => (
     (dispatch) => {
-        console.log('addLinkToCollection', description);
         postLinkToCollection(collectionId, linkId, token, description).then(() => {
             dispatch(pushLinkToCollection());
         }).then(() => callback);

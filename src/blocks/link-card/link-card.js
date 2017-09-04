@@ -16,7 +16,6 @@ const LinkCard = ({ data, button, showFooter, editIcon }) => {
         iconColor: '#fff',
         photo: data.userAdded.photo,
     };
-    console.log(data);
 
     return (<div className="link-card" style={cardStyles}>
         <div className="link-card__header">
