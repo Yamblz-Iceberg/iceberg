@@ -1,7 +1,7 @@
 import { fetchSearchResult } from '../services/search.service';
 
-const CHANGE_SEARCH = 'CHANGE_SEARCH';
-const FETCH_SEARCH_RESULT = 'FETCH_SEARCH_RESULT';
+export const CHANGE_SEARCH = 'CHANGE_SEARCH';
+export const FETCH_SEARCH_RESULT = 'FETCH_SEARCH_RESULT';
 
 const initialState = {
     text: '',
@@ -25,9 +25,9 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-const searchResultLoader = searchText => (
+const searchResultLoader = (searchText, token) => (
     (dispatch) => {
-        fetchSearchResult(searchText).then((result) => {
+        fetchSearchResult(searchText, token).then((result) => {
             dispatch(loadSearchResult(result));
         });
     }

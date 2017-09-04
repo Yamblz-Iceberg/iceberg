@@ -19,7 +19,7 @@ class CreateLinkAdd extends Component {
     };
     handleChangeUrl = (event) => {
         this.setState({ url: event.target.value });
-        const linkAdded = /^[a-z0-9]+:\/\//.test(event.target.value) && event.target.value.length > 10;
+        const linkAdded = event.target.value.length > 4;
         this.setState({ linkAdded });
     };
     clearLink = () => {

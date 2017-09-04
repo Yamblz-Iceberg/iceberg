@@ -10,12 +10,12 @@ import './home-feed.scss';
 
 class HomeFeed extends Component {
     componentDidMount() {
-        this.props.feedLoader(this.props.queryParam);
+        this.props.feedLoader(this.props.queryParam, this.props.token);
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.queryParam !== prevProps.queryParam) {
-            this.props.feedLoader(this.props.queryParam);
+            this.props.feedLoader(this.props.queryParam, this.props.token);
         }
     }
 
@@ -84,6 +84,7 @@ HomeFeed.propTypes = {
     feedLoader: PropTypes.func.isRequired,
     history: PropTypes.any.isRequired,
     queryParam: PropTypes.any.isRequired,
+    token: PropTypes.string.isRequired,
 };
 
 HomeFeed.defaultProps = {

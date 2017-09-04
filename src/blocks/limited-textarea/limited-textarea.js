@@ -42,6 +42,11 @@ class LimitedTextarea extends Component {
         this.props.handleChange(e.target.value);
     };
 
+    handleFocusTextarea = (e) => {
+        const textLength = e.target.value.length;
+        e.target.setSelectionRange(textLength, textLength);
+    };
+
     render() {
         const { max } = this.props;
 
@@ -57,6 +62,7 @@ class LimitedTextarea extends Component {
                     ref={(input) => { this.input = input; }}
                     placeholder="Введите текст описания"
                     value={this.state.textContent}
+                    onFocus={this.handleFocusTextarea}
                     autoFocus
                 />
             </div>

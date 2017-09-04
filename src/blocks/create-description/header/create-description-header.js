@@ -31,8 +31,11 @@ class CreateDescriptionHeader extends Component {
     render() {
         return (
             <header className="create-description-header">
-                <span onClick={this.goBack}>
-                    <Icon iconName={'arrow-back'} />
+                <span
+                    className="create-description-header__back"
+                    onClick={this.goBack}
+                >
+                    <Icon iconName={'arrow-details'} />
                 </span>
                 <h4 className="create-description-header__title">Описание</h4>
                 <span onClick={this.toggleMenu}>
