@@ -18,6 +18,7 @@
     }
 
     &--small {
+        min-width: auto;
         margin-bottom: 8px;
         color: #fff;
         height: 25px;
@@ -27,5 +28,10 @@
         color: #fff;
         background-color: rgba(0, 0, 0, .5);
         box-shadow: none;
+    }
+
+    &__count {
+        min-width: auto;
+        padding: 0 10px;
     }
 }
