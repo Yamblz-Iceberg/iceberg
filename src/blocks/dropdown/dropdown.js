@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import DropdownMenu from './menu/dropdown-menu';
+import { Icon } from './../../blocks';
+
 import './dropdown.scss';
 
 class Dropdown extends Component {
@@ -46,10 +49,11 @@ class Dropdown extends Component {
 
     render() {
         const { items } = this.props;
-        return (<div className="dropdown" ref={(el) => { this.refDropdown = el; }}>
-            <div className="dropdown-selected-item" onClick={this.state.istVisible ? this.hide : this.show}>
+        return (<div className={this.state.istVisible ? 'dropdown dropdown--opend' : 'dropdown'} ref={(el) => { this.refDropdown = el; }} onClick={this.state.istVisible ? this.hide : this.show}>
+            <div className="dropdown-selected-item">
                 { this.state.selected.title }
             </div>
+            <Icon iconName={'dropdown'} iconWidth="12" iconHeight="12" />
             <DropdownMenu items={items} select={this.select} show={this.state.istVisible} />
         </div>);
     }
