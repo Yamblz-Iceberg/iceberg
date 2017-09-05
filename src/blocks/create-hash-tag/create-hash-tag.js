@@ -41,7 +41,7 @@ class CreateHashTag extends Component {
 
     handleBlurInput = () => {
         // Создавать тег при потере фокуса, если он еще не создан
-        if (!this.state.created) {
+        if (!this.state.created && this.state.text !== '') {
             this.props.tagAddCallback();
         }
     }
