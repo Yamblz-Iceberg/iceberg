@@ -29,6 +29,14 @@ class Home extends Component {
         this.props.userLoader(this.props.token);
     }
 
+    componentDidUpdate = () => {
+        this.scrollToTop();
+    }
+
+    scrollToTop = () => {
+        window.scrollTo(0, 0);
+    }
+
     render() {
         const { user } = this.props;
         return (

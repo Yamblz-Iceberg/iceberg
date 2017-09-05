@@ -34,7 +34,7 @@ class CollectionDetailInfo extends Component {
     }
 
     createLink = () => {
-        this.props.history.push({ pathname: './create-link' });
+        this.props.history.push({ pathname: '/create-link' });
     };
 
     renderButton() {
