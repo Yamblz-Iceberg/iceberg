@@ -27,8 +27,8 @@ const iconsSizes = {
         height: '20px',
     },
     'save-small': {
-        width: '11px',
-        height: '14px',
+        width: '16px',
+        height: '20px',
     },
     'like-big': {
         width: '22px',
