@@ -4,10 +4,33 @@
         top: 30px;
         left: 20px;
     }
+
     &__link {
         font-size: 14px;
         text-transform: uppercase;
         text-decoration: none;
         color: black;
+    }
+}
+
+.onboarding-slider {
+    &__slide {
+        margin-top: 22vh;
+        padding: 0 10vw;
+        text-align: center;
+    }
+
+    &__image {
+        margin-bottom: 8vh;
+    }
+
+    &__title {
+        font-size: 20px;
+    }
+
+    &__text {
+        line-height: 18px;
+        font-size: 14px;
+        color: gray;
     }
 }
