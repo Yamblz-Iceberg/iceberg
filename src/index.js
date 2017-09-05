@@ -15,6 +15,7 @@ import {
     Home,
     LinkPreview,
     Modal,
+    Authorization,
 } from './blocks';
 import reducer from './reducers';
 
@@ -57,6 +58,7 @@ function onDeviceReady() {
                         <Route path="/profile" component={AccountProfile} />
                         <Route path="/search" component={Search} />
                         <Route path="/preview" component={LinkPreview} />
+                        <Route path="/authorization" component={Authorization} />
                         <Redirect from="/" to="/feed" />
                     </Switch>
                 </div>
