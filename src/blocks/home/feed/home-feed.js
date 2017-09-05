@@ -43,7 +43,7 @@ class HomeFeed extends Component {
                 currentCollections.map(card => (
                     <div
                         key={card._id}
-                        className="collection-card-container"
+                        className="home-feed__collection-card"
                         onClick={e => this.handlerOnClick(e, card._id)}
                     >
                         <CollectionCard data={card} />
@@ -58,8 +58,8 @@ class HomeFeed extends Component {
 
                 const key = Math.random().toString(36);
                 feedToRender.push(
-                    <div className="hash-tape__container" key={key}>
-                        <HashTape hashes={currentTags} />
+                    <div className="home-feed__tape" key={key}>
+                        <HashTape hashes={currentTags} size="big" />
                     </div>,
                 );
 
@@ -71,7 +71,7 @@ class HomeFeed extends Component {
 
     render() {
         return (
-            <div className="home-feed-container">
+            <div className="home-feed">
                 { this.renderFeed(6, 3) }
             </div>
         );

@@ -4,9 +4,11 @@ import { HashTag } from '../../blocks';
 
 import './hash-tape.scss';
 
-const HashTape = ({ hashes }) => (
+const HashTape = ({ hashes, size }) => (
     <div className="hash-tape">
-        { hashes.map(hash => <HashTag {...hash} key={hash._id} />) }
+        <div className="hash-tape__inner">
+            { hashes.map(hash => <HashTag {...hash} key={hash._id} size={size} />) }
+        </div>
     </div>
 );
 
@@ -14,6 +16,7 @@ HashTape.propTypes = {
     hashes: PropTypes.arrayOf(
         PropTypes.object.isRequired,
     ).isRequired,
+    size: PropTypes.string.isRequired,
 };
 
 export default HashTape;
