@@ -8,7 +8,7 @@ import {
     myCollectionsLoader,
     savedLinksLoader,
     savedCollectionsLoader,
-} from './../../../reducers/user.reducer';
+} from './../../../reducers/bookmarks.reducer';
 
 import './account-profile-filter.scss';
 

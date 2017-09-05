@@ -25,7 +25,7 @@ class Dropdown extends Component {
 
     handleOutsideClick = (event) => {
         if (this.refDropdown && !this.refDropdown.contains(event.target)) {
-            this.hide();
+            this.toggle();
         }
     }
 
@@ -37,19 +37,23 @@ class Dropdown extends Component {
         this.setState({ istVisible: false });
     }
 
-    show = () => {
-        this.setState({ istVisible: true });
-        document.addEventListener('click', this.handleOutsideClick, false);
-    }
-
-    hide = () => {
-        this.setState({ istVisible: false });
-        document.removeEventListener('click', this.handleOutsideClick, false);
+    toggle = () => {
+        if (this.state.istVisible === true) {
+            this.setState({ istVisible: false });
+            document.removeEventListener('click', this.handleOutsideClick, false);
+        } else {
+            this.setState({ istVisible: true });
+            document.addEventListener('click', this.handleOutsideClick, false);
+        }
     }
 
     render() {
         const { items } = this.props;
-        return (<div className={this.state.istVisible ? 'dropdown dropdown--opend' : 'dropdown'} ref={(el) => { this.refDropdown = el; }} onClick={this.state.istVisible ? this.hide : this.show}>
+        return (<div
+            className={this.state.istVisible ? 'dropdown dropdown--opend' : 'dropdown'}
+            ref={(el) => { this.refDropdown = el; }}
+            onClick={this.toggle}
+        >
             <div className="dropdown-selected-item">
                 { this.state.selected.title }
             </div>
