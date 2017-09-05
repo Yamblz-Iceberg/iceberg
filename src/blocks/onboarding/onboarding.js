@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import OnboardingImageSlide from './onboarding-image-slide';
 
 import './onboarding.scss';
 
@@ -64,7 +63,15 @@ class Onboarding extends Component {
                 <div className="onboarding__slider onboarding-slider">
                     <div className="onboarding-slider__track" style={{ transform: `translateX(-${100 * currentSlide}%)` }}>
                         { slides.map(slide => (
-                            <OnboardingImageSlide {...slide} key={slide._id} />
+                            <div className="onboarding-slider__slide" key={slide._id}>
+                                <img
+                                    className="onboarding-slider__image"
+                                    src={slide.img}
+                                    alt="template"
+                                />
+                                <h2 className="onboarding-slider__title">{slide.title}</h2>
+                                <p className="onboarding-slider__text">{slide.text}</p>
+                            </div>
                         )) }
                     </div>
                     <div className="onboarding-slider__pagination-wrapper">
