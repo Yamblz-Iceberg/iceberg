@@ -54,6 +54,11 @@ class AccountProfile extends Component {
                 title: 'Прочитанные',
                 name: 'savedLinks',
             },
+            {
+                id: 2,
+                title: 'Добавленные мной',
+                name: 'myLinks',
+            },
         ] : [
             {
                 id: 0,

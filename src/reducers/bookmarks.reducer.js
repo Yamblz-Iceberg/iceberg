@@ -1,7 +1,7 @@
-import { fetchSavedCollections, fetchMyCollections, fetchSavedLinks } from '../services/bookmarks.service';
+import { fetchSavedCollections, fetchMyCollections, fetchSavedLinks, fetchMyLinks } from '../services/bookmarks.service';
 
 const GET_USER_COLLECTIONS = 'GET_USER_COLLECTIONS';
-const GET_SAVED_LINKS = 'GET_SAVED_LINS';
+const GET_USER_LINKS = 'GET_SAVED_LINS';
 
 const initialState = {
     typeToFeed: 'myCollection',
@@ -13,7 +13,9 @@ const getSavedCollections = (data, type) =>
 const getMyCollections = (data, type) =>
     ({ type: GET_USER_COLLECTIONS, payload: data.collections, typeToFeed: type });
 const getSavedLinks = (data, type) =>
-    ({ type: GET_SAVED_LINKS, payload: data.links, typeToFeed: type });
+    ({ type: GET_USER_LINKS, payload: data.links, typeToFeed: type });
+const getMyLinks = (data, type) =>
+    ({ type: GET_USER_LINKS, payload: data.links, typeToFeed: type });
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -22,7 +24,7 @@ const reducer = (state = initialState, action) => {
             typeToFeed: action.typeToFeed,
             collections: action.payload,
         };
-    case GET_SAVED_LINKS:
+    case GET_USER_LINKS:
         return { ...state,
             typeToFeed: action.typeToFeed,
             links: action.payload,
@@ -56,9 +58,18 @@ const savedLinksLoader = (token, type) => (
     }
 );
 
+const myLinksLoader = (token, type) => (
+    (dispatch) => {
+        fetchMyLinks(token).then((data) => {
+            dispatch(getMyLinks(data, type));
+        });
+    }
+);
+
 export {
     reducer,
     myCollectionsLoader,
     savedLinksLoader,
     savedCollectionsLoader,
+    myLinksLoader,
 };

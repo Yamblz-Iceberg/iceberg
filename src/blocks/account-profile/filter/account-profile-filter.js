@@ -7,6 +7,7 @@ import { Icon, Dropdown } from '../../../blocks';
 import {
     myCollectionsLoader,
     savedLinksLoader,
+    myLinksLoader,
     savedCollectionsLoader,
 } from './../../../reducers/bookmarks.reducer';
 
@@ -23,6 +24,9 @@ class ProfileFilter extends Component {
             break;
         case 'savedLinks':
             this.props.savedLinksLoader(this.props.token, item.name);
+            break;
+        case 'myLinks':
+            this.props.myLinksLoader(this.props.token, item.name);
             break;
         default:
             break;
@@ -55,6 +59,7 @@ ProfileFilter.propTypes = {
     token: PropTypes.string.isRequired,
     myCollectionsLoader: PropTypes.func.isRequired,
     savedLinksLoader: PropTypes.func.isRequired,
+    myLinksLoader: PropTypes.func.isRequired,
     savedCollectionsLoader: PropTypes.func.isRequired,
 };
 
@@ -69,4 +74,5 @@ export default connect(mapStateToProps,
         myCollectionsLoader,
         savedLinksLoader,
         savedCollectionsLoader,
+        myLinksLoader,
     })(ProfileFilter);
