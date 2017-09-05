@@ -13,14 +13,11 @@ class Dropdown extends Component {
             istVisible: false,
         };
     }
-    /* eslint-disable */
+
     componentWillReceiveProps(prevProps) {
-        console.log(prevProps.items[0].name !== this.props.items[0].name);
-        console.log(prevProps.items[0].name, this.props.items[0].name);
         if (prevProps.items[0].name !== this.props.items[0].name) {
             this.select(prevProps.items[0]);
         }
-        debugger;
     }
 
     select = (item) => {
@@ -28,25 +25,24 @@ class Dropdown extends Component {
             selected: item,
         });
         this.props.onSelect(item);
+        this.setState({ istVisible: false });
     }
 
     show = () => {
-        this.setState({ listVisible: true });
-        document.addEventListener('click', this.hide);
+        this.setState({ istVisible: true });
     }
 
     hide = () => {
-        this.setState({ listVisible: false });
-        document.removeEventListener('click', this.hide);
+        this.setState({ istVisible: false });
     }
 
     render() {
         const { items } = this.props;
         return (<div className="dropdown">
-            <div className="dropdown-selected-item">
+            <div className="dropdown-selected-item" onClick={this.state.istVisible ? this.hide : this.show}>
                 { this.state.selected.title }
             </div>
-            <DropdownMenu items={items} select={this.select} />
+            <DropdownMenu items={items} select={this.select} show={this.state.istVisible} />
         </div>);
     }
 }

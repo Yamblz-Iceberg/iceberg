@@ -1,3 +1,7 @@
+.dropdown {
+    position: relative;
+    padding: 2px 10px;
+}
 .dropdown-selected-item {
-    color: red;
+    white-space: nowrap;
 }

@@ -48,12 +48,12 @@ class AccountProfile extends Component {
         const filterItems = this.props.history.location.pathname.indexOf('links') > -1 ? [
             {
                 id: 0,
-                title: 'Новое',
+                title: 'Новые',
                 name: 'savedLinks',
             },
             {
                 id: 1,
-                title: 'Прочитанное',
+                title: 'Прочитанные',
                 name: 'savedLinks',
             },
         ] : [
