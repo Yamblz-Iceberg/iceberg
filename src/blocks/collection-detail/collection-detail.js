@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Tabs, CollectionDetailLinks, Button, Icon } from '../';
@@ -29,7 +29,7 @@ class CollectionDetail extends Component {
         };
     }
     componentDidMount() {
-        this.props.collectionLoader(this.props.location.state, this.props.token);
+        this.props.collectionLoader(this.props.params.id, this.props.token);
     }
 
     componentWillReceiveProps(props) {
@@ -41,21 +41,22 @@ class CollectionDetail extends Component {
     };
 
     render() {
+        const { id, filter } = this.props.params;
         const tabs = [
             {
                 id: 1,
                 title: ' Все',
-                linkTo: '/collection-detail',
+                linkTo: `/collection/${id}`,
             },
             {
                 id: 2,
                 title: 'Непрочитанные',
-                linkTo: '/collection-detail/unread',
+                linkTo: `/collection/${id}/unread`,
             },
             {
                 id: 3,
                 title: 'Новое',
-                linkTo: '/collection-detail/new',
+                linkTo: `/collection/${id}/new`,
             },
         ];
 
@@ -67,24 +68,10 @@ class CollectionDetail extends Component {
                 <div className="collection-detail-tabs">
                     <Tabs tabs={tabs} />
                 </div>
-                <Switch>
-                    <Route
-                        exact
-                        path="/collection-detail"
-                        render={() => (
-                            <CollectionDetailLinks links={this.state.collection.links} />
-                        )}
-                    />
-                    <Route
-                        path="/collection-detail/:filter?"
-                        render={({ match }) => (
-                            <CollectionDetailLinks
-                                links={this.state.collection.links}
-                                filter={match.params.filter}
-                            />
-                        )}
-                    />
-                </Switch>
+                <CollectionDetailLinks
+                    links={this.state.collection.links}
+                    filter={filter}
+                />
                 <div className="collection-detail__add-button" onClick={this.createLink} >
                     <Button icon={<Icon iconName={'link'} />} text="добавить ссылку" />
                 </div>
@@ -94,9 +81,9 @@ class CollectionDetail extends Component {
 }
 
 CollectionDetail.propTypes = {
+    params: PropTypes.object.isRequired,
     collection: PropTypes.object.isRequired,
     collectionLoader: PropTypes.func.isRequired,
-    location: PropTypes.object.isRequired,
     token: PropTypes.string.isRequired,
     history: PropTypes.object.isRequired,
 };

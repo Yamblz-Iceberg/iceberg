@@ -1,12 +1,13 @@
 .collection-detail {
-    &-tabs {
-        margin-top: 21px;
-        border-bottom: 1px solid #e0e0e0;
-    }
     &__add-button {
         padding: 5px 0 25px;
         button {
             margin: 0 auto;
         }
     }
+}
+
+.collection-detail-tabs {
+    margin-top: 21px;
+    border-bottom: 1px solid #e0e0e0;
 }

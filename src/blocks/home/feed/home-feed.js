@@ -23,7 +23,7 @@ class HomeFeed extends Component {
         if (e.target.className === 'collection-card__overlay'
             || e.target.className === 'collection-card__header'
             || e.target.className === 'collection-card__title') {
-            this.props.history.push({ pathname: '/collection-detail', state: cardId });
+            this.props.history.push({ pathname: `/collection/${cardId}` });
         }
     }
 
