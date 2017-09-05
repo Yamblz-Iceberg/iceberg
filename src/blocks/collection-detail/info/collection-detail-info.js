@@ -25,6 +25,7 @@ class CollectionDetailInfo extends Component {
                 tags: [],
                 links: [],
                 savedTimesCount: 0,
+                saved: false,
             },
         };
     }
@@ -35,6 +36,27 @@ class CollectionDetailInfo extends Component {
     createLink = () => {
         this.props.history.push({ pathname: './create-link' });
     };
+
+    renderButton() {
+        if (this.state.collection.saved) {
+            return (
+                <Button
+                    type="light"
+                    icon={<Icon iconName={'save-big'} />}
+                    text="вы подписаны"
+                    size="max-width"
+                />
+            );
+        }
+
+        return (
+            <Button
+                icon={<Icon iconName={'save-big'} />}
+                text="подписаться"
+                size="max-width"
+            />
+        );
+    }
 
     render() {
         const collection = this.state.collection;
@@ -81,11 +103,7 @@ class CollectionDetailInfo extends Component {
                     <ToggleText text={this.state.collection.description} />
 
                     <div className="collection-detail-actions">
-                        <Button {...{
-                            icon: <Icon iconName={'save-big'} />,
-                            text: 'подписаться',
-                        }}
-                        />
+                        { this.renderButton() }
                         <button className="collection-detail-actions__add-link" onClick={this.createLink}>
                             <Icon iconName={'link'} />
                             <Icon iconName={'plus'} />
