@@ -9,6 +9,8 @@ import { HashTag, Icon, Button, CardFooter } from '../../../blocks';
 
 import './collection-detail-info.scss';
 
+import { mainYellow } from '../../../variables.scss';
+
 class CollectionDetailInfo extends Component {
     constructor(props) {
         super(props);
@@ -35,7 +37,7 @@ class CollectionDetailInfo extends Component {
             return (
                 <Button
                     type="light"
-                    icon={<Icon iconName={'save-big'} />}
+                    icon={<Icon iconName={'save-small'} iconColor={mainYellow} />}
                     text="вы подписаны"
                     size="max-width"
                     onClick={this.delFromSaved}
