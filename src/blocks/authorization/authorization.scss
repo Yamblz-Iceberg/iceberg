@@ -1,0 +1,24 @@
+.authorization {
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100vh;
+        padding: 50px 20px 20px;
+    }
+    &__description {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    &__description-text {
+        padding: 25px 0 70px;
+        font-size: 18px;
+        line-height: 24px;
+        text-align: center;
+        color: #777777;
+    }
+    &__actions button {
+        margin-bottom: 15px;
+    }
+}
