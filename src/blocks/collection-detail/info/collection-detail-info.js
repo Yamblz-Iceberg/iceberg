@@ -17,6 +17,7 @@ class CollectionDetailInfo extends Component {
 
         this.state = {
             showAllText: false,
+            saved: props.collection.saved,
         };
     }
 
@@ -32,8 +33,8 @@ class CollectionDetailInfo extends Component {
         this.props.delFromSavedLoader(this.props.collection._id, this.props.token);
     }
 
-    renderButton() {
-        if (this.props.collection.saved) {
+    renderButton(saved) {
+        if (saved) {
             return (
                 <Button
                     type="light"
@@ -98,7 +99,7 @@ class CollectionDetailInfo extends Component {
                     <ToggleText text={this.props.collection.description} />
 
                     <div className="collection-detail-actions">
-                        { this.renderButton() }
+                        { this.renderButton(this.state.saved) }
                         <button className="collection-detail-actions__add-link" onClick={this.createLink}>
                             <Icon iconName={'link'} />
                             <Icon iconName={'plus'} />
