@@ -4,23 +4,54 @@ import { NavLink } from 'react-router-dom';
 import './onboarding.scss';
 
 class Onboarding extends Component {
-    handle = e => e;
+    constructor() {
+        super();
+        this.state = {
+            currentSlide: 0,
+            slides: [],
+            tags: [],
+        };
+    }
 
-    render() {
-        const slides = [
+    componentWillMount = () => {
+        this.setSlides([
             {
-                _id: 1,
+                _id: 0,
                 img: 'http://via.placeholder.com/180x180',
                 title: 'Разберитесь в чем угодно',
                 text: 'Создавайте темы и люди накидывают полезных ссылок по ним',
             },
             {
-                _id: 2,
+                _id: 1,
                 img: 'http://via.placeholder.com/180x180',
                 title: 'Сохраняйте интересные подборки и ссылки',
                 text: '',
             },
-        ];
+        ]);
+    }
+
+    setSlides = (slides) => {
+        this.setState({
+            slides,
+        });
+    }
+
+    setCurrentSlide = (slide) => {
+        this.setState({
+            currentSlide: slide,
+        });
+    }
+
+    nextSlide = () => {
+        this.setCurrentSlide(this.state.currentSlide + 1);
+    }
+
+    prevSlide = () => {
+        this.setCurrentSlide(this.state.currentSlide - 1);
+    }
+
+    render() {
+        const { slides, currentSlide, tags } = this.state;
 
         return (
             <main className="onboarding">
@@ -29,7 +60,7 @@ class Onboarding extends Component {
                     className="onboarding__link onboarding__skip"
                 >Пропустить</NavLink>
                 <div className="onboarding__slider onboarding-slider">
-                    <div className="onboarding-slider__track">
+                    <div className="onboarding-slider__track" style={{ transform: `translateX(-${100 * currentSlide}%)` }}>
                         { slides.map(slide => (
                             <div className="onboarding-slider__slide" key={slide._id}>
                                 <img
@@ -43,11 +74,38 @@ class Onboarding extends Component {
                         )) }
                     </div>
                     <div className="onboarding-slider__pagination-wrapper">
-                        { slides.length > 1 && slides.map(slide =>
-                            <span className="onboarding-slider__pagination-item" key={slide._id} id={slide._id} />) }
+                        { slides.length > 1 && slides.map(slide => (
+                            <span
+                                className={`
+                                onboarding-slider__pagination-item
+                                ${currentSlide === slide._id ? 'onboarding-slider__pagination-item--active' : ''}
+                                `}
+                                key={slide._id}
+                                id={slide._id}
+                            />))
+                        }
                     </div>
-                    <button className="onboarding__link onboarding-slider__prev">Назад</button>
-                    <button className="onboarding__link onboarding-slider__next">Далее</button>
+                    <button
+                        onClick={this.prevSlide}
+                        className={`
+                        onboarding__link onboarding-slider__prev
+                        ${currentSlide === 0 ? 'onboarding__link--inactive' : ''}
+                        `}
+                    >Назад</button>
+                    { currentSlide === (slides.length - 1) && tags.length > 1
+                        ? (
+                            <button className="onboarding__link onboarding-slider__next">Готово</button>
+                        )
+                        : (
+                            <button
+                                onClick={this.nextSlide}
+                                className={`
+                                onboarding__link onboarding-slider__next
+                                ${currentSlide === (slides.length - 1) ? 'onboarding__link--inactive' : ''}
+                                `}
+                            >Далее</button>
+                        )
+                    }
                 </div>
             </main>
         );
