@@ -1,11 +1,15 @@
 .hash-tape {
-    overflow-x: auto;
-    padding: 25px;
-    display: block;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    
-    &::-webkit-scrollbar {
-        display: none;
+    max-width: 100%;
+
+    &__inner {
+        padding: 0 20px;
+        overflow-x: auto;
+        display: block;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 }

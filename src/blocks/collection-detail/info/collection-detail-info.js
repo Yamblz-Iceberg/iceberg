@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { putToSavedLoader, delFromSavedLoader } from '../../../reducers/collection.reducer';
 import { ToggleText } from '../../index';
-import { HashTag, Icon, Button, CardFooter } from '../../../blocks';
+import { HashTape, Icon, Button, CardFooter } from '../../../blocks';
 
 import './collection-detail-info.scss';
 
@@ -76,22 +76,20 @@ class CollectionDetailInfo extends Component {
                         />
 
                         <div className="collection-detail-card__info">
+                            <div className="collection-detail-card__tape">
+                                <HashTape hashes={collection.tags} size="small" />
+                            </div>
                             <div className="collection-detail-card__header">
-                                {collection.tags.map(hash => (
-                                    <HashTag
-                                        {...hash}
-                                        size={'small'}
-                                        key={hash._id}
-                                    />)) }
                                 <h2 className="collection-detail-card__title">{ collection.name }</h2>
                             </div>
-
-                            <CardFooter
-                                avatarOptions={avatarOptions}
-                                userName={userName}
-                                linksCount={collection.links.length}
-                                savedTimesCount={collection.savedTimesCount}
-                            />
+                            <div className="collection-detail-card__footer">
+                                <CardFooter
+                                    avatarOptions={avatarOptions}
+                                    userName={userName}
+                                    linksCount={collection.links.length}
+                                    savedTimesCount={collection.savedTimesCount}
+                                />
+                            </div>
                         </div>
 
                         <div className="collection-detail-card__overlay" />
