@@ -4,6 +4,8 @@ import { Icon, Avatar } from './../../blocks';
 
 import './card-footer.scss';
 
+import { mainYellow } from './../../variables.scss';
+
 const CardFooter = props => (
     <div className="card-footer">
         <div className="card-footer__user">
@@ -17,7 +19,12 @@ const CardFooter = props => (
                 <span>{props.linksCount}</span>
             </div>
             <div className="card-footer__save-action">
-                <Icon iconName={'save-big'} iconColor={'#fff'} />
+                {
+                    props.saved && <Icon iconName={'save-small'} iconColor={mainYellow} />
+                }
+                {
+                    !props.saved && <Icon iconName={'save-big'} iconColor={'#fff'} />
+                }
                 <span>{props.savedTimesCount}</span>
             </div>
         </div>
@@ -29,6 +36,7 @@ CardFooter.propTypes = {
     userName: PropTypes.string.isRequired,
     linksCount: PropTypes.number.isRequired,
     savedTimesCount: PropTypes.number.isRequired,
+    saved: PropTypes.bool.isRequired,
 };
 
 export default CardFooter;

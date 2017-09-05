@@ -17,7 +17,6 @@ class CollectionDetailInfo extends Component {
 
         this.state = {
             showAllText: false,
-            saved: props.collection.saved,
         };
     }
 
@@ -31,29 +30,6 @@ class CollectionDetailInfo extends Component {
 
     delFromSaved = () => {
         this.props.delFromSavedLoader(this.props.collection._id, this.props.token);
-    }
-
-    renderButton(saved) {
-        if (saved) {
-            return (
-                <Button
-                    type="light"
-                    icon={<Icon iconName={'save-small'} iconColor={mainYellow} />}
-                    text="вы подписаны"
-                    size="max-width"
-                    onClick={this.delFromSaved}
-                />
-            );
-        }
-
-        return (
-            <Button
-                icon={<Icon iconName={'save-big'} />}
-                text="подписаться"
-                size="max-width"
-                onClick={this.putToSaved}
-            />
-        );
     }
 
     render() {
@@ -89,6 +65,7 @@ class CollectionDetailInfo extends Component {
                                     userName={userName}
                                     linksCount={collection.links.length}
                                     savedTimesCount={collection.savedTimesCount}
+                                    saved={collection.saved}
                                 />
                             </div>
                         </div>
@@ -99,7 +76,25 @@ class CollectionDetailInfo extends Component {
                     <ToggleText text={this.props.collection.description} />
 
                     <div className="collection-detail-actions">
-                        { this.renderButton(this.state.saved) }
+                        {
+                            collection.saved &&
+                                <Button
+                                    type="light"
+                                    icon={<Icon iconName="save-small" iconColor={mainYellow} />}
+                                    text="вы подписаны"
+                                    size="max-width"
+                                    onClick={this.delFromSaved}
+                                />
+                        }
+                        {
+                            !collection.saved &&
+                                <Button
+                                    icon={<Icon iconName="save-big" />}
+                                    text="подписаться"
+                                    size="max-width"
+                                    onClick={this.putToSaved}
+                                />
+                        }
                         <button className="collection-detail-actions__add-link" onClick={this.createLink}>
                             <Icon iconName={'link'} />
                             <Icon iconName={'plus'} />
