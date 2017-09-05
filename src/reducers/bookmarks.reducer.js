@@ -1,7 +1,7 @@
 import { fetchSavedCollections, fetchMyCollections, fetchSavedLinks, fetchMyLinks } from '../services/bookmarks.service';
 
 const GET_USER_COLLECTIONS = 'GET_USER_COLLECTIONS';
-const GET_USER_LINKS = 'GET_SAVED_LINS';
+const GET_USER_LINKS = 'GET_USER_LINKS';
 
 const initialState = {
     typeToFeed: 'myCollection',
