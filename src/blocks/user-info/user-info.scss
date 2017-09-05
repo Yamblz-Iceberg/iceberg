@@ -19,6 +19,7 @@
         filter: blur(8px) brightness(50%);
         background-size: cover;
         z-index: 0;
+        transform: scale(1.1);
     }
 
     &__text {

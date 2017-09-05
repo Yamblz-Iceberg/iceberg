@@ -35,9 +35,9 @@ const LinkCard = ({ data, button, showFooter, editIcon }) => {
             <h3 className="link-card__title">{data.name}</h3>
             <img src={data.favicon} className="link-card__favicon" alt="link_ico" />
             {
-                data.comment && data.comment.length ?
+                data.description && data.description.length > 0 ?
                     <blockquote className="link-card__comment">
-                        <p>{data.comment}
+                        <p>{data.description}
                             {editIcon}
                         </p>
                     </blockquote>

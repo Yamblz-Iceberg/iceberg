@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button, Icon } from '../../../blocks';
+import { compareLinks } from '../../../utils/shared-functions';
 import CreateLinkHeader from '../header/create-link-header';
+import { actions as modalActions } from '../../../reducers/modal.reducer';
 
 import './create-link-add.scss';
+import { clearLink } from '../../../reducers/link.reducer';
 
 class CreateLinkAdd extends Component {
     constructor(props) {
@@ -12,17 +16,35 @@ class CreateLinkAdd extends Component {
         this.state = {
             url: '',
             linkAdded: false,
+            collection: props.collection,
         };
     }
+    componentDidMount() {
+        this.props.clearLink();
+    }
     handleAdd = () => {
-        this.props.history.push({ pathname: '/create-link/load-link', state: this.state.url });
+        const enteredLink = this.state.url;
+        const linksInCollection = this.state.collection.links;
+        const linkExist =
+            linksInCollection.filter(link => compareLinks(link.url, enteredLink)).length > 0;
+        if (linkExist) {
+            // show modal
+            this.props.showModal('ERROR_MESSAGE',
+                {
+                    title: 'Ошибка при добавлении',
+                    text: 'Упс! Кажется, такая ссылка уже добавлена в эту подборку.',
+                    buttonText: 'Ясненько',
+                });
+        } else {
+            this.props.history.push({ pathname: '/create-link/load-link', state: this.state.url });
+        }
     };
     handleChangeUrl = (event) => {
         this.setState({ url: event.target.value });
         const linkAdded = event.target.value.length > 4;
         this.setState({ linkAdded });
     };
-    clearLink = () => {
+    clearLinkInput = () => {
         this.setState({
             ...this.state,
             url: '',
@@ -34,7 +56,7 @@ class CreateLinkAdd extends Component {
         return (
             <main className="create-link-add">
                 <CreateLinkHeader
-                    title={this.props.collectionTitle}
+                    title={this.props.collection.name}
                     showAddButton={showAddButton}
                 />
                 <section className="create-link-add__body">
@@ -48,7 +70,7 @@ class CreateLinkAdd extends Component {
                         />
                         {
                             this.state.linkAdded
-                                ? <span className="create-link-add__close-icon" onClick={this.clearLink}><Icon iconName={'close'} /></span>
+                                ? <span className="create-link-add__close-icon" onClick={this.clearLinkInput}><Icon iconName={'close'} /></span>
                                 : <Icon iconName={'link'} iconColor="#d3d3d3" />
                         }
                     </div>
@@ -67,8 +89,13 @@ class CreateLinkAdd extends Component {
 
 
 CreateLinkAdd.propTypes = {
-    collectionTitle: PropTypes.string.isRequired,
+    collection: PropTypes.object.isRequired,
     history: PropTypes.any.isRequired,
+    showModal: PropTypes.func.isRequired,
+    clearLink: PropTypes.func.isRequired,
 };
 
-export default withRouter(CreateLinkAdd);
+export default connect(
+    state => ({ collection: state.collection }),
+    { ...modalActions, clearLink },
+)(withRouter(CreateLinkAdd));

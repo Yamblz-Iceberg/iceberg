@@ -11,6 +11,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     text-decoration: none;
+    background-position: center;
 
     &__overlay {
         position: absolute;
@@ -18,7 +19,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-image: linear-gradient(-180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 56%, rgba(0, 0, 0, 0.35) 94%);
+        background-image: linear-gradient(-180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 56%, rgba(0, 0, 0, 0.35) 94%);
         z-index: 1;
         border-radius: 10px;
     }
@@ -41,15 +42,22 @@
         margin: 0;
     }
     &__user-rating {
+        margin: 0;
         font-size: 8px;
         font-weight: 500;
         color: #fff;
-        margin: 0;
     }
 
     &__title {
-        color: #fff;
+        max-height: 120px;
+        display: block;
+        display: -webkit-box;
         margin: 12px 0;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #fff;
     }
 
     &__favicon {
@@ -89,7 +97,7 @@
     margin: 0;
     padding: 16px;
     width: 225px;
-    height: 100px;
+    max-height: 100px;
     position: absolute;
     bottom: 56px;
     right: -12px;

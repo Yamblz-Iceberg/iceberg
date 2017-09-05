@@ -45,7 +45,7 @@ class CreateLinkComment extends Component {
                         max={300}
                         handleChange={this.handleTextContentChange}
                         resetTextContent={this.state.resetText}
-                        initialText={this.props.comment}
+                        initialText={this.props.description}
                     />
                 </div>
             </main>
@@ -55,14 +55,14 @@ class CreateLinkComment extends Component {
 
 CreateLinkComment.propTypes = {
     addComment: PropTypes.func.isRequired,
-    comment: PropTypes.string,
+    description: PropTypes.string,
 };
 
 CreateLinkComment.defaultProps = {
-    comment: '',
+    description: '',
 };
 
 export default connect(
-    state => ({ comment: state.link.comment }),
+    state => ({ description: state.link.description }),
     { addComment },
 )(CreateLinkComment);
