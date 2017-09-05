@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { Button, Icon } from '../../../blocks';
 import SearchResultItem from './../result-item/search-result-item';
@@ -12,6 +13,10 @@ class SearchResult extends Component {
         super(props);
         const { result } = this.props;
         this.state = result;
+    }
+
+    createNewCollection = () => {
+        this.props.history.push({ pathname: '/create-empty' });
     }
 
     renderResult() {
@@ -38,7 +43,8 @@ class SearchResult extends Component {
                     <p className="search-result__message">Мы не нашли точных результатов. Создайте тему и люди помогут</p>
                     <Button
                         text="Создать тему"
-                        icon={<Icon iconName={'themes'} />}
+                        icon={<Icon iconName="themes" />}
+                        onClick={this.createNewCollection}
                     />
                 </div>
             );
@@ -66,6 +72,7 @@ SearchResult.propTypes = {
     result: PropTypes.object.isRequired,
     loader: PropTypes.bool.isRequired,
     searchText: PropTypes.string.isRequired,
+    history: PropTypes.any.isRequired,
 };
 
 SearchResult.defaultProps = {
@@ -82,4 +89,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(SearchResult);
+export default connect(mapStateToProps)(withRouter(SearchResult));

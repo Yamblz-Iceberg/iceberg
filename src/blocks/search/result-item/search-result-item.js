@@ -8,7 +8,7 @@ import './search-result-item.scss';
 
 class SearchResultItem extends Component {
     handlerOnClick(e, cardId) {
-        this.props.history.push({ pathname: './collection-detail', state: cardId });
+        this.props.history.push({ pathname: `/collection/${cardId}` });
     }
 
     render() {
