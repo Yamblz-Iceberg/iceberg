@@ -29,7 +29,7 @@ class ToggleText extends Component {
     componentDidUpdate(prevProps) {
         if ((prevProps.text !== this.props.text
             && this.toggleTextWrapper.offsetHeight <= this.toggleText.offsetHeight)
-            || this.props.text.length == 0) {
+            || (prevProps.text !== this.props.text && this.props.text.length == 0)) {
             /* eslint-disable */
             this.setState({ showToggleIcon: false });
         }
