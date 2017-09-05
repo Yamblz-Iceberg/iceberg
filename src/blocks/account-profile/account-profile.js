@@ -35,13 +35,11 @@ class AccountProfile extends Component {
                 id: 1,
                 title: 'Подборки',
                 linkTo: '/profile',
-                onClick: this.getMyCollections,
             },
             {
                 id: 2,
                 title: 'Ссылки',
                 linkTo: '/profile/links',
-                onClick: this.getSavedLinks,
             },
         ];
 

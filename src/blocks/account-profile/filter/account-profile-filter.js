@@ -32,7 +32,7 @@ class ProfileFilter extends Component {
         const { items } = this.props;
         return (<div className="profile-filter">
             <div className="profile-filter__block">
-                <Icon iconName="settings" iconColor="#000" iconHeight="20" iconWidth="20" />
+                <Icon iconName="filter" iconColor="#000" iconHeight="20" iconWidth="20" />
             </div>
             <div className="profile-filter__block profile-filter__block--dropdown-wrap">
                 <Dropdown items={items} onSelect={(item) => { this.filteringData(item); }} />
