@@ -106,6 +106,10 @@ const iconsSizes = {
         width: '145px',
         height: '145px',
     },
+    iceberg: {
+        width: '86px',
+        height: '90px',
+    },
 };
 
 const Icon = (props) => {
