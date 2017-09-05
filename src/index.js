@@ -43,7 +43,12 @@ function onDeviceReady() {
                         <Route path="/create-link" component={CreateLink} />
                         <Route path="/create-empty" component={CreateEmpty} />
                         <Route path="/add-description" component={CreateDescription} />
-                        <Route path="/collection-detail" component={CollectionDetail} />
+                        <Route
+                            path="/collection/:id/:filter?"
+                            render={({ match }) => (
+                                <CollectionDetail params={match.params} />
+                            )}
+                        />
                         <Route path="/profile" component={AccountProfile} />
                         <Route path="/search" component={Search} />
                         <Route path="/preview" component={LinkPreview} />

@@ -5,6 +5,7 @@ import './tab-item.scss';
 
 class TabItem extends Component {
     goTo = () => {
+        console.log(this.props.history);
         this.props.history.replace(this.props.linkTo);
         if (this.props.onClick) this.props.onClick();
     };
