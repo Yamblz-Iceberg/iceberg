@@ -8,7 +8,7 @@ import './account-profile-feed-item.scss';
 
 class AccountProfileFeedItem extends Component {
     handlerOnClick(e, cardId) {
-        this.props.history.push({ pathname: './collection-detail', state: cardId });
+        this.props.history.push({ pathname: `/collection/${cardId}` });
     }
 
     render() {
