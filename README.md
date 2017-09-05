@@ -45,6 +45,7 @@
 - filter
 - dropdown
 - double-links
+- iceberg
 
 
 ### Запуск приложения

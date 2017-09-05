@@ -67,7 +67,7 @@ class HomeFeed extends Component {
             }
         }
         return feedToRender;
-    }
+    };
 
     render() {
         return (
