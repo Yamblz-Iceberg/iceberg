@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import { putToSavedLoader, delFromSavedLoader } from '../../../reducers/collection.reducer';
 import { ToggleText } from '../../index';
 import { HashTag, Icon, Button, CardFooter } from '../../../blocks';
 
@@ -13,38 +15,30 @@ class CollectionDetailInfo extends Component {
 
         this.state = {
             showAllText: false,
-            collection: {
-                description: '',
-                photo: '',
-                author: {
-                    firstName: '',
-                    lastName: '',
-                    photo: '',
-                },
-                name: '',
-                tags: [],
-                links: [],
-                savedTimesCount: 0,
-                saved: false,
-            },
         };
-    }
-    componentWillReceiveProps(props) {
-        this.setState({ collection: props.collection });
     }
 
     createLink = () => {
         this.props.history.push({ pathname: './create-link' });
     };
 
+    putToSaved = () => {
+        this.props.putToSavedLoader(this.props.collection._id, this.props.token);
+    }
+
+    delFromSaved = () => {
+        this.props.delFromSavedLoader(this.props.collection._id, this.props.token);
+    }
+
     renderButton() {
-        if (this.state.collection.saved) {
+        if (this.props.collection.saved) {
             return (
                 <Button
                     type="light"
                     icon={<Icon iconName={'save-big'} />}
                     text="вы подписаны"
                     size="max-width"
+                    onClick={this.delFromSaved}
                 />
             );
         }
@@ -54,12 +48,13 @@ class CollectionDetailInfo extends Component {
                 icon={<Icon iconName={'save-big'} />}
                 text="подписаться"
                 size="max-width"
+                onClick={this.putToSaved}
             />
         );
     }
 
     render() {
-        const collection = this.state.collection;
+        const collection = this.props.collection;
 
         const avatarOptions = {
             size: '25',
@@ -100,7 +95,7 @@ class CollectionDetailInfo extends Component {
                         <div className="collection-detail-card__overlay" />
                     </div>
 
-                    <ToggleText text={this.state.collection.description} />
+                    <ToggleText text={this.props.collection.description} />
 
                     <div className="collection-detail-actions">
                         { this.renderButton() }
@@ -117,7 +112,16 @@ class CollectionDetailInfo extends Component {
 
 CollectionDetailInfo.propTypes = {
     collection: PropTypes.object.isRequired,
+    token: PropTypes.string.isRequired,
     history: PropTypes.any.isRequired,
+    putToSavedLoader: PropTypes.func.isRequired,
+    delFromSavedLoader: PropTypes.func.isRequired,
 };
 
-export default withRouter(CollectionDetailInfo);
+export default connect(
+    state => ({
+        collection: state.collection,
+        token: state.app.token,
+    }),
+    { putToSavedLoader, delFromSavedLoader },
+)(withRouter(CollectionDetailInfo));
