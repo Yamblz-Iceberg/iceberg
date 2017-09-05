@@ -1,4 +1,4 @@
-import { postCollection } from './../services/create-collection.service';
+import { postCollection, postHashtagToSaved } from './../services/create-collection.service';
 
 const UPDATE_DESCRIPTION = 'UPDATE_DESCRIPTION';
 const UPDATE_TITLE = 'UPDATE_TITLE';
@@ -21,7 +21,7 @@ const updateDescription = description => ({ type: UPDATE_DESCRIPTION, payload: d
 const updateTitle = title => ({ type: UPDATE_TITLE, payload: title });
 const updateSwitcher = (id, status) => ({ type: UPDATE_SWITCHER, payload: { [id]: status } });
 const clearCollection = () => ({ type: CLEAR_COLLECTION });
-const addHashTag = text => ({ type: ADD_HASHTAG, payload: text });
+const addHashTag = hashtag => ({ type: ADD_HASHTAG, text: hashtag.text, id: hashtag._id });
 const deleteHashTag = id => ({ type: DELETE_HASHTAG, payload: id });
 const editHashTag = (id, text) => ({ type: EDIT_HASHTAG, payload: { id, text } });
 
@@ -41,13 +41,11 @@ const reducer = (state = initialState, action) => {
         };
     }
     case ADD_HASHTAG: {
-        const id = Math.random();
-
         return {
             ...state,
             hashTags: [
                 ...state.hashTags,
-                { id, text: action.payload },
+                { id: action.id, text: action.text },
             ],
         };
     }
@@ -87,6 +85,14 @@ export const createCollection = (data, token, callback) => (
     (dispatch) => {
         postCollection(data, token).then(() => {
             dispatch(clearCollection());
+        }).then(() => callback());
+    }
+);
+
+export const createHashtag = (data, token, callback) => (
+    (dispatch) => {
+        postHashtagToSaved(data, token).then((hashtag) => {
+            dispatch(addHashTag(hashtag));
         }).then(() => callback());
     }
 );
