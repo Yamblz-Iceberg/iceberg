@@ -9,6 +9,7 @@ import './create-empty-header.scss';
 import { cardBlue } from '../../../variables.scss';
 
 import { createCollection } from '../../../reducers/create-collection.reducer';
+import { actions as modalActions } from '../../../reducers/modal.reducer';
 
 
 class CreateEmptyHeader extends Component {
@@ -64,15 +65,22 @@ class CreateEmptyHeader extends Component {
     };
 
     handleSubmitData = () => {
-        const body = {
-            description: this.props.description,
-            name: this.props.title,
-            photo: this.props.photo,
-            color: this.props.color,
-            tags: ['59a7e38c7db98b35471fed6d', '59a7e38c7db98b35471fed67'],
-        };
-
-        this.props.createCollection(body, this.props.token, this.changeRoute);
+        if (!this.state.submitStatus) {
+            this.props.showModal('ERROR_MESSAGE',
+                {
+                    title: 'Укажите категорию и название темы',
+                    text: 'Укажите хотя бы одну категорию и введите название темы (не менее 5 символов), чтобы другим было проще найти вашу подборку',
+                });
+        } else {
+            const body = {
+                description: this.props.description,
+                name: this.props.title,
+                photo: this.props.photo,
+                color: this.props.color,
+                tags: this.props.hashTags,
+            };
+            this.props.createCollection(body, this.props.token, this.changeRoute);
+        }
     };
 
 
@@ -109,6 +117,7 @@ CreateEmptyHeader.propTypes = {
     token: PropTypes.string.isRequired,
     createCollection: PropTypes.func.isRequired,
     history: PropTypes.any.isRequired,
+    showModal: PropTypes.func.isRequired,
 };
 
 export default connect(
@@ -120,5 +129,5 @@ export default connect(
         color: state.createCollection.color,
         photo: state.createCollection.photo,
     }),
-    { createCollection },
+    { createCollection, ...modalActions },
 )(withRouter(CreateEmptyHeader));
