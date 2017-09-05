@@ -20,9 +20,9 @@ class HomeFeed extends Component {
     }
 
     handlerOnClick(e, cardId) {
-        if (e.target.className === 'collection-card__overlay'
-            || e.target.className === 'collection-card__header'
-            || e.target.className === 'collection-card__title') {
+        if (e.target.className !== 'hash-tag'
+            && e.target.className !== 'card-footer__user'
+            && e.target.className !== 'card-footer__actions') {
             this.props.history.push({ pathname: `/collection/${cardId}` });
         }
     }
