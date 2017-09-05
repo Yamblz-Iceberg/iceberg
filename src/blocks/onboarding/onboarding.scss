@@ -1,0 +1,13 @@
+.onboarding {
+    &__skip {
+        position: absolute;
+        top: 30px;
+        left: 20px;
+    }
+    &__link {
+        font-size: 14px;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: black;
+    }
+}
