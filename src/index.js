@@ -39,7 +39,12 @@ function onDeviceReady() {
                 <div className="home__wrapper">
                     <Modal />
                     <Switch>
-                        <Route path="/feed" component={Home} />
+                        <Route
+                            path="/feed/:filter?"
+                            render={({ match }) => (
+                                <Home filter={match.params.filter} />
+                            )}
+                        />
                         <Route path="/create-link" component={CreateLink} />
                         <Route path="/create-empty" component={CreateEmpty} />
                         <Route path="/add-description" component={CreateDescription} />

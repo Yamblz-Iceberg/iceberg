@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Icon } from '../../../blocks';
 
@@ -21,7 +21,7 @@ class CreateEmptyHeader extends Component {
 
     componentWillMount = () => {
         this.setSubmitStatus(this.props);
-    }
+    };
 
     componentWillReceiveProps = (nextProps) => {
         const {
@@ -35,7 +35,7 @@ class CreateEmptyHeader extends Component {
         ) {
             this.setSubmitStatus(nextProps);
         }
-    }
+    };
 
     setSubmitStatus = ({ title, hashTags }) => {
         this.setState({
@@ -44,10 +44,13 @@ class CreateEmptyHeader extends Component {
                 hashTags.length > 0
             ),
         });
-    }
+    };
 
+    goBack = () => {
+        this.props.history.goBack();
+    };
     changeRoute = () => {
-        this.props.history.push({ pathname: './feed' });
+        this.props.history.push('/feed/new');
     };
 
     hexToRGB = (color) => {
@@ -76,9 +79,9 @@ class CreateEmptyHeader extends Component {
     render() {
         return (
             <header className="create-empty-header">
-                <NavLink to={'/feed'}>
+                <span onClick={this.goBack}>
                     <Icon iconName={'arrow-back'} />
-                </NavLink>
+                </span>
                 <h4 className="create-empty-header__title">Новая тема</h4>
                 <button
                     className={`create-empty-header__submit ${this.state.submitStatus ? 'create-empty-header__submit--active' : ''}`}
