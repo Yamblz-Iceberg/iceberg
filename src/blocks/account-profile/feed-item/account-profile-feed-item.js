@@ -32,12 +32,16 @@ class AccountProfileFeedItem extends Component {
         const link = (<div className="account-profile-feed-link" onClick={e => this.handlerOnClick(e, data._id)}>
             <div className="account-profile-feed-link__photo" style={resultStyles} />
             <div className="account-profile-feed-link__details">
-                <img src={data.favicon} className="account-profile-feed-link__favicon" alt="link_ico" />
                 <h5 className="account-profile-feed-link__title">{data.name || 'Нет названия'}</h5>
+                <div className="account-profile-feed-link__url-container">
+                    { data.favicon && data.favicon.length
+                        && (<img src={data.favicon} className="account-profile-feed-link__favicon" alt="link_ico" />) }
+                    <p className="account-profile-feed-link__url">{data.url}</p>
+                </div>
             </div>
         </div>);
 
-        return type === 'links' ? link : collection;
+        return type.toLowerCase().indexOf('links') > -1 ? link : collection;
     }
 }
 

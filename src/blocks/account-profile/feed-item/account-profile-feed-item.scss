@@ -87,4 +87,17 @@
         max-height: 20px;
         max-width: 20px;
     }
+    
+    &__url-container {
+        display: flex;
+        margin-top: 6px;
+        align-items: center;
+    }
+    
+    &__url {
+        margin: 0;
+        font-size: 14px;
+        padding-left: 8px;
+        color: #d0d0d0;
+    }
 }

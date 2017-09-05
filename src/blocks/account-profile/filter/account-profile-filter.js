@@ -37,7 +37,7 @@ class ProfileFilter extends Component {
             <div className="profile-filter__block profile-filter__block--dropdown-wrap">
                 <Dropdown items={items} onSelect={(item) => { this.filteringData(item); }} />
             </div>
-            <div className="profile-filter__block">
+            {/* <div className="profile-filter__block">
                 <Icon
                     className="home-filter__icon-settings"
                     iconName="search"
@@ -45,7 +45,7 @@ class ProfileFilter extends Component {
                     iconHeight="24"
                     iconWidth="24"
                 />
-            </div>
+            </div> */}
         </div>);
     }
 }
