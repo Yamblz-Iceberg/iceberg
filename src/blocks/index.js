@@ -31,3 +31,4 @@ export { default as Dropdown } from './dropdown';
 export { default as CreateHashTag } from './create-hash-tag';
 export { default as LinkPreview } from './link-preview';
 export { default as CardFooter } from './card-footer';
+export { default as Onboarding } from './onboarding';
