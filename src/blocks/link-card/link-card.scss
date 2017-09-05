@@ -12,6 +12,7 @@
     background-position: center;
     background-repeat: no-repeat;
     text-decoration: none;
+    background-position: center;
 
     &__overlay {
         position: absolute;
@@ -97,7 +98,7 @@
     margin: 0;
     padding: 16px;
     width: 225px;
-    height: 100px;
+    max-height: 100px;
     position: absolute;
     bottom: 56px;
     right: -12px;

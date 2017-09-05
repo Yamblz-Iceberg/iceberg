@@ -1,0 +1,22 @@
+.dropdown-menu {
+    position: absolute;
+    min-width: 100%;
+    top: 100%;
+    left: 0;
+    right: 0;
+    transform: translateY(12px);
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.2);
+    padding: 10px 16px;
+    border-radius: 2px;
+    z-index: 10;
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    transition: all ease-out 0.1s;
+    &--opened {
+        visibility: visible;
+        opacity: 1;
+    }
+}

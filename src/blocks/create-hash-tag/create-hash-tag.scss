@@ -27,7 +27,7 @@
 
     &__hashtag-input {
         padding-right: 20px;
-        width: 132px;
+        max-width: 132px;
         background-color: transparent;
         color: white;
         &[value=""] {

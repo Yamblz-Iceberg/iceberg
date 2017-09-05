@@ -90,6 +90,10 @@
         border-radius: 25px;
         animation: spin 1s infinite linear;
     }
+    &__upload-photo-title {
+        margin-left: 10px;
+        color: white;
+    }
 }
 
 @keyframes spin {
@@ -104,3 +108,4 @@
 .create-card__footer {
     opacity: 0.3;
 }
+
