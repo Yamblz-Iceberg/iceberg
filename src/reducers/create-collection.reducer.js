@@ -21,7 +21,8 @@ const updateDescription = description => ({ type: UPDATE_DESCRIPTION, payload: d
 const updateTitle = title => ({ type: UPDATE_TITLE, payload: title });
 const updateSwitcher = (id, status) => ({ type: UPDATE_SWITCHER, payload: { [id]: status } });
 const clearCollection = () => ({ type: CLEAR_COLLECTION });
-const addHashTag = hashtag => ({ type: ADD_HASHTAG, text: hashtag.text, id: hashtag._id });
+const addHashTag = tag =>
+    ({ type: ADD_HASHTAG, text: tag.result.name, id: tag.result._id });
 const deleteHashTag = id => ({ type: DELETE_HASHTAG, payload: id });
 const editHashTag = (id, text) => ({ type: EDIT_HASHTAG, payload: { id, text } });
 
@@ -89,11 +90,11 @@ export const createCollection = (data, token, callback) => (
     }
 );
 
-export const createHashtag = (data, token, callback) => (
+export const createHashtag = (name, token) => (
     (dispatch) => {
-        postHashtagToSaved(data, token).then((hashtag) => {
-            dispatch(addHashTag(hashtag));
-        }).then(() => callback());
+        postHashtagToSaved(name, token).then((result) => {
+            dispatch(addHashTag(result.tag));
+        });
     }
 );
 

@@ -10,12 +10,12 @@ export const postCollection = (data, token) => {
     });
 };
 
-export const postHashtagToSaved = (data, token) => {
+export const postHashtagToSaved = (name, token) => {
     const headers = new Headers({
         Authorization: token,
     });
 
-    return fetch('https://iceberg-project.herokuapp.com/tags/', {
+    return fetch(`https://iceberg-project.herokuapp.com/tags/${name}`, {
         headers,
         method: 'post',
     }).then(res => res.json());

@@ -51,7 +51,7 @@ class CreateEmptyHeader extends Component {
         this.props.history.goBack();
     };
     changeRoute = () => {
-        this.props.history.push('/feed/new');
+        this.props.history.push('/feed/time');
     };
 
     hexToRGB = (color) => {
@@ -75,7 +75,7 @@ class CreateEmptyHeader extends Component {
             const body = {
                 name: this.props.title,
                 color: this.hexToRGB(this.props.color || cardBlue),
-                tags: this.props.hashTags,
+                tags: this.props.hashTags.map(tag => tag.id),
             };
             if (this.props.photo) { body.photo = this.props.photo; }
             if (this.props.description) { body.description = this.props.description; }
