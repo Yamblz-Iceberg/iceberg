@@ -18,7 +18,7 @@ class AddLinkHeader extends Component {
             this.props.link._id,
             this.props.token,
             this.props.description,
-            this.props.history.push('/feed'),
+            this.props.history.push({ pathname: `/collection/${this.props.collection._id}/new` }),
         );
     };
 
