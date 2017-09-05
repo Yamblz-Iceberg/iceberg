@@ -16,7 +16,7 @@ class ToggleText extends Component {
 
     componentDidMount() {
         if (this.props.text.length > 0
-            && this.toggleTextWrapper.offsetHeight <= this.toggleText.offsetHeight) {
+            || this.toggleTextWrapper.offsetHeight <= this.toggleText.offsetHeight) {
             /* eslint-disable */
             this.setState({ showToggleIcon: false });
         }
@@ -27,8 +27,9 @@ class ToggleText extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.text !== this.props.text
-            && this.toggleTextWrapper.offsetHeight <= this.toggleText.offsetHeight) {
+        if ((prevProps.text !== this.props.text
+            && this.toggleTextWrapper.offsetHeight <= this.toggleText.offsetHeight)
+            || this.props.text.length == 0) {
             /* eslint-disable */
             this.setState({ showToggleIcon: false });
         }
