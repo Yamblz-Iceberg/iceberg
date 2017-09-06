@@ -9,6 +9,8 @@ let initialState = {
     token_type: '',
     userId: '',
     userPassword: '',
+    firstName: '',
+    lastName: '',
 };
 if (USER_DATA !== null && USER_DATA.access_token.length > 0) {
     initialState = USER_DATA;
@@ -31,10 +33,10 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-export const registerDemoUser = (userId, userPassword, callback) => (
+export const registerDemoUser = (userId, userPassword, firstName, lastName, callback) => (
     (dispatch) => {
-        postRegisterDemoUser(userId, userPassword).then((res) => {
-            dispatch(addDemoUser({ ...res, userId, userPassword }));
+        postRegisterDemoUser(userId, userPassword, firstName, lastName).then((res) => {
+            dispatch(addDemoUser({ ...res, userId, userPassword, firstName, lastName }));
         }).then(() => callback());
     }
 );
