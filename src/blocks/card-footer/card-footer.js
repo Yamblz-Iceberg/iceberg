@@ -25,32 +25,33 @@ class CardFooter extends Component {
 
     render() {
         const props = this.props;
-        // console.log(props);
-        return (<div className="card-footer">
-            <div className="card-footer__user">
-                <Avatar {...props.avatarOptions} />
-                <span className="card-footer__user-name">{props.userName}</span>
-            </div>
-
-            <div className="card-footer__actions">
-                <div className="card-footer__link-action">
-                    <Icon iconName={'link'} iconColor={'#fff'} />
-                    <span>{props.linksCount}</span>
+        return (
+            <div className="card-footer">
+                <div className="card-footer__user">
+                    <Avatar {...props.avatarOptions} />
+                    <span className="card-footer__user-name">{props.userName}</span>
                 </div>
-                {
-                    props.saved && <div className="card-footer__save-action" onClick={this.props.idCard ? this.delFromSaved : null}>
-                        <Icon iconName={'save-small'} iconColor={mainYellow} />
-                        <span>{props.savedTimesCount}</span>
+
+                <div className="card-footer__actions">
+                    <div className="card-footer__link-action">
+                        <Icon iconName={'link'} iconColor={'#fff'} />
+                        <span>{props.linksCount}</span>
                     </div>
-                }
-                {
-                    !props.saved && <div className="card-footer__save-action" onClick={this.props.idCard ? this.putToSaved : null}>
-                        <Icon iconName={'save-big'} iconColor={'#fff'} />
-                        <span>{props.savedTimesCount}</span>
-                    </div>
-                }
+                    {
+                        props.saved && <div className="card-footer__save-action" onClick={this.props.idCard ? this.delFromSaved : null}>
+                            <Icon iconName={'save-small'} iconColor={mainYellow} />
+                            <span>{props.savedTimesCount}</span>
+                        </div>
+                    }
+                    {
+                        !props.saved && <div className="card-footer__save-action" onClick={this.props.idCard ? this.putToSaved : null}>
+                            <Icon iconName={'save-big'} iconColor={'#fff'} />
+                            <span>{props.savedTimesCount}</span>
+                        </div>
+                    }
+                </div>
             </div>
-        </div>);
+        );
     }
 }
 
