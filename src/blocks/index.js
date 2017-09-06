@@ -32,3 +32,4 @@ export { default as CreateHashTag } from './create-hash-tag';
 export { default as LinkPreview } from './link-preview';
 export { default as CardFooter } from './card-footer';
 export { default as Authorization } from './authorization';
+export { default as Preloader } from './preloader';
