@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
+import { addTag, deleteTag } from '../../reducers/onboarding.reducer';
 import './onboarding.scss';
 
 class Onboarding extends Component {
@@ -12,27 +15,22 @@ class Onboarding extends Component {
         };
     }
 
+    componentWillReceiveProps = (nextProps) => {
+        if (this.props.tags !== nextProps.tags) {
+            this.setTags(nextProps.tags);
+        }
+    }
+
     setCurrentSlide = (slide) => {
         this.setState({
             currentSlide: slide,
         });
     }
 
-    setTag = (id, selected) => {
-        if (selected) {
-            this.setState({
-                tags: [
-                    ...this.state.tags,
-                    id,
-                ],
-            });
-        } else {
-            const filteredTags = this.state.tags.filter(tag => tag !== id);
-
-            this.setState({
-                tags: filteredTags,
-            });
-        }
+    setTags = (tags) => {
+        this.setState({
+            tags,
+        });
     }
 
     handleClickTag = id => (event) => {
@@ -41,10 +39,10 @@ class Onboarding extends Component {
 
         if (target.classList.value.includes(className)) {
             target.classList.remove(className);
-            this.setTag(id, false);
+            this.props.deleteTag(id);
         } else {
             target.classList.add(className);
-            this.setTag(id, true);
+            this.props.addTag(id);
         }
     }
 
@@ -58,7 +56,6 @@ class Onboarding extends Component {
 
     render() {
         const { currentSlide, tags } = this.state;
-        console.log(tags);
         const slides = [
             {
                 _id: 0,
@@ -196,4 +193,19 @@ class Onboarding extends Component {
     }
 }
 
-export default Onboarding;
+Onboarding.propTypes = {
+    tags: PropTypes.array,
+    addTag: PropTypes.func.isRequired,
+    deleteTag: PropTypes.func.isRequired,
+};
+
+Onboarding.defaultProps = {
+    tags: [],
+};
+
+export default connect(
+    state => ({
+        tags: state.onboarding.tags,
+    }),
+    { addTag, deleteTag },
+)(Onboarding);
