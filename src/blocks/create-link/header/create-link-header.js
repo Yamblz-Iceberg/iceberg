@@ -10,7 +10,11 @@ import './create-link-header.scss';
 
 class AddLinkHeader extends Component {
     handleGoBack = () => {
-        this.props.history.goBack();
+        if (this.props.title !== 'комментарий') {
+            this.props.history.replace({ pathname: `/collection/${this.props.collection._id}` });
+        } else {
+            this.props.history.goBack();
+        }
     };
     addLink = () => {
         this.props.addLinkToCollection(
@@ -18,7 +22,7 @@ class AddLinkHeader extends Component {
             this.props.link._id,
             this.props.token,
             this.props.description,
-            this.props.history.push({ pathname: `/collection/${this.props.collection._id}/new` }),
+            this.props.history.replace({ pathname: `/collection/${this.props.collection._id}/new` }),
         );
     };
 
