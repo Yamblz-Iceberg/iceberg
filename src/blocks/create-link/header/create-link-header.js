@@ -35,10 +35,10 @@ class AddLinkHeader extends Component {
                         <span onClick={this.handleGoBack}>
                             <Icon iconName={'arrow-back'} iconColor="#000" />
                         </span>
-                        <h4 className="create-link-header__title">
-                            {this.props.title}
-                        </h4>
                     </div>
+                    <h4 className="create-link-header__title">
+                        {this.props.title}
+                    </h4>
                     <div className="create-link-header__block create-link-header__button" onClick={this.addLink}>
                         <Button
                             text="Добавить"
