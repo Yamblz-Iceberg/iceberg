@@ -15,7 +15,9 @@ const HomeHeader = ({ user }) => (
                 <h4 className="home-header__title">Айсберг</h4>
             </div>
             <div className="home-header__block">
-                <Icon iconName={'flash'} />
+                <NavLink to={'/authorization'}>
+                    <Icon iconName={'flash'} />
+                </NavLink>
                 <NavLink to={'/profile'} className="home-header__icon-user">
                     <div>
                         <Avatar photo={user.photo} />
