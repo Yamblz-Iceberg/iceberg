@@ -7,6 +7,9 @@ import HomeFeed from './feed/home-feed';
 import HomeHeader from './header/home-header';
 import { FloatingButton } from '../../blocks';
 import { userLoader } from '../../reducers/user.reducer';
+import { registerDemoUser } from '../../reducers/authorization.reducer';
+import { generateGuid } from '../../utils/shared-functions';
+import { USER_DATA } from '../../config';
 
 import './home.scss';
 
@@ -26,6 +29,10 @@ const tabs = [
 class Home extends Component {
     componentDidMount() {
         this.props.userLoader(this.props.token);
+        if (USER_DATA === null
+            || USER_DATA.access_token.length === 0) {
+            this.authorization();
+        }
     }
 
     componentDidUpdate = () => {
@@ -34,6 +41,15 @@ class Home extends Component {
 
     scrollToTop = () => {
         window.scrollTo(0, 0);
+    };
+    // TODO нужно сделать middleware и убрать нафиг отсюда авторизацию
+    authorization = () => {
+        const uniqueId = generateGuid();
+        const password = generateGuid();
+        const saveLocal = () => {
+            localStorage.setItem('IcebergUserData', JSON.stringify(this.props.authorization));
+        };
+        this.props.registerDemoUser(uniqueId, password, saveLocal);
     };
 
     render() {
@@ -53,21 +69,25 @@ class Home extends Component {
 
 Home.propTypes = {
     user: PropTypes.object,
+    authorization: PropTypes.object,
     token: PropTypes.string.isRequired,
     userLoader: PropTypes.func.isRequired,
+    registerDemoUser: PropTypes.func.isRequired,
     filter: PropTypes.string,
 };
 
 Home.defaultProps = {
     user: {},
+    authorization: {},
     filter: 'rating',
 };
 
 function mapStateToProps(state) {
     return {
-        token: state.app.token,
+        token: state.authorization.access_token,
         user: state.user.data,
+        authorization: state.authorization,
     };
 }
 
-export default connect(mapStateToProps, { userLoader })(Home);
+export default connect(mapStateToProps, { userLoader, registerDemoUser })(Home);

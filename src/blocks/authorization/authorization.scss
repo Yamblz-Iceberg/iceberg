@@ -1,10 +1,17 @@
 .authorization {
+    &__header {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 50px;
+        padding: 0 20px;
+    }
     &__wrapper {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        height: 100vh;
-        padding: 50px 20px 20px;
+        height: calc(100vh - 50px);
+        padding: 0 20px 20px;
     }
     &__description {
         display: flex;

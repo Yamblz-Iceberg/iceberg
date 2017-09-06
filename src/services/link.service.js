@@ -1,6 +1,6 @@
 export const postLink = (data, token) => {
     const headers = new Headers({
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
     });
 
@@ -13,7 +13,7 @@ export const postLink = (data, token) => {
 
 export const postLinkToCollection = (collectionId, linkId, token, description) => {
     const headers = new Headers({
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
     });
 

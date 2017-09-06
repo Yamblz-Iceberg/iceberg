@@ -1,6 +1,6 @@
 export const fetchFeed = (queryParam, token) => {
     const headers = new Headers({
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
     });
 
     return fetch(`https://iceberg-project.herokuapp.com/feed?sort=${queryParam}`, { headers })
