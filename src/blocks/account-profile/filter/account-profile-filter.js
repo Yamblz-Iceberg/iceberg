@@ -65,7 +65,7 @@ ProfileFilter.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        token: state.app.token,
+        token: state.authorization.access_token,
     };
 }
 

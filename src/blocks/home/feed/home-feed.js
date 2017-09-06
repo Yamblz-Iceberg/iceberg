@@ -96,7 +96,7 @@ function mapStateToProps(state) {
     return {
         collections: state.feed.collections,
         tags: state.feed.tags,
-        token: state.app.token,
+        token: state.authorization.access_token,
         user: state.user.user,
     };
 }

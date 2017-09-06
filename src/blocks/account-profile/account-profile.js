@@ -95,7 +95,7 @@ AccountProfile.propTypes = {
 function mapStateToProps(state) {
     return {
         user: state.user.data,
-        token: state.app.token,
+        token: state.authorization.access_token,
         bookmarks: state.bookmarks,
         typeToFeed: state.user.typeToFeed,
     };

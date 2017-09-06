@@ -1,6 +1,6 @@
 export const fetchCollection = (collectionId, token) => {
     const headers = new Headers({
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
     });
 
     return fetch(`https://iceberg-project.herokuapp.com/collections/${collectionId}`, { headers })
@@ -9,7 +9,7 @@ export const fetchCollection = (collectionId, token) => {
 
 export const putCollectionToSaved = (id, token) => {
     const headers = new Headers({
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
     });
 
     return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/collections/${id}`, {
@@ -20,7 +20,7 @@ export const putCollectionToSaved = (id, token) => {
 
 export const delCollectionFromSaved = (id, token) => {
     const headers = new Headers({
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
     });
 
     return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/collections/${id}`, {
