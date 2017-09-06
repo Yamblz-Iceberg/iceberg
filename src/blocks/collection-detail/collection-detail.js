@@ -26,7 +26,14 @@ class CollectionDetail extends Component {
     };
 
     render() {
-        const { id, filter } = this.props.params;
+        const {
+            collection,
+            userId,
+            params: {
+                id, filter,
+            },
+        } = this.props;
+
         const tabs = [
             {
                 id: 1,
@@ -47,23 +54,66 @@ class CollectionDetail extends Component {
 
         return (
             <div className="collection-detail">
-                <CollectionDetailHeader collectionTitle={this.props.collection.name} />
-                <CollectionDetailInfo collection={this.props.collection} />
+                <CollectionDetailHeader collectionTitle={collection.name} />
+                <CollectionDetailInfo collection={collection} />
 
-                <div className="collection-detail-tabs">
-                    <Tabs tabs={tabs} />
-                </div>
-                <CollectionDetailLinks
-                    links={this.props.collection.links}
-                    filter={filter}
-                />
-                <div className="collection-detail__add-button" onClick={this.createLink} >
-                    <Button
-                        icon={<Icon iconName={'link'} />}
-                        text="добавить ссылку"
-                        type="max-width"
-                    />
-                </div>
+                { collection.links.length > 0
+                    ? (
+                        <div>
+                            <div className="collection-detail-tabs">
+                                <Tabs tabs={tabs} />
+                            </div>
+                            <CollectionDetailLinks
+                                links={collection.links}
+                                filter={filter}
+                            />
+                            <div className="collection-detail__add-button" onClick={this.createLink} >
+                                <Button
+                                    icon={<Icon iconName={'link'} />}
+                                    text="добавить ссылку"
+                                    type="max-width"
+                                />
+                            </div>
+                        </div>
+                    )
+                    : (
+                        <div className="collection-detail__mesage-wrapper">
+                            <h3 className="collection-detail__title">Ссылок пока нет</h3>
+                            { collection.author.userId === userId
+                                ? (
+                                    <div>
+                                        <p className="collection-detail__text">
+                                            Поделитесь своей подборкой, и, возможно,
+                                            друзья посоветуют вам чего-то полезного
+                                        </p>
+                                        <div className="collection-detail__add-button" onClick={this.createLink} >
+                                            <Button
+                                                icon={<Icon iconName={'link'} />}
+                                                text="поделиться"
+                                                type="max-width"
+                                            />
+                                        </div>
+                                    </div>
+                                )
+                                : (
+                                    <div>
+                                        <p className="collection-detail__text">
+                                            Добавьте ссылку сами или поделитесь с
+                                            друзьями и они посоветуют что-то полезное
+                                        </p>
+                                        <div className="collection-detail__add-button" onClick={this.createLink} >
+                                            <Button
+                                                icon={<Icon iconName={'link'} />}
+                                                text="добавить ссылку"
+                                                type="max-width"
+                                            />
+                                        </div>
+                                    </div>
+                                )
+                            }
+                        </div>
+                    )
+                }
             </div>
         );
     }
@@ -75,11 +125,13 @@ CollectionDetail.propTypes = {
     collectionLoader: PropTypes.func.isRequired,
     token: PropTypes.string.isRequired,
     history: PropTypes.object.isRequired,
+    userId: PropTypes.string.isRequired,
 };
 
 export default connect(
     state => ({
         collection: state.collection,
+        userId: state.user.data.userId,
         token: state.app.token,
     }),
     { collectionLoader },
