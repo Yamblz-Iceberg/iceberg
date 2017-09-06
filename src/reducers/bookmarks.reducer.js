@@ -1,13 +1,15 @@
 import { fetchSavedCollections, fetchMyCollections, fetchSavedLinks, fetchMyLinks } from '../services/bookmarks.service';
+import { showLoader } from './loader.reducer';
 
-const GET_USER_COLLECTIONS = 'GET_USER_COLLECTIONS';
-const GET_USER_LINKS = 'GET_USER_LINKS';
+export const GET_USER_COLLECTIONS = 'GET_USER_COLLECTIONS';
+export const GET_USER_LINKS = 'GET_USER_LINKS';
 
 const initialState = {
     typeToFeed: 'myCollection',
     collections: [],
     links: [],
 };
+
 const getSavedCollections = (data, type) =>
     ({ type: GET_USER_COLLECTIONS, payload: data.collections, typeToFeed: type });
 const getMyCollections = (data, type) =>
@@ -36,6 +38,7 @@ const reducer = (state = initialState, action) => {
 
 const savedCollectionsLoader = (token, type) => (
     (dispatch) => {
+        dispatch(showLoader());
         fetchSavedCollections(token).then((data) => {
             dispatch(getSavedCollections(data, type));
         });
@@ -44,6 +47,7 @@ const savedCollectionsLoader = (token, type) => (
 
 const myCollectionsLoader = (token, type) => (
     (dispatch) => {
+        dispatch(showLoader());
         fetchMyCollections(token).then((data) => {
             dispatch(getMyCollections(data, type));
         });
@@ -52,6 +56,7 @@ const myCollectionsLoader = (token, type) => (
 
 const savedLinksLoader = (token, type) => (
     (dispatch) => {
+        dispatch(showLoader());
         fetchSavedLinks(token).then((data) => {
             dispatch(getSavedLinks(data, type));
         });
@@ -60,6 +65,7 @@ const savedLinksLoader = (token, type) => (
 
 const myLinksLoader = (token, type) => (
     (dispatch) => {
+        dispatch(showLoader());
         fetchMyLinks(token).then((data) => {
             dispatch(getMyLinks(data, type));
         });

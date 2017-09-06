@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { CollectionCard, HashTape } from '../../index';
+import { Preloader } from '../../../blocks';
 
 import { feedLoader } from '../../../reducers/feed.reducer';
 
@@ -28,7 +29,11 @@ class HomeFeed extends Component {
     }
 
     renderFeed = (collectionsCount, tagsCount) => {
-        const { collections, tags } = this.props;
+        const { collections, tags, loader } = this.props;
+
+        if (loader) {
+            return <Preloader />;
+        }
 
         const feedToRender = [];
 
@@ -85,6 +90,7 @@ HomeFeed.propTypes = {
     history: PropTypes.any.isRequired,
     queryParam: PropTypes.any.isRequired,
     token: PropTypes.string.isRequired,
+    loader: PropTypes.bool.isRequired,
 };
 
 HomeFeed.defaultProps = {
@@ -98,6 +104,7 @@ function mapStateToProps(state) {
         tags: state.feed.tags,
         token: state.app.token,
         user: state.user.user,
+        loader: state.loader,
     };
 }
 
