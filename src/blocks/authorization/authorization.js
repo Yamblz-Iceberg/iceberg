@@ -3,56 +3,61 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Icon, Button } from '../';
-import AuthorizationModal from './__modal/authorization__modal';
-import { CLIENT_ID, CLIENT_SECRET, SERVER, YANDEX_APP_ID } from '../../config';
-import { addRealUser } from '../../reducers/authorization.reducer';
-import { hideLoader, showLoader } from '../../reducers/loader.reducer';
+import { CLIENT_ID, CLIENT_SECRET, VK_APP_ID, YANDEX_APP_ID } from '../../config';
 import { actions as modalActions } from '../../reducers/modal.reducer';
 
 import './authorization.scss';
 
 class Authorization extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            showIframe: false,
-            src: '',
-        };
-    }
-    componentDidMount() {
-        window.addEventListener('message', this.messageListener);
-    }
-    componentWillUnmount() {
-        window.removeEventListener('message', this.messageListener);
-    }
-    messageListener = (event) => {
-        if (event.origin !== SERVER) return false;
-        try {
-            const res = JSON.parse(event.data.replace(/&quot;/g, '"'));
-            this.setState({ showIframe: false });
-            this.props.addRealUser(res);
-            localStorage.setItem('IcebergUserData', JSON.stringify(res));
-            this.props.hideLoader();
-            alert('Вы успешно авторизованы!');
-            // this.goBack();
-        } catch (error) {
-            console.error('Error while parsing JSON:', error);
+    /* eslint class-methods-use-this: ["error", { "exceptMethods": ["openLink"] }] */
+    openLink(href, readerMode) {
+        if (window.cordova) {
+            window.SafariViewController.isAvailable((available) => {
+                if (available) {
+                    window.SafariViewController.show({
+                        url: href,
+                        hidden: false,
+                        animated: false,
+                        transition: 'curl',
+                        enterReaderModeIfAvailable: readerMode,
+                        tintColor: '#fff',
+                        barColor: '#000',
+                        controlTintColor: '#ffffff',
+                    },
+                    // success
+                    () => {},
+                    // error
+                    () => {
+                        this.props.showModal('ERROR_MESSAGE');
+                    });
+                } else {
+                    window.open(href);
+                }
+            });
+        } else {
+            window.open(href);
         }
-        return true;
-    };
+    }
     logInYandex = () => {
-        this.props.showLoader();
+        localStorage.removeItem('IcebergUserData');
         const redirectURI = 'https://iceberg-project.herokuapp.com/register/yandex/callback';
         const userId = this.props.authorization.userId;
-        this.setState({
-            showIframe: true,
-            src: `https://oauth.yandex.ru/authorize?response_type=code&redirect_uri=${redirectURI}&state=${CLIENT_ID},${CLIENT_SECRET},${userId}&client_id=${YANDEX_APP_ID}`,
-        });
+        const url = `https://oauth.yandex.ru/authorize?response_type=code&redirect_uri=${redirectURI}&state=${CLIENT_ID},${CLIENT_SECRET},${userId}&client_id=${YANDEX_APP_ID}`;
+        this.openLink(url);
     };
     logInVK = () => {
-        this.props.showModal('ERROR_MESSAGE', { title: 'УПС!', text: 'Авторизация через Вконтакте пока не реализована' });
+        localStorage.removeItem('IcebergUserData');
+        const redirectURI = 'https://iceberg-project.herokuapp.com/register/vk/callback';
+        const userId = this.props.authorization.userId;
+        const url = `https://oauth.vk.com/authorize?response_type=code&scope=friends&display=mobile&redirect_uri=${redirectURI}&state=${CLIENT_ID},${CLIENT_SECRET},${userId}&client_id=${VK_APP_ID}`;
+        this.openLink(url);
     };
     logInFB = () => {
+        // localStorage.removeItem('IcebergUserData');
+        // const redirectURI = 'https://iceberg-project.herokuapp.com/register/fb/callback';
+        // const userId = this.props.authorization.userId;
+        // const url = `https://www.facebook.com/dialog/oauth?response_type=code&scope=user_friends&redirect_uri=${redirectURI}&state=${CLIENT_ID},${CLIENT_SECRET},${userId}&client_id=${FB_APP_ID}`;
+        // this.openLink(url);
         this.props.showModal('ERROR_MESSAGE', { title: 'УПС!', text: 'Авторизация через Facebook пока не реализована' });
     };
     goBack = () => {
@@ -93,7 +98,6 @@ class Authorization extends Component {
                         />
                         <Button text="яндекс" size="max-width" background="#ffcc00" onClick={this.logInYandex} />
                     </section>
-                    <AuthorizationModal show={this.state.showIframe} src={this.state.src} />
                 </div>
             </main>
         );
@@ -102,9 +106,6 @@ class Authorization extends Component {
 
 Authorization.propTypes = {
     history: PropTypes.object.isRequired,
-    addRealUser: PropTypes.func.isRequired,
-    showLoader: PropTypes.func.isRequired,
-    hideLoader: PropTypes.func.isRequired,
     authorization: PropTypes.object.isRequired,
     showModal: PropTypes.func.isRequired,
 };
@@ -113,5 +114,5 @@ export default connect(
     state => ({
         authorization: state.authorization,
     }),
-    { addRealUser, showLoader, hideLoader, ...modalActions },
+    { ...modalActions },
 )(withRouter(Authorization));

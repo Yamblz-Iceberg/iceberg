@@ -8,6 +8,7 @@ import { USER_DATA } from '../../config';
 
 import './middleware.scss';
 import { showLoader, hideLoader } from '../../reducers/loader.reducer';
+import { addRealUser } from '../../reducers/authorization.reducer';
 import { Preloader } from '../';
 
 class Middleware extends Component {
@@ -16,6 +17,7 @@ class Middleware extends Component {
         this.state = {
             showOnboarding: false,
         };
+        window.handleOpenURL = this.handleUserData;
     }
     componentDidMount() {
         this.props.showLoader();
@@ -34,6 +36,20 @@ class Middleware extends Component {
     componentWillUnmount() {
         this.props.hideLoader();
     }
+    handleUserData = (url) => {
+        setTimeout(() => {
+            window.SafariViewController.hide();
+            const authData = {
+                access_token: /access_token=([^&]+)/.exec(url)[1],
+                refresh_token: /refresh_token=([^&]+)/.exec(url)[1],
+                expires_in: /expires_in=([^&]+)/.exec(url)[1],
+                token_type: /token_type=([^&]+)/.exec(url)[1],
+            };
+            this.props.addRealUser(authData);
+            localStorage.setItem('IcebergUserData', JSON.stringify(authData));
+        },
+        0);
+    };
     navigateTo = () => {
         if (!this.state.showOnboarding) {
             this.props.history.replace('/feed');
@@ -63,6 +79,7 @@ Middleware.propTypes = {
     history: PropTypes.object.isRequired,
     showLoader: PropTypes.func.isRequired,
     hideLoader: PropTypes.func.isRequired,
+    addRealUser: PropTypes.func.isRequired,
     authorization: PropTypes.object.isRequired,
     loader: PropTypes.bool.isRequired,
 };
@@ -72,5 +89,5 @@ export default connect(
         authorization: state.authorization,
         loader: state.loader,
     }),
-    { registerDemoUser, showLoader, hideLoader },
+    { registerDemoUser, addRealUser, showLoader, hideLoader },
 )(withRouter(Middleware));
