@@ -17,6 +17,10 @@ const LinkCard = ({ data, button, showFooter, editIcon }) => {
         photo: data.userAdded.photo,
     };
 
+    const handleOnErrorFavicon = (e) => {
+        e.target.style.display = 'none';
+    };
+
     return (<div className="link-card" style={cardStyles}>
         <div className="link-card__header">
             <div className="link-card__user">
@@ -33,7 +37,7 @@ const LinkCard = ({ data, button, showFooter, editIcon }) => {
 
         <div className="link-card__body">
             <h3 className="link-card__title">{data.name}</h3>
-            <img src={data.favicon} className="link-card__favicon" alt="link_ico" />
+            <img src={data.favicon} onError={handleOnErrorFavicon} className="link-card__favicon" alt="link_ico" />
             {
                 data.description && data.description.length > 0 ?
                     <blockquote className="link-card__comment">

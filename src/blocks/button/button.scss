@@ -8,6 +8,11 @@
     border: 0;
     border-radius: 4px;
     outline-color: yellow;
+    &__wrap {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
     &__text {
         * + & {
             margin-left: 10px;

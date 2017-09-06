@@ -9,8 +9,11 @@ import { Icon, Button } from '../../../blocks';
 import './create-link-header.scss';
 
 class AddLinkHeader extends Component {
-    handleGoBack = () => {
+    handleReturnToCreatingLink = () => {
         this.props.history.goBack();
+    };
+    handleReturnToCard = () => {
+        this.props.history.replace({ pathname: `/collection/${this.props.collection._id}` });
     };
     addLink = () => {
         this.props.addLinkToCollection(
@@ -18,7 +21,7 @@ class AddLinkHeader extends Component {
             this.props.link._id,
             this.props.token,
             this.props.description,
-            this.props.history.push({ pathname: `/collection/${this.props.collection._id}/new` }),
+            this.props.history.replace({ pathname: `/collection/${this.props.collection._id}/new` }),
         );
     };
 
@@ -32,13 +35,22 @@ class AddLinkHeader extends Component {
             >
                 <div className="create-link-header__container">
                     <div className="create-link-header__block">
-                        <span onClick={this.handleGoBack}>
-                            <Icon iconName={'arrow-back'} iconColor="#000" />
-                        </span>
-                        <h4 className="create-link-header__title">
-                            {this.props.title}
-                        </h4>
+                        {
+                            !this.props.isLinkConstructor &&
+                            <span onClick={this.handleReturnToCreatingLink} className="create-link-header__back-to-link">
+                                <Icon iconName={'arrow-details'} iconColor="#000" />
+                            </span>
+                        }
+                        {
+                            this.props.isLinkConstructor &&
+                            <span onClick={this.handleReturnToCard}>
+                                <Icon iconName={'arrow-back'} iconColor="#000" />
+                            </span>
+                        }
                     </div>
+                    <h4 className="create-link-header__title">
+                        {this.props.title}
+                    </h4>
                     <div className="create-link-header__block create-link-header__button" onClick={this.addLink}>
                         <Button
                             text="Добавить"
@@ -55,6 +67,7 @@ class AddLinkHeader extends Component {
 AddLinkHeader.propTypes = {
     title: PropTypes.string.isRequired,
     showAddButton: PropTypes.bool.isRequired,
+    isLinkConstructor: PropTypes.bool,
     collection: PropTypes.object.isRequired,
     link: PropTypes.object.isRequired,
     description: PropTypes.string,
@@ -65,6 +78,7 @@ AddLinkHeader.propTypes = {
 
 AddLinkHeader.defaultProps = {
     description: '',
+    isLinkConstructor: true,
 };
 
 export default connect(

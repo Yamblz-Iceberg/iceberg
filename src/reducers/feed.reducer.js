@@ -1,6 +1,7 @@
 import { fetchFeed } from '../services/feed.service';
+import { showLoader } from './loader.reducer';
 
-const FETCH_FEED = 'FETCH_FEED';
+export const FETCH_FEED = 'FETCH_FEED';
 
 const initialState = {
     tags: [],
@@ -20,6 +21,7 @@ const reducer = (state = initialState, action) => {
 
 const feedLoader = (queryParam, token) => (
     (dispatch) => {
+        dispatch(showLoader());
         fetchFeed(queryParam, token).then((feed) => {
             dispatch(loadFeed(feed));
         });

@@ -16,8 +16,10 @@ const Button = ({ type, size, icon, text, background, textColor, isDisabled, onC
         disabled={isDisabled}
         style={{ backgroundColor: background, color: textColor }}
     >
-        {icon}
-        <span className="button__text">{text}</span>
+        <span className="button__wrap">
+            {icon}
+            <span className="button__text">{text}</span>
+        </span>
     </button>
 );
 

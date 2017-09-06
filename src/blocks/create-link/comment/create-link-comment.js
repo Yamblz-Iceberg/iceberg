@@ -38,6 +38,7 @@ class CreateLinkComment extends Component {
                 <CreateLinkHeader
                     callback={this.resetTextContent}
                     title="комментарий"
+                    isLinkConstructor={false}
                     showAddButton={showAddButton}
                 />
                 <div className="add-comment__limited-textarea">
