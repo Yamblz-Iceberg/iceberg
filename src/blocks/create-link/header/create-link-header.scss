@@ -41,4 +41,7 @@
             display: initial;
         }
     }
+    &__back-to-link {
+        transform: rotate(180deg);
+    }
 }

@@ -9,12 +9,11 @@ import { Icon, Button } from '../../../blocks';
 import './create-link-header.scss';
 
 class AddLinkHeader extends Component {
-    handleGoBack = () => {
-        if (this.props.title !== 'комментарий') {
-            this.props.history.replace({ pathname: `/collection/${this.props.collection._id}` });
-        } else {
-            this.props.history.goBack();
-        }
+    handleReturnToCreatingLink = () => {
+        this.props.history.goBack();
+    };
+    handleReturnToCard = () => {
+        this.props.history.replace({ pathname: `/collection/${this.props.collection._id}` });
     };
     addLink = () => {
         this.props.addLinkToCollection(
@@ -36,9 +35,18 @@ class AddLinkHeader extends Component {
             >
                 <div className="create-link-header__container">
                     <div className="create-link-header__block">
-                        <span onClick={this.handleGoBack}>
-                            <Icon iconName={'arrow-back'} iconColor="#000" />
-                        </span>
+                        {
+                            !this.props.isLinkConstructor &&
+                            <span onClick={this.handleReturnToCreatingLink} className="create-link-header__back-to-link">
+                                <Icon iconName={'arrow-details'} iconColor="#000" />
+                            </span>
+                        }
+                        {
+                            this.props.isLinkConstructor &&
+                            <span onClick={this.handleReturnToCard}>
+                                <Icon iconName={'arrow-back'} iconColor="#000" />
+                            </span>
+                        }
                         <h4 className="create-link-header__title">
                             {this.props.title}
                         </h4>
@@ -59,6 +67,7 @@ class AddLinkHeader extends Component {
 AddLinkHeader.propTypes = {
     title: PropTypes.string.isRequired,
     showAddButton: PropTypes.bool.isRequired,
+    isLinkConstructor: PropTypes.bool,
     collection: PropTypes.object.isRequired,
     link: PropTypes.object.isRequired,
     description: PropTypes.string,
@@ -69,6 +78,7 @@ AddLinkHeader.propTypes = {
 
 AddLinkHeader.defaultProps = {
     description: '',
+    isLinkConstructor: true,
 };
 
 export default connect(
