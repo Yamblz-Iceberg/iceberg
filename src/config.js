@@ -5,7 +5,7 @@ const CLIENT_SECRET = 'SomeRandomCharsAndNumbers';
 // TODO когда CLIENT_ID browser добавится на сервере изменить его на дефолтное
 let platformId = 'android';
 if (typeof window.cordova !== 'undefined') {
-    platformId = window.cordova.platform.platformId;
+    platformId = window.cordova.platformId;
 }
 const CLIENT_ID = platformId;
 
