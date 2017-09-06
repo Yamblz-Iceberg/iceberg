@@ -4,7 +4,8 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import reducer from './reducers';
 import {
     AccountProfile,
     CollectionDetail,
@@ -16,8 +17,8 @@ import {
     LinkPreview,
     Modal,
     Authorization,
+    Middleware,
 } from './blocks';
-import reducer from './reducers';
 
 import './styles.scss';
 import './assets/fonts/fonts.scss';
@@ -59,7 +60,7 @@ function onDeviceReady() {
                         <Route path="/search" component={Search} />
                         <Route path="/preview" component={LinkPreview} />
                         <Route path="/authorization" component={Authorization} />
-                        <Redirect from="/" to="/feed" />
+                        <Route path="/" component={Middleware} />
                     </Switch>
                 </div>
             </Router>

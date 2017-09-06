@@ -2,7 +2,7 @@ import { CLIENT_ID, CLIENT_SECRET } from '../config';
 
 const encodedAuth = window.btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
 
-export const postRegisterDemoUser = (userId, password) => {
+export const postRegisterDemoUser = (userId, password, firstName, lastName) => {
     const headers = new Headers({
         Authorization: `Basic ${encodedAuth}`,
         'Content-Type': 'application/json',
@@ -10,7 +10,7 @@ export const postRegisterDemoUser = (userId, password) => {
 
     return fetch('https://iceberg-project.herokuapp.com/register/demo', {
         method: 'post',
-        body: JSON.stringify({ userId, password }),
+        body: JSON.stringify({ userId, password, firstName, lastName }),
         headers,
     }).then(res => res.json());
 };

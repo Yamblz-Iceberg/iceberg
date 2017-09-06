@@ -33,3 +33,4 @@ export { default as LinkPreview } from './link-preview';
 export { default as CardFooter } from './card-footer';
 export { default as Authorization } from './authorization';
 export { default as Preloader } from './preloader';
+export { default as Middleware } from './middleware';
