@@ -10,6 +10,7 @@
     background-color: #414141;
     padding: 72px 20px 36px;
     overflow: hidden;
+
     &__background {
         position: absolute;
         top: 0;
@@ -36,6 +37,7 @@
         display: flex;
         justify-content: flex-end;
         z-index: 2;
+
         .rating-info-wrap {
             position: absolute;
             bottom: 0;
@@ -45,7 +47,6 @@
 
     &__description {
         margin: 8px 0 0;
-        text-align: center;
         font-size: 14px;
         color: rgba(255, 255, 255, 0.85);
     }
