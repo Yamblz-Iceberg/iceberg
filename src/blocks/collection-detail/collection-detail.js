@@ -88,7 +88,7 @@ class CollectionDetail extends Component {
                                         </p>
                                         <div className="collection-detail__add-button" onClick={this.createLink} >
                                             <Button
-                                                icon={<Icon iconName={'link'} />}
+                                                icon={<Icon iconName={'share'} />}
                                                 text="поделиться"
                                                 type="max-width"
                                             />
