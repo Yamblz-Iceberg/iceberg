@@ -11,6 +11,10 @@ class AccountProfileFeedItem extends Component {
         this.props.history.push({ pathname: `/collection/${cardId}` });
     }
 
+    handleOnErrorFavicon = (e) => {
+        e.target.style.display = 'none';
+    }
+
     render() {
         const { data, type } = this.props;
         const resultStyles = {
@@ -35,7 +39,7 @@ class AccountProfileFeedItem extends Component {
                 <h5 className="account-profile-feed-link__title">{data.name || 'Нет названия'}</h5>
                 <div className="account-profile-feed-link__url-container">
                     { data.favicon && data.favicon.length
-                        && (<img src={data.favicon} className="account-profile-feed-link__favicon" alt="link_ico" />) }
+                        && (<img src={data.favicon} onError={this.handleOnErrorFavicon} className="account-profile-feed-link__favicon" alt="link_ico" />) }
                     <p className="account-profile-feed-link__url">{data.url}</p>
                 </div>
             </div>
