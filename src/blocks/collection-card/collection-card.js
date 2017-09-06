@@ -40,6 +40,7 @@ const CollectionCard = ({ data }) => {
             </div>
 
             <CardFooter
+                idCard={data._id}
                 avatarOptions={avatarOptions}
                 userName={userName}
                 linksCount={data.linksCount}
