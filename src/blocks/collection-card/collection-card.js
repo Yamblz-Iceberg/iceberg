@@ -44,6 +44,7 @@ const CollectionCard = ({ data }) => {
                 userName={userName}
                 linksCount={data.linksCount}
                 savedTimesCount={data.savedTimesCount}
+                saved={data.saved}
             />
 
             { data.photo ? <div className="collection-card__overlay" /> : null }
