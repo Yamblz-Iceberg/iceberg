@@ -67,7 +67,7 @@ class AccountProfile extends Component {
             },
             {
                 id: 1,
-                title: 'Созданные другими',
+                title: 'Сохраненные',
                 name: 'savedCollections',
             },
         ];
