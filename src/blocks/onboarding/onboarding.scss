@@ -26,6 +26,24 @@
 .onboarding-slider {
     overflow: hidden;
 
+    &__hash-tags-wrapper {
+        margin: 0 -7vw;
+        word-break: break-word;
+    }
+
+    &__hash-tag {
+        display: inline-block;
+        margin: 2vw;
+        padding: 10px 6vw;
+        font-size: 14px;
+        border-radius: 20px;
+        background-color: $dark-blue;
+        color: white;
+        &--selected {
+            filter: grayscale(100%);
+        }
+    }
+
     &__slide {
         margin-top: 22vh;
         padding: 0 10vw;
@@ -33,11 +51,9 @@
         text-align: center;
     }
 
-    &__image {
-        margin-bottom: 8vh;
-    }
-
     &__title {
+        margin-top: 8vh;
+        line-height: 26px;
         font-size: 20px;
     }
 
