@@ -21,13 +21,17 @@ class Tabs extends Component {
     }
 
     animateUnderline = () => {
-        const activeListItemPosition = this.activeListItem.offsetLeft;
-        const activeListItemWidth = this.activeListItem.offsetWidth;
+        if (typeof this.activeListItem !== 'undefined') {
+            const {
+                offsetLeft,
+                offsetWidth,
+            } = this.activeListItem;
 
-        this.underline.style.cssText = `
-            left:${activeListItemPosition}px;
-            width:${activeListItemWidth}px;
-        `;
+            this.underline.style.cssText = `
+                left:${offsetLeft}px;
+                width:${offsetWidth}px;
+            `;
+        }
     }
 
     render() {
