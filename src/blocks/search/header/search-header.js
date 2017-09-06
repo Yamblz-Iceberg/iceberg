@@ -15,8 +15,12 @@ class SearchHeader extends Component {
         super(props);
 
         this.state = {
-            text: '',
+            text: props.search.text,
         };
+
+        if (props.search.text !== '') {
+            this.loadResult();
+        }
     }
 
     componentWillMount() {

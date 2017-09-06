@@ -26,7 +26,10 @@ const reducer = (state = initialState, action) => {
     case FETCH_COLLECTION:
         return { ...state, ...action.payload };
     case CHANGE_SAVED_STATUS:
-        return { ...state, saved: action.payload };
+        return { ...state,
+            saved: action.payload,
+            savedTimesCount: state.savedTimesCount + (action.payload ? 1 : -1),
+        };
     default:
         return state;
     }

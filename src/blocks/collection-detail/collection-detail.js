@@ -58,7 +58,11 @@ class CollectionDetail extends Component {
                     filter={filter}
                 />
                 <div className="collection-detail__add-button" onClick={this.createLink} >
-                    <Button icon={<Icon iconName={'link'} />} text="добавить ссылку" />
+                    <Button
+                        icon={<Icon iconName={'link'} />}
+                        text="добавить ссылку"
+                        type="max-width"
+                    />
                 </div>
             </div>
         );

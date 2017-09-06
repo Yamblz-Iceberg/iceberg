@@ -10,8 +10,8 @@ import './hash-tag.scss';
 class HashTag extends Component {
     goToSearch = (e) => {
         e.stopPropagation();
-        this.props.changeSearch(this.props.name);
-        this.props.history.push({ pathname: './search' });
+        this.props.changeSearch(`#${this.props.name}`);
+        this.props.history.push({ pathname: '/search' });
     }
     render() {
         const { name, size } = this.props;

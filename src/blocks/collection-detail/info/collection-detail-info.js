@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { putToSavedLoader, delFromSavedLoader } from '../../../reducers/collection.reducer';
 import { ToggleText } from '../../index';
-import { HashTag, Icon, Button, CardFooter } from '../../../blocks';
+import { HashTape, Icon, Button, CardFooter } from '../../../blocks';
 
 import './collection-detail-info.scss';
 
@@ -32,29 +32,6 @@ class CollectionDetailInfo extends Component {
         this.props.delFromSavedLoader(this.props.collection._id, this.props.token);
     }
 
-    renderButton() {
-        if (this.props.collection.saved) {
-            return (
-                <Button
-                    type="light"
-                    icon={<Icon iconName={'save-small'} iconColor={mainYellow} />}
-                    text="вы подписаны"
-                    size="max-width"
-                    onClick={this.delFromSaved}
-                />
-            );
-        }
-
-        return (
-            <Button
-                icon={<Icon iconName={'save-big'} />}
-                text="подписаться"
-                size="max-width"
-                onClick={this.putToSaved}
-            />
-        );
-    }
-
     render() {
         const collection = this.props.collection;
 
@@ -76,22 +53,21 @@ class CollectionDetailInfo extends Component {
                         />
 
                         <div className="collection-detail-card__info">
+                            <div className="collection-detail-card__tape">
+                                <HashTape hashes={collection.tags} size="small" />
+                            </div>
                             <div className="collection-detail-card__header">
-                                {collection.tags.map(hash => (
-                                    <HashTag
-                                        {...hash}
-                                        size={'small'}
-                                        key={hash._id}
-                                    />)) }
                                 <h2 className="collection-detail-card__title">{ collection.name }</h2>
                             </div>
-
-                            <CardFooter
-                                avatarOptions={avatarOptions}
-                                userName={userName}
-                                linksCount={collection.links.length}
-                                savedTimesCount={collection.savedTimesCount}
-                            />
+                            <div className="collection-detail-card__footer">
+                                <CardFooter
+                                    avatarOptions={avatarOptions}
+                                    userName={userName}
+                                    linksCount={collection.links.length}
+                                    savedTimesCount={collection.savedTimesCount}
+                                    saved={collection.saved}
+                                />
+                            </div>
                         </div>
 
                         <div className="collection-detail-card__overlay" />
@@ -100,7 +76,25 @@ class CollectionDetailInfo extends Component {
                     <ToggleText text={this.props.collection.description} />
 
                     <div className="collection-detail-actions">
-                        { this.renderButton() }
+                        {
+                            collection.saved &&
+                                <Button
+                                    type="light"
+                                    icon={<Icon iconName="save-small" iconColor={mainYellow} />}
+                                    text="вы подписаны"
+                                    size="max-width"
+                                    onClick={this.delFromSaved}
+                                />
+                        }
+                        {
+                            !collection.saved &&
+                                <Button
+                                    icon={<Icon iconName="save-big" />}
+                                    text="подписаться"
+                                    size="max-width"
+                                    onClick={this.putToSaved}
+                                />
+                        }
                         <button className="collection-detail-actions__add-link" onClick={this.createLink}>
                             <Icon iconName={'link'} />
                             <Icon iconName={'plus'} />

@@ -2,7 +2,7 @@
 
 .collection-detail-card {
     position: relative;
-    height: 250px;
+    height: 256px;
     padding-top: 56px;
     overflow: hidden;
 
@@ -19,20 +19,31 @@
         filter: blur(8px);
     }
 
+    &__tape {
+        z-index: 2;
+    }
+
     &__header {
+        padding: 0 20px;
+        z-index: 2;
+    }
+
+    &__footer {
+        margin: 0;
+        margin-top: auto;
+        padding: 0 20px 20px 20px;
         z-index: 2;
     }
 
     &__info {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        height: 196px;
-        padding: 0 20px 20px;
+        justify-content: flex-start;
+        height: 200px;
     }
 
     &__title {
-        max-height: 100px;
+        margin-top: 10px;
         overflow: hidden;
         color: #fff;
         display: block;
@@ -67,6 +78,7 @@
         background-color: transparent;
         border: 2px solid $border-gray;
         border-radius: 4px;
+        padding: 0 10px;
 
         svg:first-of-type {
             margin-right: 5px;

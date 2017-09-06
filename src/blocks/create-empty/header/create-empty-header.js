@@ -51,7 +51,7 @@ class CreateEmptyHeader extends Component {
         this.props.history.goBack();
     };
     changeRoute = () => {
-        this.props.history.push('/feed/new');
+        this.props.history.push('/feed/time');
     };
 
     hexToRGB = (color) => {
@@ -73,12 +73,12 @@ class CreateEmptyHeader extends Component {
                 });
         } else {
             const body = {
-                description: this.props.description,
                 name: this.props.title,
-                photo: this.props.photo,
-                color: this.props.color,
-                tags: this.props.hashTags,
+                color: this.hexToRGB(this.props.color || cardBlue),
+                tags: this.props.hashTags.map(tag => tag.id),
             };
+            if (this.props.photo) { body.photo = this.props.photo; }
+            if (this.props.description) { body.description = this.props.description; }
             this.props.createCollection(body, this.props.token, this.changeRoute);
         }
     };
