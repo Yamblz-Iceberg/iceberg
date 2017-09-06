@@ -18,9 +18,22 @@ class CollectionDetailLinks extends Component {
         };
     }
 
-    componentWillReceiveProps(props) {
-        this.setState({ links: props.links });
+    componentWillMount = () => {
+        this.setLinks(this.props.links);
     }
+
+    componentWillReceiveProps(props) {
+        if (this.props.links !== props.links) {
+            this.setLinks(props.links);
+        }
+    }
+
+    setLinks = (links) => {
+        this.setState({
+            links,
+        });
+    }
+
     /* eslint class-methods-use-this: ["error", { "exceptMethods": ["openLink"] }] */
     openLink(href, readerMode) {
         if (window.cordova) {
