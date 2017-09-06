@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { Button, Icon } from '../../../blocks';
+import { Button, Icon, Preloader } from '../../../blocks';
 import SearchResultItem from './../result-item/search-result-item';
 
 import './search-result.scss';
@@ -51,7 +51,7 @@ class SearchResult extends Component {
         } else if (searchText !== '') {
             return (
                 <div className="search-result__preloader-wrapper">
-                    <div className="search-result__preloader" />
+                    <Preloader />
                 </div>
             );
         }

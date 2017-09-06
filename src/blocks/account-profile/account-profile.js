@@ -78,7 +78,12 @@ class AccountProfile extends Component {
             <div className="account-profile__tabs-wrap">
                 <Tabs tabs={tabs} />
             </div>
-            <ProfileFeed data={data} type={bookmarks.typeToFeed} filterItems={filterItems} />
+            <ProfileFeed
+                data={data}
+                type={bookmarks.typeToFeed}
+                filterItems={filterItems}
+                loader={this.props.loader}
+            />
         </div>);
     }
 }
@@ -90,6 +95,7 @@ AccountProfile.propTypes = {
     myCollectionsLoader: PropTypes.func.isRequired,
     savedLinksLoader: PropTypes.func.isRequired,
     history: PropTypes.any.isRequired,
+    loader: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -98,6 +104,7 @@ function mapStateToProps(state) {
         token: state.app.token,
         bookmarks: state.bookmarks,
         typeToFeed: state.user.typeToFeed,
+        loader: state.loader,
     };
 }
 
