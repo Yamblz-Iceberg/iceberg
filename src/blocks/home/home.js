@@ -25,7 +25,7 @@ const tabs = [
 
 class Home extends Component {
     componentDidMount() {
-        this.props.userLoader(this.props.token);
+        this.props.userLoader(this.props.authorization.access_token);
     }
 
     componentDidUpdate = () => {
@@ -52,7 +52,7 @@ class Home extends Component {
 
 Home.propTypes = {
     user: PropTypes.object,
-    token: PropTypes.string.isRequired,
+    authorization: PropTypes.object.isRequired,
     userLoader: PropTypes.func.isRequired,
     filter: PropTypes.string,
 };
@@ -65,7 +65,7 @@ Home.defaultProps = {
 
 function mapStateToProps(state) {
     return {
-        token: state.authorization.access_token,
+        authorization: state.authorization,
         user: state.user.data,
     };
 }

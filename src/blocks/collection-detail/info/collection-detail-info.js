@@ -10,6 +10,7 @@ import { HashTape, Icon, Button, CardFooter } from '../../../blocks';
 import './collection-detail-info.scss';
 
 import { mainYellow } from '../../../variables.scss';
+import { USER_DATA } from '../../../config';
 
 class CollectionDetailInfo extends Component {
     constructor(props) {
@@ -21,16 +22,21 @@ class CollectionDetailInfo extends Component {
     }
 
     createLink = () => {
-        this.props.history.replace({ pathname: '/create-link' });
+        if (USER_DATA !== null) {
+            this.props.history.replace({ pathname: '/create-link' });
+        } else {
+            localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
+            this.props.history.push('/authorization');
+        }
     };
 
     putToSaved = () => {
         this.props.putToSavedLoader(this.props.collection._id, this.props.token);
-    }
+    };
 
     delFromSaved = () => {
         this.props.delFromSavedLoader(this.props.collection._id, this.props.token);
-    }
+    };
 
     render() {
         const collection = this.props.collection;
