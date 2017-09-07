@@ -9,6 +9,7 @@ import { reducer as modal } from './modal.reducer';
 import { reducer as link } from './link.reducer';
 import { reducer as loader } from './loader.reducer';
 import { reducer as bookmarks } from './bookmarks.reducer';
+import { reducer as onboarding } from './onboarding.reducer';
 import { reducer as authorization } from './authorization.reducer';
 
 export default combineReducers({
@@ -22,5 +23,6 @@ export default combineReducers({
     link,
     loader,
     bookmarks,
+    onboarding,
     authorization,
 });

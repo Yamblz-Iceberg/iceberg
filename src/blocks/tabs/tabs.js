@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import './tabs.scss';
 
 class Tabs extends Component {
-    componentDidMount = () => {
+    componentDidMount() {
         this.animateUnderline();
     }
 
-    componentDidUpdate = () => {
+    componentDidUpdate() {
         this.animateUnderline();
     }
 
@@ -16,7 +16,7 @@ class Tabs extends Component {
         this.activeListItem = listItem;
     }
 
-    goTo = (linkTo) => {
+    goTo = linkTo => () => {
         this.props.history.replace(linkTo);
     }
 
@@ -50,17 +50,14 @@ class Tabs extends Component {
                             className: `tab__item ${isItemActive ? 'tabs__item--active' : ''}`,
                             key: `${tab.id}`,
                             onClick: tab.onClick,
+                            ref: isItemActive ? this.refItemListActive : null,
                         };
-
-                        if (isItemActive) {
-                            itemProps.ref = this.refItemListActive;
-                        }
 
                         return (
                             <li {...itemProps}>
                                 <span
                                     className="tabs__link"
-                                    onClick={() => this.goTo(tab.linkTo)}
+                                    onClick={this.goTo(tab.linkTo)}
                                 >{tab.title}</span>
                             </li>
                         );

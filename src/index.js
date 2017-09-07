@@ -16,6 +16,7 @@ import {
     Home,
     LinkPreview,
     Modal,
+    Onboarding,
     Authorization,
     Middleware,
 } from './blocks';
@@ -59,6 +60,7 @@ function onDeviceReady() {
                         <Route path="/profile" component={AccountProfile} />
                         <Route path="/search" component={Search} />
                         <Route path="/preview" component={LinkPreview} />
+                        <Route path="/onboarding" component={Onboarding} />
                         <Route path="/authorization" component={Authorization} />
                         <Route path="/" component={Middleware} />
                     </Switch>
