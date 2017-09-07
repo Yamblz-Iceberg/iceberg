@@ -44,6 +44,17 @@
         }
     }
 
+    &__icon-wrapper {
+        display: inline-flex;
+        margin-left: auto;
+        margin-right: auto;
+        width: 180px;
+        height: 180px;
+        overflow: hidden;
+        border-radius: 50%;
+        background-color: #76c9ff;
+    }
+
     &__slide {
         margin-top: 22vh;
         padding: 0 10vw;

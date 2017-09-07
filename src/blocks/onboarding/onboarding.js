@@ -61,21 +61,21 @@ class Onboarding extends Component {
         const slides = [
             {
                 _id: 0,
-                img: 'onboarding1',
+                img: 'onboard1',
                 title: 'Изучите любую тему',
                 text: 'Найдите существующую или создайте свою подборку',
                 type: '',
             },
             {
                 _id: 1,
-                img: 'onboarding2',
+                img: 'onboard2',
                 title: 'Делитесь своими ссылками',
                 text: 'Помогайте другим разобраться в теме и повышайте свой рейтинг',
                 type: '',
             },
             {
                 _id: 2,
-                img: 'onboarding3',
+                img: 'onboard3',
                 title: 'Сохраняйте подборки и ссылки',
                 text: 'Так вы быстро найдете их в профиле и лучше настроите свою ленту',
                 type: '',
@@ -151,11 +151,13 @@ class Onboarding extends Component {
                                         </div>
                                     )
                                     : (
-                                        <Icon
-                                            iconName={slide.img}
-                                            iconWidth={'180'}
-                                            iconHeight={'180'}
-                                        />
+                                        <span className="onboarding-slider__icon-wrapper">
+                                            <Icon
+                                                iconName={slide.img}
+                                                iconWidth={'180'}
+                                                iconHeight={'180'}
+                                            />
+                                        </span>
                                     )
                                 }
                                 <h2 className="onboarding-slider__title">{slide.title}</h2>
