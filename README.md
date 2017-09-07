@@ -50,13 +50,15 @@
 - onboard2
 - onboard3
 - onboard4
+- home
+- titanic
 
 
 ### Запуск приложения
 
 1. Склонировать проект локально:
 
-`git clone https://github.com/batogov/iceberg.git`
+`git clone https://github.com/Yamblz-Iceberg/iceberg-app.git`
 
 1. Перейти в директорию проекта: `cd iceberg`
 

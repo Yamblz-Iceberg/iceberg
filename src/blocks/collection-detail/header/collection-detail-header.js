@@ -37,6 +37,10 @@ class CollectionDetailHeader extends Component {
         this.props.history.goBack();
     };
 
+    handleGoHome = () => {
+        this.props.history.push({ pathname: '/feed' });
+    };
+
     render() {
         return (
             <header
@@ -52,6 +56,9 @@ class CollectionDetailHeader extends Component {
                     <h4 className="collection-detail-header__title">
                         {this.state.fixedHeader === true ? this.props.collectionTitle : false}
                     </h4>
+                    <div className="collection-detail-header__block" onClick={this.handleGoHome}>
+                        <Icon iconName={'home'} iconColor={this.state.fixedHeader ? '#000' : '#fff'} />
+                    </div>
                     <div className="collection-detail-header__block">
                         <Icon iconName={'more-vert'} iconColor={this.state.fixedHeader ? '#000' : '#fff'} />
                     </div>

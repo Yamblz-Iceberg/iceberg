@@ -7,6 +7,20 @@
             margin: 0 auto;
         }
     }
+    &__mesage-wrapper {
+        margin-bottom: 25px;
+        padding: 0 20px;
+        text-align: center;
+    }
+    &__title {
+        margin-top: 25px;
+        text-align: center;
+    }
+    &__text {
+        line-height: 18px;
+        font-size: 14px;
+        color: gray;
+    }
 }
 
 .collection-detail-tabs {

@@ -21,18 +21,22 @@ class Tabs extends Component {
     }
 
     animateUnderline = () => {
-        const { offsetLeft, offsetWidth } = this.activeListItem;
+        if (typeof this.activeListItem !== 'undefined') {
+            const {
+                offsetLeft,
+                offsetWidth,
+            } = this.activeListItem;
 
-        this.underline.style.cssText = `
-            left:${offsetLeft}px;
-            width:${offsetWidth}px;
-        `;
+            this.underline.style.cssText = `
+                left:${offsetLeft}px;
+                width:${offsetWidth}px;
+            `;
+        }
     }
 
     render() {
         const { tabs, history } = this.props;
 
-        // cn('tab__item', { 'tabs__item--active': isItemActive });
         return (
             <div className="tabs-container">
                 <ul className="tabs__list">

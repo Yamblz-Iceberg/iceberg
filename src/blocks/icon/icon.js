@@ -103,8 +103,8 @@ const iconsSizes = {
         height: '5px',
     },
     'double-links': {
-        width: '145px',
-        height: '145px',
+        width: '143px',
+        height: '143px',
     },
     iceberg: {
         width: '86px',
@@ -125,6 +125,14 @@ const iconsSizes = {
     onboard4: {
         width: '182px',
         height: '182px',
+    },
+    home: {
+        width: '20px',
+        height: '17px',
+    },
+    titanic: {
+        width: '143px',
+        height: '143px',
     },
 };
 
