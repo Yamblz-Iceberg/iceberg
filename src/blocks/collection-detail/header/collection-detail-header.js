@@ -56,7 +56,7 @@ class CollectionDetailHeader extends Component {
                     <h4 className="collection-detail-header__title">
                         {this.state.fixedHeader === true ? this.props.collectionTitle : false}
                     </h4>
-                    <div className="collection-detail-header__block" onClick={this.handleGoHome}>
+                    <div className="collection-detail-header__block collection-detail-header__home-wrap" onClick={this.handleGoHome}>
                         <Icon iconName={'home'} iconColor={this.state.fixedHeader ? '#000' : '#fff'} />
                     </div>
                     <div className="collection-detail-header__block">

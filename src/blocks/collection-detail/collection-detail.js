@@ -45,11 +45,6 @@ class CollectionDetail extends Component {
                 title: 'Непрочитанные',
                 linkTo: `/collection/${id}/unread`,
             },
-            {
-                id: 3,
-                title: 'Новое',
-                linkTo: `/collection/${id}/new`,
-            },
         ];
 
         return (

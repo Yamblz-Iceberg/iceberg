@@ -1,14 +1,14 @@
 .collection-detail {
+    padding-bottom: 25px;
     &__add-button {
         width: 260px;
-        margin: 0 auto 25px auto;
+        margin: 0 auto;
         
         button {
             margin: 0 auto;
         }
     }
     &__mesage-wrapper {
-        margin-bottom: 25px;
         padding: 0 20px;
         text-align: center;
     }
