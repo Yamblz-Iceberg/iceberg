@@ -37,7 +37,7 @@ class CreateDescription extends Component {
                 <CreateDescriptionHeader callback={this.resetTextContent} />
                 <div className="create-description__limited-textarea">
                     <LimitedTextarea
-                        max={1000}
+                        max={300}
                         handleChange={this.handleTextContentChange}
                         resetTextContent={this.state.resetText}
                         initialText={this.props.description}
