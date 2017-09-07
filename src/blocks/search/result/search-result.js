@@ -26,7 +26,7 @@ class SearchResult extends Component {
             return (
                 <div className="search-result__info">
                     <div className="search-result__count">
-                        <p>Найдено {result.collections.length} подборки</p>
+                        <p>Найдено подборок: {result.collections.length}</p>
                     </div>
                     <div className="search-result__list">
                         {
