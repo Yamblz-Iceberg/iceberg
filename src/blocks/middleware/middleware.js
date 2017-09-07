@@ -29,8 +29,7 @@ class Middleware extends Component {
     }
     componentWillReceiveProps = (nextProps) => {
         if (this.props.authorization.access_token === '' && nextProps.authorization.access_token !== '') {
-            // TODO Переход на онбоардинг
-            this.props.history.replace('/feed');
+            this.props.history.replace('/onboarding');
         } else if (this.props.authorization.access_token !== nextProps.authorization.access_token) {
             this.props.history.replace('/feed');
         }
