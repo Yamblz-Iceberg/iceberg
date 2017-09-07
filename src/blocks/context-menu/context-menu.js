@@ -45,11 +45,12 @@ class ContextMenu extends Component {
         >
             <Icon iconName={'more-vert'} iconColor={color} iconWidth="16px" iconHeight="16px" />
             { this.state.isOpened && <div className="context-menu__overlay" /> }
-            <div className={this.state.isOpened ? 'context-menu-list context-menu-list--opened' : 'context-menu-list'}>
+            { this.state.isOpened && <div className="context-menu-list">
                 {
                     items.map(item => <ContextMenuItem key={item.id} item={item} />)
                 }
             </div>
+            }
         </div>);
     }
 }
