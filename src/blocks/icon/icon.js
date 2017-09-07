@@ -110,6 +110,22 @@ const iconsSizes = {
         width: '86px',
         height: '90px',
     },
+    onboard1: {
+        width: '182px',
+        height: '182px',
+    },
+    onboard2: {
+        width: '182px',
+        height: '182px',
+    },
+    onboard3: {
+        width: '182px',
+        height: '182px',
+    },
+    onboard4: {
+        width: '182px',
+        height: '182px',
+    },
 };
 
 const Icon = (props) => {

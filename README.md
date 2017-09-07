@@ -46,6 +46,10 @@
 - dropdown
 - double-links
 - iceberg
+- onboard1
+- onboard2
+- onboard3
+- onboard4
 
 
 ### Запуск приложения
