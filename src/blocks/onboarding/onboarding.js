@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { Icon } from '../../blocks';
+
 import { addTag, deleteTag } from '../../reducers/onboarding.reducer';
 import './onboarding.scss';
 
@@ -59,20 +61,27 @@ class Onboarding extends Component {
         const slides = [
             {
                 _id: 0,
-                img: 'http://via.placeholder.com/180x180',
-                title: 'Разберитесь в чем угодно',
-                text: 'Создавайте темы и люди накидывают полезных ссылок по ним',
+                img: 'onboarding1',
+                title: 'Изучите любую тему',
+                text: 'Найдите существующую или создайте свою подборку',
                 type: '',
             },
             {
                 _id: 1,
-                img: 'http://via.placeholder.com/180x180',
-                title: 'Сохраняйте интересные подборки и ссылки',
-                text: '',
+                img: 'onboarding2',
+                title: 'Делитесь своими ссылками',
+                text: 'Помогайте другим разобраться в теме и повышайте свой рейтинг',
                 type: '',
             },
             {
                 _id: 2,
+                img: 'onboarding3',
+                title: 'Сохраняйте подборки и ссылки',
+                text: 'Так вы быстро найдете их в профиле и лучше настроите свою ленту',
+                type: '',
+            },
+            {
+                _id: 3,
                 title: 'Выберите интересные вам темы',
                 text: '',
                 type: 'tags',
@@ -142,10 +151,10 @@ class Onboarding extends Component {
                                         </div>
                                     )
                                     : (
-                                        <img
-                                            className="onboarding-slider__image"
-                                            src={slide.img}
-                                            alt="template"
+                                        <Icon
+                                            iconName={slide.img}
+                                            iconWidth={'180'}
+                                            iconHeight={'180'}
                                         />
                                     )
                                 }
