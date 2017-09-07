@@ -36,7 +36,7 @@ const CollectionCard = ({ data }) => {
                         <span className="hash-tag__text">{`+ ${hashesCount}`}</span>
                     </div>
                 }
-                <h2 className="collection-card__title">{data.name}</h2>
+                <h2 className="collection-card__title">{ data.name }</h2>
             </div>
 
             <CardFooter

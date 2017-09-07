@@ -3,10 +3,10 @@ const SERVER = 'https://iceberg-project.herokuapp.com';
 const CLIENT_SECRET = 'SomeRandomCharsAndNumbers';
 
 // TODO когда CLIENT_ID browser добавится на сервере изменить его на дефолтное
-let platformId = 'android';
-if (typeof window.cordova !== 'undefined') {
-    platformId = window.cordova.platformId;
-}
+const platformId = 'android';
+// if (typeof window.cordova !== 'undefined') {
+//     platformId = window.cordova.platformId;
+// }
 const CLIENT_ID = platformId;
 
 const YANDEX_APP_ID = 'de408bbe9e2e47acb701ed948c40f60e';

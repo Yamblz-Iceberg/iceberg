@@ -1,0 +1,121 @@
+@import "../../variables.scss";
+
+.onboarding {
+    height: 100vh;
+
+    &__skip {
+        position: absolute;
+        top: 30px;
+        left: 20px;
+    }
+
+    &__link {
+        font-size: 14px;
+        font-weight: 700;
+        border: none;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-decoration: none;
+        background-color: transparent;
+        color: black;
+        &--inactive {
+            color: gray;
+            pointer-events: none;
+        }
+    }
+}
+
+.onboarding-slider {
+    overflow: hidden;
+
+    &__hash-tags-wrapper {
+        margin: 0 -7vw;
+        word-break: break-word;
+    }
+
+    &__hash-tag {
+        display: inline-block;
+        margin: 2vw;
+        padding: 10px 6vw;
+        font-size: 14px;
+        border-radius: 20px;
+        background-color: $dark-blue;
+        color: white;
+        &--selected {
+            filter: grayscale(100%);
+        }
+    }
+
+    &__icon-wrapper {
+        display: inline-flex;
+        margin-left: auto;
+        margin-right: auto;
+        width: 180px;
+        height: 180px;
+        overflow: hidden;
+        border-radius: 50%;
+        background-color: #76c9ff;
+    }
+
+    &__slide {
+        margin-top: 22vh;
+        padding: 0 10vw;
+        min-width: 100%;
+        text-align: center;
+    }
+
+    &__title {
+        margin-top: 8vh;
+        line-height: 26px;
+        font-size: 20px;
+    }
+
+    &__text {
+        line-height: 18px;
+        font-size: 14px;
+        color: gray;
+    }
+
+    &__track {
+        display: flex;
+        transform: translateX(0);
+        touch-action: pan-y;
+        will-change: transform;
+        transition: transform .3s;
+    }
+
+    &__prev,
+    &__next {
+        position: absolute;
+        bottom: 50px;
+    }
+
+    &__prev {
+        left: 20px;
+    }
+
+    &__next {
+        right: 20px;
+    }
+
+    &__pagination-wrapper {
+        position: absolute;
+        right: 85px;
+        bottom: 50px;
+        left: 85px;
+        text-align: center;
+    }
+
+    &__pagination-item {
+        display: inline-block;
+        margin: 3px 4px;
+        width: 8px;
+        height: 8px;
+        background-color: lightgray;
+        border-radius: 50%;
+        &--active {
+            box-shadow: 0 0 0 1px $main-yellow;
+            background-color: $main-yellow;
+        }
+    }
+}

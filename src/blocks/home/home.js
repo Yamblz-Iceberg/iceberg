@@ -35,6 +35,7 @@ class Home extends Component {
     scrollToTop = () => {
         window.scrollTo(0, 0);
     };
+
     render() {
         const { user } = this.props;
         return (
@@ -67,6 +68,7 @@ function mapStateToProps(state) {
     return {
         authorization: state.authorization,
         user: state.user.data,
+        loader: state.loader,
     };
 }
 

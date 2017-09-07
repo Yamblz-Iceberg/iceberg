@@ -26,7 +26,12 @@
         height: 100%;
     }
 
+    &__home-wrap {
+        margin-right: 10px;
+    }
+
     &__title {
+        flex-grow: 1;
         font-weight: 500;
         max-width: calc(100% - 100px);
         text-overflow: ellipsis;

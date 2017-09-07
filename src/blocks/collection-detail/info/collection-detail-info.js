@@ -1,3 +1,6 @@
+import Hypher from 'hypher';
+import Ru from 'hyphenation.ru';
+import En from 'hyphenation.en-us';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -49,6 +52,10 @@ class CollectionDetailInfo extends Component {
 
         const userName = `${collection.author.firstName} ${collection.author.lastName}`;
 
+        const ruText = new Hypher(Ru);
+        const enText = new Hypher(En);
+        const hyphenateText = text => (enText.hyphenateText(ruText.hyphenateText(text, 10), 10));
+
         return (
             <section>
                 <div className="collection-detail-info">
@@ -63,7 +70,7 @@ class CollectionDetailInfo extends Component {
                                 <HashTape hashes={collection.tags} size="small" />
                             </div>
                             <div className="collection-detail-card__header">
-                                <h2 className="collection-detail-card__title">{ collection.name }</h2>
+                                <h2 className="collection-detail-card__title">{ hyphenateText(collection.name) }</h2>
                             </div>
                             <div className="collection-detail-card__footer">
                                 <CardFooter
