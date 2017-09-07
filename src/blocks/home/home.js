@@ -35,7 +35,6 @@ class Home extends Component {
     scrollToTop = () => {
         window.scrollTo(0, 0);
     };
-
     render() {
         const { user } = this.props;
         return (
@@ -60,12 +59,13 @@ Home.propTypes = {
 
 Home.defaultProps = {
     user: {},
+    authorization: {},
     filter: 'rating',
 };
 
 function mapStateToProps(state) {
     return {
-        token: state.app.token,
+        token: state.authorization.access_token,
         user: state.user.data,
     };
 }

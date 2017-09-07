@@ -117,7 +117,7 @@ CollectionDetailInfo.propTypes = {
 export default connect(
     state => ({
         collection: state.collection,
-        token: state.app.token,
+        token: state.authorization.access_token,
     }),
     { putToSavedLoader, delFromSavedLoader },
 )(withRouter(CollectionDetailInfo));

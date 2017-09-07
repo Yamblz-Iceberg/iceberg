@@ -54,7 +54,7 @@
         display: block;
         display: -webkit-box;
         margin: 12px 0;
-        -webkit-line-clamp: 5;
+        -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -74,6 +74,7 @@
             margin-left: 5px;
         }
     }
+
     button {
         margin-bottom: 40px;
         z-index: 2;
@@ -98,19 +99,25 @@
     margin: 0;
     padding: 16px;
     width: 225px;
-    max-height: 100px;
     position: absolute;
-    bottom: 56px;
+    top: 55%;
     right: -12px;
+
     > p {
         display: flex;
+        display: -webkit-box;
         margin: 0;
         padding: 0;
         font-size: 14px;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
         > span {
             margin-left: 5px;
         }
     }
+
     &::before {
         content: '‘‘';
         color: #ffe200;

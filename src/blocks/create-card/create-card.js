@@ -269,7 +269,7 @@ CreateCard.propTypes = {
 
 export default connect(
     state => ({
-        token: state.app.token,
+        token: state.authorization.access_token,
         title: state.createCollection.title,
         hashTags: state.createCollection.hashTags,
         color: state.createCollection.color,

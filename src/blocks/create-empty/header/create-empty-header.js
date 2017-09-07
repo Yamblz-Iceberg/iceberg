@@ -125,7 +125,7 @@ export default connect(
         title: state.createCollection.title,
         description: state.createCollection.description,
         hashTags: state.createCollection.hashTags,
-        token: state.app.token,
+        token: state.authorization.access_token,
         color: state.createCollection.color,
         photo: state.createCollection.photo,
     }),
