@@ -8,6 +8,76 @@ import { Icon } from '../../blocks';
 import { addTag, deleteTag } from '../../reducers/onboarding.reducer';
 import './onboarding.scss';
 
+const slides = [
+    {
+        _id: 0,
+        img: 'onboard1',
+        title: 'Изучите любую тему',
+        text: 'Найдите существующую или создайте свою подборку',
+        type: '',
+    },
+    {
+        _id: 1,
+        img: 'onboard2',
+        title: 'Делитесь своими ссылками',
+        text: 'Помогайте другим разобраться в теме и повышайте свой рейтинг',
+        type: '',
+    },
+    {
+        _id: 2,
+        img: 'onboard3',
+        title: 'Сохраняйте подборки и ссылки',
+        text: 'Так вы быстро найдете их в профиле и лучше настроите свою ленту',
+        type: '',
+    },
+    {
+        _id: 3,
+        title: 'Выберите интересные вам темы',
+        text: '',
+        type: 'tags',
+    },
+];
+
+const hashTags = [
+    {
+        _id: 0,
+        text: 'наука',
+    },
+    {
+        _id: 1,
+        text: 'автомобили',
+    },
+    {
+        _id: 2,
+        text: 'ЗОЖ',
+    },
+    {
+        _id: 3,
+        text: 'спорт',
+    },
+    {
+        _id: 4,
+        text: 'готовка',
+    },
+    {
+        _id: 5,
+        text: 'фотография',
+    },
+    {
+        _id: 6,
+        text: 'литература',
+    },
+    {
+        _id: 7,
+        text: 'фитнес',
+    },
+    {
+        _id: 8,
+        text: 'DIY',
+    },
+];
+
+
 class Onboarding extends Component {
     constructor() {
         super();
@@ -58,74 +128,6 @@ class Onboarding extends Component {
 
     render() {
         const { currentSlide, tags } = this.state;
-        const slides = [
-            {
-                _id: 0,
-                img: 'onboard1',
-                title: 'Изучите любую тему',
-                text: 'Найдите существующую или создайте свою подборку',
-                type: '',
-            },
-            {
-                _id: 1,
-                img: 'onboard2',
-                title: 'Делитесь своими ссылками',
-                text: 'Помогайте другим разобраться в теме и повышайте свой рейтинг',
-                type: '',
-            },
-            {
-                _id: 2,
-                img: 'onboard3',
-                title: 'Сохраняйте подборки и ссылки',
-                text: 'Так вы быстро найдете их в профиле и лучше настроите свою ленту',
-                type: '',
-            },
-            {
-                _id: 3,
-                title: 'Выберите интересные вам темы',
-                text: '',
-                type: 'tags',
-            },
-        ];
-
-        const hashTags = [
-            {
-                _id: 0,
-                text: 'наука',
-            },
-            {
-                _id: 1,
-                text: 'автомобили',
-            },
-            {
-                _id: 2,
-                text: 'ЗОЖ',
-            },
-            {
-                _id: 3,
-                text: 'спорт',
-            },
-            {
-                _id: 4,
-                text: 'готовка',
-            },
-            {
-                _id: 5,
-                text: 'фотография',
-            },
-            {
-                _id: 6,
-                text: 'литература',
-            },
-            {
-                _id: 7,
-                text: 'фитнес',
-            },
-            {
-                _id: 8,
-                text: 'DIY',
-            },
-        ];
 
         return (
             <main className="onboarding">

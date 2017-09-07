@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import './tabs.scss';
 
 class Tabs extends Component {
-    componentDidMount = () => {
+    componentDidMount() {
         this.animateUnderline();
     }
 
-    componentDidUpdate = () => {
+    componentDidUpdate() {
         this.animateUnderline();
     }
 
@@ -16,23 +16,23 @@ class Tabs extends Component {
         this.activeListItem = listItem;
     }
 
-    goTo = (linkTo) => {
+    goTo = linkTo => () => {
         this.props.history.replace(linkTo);
     }
 
     animateUnderline = () => {
-        const activeListItemPosition = this.activeListItem.offsetLeft;
-        const activeListItemWidth = this.activeListItem.offsetWidth;
+        const { offsetLeft, offsetWidth } = this.activeListItem;
 
         this.underline.style.cssText = `
-            left:${activeListItemPosition}px;
-            width:${activeListItemWidth}px;
+            left:${offsetLeft}px;
+            width:${offsetWidth}px;
         `;
     }
 
     render() {
         const { tabs, history } = this.props;
 
+        // cn('tab__item', { 'tabs__item--active': isItemActive });
         return (
             <div className="tabs-container">
                 <ul className="tabs__list">
@@ -46,17 +46,14 @@ class Tabs extends Component {
                             className: `tab__item ${isItemActive ? 'tabs__item--active' : ''}`,
                             key: `${tab.id}`,
                             onClick: tab.onClick,
+                            ref: isItemActive ? this.refItemListActive : null,
                         };
-
-                        if (isItemActive) {
-                            itemProps.ref = this.refItemListActive;
-                        }
 
                         return (
                             <li {...itemProps}>
                                 <span
                                     className="tabs__link"
-                                    onClick={() => this.goTo(tab.linkTo)}
+                                    onClick={this.goTo(tab.linkTo)}
                                 >{tab.title}</span>
                             </li>
                         );
