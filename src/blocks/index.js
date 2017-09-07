@@ -28,6 +28,7 @@ export { default as SwitchButton } from './switch-button';
 export { default as FloatingButton } from './floating-button';
 export { default as Notice } from './notice';
 export { default as Dropdown } from './dropdown';
+export { default as ContextMenu } from './context-menu';
 export { default as CreateHashTag } from './create-hash-tag';
 export { default as LinkPreview } from './link-preview';
 export { default as CardFooter } from './card-footer';

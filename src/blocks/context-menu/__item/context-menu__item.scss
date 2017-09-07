@@ -1,0 +1,16 @@
+.dropdown-menu-item {
+    margin: 10px 0;
+    font-size: 14px;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &__title {
+        padding: 0;
+        margin: 0;
+        color: #070707;
+        * + & {
+            padding-left: 16px;
+        }
+    }
+}

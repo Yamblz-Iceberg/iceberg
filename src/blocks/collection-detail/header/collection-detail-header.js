@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 
-import { Icon } from '../../../blocks';
+import { Icon, ContextMenu } from '../../../blocks';
 
 import './collection-detail-header.scss';
 
@@ -42,6 +42,32 @@ class CollectionDetailHeader extends Component {
     };
 
     render() {
+        const contextMenuItems = [
+            {
+                title: 'Поделиться',
+                id: 0,
+                onClick: () => {},
+                icon: <Icon iconName={'share'} iconColor={'#777'} />,
+            },
+            {
+                title: 'Не хочу видеть',
+                id: 1,
+                onClick: () => {},
+                icon: <Icon iconName={'like-small'} iconColor={'#777'} iconWidth="18" iconHeight="20" />,
+            },
+            {
+                title: 'Скрыть все от автора',
+                id: 2,
+                onClick: () => {},
+                icon: <Icon iconName={'account'} iconColor={'#777'} />,
+            },
+            {
+                title: 'Пожаловаться',
+                id: 3,
+                onClick: () => { alert('Ябеда!'); },
+                icon: <Icon iconName={'question'} iconColor={'#777'} />,
+            },
+        ];
         return (
             <header
                 className={`collection-detail-header
@@ -60,7 +86,7 @@ class CollectionDetailHeader extends Component {
                         <Icon iconName={'home'} iconColor={this.state.fixedHeader ? '#000' : '#fff'} />
                     </div>
                     <div className="collection-detail-header__block">
-                        <Icon iconName={'more-vert'} iconColor={this.state.fixedHeader ? '#000' : '#fff'} />
+                        <ContextMenu color={this.state.fixedHeader ? '#000' : '#fff'} items={contextMenuItems} />
                     </div>
                 </div>
             </header>
