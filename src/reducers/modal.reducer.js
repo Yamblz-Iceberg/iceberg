@@ -4,9 +4,9 @@ const HIDE_MODAL = 'HIDE_MODAL';
 const initialState = {
     modalType: null,
     modalProps: {
-        title: '',
-        text: '',
-        buttonText: '',
+        title: 'Ошибка',
+        text: 'Ой, что-то пошло не так!',
+        buttonText: 'Понятно',
     },
 };
 
@@ -32,7 +32,7 @@ const hideModal = () => {
     document.body.removeEventListener('touchmove', handleTouchMove);
     return { type: HIDE_MODAL };
 };
-const showModal = (text, modalText) => {
+const showModal = (text, modalText = this.initialState.modalProps) => {
     // TODO: придумать что-нибудь красивое с блокировкой скрола
     document.body.addEventListener('touchmove', handleTouchMove, false);
     return { type: SHOW_MODAL, modalType: text, modalProps: modalText };
