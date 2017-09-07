@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { createLink } from '../../../reducers/link.reducer';
 import { LinkCard, Button, Icon } from '../../../blocks';
 import CreateLinkHeader from '../header/create-link-header';
+import { Preloader } from '../../../blocks';
 
 import './create-link-load.scss';
 
@@ -12,14 +13,10 @@ class CreateLinkLoad extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            link: {
-                name: '',
-            },
-            user: {},
-            description: '',
-            isCreated: false,
+            showAddButton: true,
         };
     }
+
     componentDidMount() {
         const enteredUrl = this.props.history.location.state;
         const linkUrl = (enteredUrl.startsWith('http://') || enteredUrl.startsWith('https://'))
@@ -28,6 +25,7 @@ class CreateLinkLoad extends Component {
         const data = { link: linkUrl };
         this.props.createLink(data, this.props.token);
     }
+
     componentWillReceiveProps(props) {
         this.setState({
             ...this.state,
@@ -37,44 +35,61 @@ class CreateLinkLoad extends Component {
             user: props.user,
         });
     }
+
     addComment = () => {
         this.props.history.push('./load-link/add-comment');
-    };
-    render() {
-        const showAddButton = true;
-        const showFooter = false;
-        const linkButton = () => (
-            <Button
-                text="комментарий"
-                icon={<Icon iconName="plus" />}
-                background="#fff"
-                size="max-width"
-                onClick={this.addComment}
+    }
+
+    renderLinkButton = () => (
+        <Button
+            text="комментарий"
+            icon={<Icon iconName="plus" />}
+            background="#fff"
+            size="max-width"
+            onClick={this.addComment}
+        />
+    )
+
+    renderLink = () => {
+        if (this.props.loader) {
+            return (
+                <Preloader />
+            );
+        }
+
+        const cardLink = this.props.link;
+        cardLink.userAdded = this.props.user;
+        cardLink.description = this.props.description;
+
+        cardLink.likes = 0;
+        cardLink.savedTimesCount = 0;
+
+        return (
+            <LinkCard
+                data={cardLink}
+                button={this.props.description.length === 0
+                && this.props.link.name.length > 0 ? this.renderLinkButton() : null}
+                isTransparent
+                editIcon={
+                    <span onClick={this.addComment}>
+                        <Icon iconName={'edit'} />
+                    </span>
+                }
             />
         );
-        const cardLink = this.state.link;
-        cardLink.userAdded = this.state.user;
-        cardLink.description = this.state.description;
+    }
+
+    render() {
         return (
-            <main>
+            <div>
                 <CreateLinkHeader
-                    title={this.state.link.name}
-                    showAddButton={showAddButton}
+                    title={this.props.link.name}
+                    showAddButton={this.state.showAddButton}
                 />
-                <section className="create-link-load">
-                    <LinkCard
-                        data={cardLink}
-                        button={this.state.description.length === 0
-                        && this.state.link.name.length > 0 ? linkButton() : null}
-                        showFooter={showFooter}
-                        editIcon={
-                            <span onClick={this.addComment}>
-                                <Icon iconName={'edit'} />
-                            </span>
-                        }
-                    />
-                </section>
-            </main>
+                <div className="create-link-load">
+                    { this.renderLink() }
+                </div>
+            </div>
         );
     }
 }
@@ -87,6 +102,7 @@ CreateLinkLoad.propTypes = {
     isCreated: PropTypes.bool.isRequired,
     user: PropTypes.object.isRequired,
     description: PropTypes.string,
+    loader: PropTypes.bool.isRequired,
 };
 
 CreateLinkLoad.defaultProps = {
@@ -100,6 +116,7 @@ export default connect(
         link: state.link.result,
         description: state.link.description,
         isCreated: state.link.created,
+        loader: state.loader,
     }),
     { createLink },
 )(withRouter(CreateLinkLoad));

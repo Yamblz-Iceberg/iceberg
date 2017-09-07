@@ -1,6 +1,7 @@
 import { CHANGE_SEARCH, FETCH_SEARCH_RESULT } from './search.reducer';
 import { FETCH_FEED } from './feed.reducer';
 import { GET_USER_COLLECTIONS, GET_USER_LINKS } from './bookmarks.reducer';
+import { ADD_LINK } from './link.reducer';
 
 const SHOW_LOADER = 'SHOW_LOADER';
 const HIDE_LOADER = 'HIDE_LOADER';
@@ -18,6 +19,7 @@ const reducer = (state = false, action) => {
     case FETCH_FEED:
     case GET_USER_COLLECTIONS:
     case GET_USER_LINKS:
+    case ADD_LINK:
         return false;
     default:
         return state;
