@@ -13,7 +13,6 @@ import { HashTape, Icon, Button, CardFooter } from '../../../blocks';
 import './collection-detail-info.scss';
 
 import { mainYellow } from '../../../variables.scss';
-import { USER_DATA } from '../../../config';
 
 class CollectionDetailInfo extends Component {
     constructor(props) {
@@ -25,8 +24,8 @@ class CollectionDetailInfo extends Component {
     }
 
     createLink = () => {
-        if (USER_DATA !== null) {
-            this.props.history.replace({ pathname: '/create-link' });
+        if (typeof this.props.userData.accType !== 'undefined' && this.props.userData.accType !== 'demo') {
+            this.props.history.push({ pathname: '/create-link' });
         } else {
             localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
             this.props.history.push('/authorization');
@@ -34,11 +33,22 @@ class CollectionDetailInfo extends Component {
     };
 
     putToSaved = () => {
-        this.props.putToSavedLoader(this.props.collection._id, this.props.token);
+        if (typeof this.props.userData.accType !== 'undefined' && this.props.userData.accType !== 'demo') {
+            this.props.putToSavedLoader(
+                this.props.collection._id,
+                this.props.token,
+            );
+        } else {
+            localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
+            this.props.history.push('/authorization');
+        }
     };
 
     delFromSaved = () => {
-        this.props.delFromSavedLoader(this.props.collection._id, this.props.token);
+        this.props.delFromSavedLoader(
+            this.props.collection._id,
+            this.props.token,
+        );
     };
 
     render() {
@@ -122,6 +132,7 @@ class CollectionDetailInfo extends Component {
 CollectionDetailInfo.propTypes = {
     collection: PropTypes.object.isRequired,
     token: PropTypes.string.isRequired,
+    userData: PropTypes.object.isRequired,
     history: PropTypes.any.isRequired,
     putToSavedLoader: PropTypes.func.isRequired,
     delFromSavedLoader: PropTypes.func.isRequired,
@@ -131,6 +142,7 @@ export default connect(
     state => ({
         collection: state.collection,
         token: state.authorization.access_token,
+        userData: state.user.data,
     }),
     { putToSavedLoader, delFromSavedLoader },
 )(withRouter(CollectionDetailInfo));

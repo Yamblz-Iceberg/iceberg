@@ -14,9 +14,6 @@ import './middleware.scss';
 class Middleware extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            showOnboarding: false,
-        };
         window.handleOpenURL = this.handleUserData;
     }
     componentDidMount() {

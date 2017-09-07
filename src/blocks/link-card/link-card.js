@@ -56,7 +56,7 @@ const LinkCard = ({ data, button, isTransparent, editIcon }) => {
                     <Icon iconName={'like-big'} iconColor={'#fff'} />
                     <span>{data.likes}</span>
                 </div>
-                <div className="link-card__block">
+                <div className="link-card__block" onClick={this.saveLink}>
                     <Icon iconName={'save-big'} iconColor={'#fff'} />
                     <span>{data.savedTimesCount}</span>
                 </div>
