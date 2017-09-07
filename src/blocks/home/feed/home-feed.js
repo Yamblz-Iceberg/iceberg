@@ -29,7 +29,11 @@ class HomeFeed extends Component {
     handlerOnClick(e, cardId) {
         if (e.target.className !== 'hash-tag'
             && e.target.className !== 'card-footer__user'
-            && e.target.className !== 'card-footer__actions') {
+            && e.target.className !== 'card-footer__actions'
+            && e.target.className !== 'card-footer__save-action'
+            && (typeof e.target.className.baseVal === 'undefined'
+                || (e.target.className.baseVal
+                && e.target.className.baseVal.trim() !== 'svg-icon'))) {
             this.props.history.push({ pathname: `/collection/${cardId}` });
         }
     }

@@ -59,9 +59,6 @@ class Authorization extends Component {
         const userId = this.props.authorization.userId;
         const url = `https://www.facebook.com/dialog/oauth?response_type=code&scope=user_friends&redirect_uri=${redirectURI}&state=${CLIENT_ID},${CLIENT_SECRET},${userId}&client_id=${FB_APP_ID}`;
         this.openLink(url);
-        // this.props.showModal(
-        // 'ERROR_MESSAGE', { title: 'УПС!', text: 'Авторизация через Facebook пока не реализована'
-        // });
     };
     goBack = () => {
         this.props.history.goBack();

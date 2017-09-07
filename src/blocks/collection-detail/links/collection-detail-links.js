@@ -20,7 +20,7 @@ class CollectionDetailLinks extends Component {
 
     componentWillMount = () => {
         this.setLinks(this.props.links);
-    }
+    };
 
     componentWillReceiveProps(props) {
         if (this.props.links !== props.links) {
@@ -32,7 +32,7 @@ class CollectionDetailLinks extends Component {
         this.setState({
             links,
         });
-    }
+    };
 
     /* eslint class-methods-use-this: ["error", { "exceptMethods": ["openLink"] }] */
     openLink(href, readerMode) {
@@ -78,7 +78,6 @@ class CollectionDetailLinks extends Component {
         });
         return (
             <section className="collection-detail-links">
-
                 {filteredLinks.map(link => (
                     <div className="collection-detail-links__item" key={link._id} onClick={() => this.openLink(link.url)}>
                         <LinkCard data={link} />
