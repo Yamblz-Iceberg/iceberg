@@ -1,3 +1,6 @@
+// Полифилл для fetch
+import 'whatwg-fetch';
+
 import React from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
@@ -6,6 +9,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import reducer from './reducers';
+
 import {
     AccountProfile,
     CollectionDetail,
