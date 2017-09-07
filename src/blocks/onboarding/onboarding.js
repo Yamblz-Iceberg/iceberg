@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Icon } from '../../blocks';
 
-import { addTag, deleteTag, resetTags, getTags } from '../../reducers/onboarding.reducer';
+import { addTag, deleteTag, getTags, sendTags } from '../../reducers/onboarding.reducer';
 import './onboarding.scss';
 
 const slides = [
@@ -82,7 +82,7 @@ class Onboarding extends Component {
     }
 
     handleReady = () => {
-        this.props.resetTags();
+        this.props.sendTags(this.props.token);
         this.props.history.push('/feed');
     }
 
@@ -183,8 +183,8 @@ Onboarding.propTypes = {
     hashTags: PropTypes.array,
     addTag: PropTypes.func.isRequired,
     deleteTag: PropTypes.func.isRequired,
-    resetTags: PropTypes.func.isRequired,
     getTags: PropTypes.func.isRequired,
+    sendTags: PropTypes.func.isRequired,
     token: PropTypes.string.isRequired,
     history: PropTypes.any.isRequired,
 };
@@ -200,5 +200,5 @@ export default connect(
         hashTags: state.onboarding.hashTags,
         token: state.authorization.access_token,
     }),
-    { addTag, deleteTag, resetTags, getTags },
+    { addTag, deleteTag, getTags, sendTags },
 )(Onboarding);
