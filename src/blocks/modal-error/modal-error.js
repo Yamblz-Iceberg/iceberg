@@ -11,7 +11,7 @@ class ModalError extends Component {
         this.props.hideModal()
     );
     render() {
-        const { title = 'Ошибка', text = 'Ой, что-то пошло не так!', buttonText = 'Понятно' } = this.props.modal.modalProps;
+        const { title, text, buttonText } = this.props.modal.modalProps;
         const content = (<div>
             <h3 className="modal__title">{title}</h3>
             <p className="modal__text">{text}</p>
