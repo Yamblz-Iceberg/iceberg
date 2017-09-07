@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Icon } from '../../blocks';
 
-import { addTag, deleteTag, resetTags } from '../../reducers/onboarding.reducer';
+import { addTag, deleteTag, resetTags, getTags } from '../../reducers/onboarding.reducer';
 import './onboarding.scss';
 
 const slides = [
@@ -37,58 +37,22 @@ const slides = [
     },
 ];
 
-const hashTags = [
-    {
-        _id: 0,
-        text: 'наука',
-    },
-    {
-        _id: 1,
-        text: 'автомобили',
-    },
-    {
-        _id: 2,
-        text: 'ЗОЖ',
-    },
-    {
-        _id: 3,
-        text: 'спорт',
-    },
-    {
-        _id: 4,
-        text: 'готовка',
-    },
-    {
-        _id: 5,
-        text: 'фотография',
-    },
-    {
-        _id: 6,
-        text: 'литература',
-    },
-    {
-        _id: 7,
-        text: 'фитнес',
-    },
-    {
-        _id: 8,
-        text: 'DIY',
-    },
-];
-
-
 class Onboarding extends Component {
     constructor() {
         super();
         this.state = {
             currentSlide: 0,
-            tags: [],
+            selectedTags: [],
         };
     }
 
-    componentWillReceiveProps = (nextProps) => {
-        if (this.props.tags !== nextProps.tags) {
-            this.setTags(nextProps.tags);
+    componentDidMount() {
+        this.props.getTags(this.props.token);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.selectedTags !== nextProps.selectedTags) {
+            this.setTags(nextProps.selectedTags);
         }
     }
 
@@ -98,9 +62,9 @@ class Onboarding extends Component {
         });
     }
 
-    setTags = (tags) => {
+    setTags = (selectedTags) => {
         this.setState({
-            tags,
+            selectedTags,
         });
     }
 
@@ -131,7 +95,8 @@ class Onboarding extends Component {
     }
 
     render() {
-        const { currentSlide, tags } = this.state;
+        const { currentSlide, selectedTags } = this.state;
+        const { hashTags } = this.props;
 
         return (
             <main className="onboarding">
@@ -147,12 +112,12 @@ class Onboarding extends Component {
                                 { slide.type === 'tags'
                                     ? (
                                         <div className="onboarding-slider__hash-tags-wrapper">
-                                            { hashTags.map(hashTag => (
+                                            { hashTags.length > 0 && hashTags.map(hashTag => (
                                                 <span
                                                     onClick={this.handleClickTag(hashTag._id)}
                                                     className="onboarding-slider__hash-tag"
                                                     key={hashTag._id}
-                                                >{`#${hashTag.text}`}</span>))
+                                                >{`#${hashTag.name}`}</span>))
                                             }
                                         </div>
                                     )
@@ -190,7 +155,7 @@ class Onboarding extends Component {
                         ${currentSlide === 0 ? 'onboarding__link--inactive' : ''}
                         `}
                     >Назад</button>
-                    { currentSlide === (slides.length - 1) && tags.length > 0
+                    { currentSlide === (slides.length - 1) && selectedTags.length > 0
                         ? (
                             <button
                                 onClick={this.handleReady}
@@ -214,20 +179,26 @@ class Onboarding extends Component {
 }
 
 Onboarding.propTypes = {
-    tags: PropTypes.array,
+    selectedTags: PropTypes.array,
+    hashTags: PropTypes.array,
     addTag: PropTypes.func.isRequired,
     deleteTag: PropTypes.func.isRequired,
     resetTags: PropTypes.func.isRequired,
+    getTags: PropTypes.func.isRequired,
+    token: PropTypes.string.isRequired,
     history: PropTypes.any.isRequired,
 };
 
 Onboarding.defaultProps = {
-    tags: [],
+    selectedTags: [],
+    hashTags: [],
 };
 
 export default connect(
     state => ({
-        tags: state.onboarding.tags,
+        selectedTags: state.onboarding.selectedTags,
+        hashTags: state.onboarding.hashTags,
+        token: state.authorization.access_token,
     }),
-    { addTag, deleteTag, resetTags },
+    { addTag, deleteTag, resetTags, getTags },
 )(Onboarding);
