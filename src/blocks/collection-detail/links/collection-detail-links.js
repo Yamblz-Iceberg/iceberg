@@ -53,7 +53,12 @@ class CollectionDetailLinks extends Component {
                     () => {},
                     // error
                     () => {
-                        this.props.showModal('ERROR_MESSAGE');
+                        this.props.showModal('ERROR_MESSAGE',
+                            {
+                                title: 'Упс!',
+                                text: 'Такая ссылка не существует.',
+                                buttonText: 'Понятно',
+                            });
                     });
                 } else {
                     window.open(href);
