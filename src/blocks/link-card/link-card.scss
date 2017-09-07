@@ -79,59 +79,68 @@
         margin-bottom: 40px;
         z-index: 2;
     }
-}
 
-.link-card__header {
-    z-index: 2;
-    display: flex;
-    justify-content: space-between;
-}
-
-.link-card__body {
-    z-index: 2;
-    flex: 1;
-    position: relative;
-}
-
-.link-card__comment {
-    background-color: #fff;
-    color: #000;
-    margin: 0;
-    padding: 16px;
-    width: 225px;
-    position: absolute;
-    top: 55%;
-    right: -12px;
-
-    > p {
+    &__header {
+        z-index: 2;
         display: flex;
-        display: -webkit-box;
+        justify-content: space-between;
+    }
+
+    &__body {
+        z-index: 2;
+        flex: 1;
+        position: relative;
+    }
+
+    &__comment {
+        background-color: #fff;
+        color: #000;
         margin: 0;
-        padding: 0;
-        font-size: 14px;
-        -webkit-line-clamp: 5;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        > span {
-            margin-left: 5px;
+        padding: 16px;
+        width: 225px;
+        position: absolute;
+        top: 55%;
+        right: -12px;
+    
+        > p {
+            display: flex;
+            display: -webkit-box;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            > span {
+                margin-left: 5px;
+            }
+        }
+    
+        &::before {
+            content: '‘‘';
+            color: #ffe200;
+            font-size: 70px;
+            font-weight: bold;
+            position: absolute;
+            top: 0;
+            left: 16px;
+            transform: translateY(-30%);
         }
     }
 
-    &::before {
-        content: '‘‘';
-        color: #ffe200;
-        font-size: 70px;
-        font-weight: bold;
-        position: absolute;
-        top: 0;
-        left: 16px;
-        transform: translateY(-30%);
+    &__comment-edit {
+        display: inline-flex;
+        margin-left: 5px;
     }
-}
 
-.link-card__footer {
-    z-index: 2;
-    display: flex;
-    justify-content: space-between;
+    &__footer {
+        z-index: 2;
+        display: flex;
+        justify-content: space-between;
+
+        &--transparent {
+            opacity: 0.3;
+        }
+    }
 }

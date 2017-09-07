@@ -6,7 +6,7 @@ import { Icon, Avatar } from '../../blocks';
 import './link-card.scss';
 import variables from './../../variables.scss';
 
-const LinkCard = ({ data, button, showFooter, editIcon }) => {
+const LinkCard = ({ data, button, isTransparent, editIcon }) => {
     const cardStyles = {
         backgroundColor: variables.blue,
         backgroundImage: `url('${data.photo}')`,
@@ -41,8 +41,9 @@ const LinkCard = ({ data, button, showFooter, editIcon }) => {
             {
                 data.description && data.description.length > 0 ?
                     <blockquote className="link-card__comment">
-                        <p>{data.description}
-                            {editIcon}
+                        <p>
+                            {data.description}
+                            <span className="link-card__comment-edit">{editIcon}</span>
                         </p>
                     </blockquote>
                     : null
@@ -50,18 +51,16 @@ const LinkCard = ({ data, button, showFooter, editIcon }) => {
         </div>
         { button }
         {
-            showFooter === true ?
-                <div className="link-card__footer">
-                    <div className="link-card__block">
-                        <Icon iconName={'like-big'} iconColor={'#fff'} />
-                        <span>{data.likes}</span>
-                    </div>
-                    <div className="link-card__block">
-                        <Icon iconName={'save-big'} iconColor={'#fff'} />
-                        <span>{data.savedTimesCount}</span>
-                    </div>
+            <div className={isTransparent ? 'link-card__footer link-card__footer--transparent' : 'link-card__footer'}>
+                <div className="link-card__block">
+                    <Icon iconName={'like-big'} iconColor={'#fff'} />
+                    <span>{data.likes}</span>
                 </div>
-                : null
+                <div className="link-card__block">
+                    <Icon iconName={'save-big'} iconColor={'#fff'} />
+                    <span>{data.savedTimesCount}</span>
+                </div>
+            </div>
         }
 
         <div className="link-card__overlay" />
@@ -71,14 +70,14 @@ const LinkCard = ({ data, button, showFooter, editIcon }) => {
 LinkCard.propTypes = {
     data: PropTypes.object.isRequired,
     button: PropTypes.any,
-    showFooter: PropTypes.bool,
+    isTransparent: PropTypes.bool,
     editIcon: PropTypes.object,
 };
 
 LinkCard.defaultProps = {
     button: null,
     editIcon: null,
-    showFooter: true,
+    isTransparent: false,
 };
 
 export default LinkCard;

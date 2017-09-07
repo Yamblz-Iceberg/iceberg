@@ -1,6 +1,7 @@
 import { postLink, postLinkToCollection } from './../services/link.service';
+import { showLoader } from './../reducers/loader.reducer';
 
-const ADD_LINK = 'ADD_LINK';
+export const ADD_LINK = 'ADD_LINK';
 const ADD_COMMENT = 'ADD_COMMENT';
 const CLEAR_LINK = 'CLEAR_LINK';
 const PUSH_LINK_TO_COLLECTION = 'PUSH_LINK_TO_COLLECTION';
@@ -8,9 +9,9 @@ const PUSH_LINK_TO_COLLECTION = 'PUSH_LINK_TO_COLLECTION';
 const initialState = {
     result: {
         url: '',
-        title: '',
         photo: '',
         favicon: '',
+        name: '',
     },
     created: false,
     description: '',
@@ -38,6 +39,7 @@ const reducer = (state = initialState, action) => {
 
 export const createLink = (data, token) => (
     (dispatch) => {
+        dispatch(showLoader());
         postLink(data, token).then((res) => {
             dispatch(addLink(res));
         });

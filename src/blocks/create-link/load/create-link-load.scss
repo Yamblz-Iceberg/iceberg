@@ -1,8 +1,8 @@
 .create-link-load {
     width: 100%;
-    height: 100%;
+    height: calc(100vh - 56px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 75px;
+    justify-content: center;
 }
