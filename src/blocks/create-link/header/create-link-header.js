@@ -12,9 +12,11 @@ class AddLinkHeader extends Component {
     handleReturnToCreatingLink = () => {
         this.props.history.goBack();
     };
+
     handleReturnToCard = () => {
         this.props.history.replace({ pathname: `/collection/${this.props.collection._id}` });
     };
+
     addLink = () => {
         this.props.addLinkToCollection(
             this.props.collection._id,
@@ -49,7 +51,7 @@ class AddLinkHeader extends Component {
                         }
                     </div>
                     <h4 className="create-link-header__title">
-                        {this.props.title}
+                        {this.props.title || 'Новая ссылка'}
                     </h4>
                     <div className="create-link-header__block create-link-header__button" onClick={this.addLink}>
                         <Button

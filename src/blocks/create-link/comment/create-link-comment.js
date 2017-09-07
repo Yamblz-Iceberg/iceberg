@@ -37,7 +37,7 @@ class CreateLinkComment extends Component {
             <main className="add-comment">
                 <CreateLinkHeader
                     callback={this.resetTextContent}
-                    title="комментарий"
+                    title="Комментарий"
                     isLinkConstructor={false}
                     showAddButton={showAddButton}
                 />
