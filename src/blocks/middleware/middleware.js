@@ -4,12 +4,12 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { registerDemoUser } from '../../reducers/authorization.reducer';
 import { generateGuid } from '../../utils/shared-functions';
-import { USER_DATA } from '../../config';
-
-import './middleware.scss';
 import { showLoader, hideLoader } from '../../reducers/loader.reducer';
 import { addRealUser } from '../../reducers/authorization.reducer';
 import { Preloader } from '../';
+import { stopAuth } from '../../reducers/app.reducer';
+
+import './middleware.scss';
 
 class Middleware extends Component {
     constructor(props) {
@@ -21,16 +21,18 @@ class Middleware extends Component {
     }
     componentDidMount() {
         this.props.showLoader();
-        if (USER_DATA === null
-            || USER_DATA.access_token.length === 0) {
+        if (this.props.authorization.access_token === '') {
             this.authorization();
-        } else {
-            this.navigateTo();
+        } else if (!this.props.authInProgress) {
+            this.props.history.replace('/feed');
         }
     }
     componentWillReceiveProps = (nextProps) => {
-        if (nextProps.authorization.access_token.length > 0) {
-            this.navigateTo();
+        if (this.props.authorization.access_token === '' && nextProps.authorization.access_token !== '') {
+            // TODO Переход на онбоардинг
+            this.props.history.replace('/feed');
+        } else if (this.props.authorization.access_token !== nextProps.authorization.access_token) {
+            this.props.history.replace('/feed');
         }
     };
     componentWillUnmount() {
@@ -46,14 +48,15 @@ class Middleware extends Component {
                 token_type: /token_type=([^&]+)/.exec(url)[1],
             };
             this.props.addRealUser(authData);
+            this.props.stopAuth();
             localStorage.setItem('IcebergUserData', JSON.stringify(authData));
+            const returnToAfterAuth = localStorage.getItem('returnToAfterAuth');
+            if (returnToAfterAuth !== null) {
+                localStorage.removeItem('returnToAfterAuth');
+                this.props.history.push(returnToAfterAuth);
+            }
         },
         0);
-    };
-    navigateTo = () => {
-        if (!this.state.showOnboarding) {
-            this.props.history.replace('/feed');
-        }
     };
     authorization = () => {
         const uniqueId = generateGuid();
@@ -80,14 +83,17 @@ Middleware.propTypes = {
     showLoader: PropTypes.func.isRequired,
     hideLoader: PropTypes.func.isRequired,
     addRealUser: PropTypes.func.isRequired,
+    stopAuth: PropTypes.func.isRequired,
     authorization: PropTypes.object.isRequired,
     loader: PropTypes.bool.isRequired,
+    authInProgress: PropTypes.bool.isRequired,
 };
 
 export default connect(
     state => ({
         authorization: state.authorization,
         loader: state.loader,
+        authInProgress: state.app.authInProgress,
     }),
-    { registerDemoUser, addRealUser, showLoader, hideLoader },
+    { registerDemoUser, addRealUser, showLoader, hideLoader, stopAuth },
 )(withRouter(Middleware));

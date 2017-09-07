@@ -41,4 +41,4 @@ export const registerDemoUser = (userId, userPassword, firstName, lastName, call
     }
 );
 
-export { reducer, addRealUser };
+export { reducer, addRealUser, ADD_REAL_USER };
