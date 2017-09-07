@@ -16,8 +16,13 @@ class SearchResult extends Component {
     }
 
     createNewCollection = () => {
-        this.props.history.push({ pathname: '/create-empty' });
-    }
+        if (typeof this.props.userData.accType !== 'undefined' && this.props.userData.accType !== 'demo') {
+            this.props.history.push({ pathname: '/create-empty' });
+        } else {
+            localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
+            this.props.history.push('/authorization');
+        }
+    };
 
     renderResult() {
         const { result, loader, searchText } = this.props;
@@ -73,6 +78,7 @@ SearchResult.propTypes = {
     loader: PropTypes.bool.isRequired,
     searchText: PropTypes.string.isRequired,
     history: PropTypes.any.isRequired,
+    userData: PropTypes.object.isRequired,
 };
 
 SearchResult.defaultProps = {
@@ -86,6 +92,7 @@ function mapStateToProps(state) {
         searchText: state.search.text,
         result: state.search.result,
         loader: state.loader,
+        userData: state.user.data,
     };
 }
 
