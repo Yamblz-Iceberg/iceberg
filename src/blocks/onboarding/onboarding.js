@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { Icon } from '../../blocks';
 
-import { addTag, deleteTag } from '../../reducers/onboarding.reducer';
+import { addTag, deleteTag, resetTags } from '../../reducers/onboarding.reducer';
 import './onboarding.scss';
 
 const slides = [
@@ -118,6 +117,11 @@ class Onboarding extends Component {
         }
     }
 
+    handleReady = () => {
+        this.props.resetTags();
+        this.props.history.push('/feed');
+    }
+
     nextSlide = () => {
         this.setCurrentSlide(this.state.currentSlide + 1);
     }
@@ -131,10 +135,10 @@ class Onboarding extends Component {
 
         return (
             <main className="onboarding">
-                <NavLink
-                    to={'/feed'}
+                <button
+                    onClick={this.handleReady}
                     className="onboarding__link onboarding__skip"
-                >Пропустить</NavLink>
+                >Пропустить</button>
 
                 <div className="onboarding__slider onboarding-slider">
                     <div className="onboarding-slider__track" style={{ transform: `translateX(-${100 * currentSlide}%)` }}>
@@ -188,7 +192,10 @@ class Onboarding extends Component {
                     >Назад</button>
                     { currentSlide === (slides.length - 1) && tags.length > 0
                         ? (
-                            <button className="onboarding__link onboarding-slider__next">Готово</button>
+                            <button
+                                onClick={this.handleReady}
+                                className="onboarding__link onboarding-slider__next"
+                            >Готово</button>
                         )
                         : (
                             <button
@@ -210,6 +217,8 @@ Onboarding.propTypes = {
     tags: PropTypes.array,
     addTag: PropTypes.func.isRequired,
     deleteTag: PropTypes.func.isRequired,
+    resetTags: PropTypes.func.isRequired,
+    history: PropTypes.any.isRequired,
 };
 
 Onboarding.defaultProps = {
@@ -220,5 +229,5 @@ export default connect(
     state => ({
         tags: state.onboarding.tags,
     }),
-    { addTag, deleteTag },
+    { addTag, deleteTag, resetTags },
 )(Onboarding);

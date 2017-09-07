@@ -12,9 +12,11 @@
     &__link {
         font-size: 14px;
         font-weight: 700;
+        border: none;
         letter-spacing: 1px;
         text-transform: uppercase;
         text-decoration: none;
+        background-color: transparent;
         color: black;
         &--inactive {
             color: gray;
@@ -86,8 +88,6 @@
     &__next {
         position: absolute;
         bottom: 50px;
-        border: none;
-        background-color: transparent;
     }
 
     &__prev {
