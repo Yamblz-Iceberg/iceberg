@@ -8,7 +8,7 @@ import { cardBlue } from './../../variables.scss';
 import { CreateHashTag, Icon, CardFooter } from './../../blocks';
 
 import { actions as modalActions } from './../../reducers/modal.reducer';
-import { addHashTag, deleteHashTag, editHashTag, addImage } from '../../reducers/create-collection.reducer';
+import { createHashtag, deleteHashTag, editHashTag, addImage } from '../../reducers/create-collection.reducer';
 
 class CreateCard extends Component {
     constructor() {
@@ -64,7 +64,10 @@ class CreateCard extends Component {
     }
 
     handleHashTagChange = (event) => {
-        this.setTagText(event.target.value);
+        const textWithoutSpaces = event.target.value.trim();
+        if (textWithoutSpaces === event.target.value) {
+            this.setTagText(textWithoutSpaces);
+        }
     }
 
     handleTitleChange = (event) => {
@@ -76,7 +79,7 @@ class CreateCard extends Component {
             currentHashTagText,
         } = this.state;
 
-        this.props.addHashTag(currentHashTagText);
+        this.props.createHashtag(currentHashTagText, this.props.token);
         this.setTagText('');
         this.setCanCreate(false);
     }
@@ -254,21 +257,23 @@ CreateCard.propTypes = {
     data: PropTypes.object.isRequired,
     title: PropTypes.string,
     hashTags: PropTypes.array,
-    addHashTag: PropTypes.func.isRequired,
+    createHashtag: PropTypes.func.isRequired,
     deleteHashTag: PropTypes.func.isRequired,
     editHashTag: PropTypes.func.isRequired,
     showModal: PropTypes.func.isRequired,
     addImage: PropTypes.func.isRequired,
     color: PropTypes.string,
     photo: PropTypes.string,
+    token: PropTypes.string.isRequired,
 };
 
 export default connect(
     state => ({
+        token: state.authorization.access_token,
         title: state.createCollection.title,
         hashTags: state.createCollection.hashTags,
         color: state.createCollection.color,
         photo: state.createCollection.photo,
     }),
-    { addHashTag, deleteHashTag, editHashTag, addImage, ...modalActions },
+    { createHashtag, deleteHashTag, editHashTag, addImage, ...modalActions },
 )(CreateCard);

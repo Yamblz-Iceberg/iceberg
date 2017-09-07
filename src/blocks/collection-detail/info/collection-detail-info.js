@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import { putToSavedLoader, delFromSavedLoader } from '../../../reducers/collection.reducer';
 import { ToggleText } from '../../index';
-import { HashTag, Icon, Button, CardFooter } from '../../../blocks';
+import { HashTape, Icon, Button, CardFooter } from '../../../blocks';
 
 import './collection-detail-info.scss';
+
+import { mainYellow } from '../../../variables.scss';
 
 class CollectionDetailInfo extends Component {
     constructor(props) {
@@ -13,53 +17,23 @@ class CollectionDetailInfo extends Component {
 
         this.state = {
             showAllText: false,
-            collection: {
-                description: '',
-                photo: '',
-                author: {
-                    firstName: '',
-                    lastName: '',
-                    photo: '',
-                },
-                name: '',
-                tags: [],
-                links: [],
-                savedTimesCount: 0,
-                saved: false,
-            },
         };
-    }
-    componentWillReceiveProps(props) {
-        this.setState({ collection: props.collection });
     }
 
     createLink = () => {
-        this.props.history.push({ pathname: './create-link' });
+        this.props.history.replace({ pathname: '/create-link' });
     };
 
-    renderButton() {
-        if (this.state.collection.saved) {
-            return (
-                <Button
-                    type="light"
-                    icon={<Icon iconName={'save-big'} />}
-                    text="вы подписаны"
-                    size="max-width"
-                />
-            );
-        }
+    putToSaved = () => {
+        this.props.putToSavedLoader(this.props.collection._id, this.props.token);
+    }
 
-        return (
-            <Button
-                icon={<Icon iconName={'save-big'} />}
-                text="подписаться"
-                size="max-width"
-            />
-        );
+    delFromSaved = () => {
+        this.props.delFromSavedLoader(this.props.collection._id, this.props.token);
     }
 
     render() {
-        const collection = this.state.collection;
+        const collection = this.props.collection;
 
         const avatarOptions = {
             size: '25',
@@ -79,31 +53,48 @@ class CollectionDetailInfo extends Component {
                         />
 
                         <div className="collection-detail-card__info">
+                            <div className="collection-detail-card__tape">
+                                <HashTape hashes={collection.tags} size="small" />
+                            </div>
                             <div className="collection-detail-card__header">
-                                {collection.tags.map(hash => (
-                                    <HashTag
-                                        {...hash}
-                                        size={'small'}
-                                        key={hash._id}
-                                    />)) }
                                 <h2 className="collection-detail-card__title">{ collection.name }</h2>
                             </div>
-
-                            <CardFooter
-                                avatarOptions={avatarOptions}
-                                userName={userName}
-                                linksCount={collection.links.length}
-                                savedTimesCount={collection.savedTimesCount}
-                            />
+                            <div className="collection-detail-card__footer">
+                                <CardFooter
+                                    avatarOptions={avatarOptions}
+                                    userName={userName}
+                                    linksCount={collection.links.length}
+                                    savedTimesCount={collection.savedTimesCount}
+                                    saved={collection.saved}
+                                />
+                            </div>
                         </div>
 
                         <div className="collection-detail-card__overlay" />
                     </div>
 
-                    <ToggleText text={this.state.collection.description} />
+                    <ToggleText text={this.props.collection.description} />
 
                     <div className="collection-detail-actions">
-                        { this.renderButton() }
+                        {
+                            collection.saved &&
+                                <Button
+                                    type="light"
+                                    icon={<Icon iconName="save-small" iconColor={mainYellow} />}
+                                    text="вы подписаны"
+                                    size="max-width"
+                                    onClick={this.delFromSaved}
+                                />
+                        }
+                        {
+                            !collection.saved &&
+                                <Button
+                                    icon={<Icon iconName="save-big" />}
+                                    text="подписаться"
+                                    size="max-width"
+                                    onClick={this.putToSaved}
+                                />
+                        }
                         <button className="collection-detail-actions__add-link" onClick={this.createLink}>
                             <Icon iconName={'link'} />
                             <Icon iconName={'plus'} />
@@ -117,7 +108,16 @@ class CollectionDetailInfo extends Component {
 
 CollectionDetailInfo.propTypes = {
     collection: PropTypes.object.isRequired,
+    token: PropTypes.string.isRequired,
     history: PropTypes.any.isRequired,
+    putToSavedLoader: PropTypes.func.isRequired,
+    delFromSavedLoader: PropTypes.func.isRequired,
 };
 
-export default withRouter(CollectionDetailInfo);
+export default connect(
+    state => ({
+        collection: state.collection,
+        token: state.authorization.access_token,
+    }),
+    { putToSavedLoader, delFromSavedLoader },
+)(withRouter(CollectionDetailInfo));

@@ -19,23 +19,33 @@ const CollectionCard = ({ data }) => {
 
     const userName = `${data.author.firstName} ${data.author.lastName}`;
 
+    const hashesCount = hashes.length - 1;
+
     return (
         <div className="collection-card" style={cardStyles}>
             <div className="collection-card__header">
-                { hashes.map(hash => (
-                    <HashTag
-                        name={hash.name}
+                {
+                    hashes[0] && <HashTag
+                        name={hashes[0].name}
                         size={'small'}
-                        key={hash._id}
-                    />)) }
+                        key={hashes[0]._id}
+                    />
+                }
+                {
+                    (hashesCount > 0) && <div className="hash-tag hash-tag--small hash-tag__count">
+                        <span className="hash-tag__text">{`+ ${hashesCount}`}</span>
+                    </div>
+                }
                 <h2 className="collection-card__title">{data.name}</h2>
             </div>
 
             <CardFooter
+                idCard={data._id}
                 avatarOptions={avatarOptions}
                 userName={userName}
                 linksCount={data.linksCount}
                 savedTimesCount={data.savedTimesCount}
+                saved={data.saved}
             />
 
             { data.photo ? <div className="collection-card__overlay" /> : null }

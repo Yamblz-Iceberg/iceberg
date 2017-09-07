@@ -7,6 +7,7 @@ import { Icon, Dropdown } from '../../../blocks';
 import {
     myCollectionsLoader,
     savedLinksLoader,
+    myLinksLoader,
     savedCollectionsLoader,
 } from './../../../reducers/bookmarks.reducer';
 
@@ -24,6 +25,9 @@ class ProfileFilter extends Component {
         case 'savedLinks':
             this.props.savedLinksLoader(this.props.token, item.name);
             break;
+        case 'myLinks':
+            this.props.myLinksLoader(this.props.token, item.name);
+            break;
         default:
             break;
         }
@@ -37,7 +41,7 @@ class ProfileFilter extends Component {
             <div className="profile-filter__block profile-filter__block--dropdown-wrap">
                 <Dropdown items={items} onSelect={(item) => { this.filteringData(item); }} />
             </div>
-            <div className="profile-filter__block">
+            {/* <div className="profile-filter__block">
                 <Icon
                     className="home-filter__icon-settings"
                     iconName="search"
@@ -45,7 +49,7 @@ class ProfileFilter extends Component {
                     iconHeight="24"
                     iconWidth="24"
                 />
-            </div>
+            </div> */}
         </div>);
     }
 }
@@ -55,12 +59,13 @@ ProfileFilter.propTypes = {
     token: PropTypes.string.isRequired,
     myCollectionsLoader: PropTypes.func.isRequired,
     savedLinksLoader: PropTypes.func.isRequired,
+    myLinksLoader: PropTypes.func.isRequired,
     savedCollectionsLoader: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
     return {
-        token: state.app.token,
+        token: state.authorization.access_token,
     };
 }
 
@@ -69,4 +74,5 @@ export default connect(mapStateToProps,
         myCollectionsLoader,
         savedLinksLoader,
         savedCollectionsLoader,
+        myLinksLoader,
     })(ProfileFilter);

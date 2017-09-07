@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Icon } from '../../../blocks';
 
@@ -9,6 +9,7 @@ import './create-empty-header.scss';
 import { cardBlue } from '../../../variables.scss';
 
 import { createCollection } from '../../../reducers/create-collection.reducer';
+import { actions as modalActions } from '../../../reducers/modal.reducer';
 
 
 class CreateEmptyHeader extends Component {
@@ -21,7 +22,7 @@ class CreateEmptyHeader extends Component {
 
     componentWillMount = () => {
         this.setSubmitStatus(this.props);
-    }
+    };
 
     componentWillReceiveProps = (nextProps) => {
         const {
@@ -35,7 +36,7 @@ class CreateEmptyHeader extends Component {
         ) {
             this.setSubmitStatus(nextProps);
         }
-    }
+    };
 
     setSubmitStatus = ({ title, hashTags }) => {
         this.setState({
@@ -44,10 +45,13 @@ class CreateEmptyHeader extends Component {
                 hashTags.length > 0
             ),
         });
-    }
+    };
 
+    goBack = () => {
+        this.props.history.goBack();
+    };
     changeRoute = () => {
-        this.props.history.push({ pathname: './feed' });
+        this.props.history.push('/feed/time');
     };
 
     hexToRGB = (color) => {
@@ -61,24 +65,31 @@ class CreateEmptyHeader extends Component {
     };
 
     handleSubmitData = () => {
-        const body = {
-            description: this.props.description,
-            name: this.props.title,
-            photo: this.props.photo,
-            color: this.props.color,
-            tags: ['59a7e38c7db98b35471fed6d', '59a7e38c7db98b35471fed67'],
-        };
-
-        this.props.createCollection(body, this.props.token, this.changeRoute);
+        if (!this.state.submitStatus) {
+            this.props.showModal('ERROR_MESSAGE',
+                {
+                    title: 'Укажите категорию и название темы',
+                    text: 'Укажите хотя бы одну категорию и введите название темы (не менее 5 символов), чтобы другим было проще найти вашу подборку',
+                });
+        } else {
+            const body = {
+                name: this.props.title,
+                color: this.hexToRGB(this.props.color || cardBlue),
+                tags: this.props.hashTags.map(tag => tag.id),
+            };
+            if (this.props.photo) { body.photo = this.props.photo; }
+            if (this.props.description) { body.description = this.props.description; }
+            this.props.createCollection(body, this.props.token, this.changeRoute);
+        }
     };
 
 
     render() {
         return (
             <header className="create-empty-header">
-                <NavLink to={'/feed'}>
+                <span onClick={this.goBack}>
                     <Icon iconName={'arrow-back'} />
-                </NavLink>
+                </span>
                 <h4 className="create-empty-header__title">Новая тема</h4>
                 <button
                     className={`create-empty-header__submit ${this.state.submitStatus ? 'create-empty-header__submit--active' : ''}`}
@@ -106,6 +117,7 @@ CreateEmptyHeader.propTypes = {
     token: PropTypes.string.isRequired,
     createCollection: PropTypes.func.isRequired,
     history: PropTypes.any.isRequired,
+    showModal: PropTypes.func.isRequired,
 };
 
 export default connect(
@@ -113,9 +125,9 @@ export default connect(
         title: state.createCollection.title,
         description: state.createCollection.description,
         hashTags: state.createCollection.hashTags,
-        token: state.app.token,
+        token: state.authorization.access_token,
         color: state.createCollection.color,
         photo: state.createCollection.photo,
     }),
-    { createCollection },
+    { createCollection, ...modalActions },
 )(withRouter(CreateEmptyHeader));

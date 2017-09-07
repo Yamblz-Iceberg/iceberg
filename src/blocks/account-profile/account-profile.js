@@ -54,6 +54,11 @@ class AccountProfile extends Component {
                 title: 'Прочитанные',
                 name: 'savedLinks',
             },
+            {
+                id: 2,
+                title: 'Добавленные мной',
+                name: 'myLinks',
+            },
         ] : [
             {
                 id: 0,
@@ -62,7 +67,7 @@ class AccountProfile extends Component {
             },
             {
                 id: 1,
-                title: 'Созданные другими',
+                title: 'Сохраненные',
                 name: 'savedCollections',
             },
         ];
@@ -73,7 +78,12 @@ class AccountProfile extends Component {
             <div className="account-profile__tabs-wrap">
                 <Tabs tabs={tabs} />
             </div>
-            <ProfileFeed data={data} type={bookmarks.typeToFeed} filterItems={filterItems} />
+            <ProfileFeed
+                data={data}
+                type={bookmarks.typeToFeed}
+                filterItems={filterItems}
+                loader={this.props.loader}
+            />
         </div>);
     }
 }
@@ -85,14 +95,16 @@ AccountProfile.propTypes = {
     myCollectionsLoader: PropTypes.func.isRequired,
     savedLinksLoader: PropTypes.func.isRequired,
     history: PropTypes.any.isRequired,
+    loader: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
     return {
         user: state.user.data,
-        token: state.app.token,
+        token: state.authorization.access_token,
         bookmarks: state.bookmarks,
         typeToFeed: state.user.typeToFeed,
+        loader: state.loader,
     };
 }
 

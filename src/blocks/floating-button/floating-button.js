@@ -7,7 +7,7 @@ import './floating-button.scss';
 
 class FloatingButton extends Component {
     onButtonClick = () => {
-        this.props.history.push({ pathname: './create-empty' });
+        this.props.history.push({ pathname: '/create-empty' });
     }
 
     render() {

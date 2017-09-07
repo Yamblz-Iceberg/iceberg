@@ -12,32 +12,17 @@ import './collection-detail.scss';
 class CollectionDetail extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             showAllText: false,
-            collection: {
-                description: '',
-                photo: '',
-                author: {
-                    firstName: '',
-                    lastName: '',
-                    photo: '',
-                },
-                name: '',
-                tags: [],
-                links: [],
-            },
         };
     }
     componentDidMount() {
         this.props.collectionLoader(this.props.params.id, this.props.token);
     }
 
-    componentWillReceiveProps(props) {
-        this.setState({ collection: props.collection });
-    }
-
     createLink = () => {
-        this.props.history.push({ pathname: './create-link' });
+        this.props.history.push({ pathname: '/create-link' });
     };
 
     render() {
@@ -62,18 +47,22 @@ class CollectionDetail extends Component {
 
         return (
             <div className="collection-detail">
-                <CollectionDetailHeader collectionTitle={this.state.collection.name} />
-                <CollectionDetailInfo collection={this.state.collection} />
+                <CollectionDetailHeader collectionTitle={this.props.collection.name} />
+                <CollectionDetailInfo collection={this.props.collection} />
 
                 <div className="collection-detail-tabs">
                     <Tabs tabs={tabs} />
                 </div>
                 <CollectionDetailLinks
-                    links={this.state.collection.links}
+                    links={this.props.collection.links}
                     filter={filter}
                 />
                 <div className="collection-detail__add-button" onClick={this.createLink} >
-                    <Button icon={<Icon iconName={'link'} />} text="добавить ссылку" />
+                    <Button
+                        icon={<Icon iconName={'link'} />}
+                        text="добавить ссылку"
+                        type="max-width"
+                    />
                 </div>
             </div>
         );
@@ -91,7 +80,7 @@ CollectionDetail.propTypes = {
 export default connect(
     state => ({
         collection: state.collection,
-        token: state.app.token,
+        token: state.authorization.access_token,
     }),
     { collectionLoader },
 )(withRouter(CollectionDetail));

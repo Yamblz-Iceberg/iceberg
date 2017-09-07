@@ -10,6 +10,7 @@ import { reducer as link } from './link.reducer';
 import { reducer as loader } from './loader.reducer';
 import { reducer as bookmarks } from './bookmarks.reducer';
 import { reducer as onboarding } from './onboarding.reducer';
+import { reducer as authorization } from './authorization.reducer';
 
 export default combineReducers({
     feed,
@@ -23,4 +24,5 @@ export default combineReducers({
     loader,
     bookmarks,
     onboarding,
+    authorization,
 });

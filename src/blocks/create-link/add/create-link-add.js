@@ -36,7 +36,7 @@ class CreateLinkAdd extends Component {
                     buttonText: 'Ясненько',
                 });
         } else {
-            this.props.history.push({ pathname: '/create-link/load-link', state: this.state.url });
+            this.props.history.replace({ pathname: '/create-link/load-link', state: this.state.url });
         }
     };
     handleChangeUrl = (event) => {

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { CollectionCard, HashTape } from '../../index';
+import { Preloader } from '../../../blocks';
 
 import { feedLoader } from '../../../reducers/feed.reducer';
 
@@ -20,15 +21,19 @@ class HomeFeed extends Component {
     }
 
     handlerOnClick(e, cardId) {
-        if (e.target.className === 'collection-card__overlay'
-            || e.target.className === 'collection-card__header'
-            || e.target.className === 'collection-card__title') {
+        if (e.target.className !== 'hash-tag'
+            && e.target.className !== 'card-footer__user'
+            && e.target.className !== 'card-footer__actions') {
             this.props.history.push({ pathname: `/collection/${cardId}` });
         }
     }
 
     renderFeed = (collectionsCount, tagsCount) => {
-        const { collections, tags } = this.props;
+        const { collections, tags, loader } = this.props;
+
+        if (loader) {
+            return <Preloader />;
+        }
 
         const feedToRender = [];
 
@@ -43,7 +48,7 @@ class HomeFeed extends Component {
                 currentCollections.map(card => (
                     <div
                         key={card._id}
-                        className="collection-card-container"
+                        className="home-feed__collection-card"
                         onClick={e => this.handlerOnClick(e, card._id)}
                     >
                         <CollectionCard data={card} />
@@ -58,8 +63,8 @@ class HomeFeed extends Component {
 
                 const key = Math.random().toString(36);
                 feedToRender.push(
-                    <div className="hash-tape__container" key={key}>
-                        <HashTape hashes={currentTags} />
+                    <div className="home-feed__tape" key={key}>
+                        <HashTape hashes={currentTags} size="big" />
                     </div>,
                 );
 
@@ -67,11 +72,11 @@ class HomeFeed extends Component {
             }
         }
         return feedToRender;
-    }
+    };
 
     render() {
         return (
-            <div className="home-feed-container">
+            <div className="home-feed">
                 { this.renderFeed(6, 3) }
             </div>
         );
@@ -85,6 +90,7 @@ HomeFeed.propTypes = {
     history: PropTypes.any.isRequired,
     queryParam: PropTypes.any.isRequired,
     token: PropTypes.string.isRequired,
+    loader: PropTypes.bool.isRequired,
 };
 
 HomeFeed.defaultProps = {
@@ -96,8 +102,9 @@ function mapStateToProps(state) {
     return {
         collections: state.feed.collections,
         tags: state.feed.tags,
-        token: state.app.token,
+        token: state.authorization.access_token,
         user: state.user.user,
+        loader: state.loader,
     };
 }
 

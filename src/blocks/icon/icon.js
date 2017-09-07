@@ -27,8 +27,8 @@ const iconsSizes = {
         height: '20px',
     },
     'save-small': {
-        width: '11px',
-        height: '14px',
+        width: '16px',
+        height: '20px',
     },
     'like-big': {
         width: '22px',
@@ -105,6 +105,26 @@ const iconsSizes = {
     'double-links': {
         width: '145px',
         height: '145px',
+    },
+    iceberg: {
+        width: '86px',
+        height: '90px',
+    },
+    onboard1: {
+        width: '182px',
+        height: '182px',
+    },
+    onboard2: {
+        width: '182px',
+        height: '182px',
+    },
+    onboard3: {
+        width: '182px',
+        height: '182px',
+    },
+    onboard4: {
+        width: '182px',
+        height: '182px',
     },
 };
 

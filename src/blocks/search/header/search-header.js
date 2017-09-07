@@ -15,8 +15,12 @@ class SearchHeader extends Component {
         super(props);
 
         this.state = {
-            text: '',
+            text: props.search.text,
         };
+
+        if (props.search.text !== '') {
+            this.loadResult();
+        }
     }
 
     componentWillMount() {
@@ -98,7 +102,7 @@ SearchHeader.propTypes = {
 function mapStateToProps(state) {
     return {
         search: state.search,
-        token: state.app.token,
+        token: state.authorization.access_token,
     };
 }
 

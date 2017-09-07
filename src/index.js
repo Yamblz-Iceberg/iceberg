@@ -4,7 +4,8 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import reducer from './reducers';
 import {
     AccountProfile,
     CollectionDetail,
@@ -16,8 +17,9 @@ import {
     LinkPreview,
     Modal,
     Onboarding,
+    Authorization,
+    Middleware,
 } from './blocks';
-import reducer from './reducers';
 
 import './styles.scss';
 import './assets/fonts/fonts.scss';
@@ -40,7 +42,12 @@ function onDeviceReady() {
                 <div className="home__wrapper">
                     <Modal />
                     <Switch>
-                        <Route path="/feed" component={Home} />
+                        <Route
+                            path="/feed/:filter?"
+                            render={({ match }) => (
+                                <Home filter={match.params.filter} />
+                            )}
+                        />
                         <Route path="/create-link" component={CreateLink} />
                         <Route path="/create-empty" component={CreateEmpty} />
                         <Route path="/add-description" component={CreateDescription} />
@@ -54,7 +61,8 @@ function onDeviceReady() {
                         <Route path="/search" component={Search} />
                         <Route path="/preview" component={LinkPreview} />
                         <Route path="/onboarding" component={Onboarding} />
-                        <Redirect from="/" to="/feed" />
+                        <Route path="/authorization" component={Authorization} />
+                        <Route path="/" component={Middleware} />
                     </Switch>
                 </div>
             </Router>

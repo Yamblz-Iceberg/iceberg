@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { Tabs } from '../index';
@@ -20,7 +19,7 @@ const tabs = [
     {
         id: 2,
         title: 'Новое',
-        linkTo: '/feed/new',
+        linkTo: '/feed/time',
     },
 ];
 
@@ -29,6 +28,13 @@ class Home extends Component {
         this.props.userLoader(this.props.token);
     }
 
+    componentDidUpdate = () => {
+        this.scrollToTop();
+    };
+
+    scrollToTop = () => {
+        window.scrollTo(0, 0);
+    };
     render() {
         const { user } = this.props;
         return (
@@ -38,22 +44,7 @@ class Home extends Component {
                     <Tabs tabs={tabs} />
                 </div>
                 <FloatingButton />
-                <Switch>
-                    <Route
-                        exact
-                        path="/feed"
-                        render={() => (
-                            <HomeFeed queryParam="rating" />
-                        )}
-                    />
-
-                    <Route
-                        path="/feed/new"
-                        render={() => (
-                            <HomeFeed queryParam="time" />
-                        )}
-                    />
-                </Switch>
+                <HomeFeed queryParam={this.props.filter} />
             </main>
         );
     }
@@ -63,15 +54,18 @@ Home.propTypes = {
     user: PropTypes.object,
     token: PropTypes.string.isRequired,
     userLoader: PropTypes.func.isRequired,
+    filter: PropTypes.string,
 };
 
 Home.defaultProps = {
     user: {},
+    authorization: {},
+    filter: 'rating',
 };
 
 function mapStateToProps(state) {
     return {
-        token: state.app.token,
+        token: state.authorization.access_token,
         user: state.user.data,
     };
 }

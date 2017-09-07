@@ -95,7 +95,7 @@ CreateLinkLoad.defaultProps = {
 
 export default connect(
     state => ({
-        token: state.app.token,
+        token: state.authorization.access_token,
         user: state.user.data,
         link: state.link.result,
         description: state.link.description,
