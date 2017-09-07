@@ -1,6 +1,3 @@
-import Hypher from 'hypher';
-import Ru from 'hyphenation.ru';
-import En from 'hyphenation.en-us';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -24,10 +21,6 @@ const CollectionCard = ({ data }) => {
 
     const hashesCount = hashes.length - 1;
 
-    const ruText = new Hypher(Ru);
-    const enText = new Hypher(En);
-    const hyphenateText = text => (enText.hyphenateText(ruText.hyphenateText(text, 10), 10));
-
     return (
         <div className="collection-card" style={cardStyles}>
             <div className="collection-card__header">
@@ -43,7 +36,7 @@ const CollectionCard = ({ data }) => {
                         <span className="hash-tag__text">{`+ ${hashesCount}`}</span>
                     </div>
                 }
-                <h2 className="collection-card__title">{ hyphenateText(data.name) }</h2>
+                <h2 className="collection-card__title">{ data.name }</h2>
             </div>
 
             <CardFooter
