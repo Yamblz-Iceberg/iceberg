@@ -23,3 +23,25 @@ export const postLinkToCollection = (collectionId, linkId, token, description) =
         headers,
     });
 };
+
+export const putLinkToLiked = (id, token) => {
+    const headers = new Headers({
+        Authorization: `Bearer ${token}`,
+    });
+
+    return fetch(`https://iceberg-project.herokuapp.com/links/like/${id}`, {
+        headers,
+        method: 'put',
+    }).then(res => res.json());
+};
+
+export const delLinkFromLiked = (id, token) => {
+    const headers = new Headers({
+        Authorization: `Bearer ${token}`,
+    });
+
+    return fetch(`https://iceberg-project.herokuapp.com/links/like/${id}`, {
+        headers,
+        method: 'delete',
+    }).then(res => res.json());
+};
