@@ -38,7 +38,7 @@ class CreateLinkLoad extends Component {
 
     addComment = () => {
         this.props.history.push('./load-link/add-comment');
-    }
+    };
 
     renderLinkButton = () => (
         <Button
@@ -48,7 +48,7 @@ class CreateLinkLoad extends Component {
             size="max-width"
             onClick={this.addComment}
         />
-    )
+    );
 
     renderLink = () => {
         if (this.props.loader) {
