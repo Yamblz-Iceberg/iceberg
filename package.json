@@ -1,8 +1,8 @@
 {
-  "name": "ru.yandex.cordova",
-  "displayName": "cordova-boilerplate",
+  "name": "ru.yandex.iceberg",
+  "displayName": "Айсберг",
   "version": "1.0.0",
-  "description": "Boilerplate for mobile apps",
+  "description": "Яндекс.Айсберг: проект студентов Мобилизации 2017",
   "main": "index.js",
   "scripts": {
     "clear-assets": "rm -rf ./www/assets",
