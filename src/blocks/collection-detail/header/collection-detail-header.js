@@ -31,7 +31,7 @@ class CollectionDetailHeader extends Component {
         } else if (this.state.fixedHeader) {
             this.setState({ fixedHeader: false });
         }
-    }
+    };
 
     handleGoBack = () => {
         this.props.history.goBack();
@@ -64,6 +64,7 @@ class CollectionDetailHeader extends Component {
             {
                 title: 'Пожаловаться',
                 id: 3,
+                /* eslint-disable */
                 onClick: () => { alert('Ябеда!'); },
                 icon: <Icon iconName={'question'} iconColor={'#777'} />,
             },
