@@ -52,6 +52,7 @@
 - onboard4
 - home
 - titanic
+- empty-profile
 
 
 ### Запуск приложения
