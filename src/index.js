@@ -15,6 +15,7 @@ import {
     CollectionDetail,
     CreateEmpty,
     CreateDescription,
+    CreatingSuccessfully,
     CreateLink,
     Search,
     Home,
@@ -53,6 +54,7 @@ function onDeviceReady() {
                             )}
                         />
                         <Route path="/create-link" component={CreateLink} />
+                        <Route path="/creating-successfully" component={CreatingSuccessfully} />
                         <Route path="/create-empty" component={CreateEmpty} />
                         <Route path="/add-description" component={CreateDescription} />
                         <Route

@@ -50,8 +50,25 @@ class CreateEmptyHeader extends Component {
     goBack = () => {
         this.props.history.goBack();
     };
-    changeRoute = () => {
-        this.props.history.push('/feed/time');
+
+    changeRoute = (data) => {
+        const { firstName, lastName, photo } = this.props.user;
+
+        const collection = {
+            linksCount: 0,
+            savedTimesCount: 0,
+            ...data,
+            author: {
+                photo,
+                firstName,
+                lastName,
+            },
+        };
+
+        this.props.history.push({
+            pathname: '/creating-successfully',
+            state: { collection },
+        });
     };
 
     hexToRGB = (color) => {
@@ -70,6 +87,7 @@ class CreateEmptyHeader extends Component {
                 {
                     title: 'Укажите категорию и название темы',
                     text: 'Укажите хотя бы одну категорию и введите название темы (не менее 5 символов), чтобы другим было проще найти вашу подборку',
+                    buttonText: 'Ок',
                 });
         } else {
             const body = {
@@ -109,6 +127,7 @@ CreateEmptyHeader.defaultProps = {
 };
 
 CreateEmptyHeader.propTypes = {
+    user: PropTypes.object.isRequired,
     title: PropTypes.string,
     photo: PropTypes.string,
     color: PropTypes.string,
@@ -122,6 +141,7 @@ CreateEmptyHeader.propTypes = {
 
 export default connect(
     state => ({
+        user: state.user.data,
         title: state.createCollection.title,
         description: state.createCollection.description,
         hashTags: state.createCollection.hashTags,

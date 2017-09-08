@@ -86,7 +86,7 @@ export const createCollection = (data, token, callback) => (
     (dispatch) => {
         postCollection(data, token).then(() => {
             dispatch(clearCollection());
-        }).then(() => callback());
+        }).then(() => callback(data));
     }
 );
 

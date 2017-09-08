@@ -8,8 +8,9 @@
 
     &__img {
         background-color: $blue;
-        transform: scale(1.1);
         background-size: cover;
+        background-position: center;
+        transform: scale(1.1);
         height: 250px;
         z-index: -2;
         position: absolute;

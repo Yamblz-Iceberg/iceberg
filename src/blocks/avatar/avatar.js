@@ -17,7 +17,7 @@ const Avatar = ({ photo, size, iconColor }) => {
             <img className="user__photo" src={photo} alt="user" width={size} />
         </div>);
     } else {
-        template = (<Icon iconName={'account'} iconColor={iconColor} iconWidth={size} iconHeight={size} />);
+        template = (<Icon iconName="empty-profile" iconColor={iconColor} iconWidth={size} iconHeight={size} />);
     }
     return template;
 };
