@@ -23,3 +23,14 @@ export const postLinkToCollection = (collectionId, linkId, token, description) =
         headers,
     });
 };
+
+export const changeLikeOfLink = (id, token) => {
+    const headers = new Headers({
+        Authorization: `Bearer ${token}`,
+    });
+
+    return fetch(`https://iceberg-project.herokuapp.com/links/like/${id}`, {
+        headers,
+        method: 'put',
+    });
+};
