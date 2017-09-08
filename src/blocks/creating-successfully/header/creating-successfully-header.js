@@ -7,7 +7,7 @@ import { Icon } from '../../../blocks';
 const CreatingSuccessfullyHeader = () => (
     <header className="create-successfully-header">
         <h2>Готово</h2>
-        <NavLink to={'/feed'}>
+        <NavLink to={'/feed/time'}>
             <Icon iconName={'close'} />
         </NavLink>
     </header>

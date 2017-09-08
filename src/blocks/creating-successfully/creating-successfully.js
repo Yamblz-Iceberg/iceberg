@@ -10,7 +10,7 @@ class CreatingSuccessfully extends Component {
     handleClick = e => e;
 
     render() {
-        const { collection } = this.props.history;
+        const { collection } = this.props.history.location.state;
 
         return (
             <div className="creating-successfully">
