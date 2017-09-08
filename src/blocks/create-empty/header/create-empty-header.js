@@ -50,8 +50,25 @@ class CreateEmptyHeader extends Component {
     goBack = () => {
         this.props.history.goBack();
     };
-    changeRoute = () => {
-        this.props.history.push('/feed/time');
+
+    changeRoute = (data) => {
+        const { firstName, lastName, photo } = this.props.user;
+
+        const collection = {
+            linksCount: 0,
+            savedTimesCount: 0,
+            ...data,
+            author: {
+                photo,
+                firstName,
+                lastName,
+            },
+        };
+
+        this.props.history.push({
+            pathname: '/creating-successfully',
+            state: { collection },
+        });
     };
 
     hexToRGB = (color) => {
@@ -110,6 +127,7 @@ CreateEmptyHeader.defaultProps = {
 };
 
 CreateEmptyHeader.propTypes = {
+    user: PropTypes.object.isRequired,
     title: PropTypes.string,
     photo: PropTypes.string,
     color: PropTypes.string,
@@ -123,6 +141,7 @@ CreateEmptyHeader.propTypes = {
 
 export default connect(
     state => ({
+        user: state.user.data,
         title: state.createCollection.title,
         description: state.createCollection.description,
         hashTags: state.createCollection.hashTags,
