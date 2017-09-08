@@ -3,33 +3,24 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Icon, Avatar } from '../../blocks';
-import { putToLikedLoader, delFromLikedLoader, changeLikedStatusById } from './../../reducers/collection.reducer';
+import { changeLikeOfLinkLoader } from './../../reducers/collection.reducer';
 
 import './link-card.scss';
 import variables from './../../variables.scss';
 
 class LinkCard extends Component {
-    componentWillReceiveProps() {
-        // if (this.data.likes !== props.data.likes) {
-        // }
-        console.log('like!');
-    }
-
     putToLiked = (e) => {
-        this.props.changeLikedStatusById(this.props.data._id, true);
-        // this.props.putToLikedLoader(this.props.data._id, this.props.token);
+        this.props.changeLikeOfLinkLoader(this.props.data._id, true, this.props.token);
         e.stopPropagation();
     }
 
     delFromLiked = (e) => {
-        this.props.changeLikedStatusById(this.props.data._id, false);
-        // this.props.delFromLikedLoader(this.props.data._id, this.props.token);
+        this.props.changeLikeOfLinkLoader(this.props.data._id, false, this.props.token);
         e.stopPropagation();
     }
 
     render() {
         const { data, button, isTransparent, editIcon } = this.props;
-        console.log('likes', data.likes);
         const cardStyles = {
             backgroundColor: variables.blue,
             backgroundImage: `url('${data.photo}')`,
@@ -77,7 +68,7 @@ class LinkCard extends Component {
                 <div className={isTransparent ? 'link-card__footer link-card__footer--transparent' : 'link-card__footer'}>
                     {
                         data.liked && <div className="link-card__block" onClick={this.delFromLiked}>
-                            <Icon iconName={'like-big'} iconColor={variables.mainYellow} />
+                            <Icon iconName={'like-small'} iconColor={variables.mainYellow} iconWidth="20" iconHeight="20" />
                             <span>{data.likes}</span>
                         </div>
                     }
@@ -103,13 +94,12 @@ LinkCard.propTypes = {
     button: PropTypes.any,
     isTransparent: PropTypes.bool,
     editIcon: PropTypes.object,
-    delFromLikedLoader: PropTypes.func.isRequired,
-    putToLikedLoader: PropTypes.func.isRequired,
+    changeLikeOfLinkLoader: PropTypes.func.isRequired,
     token: PropTypes.any.isRequired,
-    changeLikedStatusById: PropTypes.func.isRequired,
 };
 
 LinkCard.defaultProps = {
+    data: {},
     button: null,
     editIcon: null,
     isTransparent: false,
@@ -117,4 +107,4 @@ LinkCard.defaultProps = {
 
 export default connect(state => ({
     token: state.authorization.access_token,
-}), { putToLikedLoader, delFromLikedLoader, changeLikedStatusById })(LinkCard);
+}), { changeLikeOfLinkLoader })(LinkCard);

@@ -78,15 +78,16 @@ class CollectionDetailLinks extends Component {
             }
             return link;
         });
-        console.log(filteredLinks);
 
         return (
             <section className="collection-detail-links">
-                {filteredLinks.map(link => (
-                    <div className="collection-detail-links__item" key={link._id} onClick={() => this.openLink(link.url)}>
-                        <LinkCard data={link} />
-                    </div>
-                ))}
+                {
+                    filteredLinks.map(link => (
+                        <div className="collection-detail-links__item" key={link._id} onClick={() => this.openLink(link.url)}>
+                            <LinkCard data={{ ...link }} />
+                        </div>
+                    ))
+                }
             </section>
         );
     }

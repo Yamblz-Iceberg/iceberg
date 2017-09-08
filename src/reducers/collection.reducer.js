@@ -1,5 +1,5 @@
 import { fetchCollection, putCollectionToSaved, delCollectionFromSaved } from '../services/collection.service';
-import { putLinkToLiked, delLinkFromLiked } from './../services/link.service';
+import { changeLikeOfLink } from './../services/link.service';
 
 const FETCH_COLLECTION = 'FETCH_COLLECTION';
 const CHANGE_SAVED_STATUS = 'CHANGE_SAVED_STATUS';
@@ -34,7 +34,6 @@ const reducer = (state = initialState, action) => {
             savedTimesCount: state.savedTimesCount + (action.payload ? 1 : -1),
         };
     case CHANGE_LIKED_STATUS_BY_ID: {
-        console.log(state);
         const update = (items, id, status) => {
             const editedLinksList = [].concat(items);
             const editindLink = editedLinksList[items.findIndex(x => x._id === id)];
@@ -80,22 +79,10 @@ const delFromSavedLoader = (id, token) => (
     }
 );
 
-const putToLikedLoader = (id, token) => (
+const changeLikeOfLinkLoader = (id, status, token) => (
     (dispatch) => {
-        console.log(id);
-        changeLikedStatusById(id, true);
-        putLinkToLiked(id, token).then(() => {
-            dispatch(changeLikedStatusById(id, true));
-        });
-    }
-);
-
-const delFromLikedLoader = (id, token) => (
-    (dispatch) => {
-        changeLikedStatusById(id, false);
-        delLinkFromLiked(id, token).then(() => {
-            dispatch(changeLikedStatusById(id, false));
-        });
+        dispatch(changeLikedStatusById(id, status));
+        changeLikeOfLink(id, token);
     }
 );
 
@@ -104,7 +91,5 @@ export {
     collectionLoader,
     putToSavedLoader,
     delFromSavedLoader,
-    putToLikedLoader,
-    delFromLikedLoader,
-    changeLikedStatusById,
+    changeLikeOfLinkLoader,
 };
