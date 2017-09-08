@@ -134,6 +134,10 @@ const iconsSizes = {
         width: '143px',
         height: '143px',
     },
+    'empty-profile': {
+        width: '70px',
+        height: '70px',
+    },
 };
 
 const Icon = (props) => {

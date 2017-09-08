@@ -25,12 +25,16 @@ const HomeHeader = ({ user, history, userData }) => {
                     <h4 className="home-header__title">Айсберг</h4>
                 </div>
                 <div className="home-header__block">
-                    <span onClick={() => { navigateTo('/feed'); }}>
+                    <span onClick={() => { this.props.history.replace('/authorization'); }}>
                         <Icon iconName={'flash'} />
                     </span>
                     <span className="home-header__icon-user" onClick={() => { navigateTo('/profile'); }}>
                         <div>
-                            <Avatar photo={user.photo} />
+                            {
+                                typeof userData.accType !== 'undefined' && userData.accType !== 'demo'
+                                    ? <Avatar photo={user.photo} />
+                                    : <Icon iconName="account" />
+                            }
                         </div>
                     </span>
                 </div>
