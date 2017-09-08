@@ -48,7 +48,7 @@ class SearchResult extends Component {
                     <p className="search-result__message">Мы не нашли точных результатов. Создайте тему и люди помогут</p>
                     <Button
                         text="Создать тему"
-                        icon={<Icon iconName="themes" />}
+                        icon={<Icon iconName="lock" />}
                         onClick={this.createNewCollection}
                     />
                 </div>
