@@ -42,7 +42,7 @@
         background-color: $dark-blue;
         color: white;
         &--selected {
-            filter: grayscale(100%);
+            background-color: #414141;
         }
     }
 
