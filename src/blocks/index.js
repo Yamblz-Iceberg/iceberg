@@ -36,3 +36,4 @@ export { default as Onboarding } from './onboarding';
 export { default as Authorization } from './authorization';
 export { default as Preloader } from './preloader';
 export { default as Middleware } from './middleware';
+export { default as CreatingSuccessfully } from './creating-successfully';
