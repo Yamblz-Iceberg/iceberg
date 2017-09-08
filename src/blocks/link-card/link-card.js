@@ -81,7 +81,6 @@ class LinkCard extends Component {
                             <span>{data.likes}</span>
                         </div>
                     }
-                    <span>{data.likes}</span>
                     {
                         !data.liked && <div className="link-card__block" onClick={this.putToLiked}>
                             <Icon iconName={'like-big'} iconColor={'#fff'} />
@@ -94,7 +93,6 @@ class LinkCard extends Component {
                     </div>
                 </div>
             }
-
             <div className="link-card__overlay" />
         </div>);
     }

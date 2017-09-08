@@ -15,7 +15,7 @@ const reducer = (state = initialState, action) => {
     case SHOW_MODAL:
         return {
             modalType: action.modalType,
-            modalProps: action.modalProps,
+            modalProps: { ...state.modalProps, ...action.modalProps },
         };
     case HIDE_MODAL:
         return initialState;

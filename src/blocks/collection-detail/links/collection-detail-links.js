@@ -82,7 +82,6 @@ class CollectionDetailLinks extends Component {
 
         return (
             <section className="collection-detail-links">
-
                 {filteredLinks.map(link => (
                     <div className="collection-detail-links__item" key={link._id} onClick={() => this.openLink(link.url)}>
                         <LinkCard data={link} />

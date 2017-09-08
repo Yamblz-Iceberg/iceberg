@@ -22,13 +22,18 @@ class CollectionDetail extends Component {
     }
 
     createLink = () => {
-        this.props.history.push({ pathname: '/create-link' });
+        if (this.props.userData.accType !== 'demo') {
+            this.props.history.replace({ pathname: '/create-link' });
+        } else {
+            localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
+            this.props.history.push('/authorization');
+        }
     };
 
     render() {
         const {
             collection,
-            userId,
+            userData,
             params: {
                 id, filter,
             },
@@ -74,7 +79,7 @@ class CollectionDetail extends Component {
                     : (
                         <div className="collection-detail__mesage-wrapper">
                             <h3 className="collection-detail__title">Ссылок пока нет</h3>
-                            { collection.author.userId === userId
+                            { collection.author.userId === userData.userId
                                 ? (
                                     <div>
                                         <p className="collection-detail__text">
@@ -120,14 +125,14 @@ CollectionDetail.propTypes = {
     collectionLoader: PropTypes.func.isRequired,
     token: PropTypes.string.isRequired,
     history: PropTypes.object.isRequired,
-    userId: PropTypes.string.isRequired,
+    userData: PropTypes.object.isRequired,
 };
 
 export default connect(
     state => ({
         collection: state.collection,
-        userId: state.user.data.userId,
         token: state.authorization.access_token,
+        userData: state.user.data,
     }),
     { collectionLoader },
 )(withRouter(CollectionDetail));

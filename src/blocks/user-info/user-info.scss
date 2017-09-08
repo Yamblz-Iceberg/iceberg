@@ -6,8 +6,7 @@
     align-content: center;
     justify-content: space-between;
     flex-direction: row;
-    padding-bottom: 16px;
-    background-color: #414141;
+    background-color: #363636;
     padding: 72px 20px 36px;
     overflow: hidden;
 
@@ -19,6 +18,7 @@
         right: 0;
         filter: blur(8px) brightness(50%);
         background-size: cover;
+        background-position: center;
         z-index: 0;
         transform: scale(1.1);
     }

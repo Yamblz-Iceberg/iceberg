@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { Icon, Avatar } from './../../blocks';
 import { putToSavedLoader, delFromSavedLoader } from './../../reducers/collection.reducer';
@@ -12,16 +13,21 @@ import { mainYellow } from './../../variables.scss';
 
 class CardFooter extends Component {
     putToSaved = (e) => {
-        this.props.putToSavedLoader(this.props.idCard, this.props.token);
-        this.props.changeSavedStatusOfCardById(this.props.idCard, true);
-        e.stopPropagation();
-    }
+        if (typeof this.props.userData.accType !== 'undefined' && this.props.userData.accType !== 'demo') {
+            this.props.putToSavedLoader(this.props.idCard, this.props.token);
+            this.props.changeSavedStatusOfCardById(this.props.idCard, true);
+            e.stopPropagation();
+        } else {
+            localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
+            this.props.history.push('/authorization');
+        }
+    };
 
     delFromSaved = (e) => {
         this.props.delFromSavedLoader(this.props.idCard, this.props.token);
         this.props.changeSavedStatusOfCardById(this.props.idCard, false);
         e.stopPropagation();
-    }
+    };
 
     render() {
         const props = this.props;
@@ -66,6 +72,8 @@ CardFooter.propTypes = {
     putToSavedLoader: PropTypes.func.isRequired,
     delFromSavedLoader: PropTypes.func.isRequired,
     changeSavedStatusOfCardById: PropTypes.func.isRequired,
+    userData: PropTypes.object.isRequired,
+    history: PropTypes.any.isRequired,
 };
 
 CardFooter.defaultProps = {
@@ -76,5 +84,7 @@ CardFooter.defaultProps = {
 export default connect(state => ({
     collection: state.collection,
     token: state.authorization.access_token,
+    userData: state.user.data,
 }),
-{ putToSavedLoader, delFromSavedLoader, changeSavedStatusOfCardById })(CardFooter);
+{ putToSavedLoader, delFromSavedLoader, changeSavedStatusOfCardById },
+)(withRouter(CardFooter));

@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { Icon } from '../../blocks';
 import './floating-button.scss';
 
 class FloatingButton extends Component {
     onButtonClick = () => {
-        this.props.history.push({ pathname: '/create-empty' });
-    }
+        if (typeof this.props.userData.accType !== 'undefined' && this.props.userData.accType !== 'demo') {
+            this.props.history.push({ pathname: '/create-empty' });
+        } else {
+            localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
+            this.props.history.push('/authorization');
+        }
+    };
 
     render() {
         return (
@@ -21,6 +27,9 @@ class FloatingButton extends Component {
 
 FloatingButton.propTypes = {
     history: PropTypes.any.isRequired,
+    userData: PropTypes.object.isRequired,
 };
 
-export default withRouter(FloatingButton);
+export default connect(
+    state => ({ userData: state.user.data }),
+)(withRouter(FloatingButton));
