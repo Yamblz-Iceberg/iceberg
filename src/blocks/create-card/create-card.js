@@ -15,7 +15,7 @@ class CreateCard extends Component {
         super();
         this.state = {
             currentHashTagText: '',
-            hashTags: [],
+            tags: [],
             canCreateTag: false,
             cardStyles: {},
             imageStatus: 'none',
@@ -23,13 +23,13 @@ class CreateCard extends Component {
     }
 
     componentWillMount = () => {
-        this.setHashTags(this.props.hashTags);
+        this.setHashTags(this.props.tags);
         this.setCardStyles(this.props.color, this.props.photo);
     }
 
     componentWillReceiveProps = (nextProps) => {
-        if (this.props.hashTags !== nextProps.hashTags) {
-            this.setHashTags(nextProps.hashTags);
+        if (this.props.tags !== nextProps.tags) {
+            this.setHashTags(nextProps.tags);
         }
         if (this.props.color !== nextProps.color || this.props.photo !== nextProps.photo) {
             this.setCardStyles(nextProps.color, nextProps.photo);
@@ -51,9 +51,9 @@ class CreateCard extends Component {
         });
     }
 
-    setHashTags = (hashTags) => {
+    setHashTags = (tags) => {
         this.setState({
-            hashTags,
+            tags,
         });
     }
 
@@ -158,7 +158,7 @@ class CreateCard extends Component {
 
         const {
             currentHashTagText,
-            hashTags,
+            tags,
             canCreateTag,
         } = this.state;
 
@@ -183,17 +183,17 @@ class CreateCard extends Component {
             <div className="create-card" style={this.state.cardStyles}>
                 <div>
                     <div className="create-card__hashtags-wrapper">
-                        { hashTags.length > 0 && hashTags.map(hashTag => (
+                        { tags.length > 0 && tags.map(hashTag => (
                             <CreateHashTag
                                 initText={initText}
-                                text={hashTag.text}
+                                text={hashTag.name}
                                 key={hashTag.id}
                                 tagChangeCallback={event => this.handleEditTag(hashTag.id, event)}
                                 tagAddCallback={this.handleAddTag}
                                 tagDeleteCallback={() => this.handleDeleteTag(hashTag.id)}
                             />))
                         }
-                        { ((canCreateTag && hashTags.length < 4) || hashTags.length === 0) && (
+                        { ((canCreateTag && tags.length < 4) || tags.length === 0) && (
                             <CreateHashTag
                                 initText={initText}
                                 text={currentHashTagText}
@@ -201,7 +201,7 @@ class CreateCard extends Component {
                                 tagAddCallback={this.handleAddTag}
                             />)
                         }
-                        { (!canCreateTag && hashTags.length > 0 && hashTags.length < 4) && (
+                        { (!canCreateTag && tags.length > 0 && tags.length < 4) && (
                             <button
                                 className="create-card__add-button"
                                 onClick={this.handleAddButtonClick}
@@ -248,7 +248,7 @@ class CreateCard extends Component {
 
 CreateCard.defaultProps = {
     title: '',
-    hashTags: [],
+    tags: [],
     color: cardBlue,
     photo: '',
 };
@@ -256,7 +256,7 @@ CreateCard.defaultProps = {
 CreateCard.propTypes = {
     data: PropTypes.object.isRequired,
     title: PropTypes.string,
-    hashTags: PropTypes.array,
+    tags: PropTypes.array,
     createHashtag: PropTypes.func.isRequired,
     deleteHashTag: PropTypes.func.isRequired,
     editHashTag: PropTypes.func.isRequired,
@@ -271,7 +271,7 @@ export default connect(
     state => ({
         token: state.authorization.access_token,
         title: state.createCollection.title,
-        hashTags: state.createCollection.hashTags,
+        tags: state.createCollection.tags,
         color: state.createCollection.color,
         photo: state.createCollection.photo,
     }),
