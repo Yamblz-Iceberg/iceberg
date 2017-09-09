@@ -1,13 +1,49 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { Icon } from './../..';
+import { actions as modalActions } from '../../../reducers/modal.reducer';
 
 import './account-profile-feed-item.scss';
 
 class AccountProfileFeedItem extends Component {
-    handlerOnClick(e, cardId) {
+    openLink(href, readerMode) {
+        if (window.cordova) {
+            window.SafariViewController.isAvailable((available) => {
+                if (available) {
+                    window.SafariViewController.show({
+                        url: href,
+                        hidden: false,
+                        animated: false,
+                        transition: 'curl',
+                        enterReaderModeIfAvailable: readerMode,
+                        tintColor: '#fff',
+                        barColor: '#000',
+                        controlTintColor: '#ffffff',
+                    },
+                    // success
+                    () => {},
+                    // error
+                    () => {
+                        this.props.showModal('ERROR_MESSAGE',
+                            {
+                                title: 'Упс!',
+                                text: 'Такая ссылка не существует.',
+                                buttonText: 'Понятно',
+                            });
+                    });
+                } else {
+                    window.open(href);
+                }
+            });
+        } else {
+            window.open(href);
+        }
+    }
+
+    openCollection(e, cardId) {
         this.props.history.push({ pathname: `/collection/${cardId}` });
     }
 
@@ -22,7 +58,7 @@ class AccountProfileFeedItem extends Component {
             backgroundColor: data.color,
         };
 
-        const collection = (<div className="account-profile-feed-collection" onClick={e => this.handlerOnClick(e, data._id)}>
+        const collection = (<div className="account-profile-feed-collection" onClick={e => this.openCollection(e, data._id)}>
             <div className="account-profile-feed-collection__photo" style={resultStyles} />
             <div className="account-profile-feed-collection__details">
                 <h5 className="account-profile-feed-collection__title">{data.name || 'Нет названия'}</h5>
@@ -33,7 +69,7 @@ class AccountProfileFeedItem extends Component {
             </div>
         </div>);
 
-        const link = (<div className="account-profile-feed-link" onClick={e => this.handlerOnClick(e, data._id)}>
+        const link = (<div className="account-profile-feed-link" onClick={() => this.openLink(data.url)}>
             <div className="account-profile-feed-link__photo" style={resultStyles} />
             <div className="account-profile-feed-link__details">
                 <h5 className="account-profile-feed-link__title">{data.name || 'Нет названия'}</h5>
@@ -53,6 +89,8 @@ AccountProfileFeedItem.propTypes = {
     data: PropTypes.object.isRequired,
     type: PropTypes.string.isRequired,
     history: PropTypes.any.isRequired,
+    showModal: PropTypes.func.isRequired,
 };
 
-export default withRouter(AccountProfileFeedItem);
+export default
+connect(null, { ...modalActions })(withRouter(AccountProfileFeedItem));
