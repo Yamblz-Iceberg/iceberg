@@ -64,7 +64,7 @@ class CollectionDetailHeader extends Component {
             {
                 title: 'Пожаловаться',
                 id: 3,
-                /* eslint-disable */
+                /* eslint-disable no-alert */
                 onClick: () => { alert('Ябеда!'); },
                 icon: <Icon iconName={'question'} iconColor={'#777'} />,
             },
