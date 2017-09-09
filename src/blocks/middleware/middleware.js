@@ -11,7 +11,15 @@ import { stopAuth } from '../../reducers/app.reducer';
 
 import './middleware.scss';
 
+
 class Middleware extends Component {
+    static authDemoUser = (registerFn, callback) => {
+        const userId = generateGuid();
+        const userPassword = generateGuid();
+        const firstName = 'Демо';
+        const lastName = 'Пользователь';
+        registerFn(userId, userPassword, firstName, lastName, callback);
+    };
     constructor(props) {
         super(props);
         window.handleOpenURL = this.handleUserData;
@@ -19,7 +27,10 @@ class Middleware extends Component {
     componentDidMount() {
         this.props.showLoader();
         if (this.props.authorization.access_token === '') {
-            this.authorization();
+            this.constructor.authDemoUser(
+                this.props.registerDemoUser,
+                this.saveLocal,
+            );
         } else if (!this.props.authInProgress) {
             this.props.history.replace('/feed');
         }
@@ -34,6 +45,9 @@ class Middleware extends Component {
     componentWillUnmount() {
         this.props.hideLoader();
     }
+    saveLocal = () => {
+        localStorage.setItem('IcebergUserData', JSON.stringify(this.props.authorization));
+    };
     handleUserData = (url) => {
         setTimeout(() => {
             window.SafariViewController.hide();
@@ -53,16 +67,6 @@ class Middleware extends Component {
             }
         },
         0);
-    };
-    authorization = () => {
-        const uniqueId = generateGuid();
-        const password = generateGuid();
-        const firstName = 'Демо';
-        const lastName = 'Пользователь';
-        const saveLocal = () => {
-            localStorage.setItem('IcebergUserData', JSON.stringify(this.props.authorization));
-        };
-        this.props.registerDemoUser(uniqueId, password, firstName, lastName, saveLocal);
     };
     render() {
         return (

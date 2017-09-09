@@ -87,7 +87,7 @@ class CollectionDetailHeader extends Component {
                         <Icon iconName={'home'} iconColor={this.state.fixedHeader ? '#000' : '#fff'} />
                     </div>
                     <div className="collection-detail-header__block">
-                        <ContextMenu color={this.state.fixedHeader ? '#000' : '#fff'} items={contextMenuItems} />
+                        <ContextMenu iconColor={this.state.fixedHeader ? '#000' : '#fff'} items={contextMenuItems} />
                     </div>
                 </div>
             </header>

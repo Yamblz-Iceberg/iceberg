@@ -22,3 +22,16 @@ export const postRefreshToken = (refreshToken) => {
         body: data,
     }).then(res => res.json());
 };
+
+export const putLogOut = (accessToken, refreshToken) => {
+    const headers = new Headers({
+        Authorization: `Basic ${encodedAuth}`,
+        'Content-Type': 'application/json',
+    });
+
+    return fetch('https://iceberg-project.herokuapp.com/register/logout', {
+        method: 'put',
+        body: JSON.stringify({ accessToken, refreshToken }),
+        headers,
+    });
+};
