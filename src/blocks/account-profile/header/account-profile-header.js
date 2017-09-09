@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { authDemoUser } from '../../../utils/shared-functions';
 import { Icon, ContextMenu } from '../../../blocks';
 import { logOut, registerDemoUser } from '../../../reducers/authorization.reducer';
-import { Middleware } from '../../';
 
 import './account-profile-header.scss';
 
@@ -17,7 +17,7 @@ class ProfileHeader extends Component {
         );
     };
     logOutLocal = () => {
-        Middleware.authDemoUser(
+        authDemoUser(
             this.props.registerDemoUser,
             this.saveLocal,
         );

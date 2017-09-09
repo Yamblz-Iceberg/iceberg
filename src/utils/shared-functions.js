@@ -15,3 +15,11 @@ export const generateGuid = () => {
     }
     return `${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}`;
 };
+
+export const authDemoUser = (registerFn, callback) => {
+    const userId = generateGuid();
+    const userPassword = generateGuid();
+    const firstName = 'Демо';
+    const lastName = 'Пользователь';
+    registerFn(userId, userPassword, firstName, lastName, callback);
+};
