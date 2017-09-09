@@ -11,6 +11,17 @@ export const postLink = (data, token) => {
     }).then(res => res.json());
 };
 
+export const postDeleteLink = (id, token) => {
+    const headers = new Headers({
+        Authorization: `Bearer ${token}`,
+    });
+
+    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/myLinks/${id}`, {
+        method: 'delete',
+        headers,
+    }).then(res => res.json());
+};
+
 export const postLinkToCollection = (collectionId, linkId, token, description) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,

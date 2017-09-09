@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addLinkToCollection } from '../../../reducers/link.reducer';
+import { addLinkToCollection, removeLink } from '../../../reducers/link.reducer';
 
 import { Icon, Button } from '../../../blocks';
 
@@ -15,6 +15,8 @@ class AddLinkHeader extends Component {
 
     handleReturnToCard = () => {
         this.props.history.replace({ pathname: `/collection/${this.props.collection._id}` });
+        // удаляем недосозданную ссылку из БД
+        if (this.props.link._id) { this.props.removeLink(this.props.link._id, this.props.token); }
     };
 
     addLink = () => {
@@ -75,6 +77,7 @@ AddLinkHeader.propTypes = {
     description: PropTypes.string,
     token: PropTypes.string.isRequired,
     addLinkToCollection: PropTypes.func.isRequired,
+    removeLink: PropTypes.func.isRequired,
     history: PropTypes.any.isRequired,
 };
 
@@ -90,5 +93,5 @@ export default connect(
         description: state.link.description,
         collection: state.collection,
     }),
-    { addLinkToCollection },
+    { addLinkToCollection, removeLink },
 )(withRouter(AddLinkHeader));
