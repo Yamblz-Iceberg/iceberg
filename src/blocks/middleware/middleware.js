@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { registerDemoUser } from '../../reducers/authorization.reducer';
-import { generateGuid } from '../../utils/shared-functions';
+import { authDemoUser } from '../../utils/shared-functions';
 import { showLoader, hideLoader } from '../../reducers/loader.reducer';
 import { addRealUser } from '../../reducers/authorization.reducer';
 import { Preloader } from '../';
@@ -13,13 +13,6 @@ import './middleware.scss';
 
 
 class Middleware extends Component {
-    static authDemoUser = (registerFn, callback) => {
-        const userId = generateGuid();
-        const userPassword = generateGuid();
-        const firstName = 'Демо';
-        const lastName = 'Пользователь';
-        registerFn(userId, userPassword, firstName, lastName, callback);
-    };
     constructor(props) {
         super(props);
         window.handleOpenURL = this.handleUserData;
@@ -27,7 +20,7 @@ class Middleware extends Component {
     componentDidMount() {
         this.props.showLoader();
         if (this.props.authorization.access_token === '') {
-            this.constructor.authDemoUser(
+            authDemoUser(
                 this.props.registerDemoUser,
                 this.saveLocal,
             );
