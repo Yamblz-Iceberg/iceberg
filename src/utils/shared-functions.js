@@ -29,3 +29,11 @@ export const handleClickToCollection = (e, cardId, history) => {
         history.push({ pathname: `/collection/${cardId}` });
     }
 };
+
+export const authDemoUser = (registerFn, callback) => {
+    const userId = generateGuid();
+    const userPassword = generateGuid();
+    const firstName = 'Демо';
+    const lastName = 'Пользователь';
+    registerFn(userId, userPassword, firstName, lastName, callback);
+};
