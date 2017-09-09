@@ -1,21 +1,65 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './creating-successfully.scss';
 
 import { CollectionCard, Button, Icon } from '../../blocks';
 import CreatingSuccessfullyHeader from './header/creating-successfully-header';
+import { handleClickToCollection } from '../../utils/shared-functions';
 
 class CreatingSuccessfully extends Component {
-    handleClick = e => e;
+    componentWillMount() {
+        const {
+            links,
+            savedTimesCount,
+            history,
+        } = this.props;
+
+        const collection = {
+            ...history.location.state.collection,
+            savedTimesCount,
+            linksCount: links.length,
+        };
+
+        this.setCollection(collection);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.links !== nextProps.links) {
+            this.setLinks(nextProps.links);
+        }
+    }
+
+    setCollection = (collection) => {
+        this.setState({
+            collection,
+        });
+    }
+
+    setLinks = (links) => {
+        this.setLinks({
+            collection: {
+                ...this.state.collection,
+                links,
+            },
+        });
+    }
+
+    handleClick = cardId => (e) => {
+        handleClickToCollection(e, cardId, this.props.history);
+    }
 
     render() {
-        const { collection } = this.props.history.location.state;
+        const { collection } = this.state;
 
         return (
             <div className="creating-successfully">
                 <CreatingSuccessfullyHeader />
-                <div className="creating-successfully__collection-card-wrapper">
+                <div
+                    className="creating-successfully__collection-card-wrapper"
+                    onClick={this.handleClick(collection._id)}
+                >
                     <CollectionCard data={collection} />
                 </div>
                 <div className="creating-successfully__button-wrapper">
@@ -30,8 +74,20 @@ class CreatingSuccessfully extends Component {
     }
 }
 
-CreatingSuccessfully.propTypes = {
-    history: PropTypes.any.isRequired,
+CreatingSuccessfully.defaultProps = {
+    links: [],
+    savedTimesCount: 0,
 };
 
-export default withRouter(CreatingSuccessfully);
+CreatingSuccessfully.propTypes = {
+    history: PropTypes.any.isRequired,
+    links: PropTypes.array,
+    savedTimesCount: PropTypes.number,
+};
+
+export default connect(
+    state => ({
+        links: state.collection.links,
+        savedTimesCount: state.collection.savedTimesCount,
+    }),
+)(withRouter(CreatingSuccessfully));

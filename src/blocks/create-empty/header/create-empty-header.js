@@ -63,8 +63,6 @@ class CreateEmptyHeader extends Component {
 
         const collection = {
             ...data.collection,
-            linksCount: 0,
-            savedTimesCount: 0,
             tags,
             author: {
                 photo,
@@ -72,7 +70,6 @@ class CreateEmptyHeader extends Component {
                 lastName,
             },
         };
-        console.log(data, collection);
 
         this.props.history.push({
             pathname: '/creating-successfully',
