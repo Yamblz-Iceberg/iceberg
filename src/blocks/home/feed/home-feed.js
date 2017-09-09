@@ -9,6 +9,7 @@ import { CollectionCard, HashTape } from '../../index';
 import { Preloader } from '../../../blocks';
 
 import { feedLoader } from '../../../reducers/feed.reducer';
+import { handleClickToCollection } from '../../../utils/shared-functions';
 
 import './home-feed.scss';
 
@@ -26,16 +27,8 @@ class HomeFeed extends Component {
         }
     }
 
-    handlerOnClick(e, cardId) {
-        if (e.target.className !== 'hash-tag'
-            && e.target.className !== 'card-footer__user'
-            && e.target.className !== 'card-footer__actions'
-            && e.target.className !== 'card-footer__save-action'
-            && (typeof e.target.className.baseVal === 'undefined'
-                || (e.target.className.baseVal
-                && e.target.className.baseVal.trim() !== 'svg-icon'))) {
-            this.props.history.push({ pathname: `/collection/${cardId}` });
-        }
+    handlerOnClick = cardId => (e) => {
+        handleClickToCollection(e, cardId, this.props.history);
     }
 
     hyphenateCardNames = collection =>
@@ -64,7 +57,7 @@ class HomeFeed extends Component {
                     <div
                         key={card._id}
                         className="home-feed__collection-card"
-                        onClick={e => this.handlerOnClick(e, card._id)}
+                        onClick={this.handlerOnClick(card._id)}
                     >
                         <CollectionCard data={card} />
                     </div>
