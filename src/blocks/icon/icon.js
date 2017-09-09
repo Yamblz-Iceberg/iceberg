@@ -138,6 +138,10 @@ const iconsSizes = {
         width: '70px',
         height: '70px',
     },
+    'like-filled': {
+        width: '22px',
+        height: '21px',
+    },
 };
 
 const Icon = (props) => {

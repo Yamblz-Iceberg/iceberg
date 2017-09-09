@@ -53,6 +53,7 @@
 - home
 - titanic
 - empty-profile
+- like-filled
 
 
 ### Запуск приложения
