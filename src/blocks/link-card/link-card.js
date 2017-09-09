@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Icon, Avatar } from '../../blocks';
-import { changeLikeOfLinkLoader } from './../../reducers/collection.reducer';
+import { changeLikeOfLinkLoader, changeSavedOfLinkLoader } from './../../reducers/collection.reducer';
 
 import './link-card.scss';
 import variables from './../../variables.scss';
@@ -16,6 +16,16 @@ class LinkCard extends Component {
 
     delFromLiked = (e) => {
         this.props.changeLikeOfLinkLoader(this.props.data._id, false, this.props.token);
+        e.stopPropagation();
+    }
+
+    putToSaved = (e) => {
+        this.props.changeSavedOfLinkLoader(this.props.data._id, true, this.props.token);
+        e.stopPropagation();
+    }
+
+    delFromSaved = (e) => {
+        this.props.changeSavedOfLinkLoader(this.props.data._id, false, this.props.token);
         e.stopPropagation();
     }
 
@@ -66,6 +76,7 @@ class LinkCard extends Component {
             { button }
             {
                 <div className={isTransparent ? 'link-card__footer link-card__footer--transparent' : 'link-card__footer'}>
+                    {/* лайки */}
                     {
                         data.liked && <div className="link-card__block" onClick={this.delFromLiked}>
                             <Icon iconName={'like-filled'} iconColor={variables.mainYellow} />
@@ -78,10 +89,19 @@ class LinkCard extends Component {
                             <span>{data.likes}</span>
                         </div>
                     }
-                    <div className="link-card__block">
-                        <Icon iconName={'save-big'} iconColor={'#fff'} />
-                        <span>{data.savedTimesCount}</span>
-                    </div>
+                    {/* сохранение */}
+                    {
+                        data.saved && <div className="link-card__block" onClick={this.delFromSaved}>
+                            <Icon iconName={'save-small'} iconColor={variables.mainYellow} />
+                            <span>{data.savedTimesCount}</span>
+                        </div>
+                    }
+                    {
+                        !data.saved && <div className="link-card__block" onClick={this.putToSaved}>
+                            <Icon iconName={'save-big'} iconColor={'#fff'} />
+                            <span>{data.savedTimesCount}</span>
+                        </div>
+                    }
                 </div>
             }
             <div className="link-card__overlay" />
@@ -95,6 +115,7 @@ LinkCard.propTypes = {
     isTransparent: PropTypes.bool,
     editIcon: PropTypes.object,
     changeLikeOfLinkLoader: PropTypes.func.isRequired,
+    changeSavedOfLinkLoader: PropTypes.func.isRequired,
     token: PropTypes.any.isRequired,
 };
 
@@ -107,4 +128,4 @@ LinkCard.defaultProps = {
 
 export default connect(state => ({
     token: state.authorization.access_token,
-}), { changeLikeOfLinkLoader })(LinkCard);
+}), { changeLikeOfLinkLoader, changeSavedOfLinkLoader })(LinkCard);

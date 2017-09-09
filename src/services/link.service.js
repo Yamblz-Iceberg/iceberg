@@ -34,3 +34,25 @@ export const changeLikeOfLink = (id, token) => {
         method: 'put',
     });
 };
+
+export const putSaveOfLink = (id, token) => {
+    const headers = new Headers({
+        Authorization: `Bearer ${token}`,
+    });
+
+    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/links/${id}`, {
+        headers,
+        method: 'put',
+    });
+};
+
+export const deleteSaveOfLink = (id, token) => {
+    const headers = new Headers({
+        Authorization: `Bearer ${token}`,
+    });
+
+    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/links/${id}`, {
+        headers,
+        method: 'delete',
+    });
+};

@@ -14,6 +14,7 @@ const initialState = {
         name: '',
     },
     created: false,
+    saved: false,
     liked: false,
     likes: 0,
     description: '',
