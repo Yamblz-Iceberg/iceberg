@@ -32,6 +32,7 @@ class HashTag extends Component {
 
 HashTag.defaultProps = {
     size: '',
+    id: '',
 };
 
 HashTag.propTypes = {
@@ -40,7 +41,7 @@ HashTag.propTypes = {
     history: PropTypes.any.isRequired,
     changeSearch: PropTypes.func.isRequired,
     token: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
+    id: PropTypes.string,
 };
 
 function mapStateToProps(state) {

@@ -27,22 +27,22 @@ class CreateEmptyHeader extends Component {
     componentWillReceiveProps = (nextProps) => {
         const {
             title: currTitle,
-            hashTags: currHashTags,
+            tags: currHashTags,
         } = this.props;
-        const { title, hashTags } = nextProps;
+        const { title, tags } = nextProps;
 
         if ((title && currTitle !== title) ||
-            (hashTags && currHashTags !== hashTags)
+            (tags && currHashTags !== tags)
         ) {
             this.setSubmitStatus(nextProps);
         }
     };
 
-    setSubmitStatus = ({ title, hashTags }) => {
+    setSubmitStatus = ({ title, tags }) => {
         this.setState({
             submitStatus: (
                 title.length > 4 &&
-                hashTags.length > 0
+                tags.length > 0
             ),
         });
     };
@@ -52,12 +52,18 @@ class CreateEmptyHeader extends Component {
     };
 
     changeRoute = (data) => {
-        const { firstName, lastName, photo } = this.props.user;
+        const {
+            user: {
+                firstName,
+                lastName,
+                photo,
+            },
+            tags,
+        } = this.props;
 
         const collection = {
-            linksCount: 0,
-            savedTimesCount: 0,
-            ...data,
+            ...data.collection,
+            tags,
             author: {
                 photo,
                 firstName,
@@ -93,7 +99,7 @@ class CreateEmptyHeader extends Component {
             const body = {
                 name: this.props.title,
                 color: this.hexToRGB(this.props.color || cardBlue),
-                tags: this.props.hashTags.map(tag => tag.id),
+                tags: this.props.tags.map(tag => tag.id),
             };
             if (this.props.photo) { body.photo = this.props.photo; }
             if (this.props.description) { body.description = this.props.description; }
@@ -121,7 +127,7 @@ class CreateEmptyHeader extends Component {
 CreateEmptyHeader.defaultProps = {
     title: '',
     description: '',
-    hashTags: [],
+    tags: [],
     photo: '',
     color: cardBlue,
 };
@@ -132,11 +138,11 @@ CreateEmptyHeader.propTypes = {
     photo: PropTypes.string,
     color: PropTypes.string,
     description: PropTypes.string,
-    hashTags: PropTypes.array,
+    tags: PropTypes.array,
     token: PropTypes.string.isRequired,
-    createCollection: PropTypes.func.isRequired,
     history: PropTypes.any.isRequired,
     showModal: PropTypes.func.isRequired,
+    createCollection: PropTypes.func.isRequired,
 };
 
 export default connect(
@@ -144,7 +150,7 @@ export default connect(
         user: state.user.data,
         title: state.createCollection.title,
         description: state.createCollection.description,
-        hashTags: state.createCollection.hashTags,
+        tags: state.createCollection.tags,
         token: state.authorization.access_token,
         color: state.createCollection.color,
         photo: state.createCollection.photo,
