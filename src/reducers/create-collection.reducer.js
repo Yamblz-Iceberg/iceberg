@@ -8,6 +8,7 @@ const ADD_HASHTAG = 'ADD_HASHTAG';
 const DELETE_HASHTAG = 'DELETE_HASHTAG';
 const EDIT_HASHTAG = 'EDIT_HASHTAG';
 const ADD_IMAGE = 'ADD_IMAGE';
+const PUT_COLLECTION = 'PUT_COLLECTION';
 
 const initialState = {
     description: '',
@@ -25,6 +26,7 @@ const addHashTag = tag =>
     ({ type: ADD_HASHTAG, name: tag.result.name, id: tag.result._id });
 const deleteHashTag = id => ({ type: DELETE_HASHTAG, payload: id });
 const editHashTag = (id, name) => ({ type: EDIT_HASHTAG, payload: { id, name } });
+const putCollection = () => ({ type: PUT_COLLECTION });
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -73,6 +75,8 @@ const reducer = (state = initialState, action) => {
             tags: update([...state.tags], action.payload),
         };
     }
+    case PUT_COLLECTION:
+        return state;
     case CLEAR_COLLECTION:
         return { ...initialState };
     default:
@@ -83,8 +87,12 @@ const reducer = (state = initialState, action) => {
 export const addImage = data => ({ type: ADD_IMAGE, color: data.color, photo: data.photo });
 
 export const createCollection = (data, token, callback) => (
-    postCollection(data, token).then(res => res.json())
-        .then(res => callback(res))
+    (dispatch) => {
+        postCollection(data, token)
+            .then(res => res.json())
+            .then(res => callback(res))
+            .then(() => { dispatch(putCollection()); });
+    }
 );
 
 export const createHashtag = (name, token) => (
