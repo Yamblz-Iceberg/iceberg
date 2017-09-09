@@ -1,7 +1,8 @@
-import { postLink, postLinkToCollection } from './../services/link.service';
+import { postLink, postLinkToCollection, postDeleteLink } from './../services/link.service';
 import { showLoader } from './../reducers/loader.reducer';
 
 export const ADD_LINK = 'ADD_LINK';
+const DELETE_LINK = 'DELETE_LINK';
 const ADD_COMMENT = 'ADD_COMMENT';
 const CLEAR_LINK = 'CLEAR_LINK';
 const PUSH_LINK_TO_COLLECTION = 'PUSH_LINK_TO_COLLECTION';
@@ -14,12 +15,14 @@ const initialState = {
         name: '',
     },
     created: false,
+    saved: false,
     liked: false,
     likes: 0,
     description: '',
 };
 
 const addLink = res => ({ type: ADD_LINK, payload: res });
+const deleteLink = () => ({ type: DELETE_LINK });
 const addComment = description => ({ type: ADD_COMMENT, payload: description });
 const clearLink = () => ({ type: CLEAR_LINK });
 const pushLinkToCollection = () => ({ type: PUSH_LINK_TO_COLLECTION });
@@ -28,6 +31,8 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
     case ADD_LINK:
         return { ...state, ...action.payload };
+    case DELETE_LINK:
+        return { ...initialState };
     case ADD_COMMENT:
         return { ...state, description: action.payload };
     case PUSH_LINK_TO_COLLECTION:
@@ -44,6 +49,14 @@ export const createLink = (data, token) => (
         dispatch(showLoader());
         postLink(data, token).then((res) => {
             dispatch(addLink(res));
+        });
+    }
+);
+
+export const removeLink = (id, token) => (
+    (dispatch) => {
+        postDeleteLink(id, token).then((res) => {
+            dispatch(deleteLink(res));
         });
     }
 );
