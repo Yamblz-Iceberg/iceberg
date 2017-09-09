@@ -40,6 +40,9 @@ function onDeviceReady() {
         }
         window.StatusBar.overlaysWebView(false);
     }
+    if (typeof navigator.splashscreen !== 'undefined') {
+        navigator.splashscreen.hide();
+    }
 
     render(
         <Provider store={store}>

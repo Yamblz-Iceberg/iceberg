@@ -29,6 +29,7 @@ const CollectionCard = ({ data }) => {
                         name={hashes[0].name}
                         size={'small'}
                         key={hashes[0]._id}
+                        id={hashes[0]._id}
                     />
                 }
                 {

@@ -7,6 +7,8 @@ import CollectionDetailInfo from './info/collection-detail-info';
 import CollectionDetailHeader from './header/collection-detail-header';
 import { collectionLoader } from '../../reducers/collection.reducer';
 
+import { putTags } from '../../services/personal-tags.service';
+
 import './collection-detail.scss';
 
 class CollectionDetail extends Component {
@@ -17,13 +19,21 @@ class CollectionDetail extends Component {
             showAllText: false,
         };
     }
+
     componentDidMount() {
         this.props.collectionLoader(this.props.params.id, this.props.token);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.collection.tags.length !== 0) {
+            const tags = nextProps.collection.tags.map(tag => (tag._id));
+            putTags(tags, this.props.token);
+        }
+    }
+
     createLink = () => {
         if (this.props.userData.accType !== 'demo') {
-            this.props.history.push({ pathname: '/create-link' });
+            this.props.history.replace({ pathname: '/create-link' });
         } else {
             localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
             this.props.history.push('/authorization');
