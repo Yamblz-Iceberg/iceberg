@@ -64,7 +64,7 @@ class CollectionDetailHeader extends Component {
             {
                 title: 'Пожаловаться',
                 id: 3,
-                /* eslint-disable */
+                /* eslint-disable no-alert */
                 onClick: () => { alert('Ябеда!'); },
                 icon: <Icon iconName={'question'} iconColor={'#777'} />,
             },
@@ -87,7 +87,7 @@ class CollectionDetailHeader extends Component {
                         <Icon iconName={'home'} iconColor={this.state.fixedHeader ? '#000' : '#fff'} />
                     </div>
                     <div className="collection-detail-header__block">
-                        <ContextMenu color={this.state.fixedHeader ? '#000' : '#fff'} items={contextMenuItems} />
+                        <ContextMenu iconColor={this.state.fixedHeader ? '#000' : '#fff'} items={contextMenuItems} />
                     </div>
                 </div>
             </header>

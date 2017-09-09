@@ -18,7 +18,7 @@ class ContextMenu extends Component {
         if (this.refContextMenu && !this.refContextMenu.contains(event.target)) {
             this.toggle();
         }
-    }
+    };
 
     handleTouchMove = () => {
         this.setState({ isOpened: false });
@@ -34,16 +34,16 @@ class ContextMenu extends Component {
             document.addEventListener('click', this.handleOutsideClick, false);
             document.body.addEventListener('touchmove', this.handleTouchMove, false);
         }
-    }
+    };
 
     render() {
-        const { items, color } = this.props;
+        const { items, iconName, iconColor } = this.props;
         return (<div
             className="context-menu"
             onClick={this.toggle}
             ref={(el) => { this.refContextMenu = el; }}
         >
-            <Icon iconName={'more-vert'} iconColor={color} iconWidth="16px" iconHeight="16px" />
+            <Icon iconName={iconName} iconColor={iconColor} />
             { this.state.isOpened && <div className="context-menu__overlay" /> }
             { this.state.isOpened && <div className="context-menu__list">
                 {
@@ -62,13 +62,15 @@ ContextMenu.propTypes = {
         icon: PropTypes.any,
         onClick: PropTypes.func,
     })),
-    color: PropTypes.string,
+    iconName: PropTypes.string,
+    iconColor: PropTypes.string,
 };
 
 ContextMenu.defaultProps = {
     icon: null,
     items: [],
-    color: '#fff',
+    iconName: 'more-vert',
+    iconColor: '#fff',
 };
 
 export default ContextMenu;
