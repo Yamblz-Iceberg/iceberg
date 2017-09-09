@@ -68,7 +68,7 @@ class LinkCard extends Component {
                 <div className={isTransparent ? 'link-card__footer link-card__footer--transparent' : 'link-card__footer'}>
                     {
                         data.liked && <div className="link-card__block" onClick={this.delFromLiked}>
-                            <Icon iconName={'like-small'} iconColor={variables.mainYellow} iconWidth="20" iconHeight="20" />
+                            <Icon iconName={'like-filled'} iconColor={variables.mainYellow} />
                             <span>{data.likes}</span>
                         </div>
                     }
