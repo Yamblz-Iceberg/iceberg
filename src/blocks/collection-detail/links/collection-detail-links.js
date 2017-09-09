@@ -10,7 +10,6 @@ import { actions as modalActions } from '../../../reducers/modal.reducer';
 import './collection-detail-links.scss';
 
 class CollectionDetailLinks extends Component {
-    /* eslint class-methods-use-this: ["error", { "exceptMethods": ["openLink"] }] */
     openLink(href, readerMode) {
         if (window.cordova) {
             window.SafariViewController.isAvailable((available) => {
