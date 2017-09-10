@@ -6,3 +6,12 @@ export const fetchUser = (token, id) => {
     return fetch(`https://iceberg-project.herokuapp.com/users/${id}`, { headers })
         .then(res => res.json());
 };
+
+export const fetchCollections = (token, id) => {
+    const headers = new Headers({
+        Authorization: `Bearer ${token}`,
+    });
+
+    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/createdCollections?userId=${id}`, { headers })
+        .then(res => res.json());
+};
