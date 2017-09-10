@@ -142,6 +142,10 @@ const iconsSizes = {
         width: '22px',
         height: '21px',
     },
+    exit: {
+        width: '22px',
+        height: '20px',
+    },
 };
 
 const Icon = (props) => {
