@@ -4,15 +4,41 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Icon } from '../../../blocks';
 
-import './create-empty-header.scss';
+import { hexToRGB } from '../../../utils/shared-functions';
 
+import './create-empty-header.scss';
 import { cardBlue } from '../../../variables.scss';
 
 import { createCollection } from '../../../reducers/create-collection.reducer';
 import { actions as modalActions } from '../../../reducers/modal.reducer';
 
-
+/*
+Компонент хедера экрана создания новой коллекции. По нажатию на кнопку "Создать"
+обращается к серверу и создаёт новую коллекцию. Данные берёт из поля
+"createCollection" стора.
+*/
 class CreateEmptyHeader extends Component {
+    static propTypes = {
+        user: PropTypes.object.isRequired,
+        title: PropTypes.string,
+        photo: PropTypes.string,
+        color: PropTypes.string,
+        description: PropTypes.string,
+        tags: PropTypes.array,
+        token: PropTypes.string.isRequired,
+        history: PropTypes.any.isRequired,
+        showModal: PropTypes.func.isRequired,
+        createCollection: PropTypes.func.isRequired,
+    }
+
+    static defaultProps = {
+        title: '',
+        description: '',
+        tags: [],
+        photo: '',
+        color: cardBlue,
+    };
+
     constructor() {
         super();
         this.state = {
@@ -77,16 +103,6 @@ class CreateEmptyHeader extends Component {
         });
     };
 
-    hexToRGB = (color) => {
-        if (!color.match(/^#[0-9a-f]{3,6}$/i)) {
-            return color;
-        }
-        const r = parseInt(color.slice(1, 3), 16);
-        const g = parseInt(color.slice(3, 5), 16);
-        const b = parseInt(color.slice(5, 7), 16);
-        return `rgb(${r}, ${g}, ${b})`;
-    };
-
     handleSubmitData = () => {
         if (!this.state.submitStatus) {
             this.props.showModal('ERROR_MESSAGE',
@@ -98,15 +114,15 @@ class CreateEmptyHeader extends Component {
         } else {
             const body = {
                 name: this.props.title,
-                color: this.hexToRGB(this.props.color || cardBlue),
+                color: hexToRGB(this.props.color || cardBlue),
                 tags: this.props.tags.map(tag => tag.id),
             };
+
             if (this.props.photo) { body.photo = this.props.photo; }
             if (this.props.description) { body.description = this.props.description; }
             this.props.createCollection(body, this.props.token, this.changeRoute);
         }
     };
-
 
     render() {
         return (
@@ -123,27 +139,6 @@ class CreateEmptyHeader extends Component {
         );
     }
 }
-
-CreateEmptyHeader.defaultProps = {
-    title: '',
-    description: '',
-    tags: [],
-    photo: '',
-    color: cardBlue,
-};
-
-CreateEmptyHeader.propTypes = {
-    user: PropTypes.object.isRequired,
-    title: PropTypes.string,
-    photo: PropTypes.string,
-    color: PropTypes.string,
-    description: PropTypes.string,
-    tags: PropTypes.array,
-    token: PropTypes.string.isRequired,
-    history: PropTypes.any.isRequired,
-    showModal: PropTypes.func.isRequired,
-    createCollection: PropTypes.func.isRequired,
-};
 
 export default connect(
     state => ({
