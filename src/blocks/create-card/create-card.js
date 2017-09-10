@@ -10,7 +10,33 @@ import { CreateHashTag, Icon, CardFooter } from './../../blocks';
 import { actions as modalActions } from './../../reducers/modal.reducer';
 import { createHashtag, deleteHashTag, editHashTag, addImage } from '../../reducers/create-collection.reducer';
 
+/*
+Компонент карточки создания новой коллекции. Содержит логику
+добавления тегов, инпут названия подборки, загрузчик для обложки
+подборки. Работает с полем "createCollection" стора.
+*/
 class CreateCard extends Component {
+    static propTypes = {
+        data: PropTypes.object.isRequired,
+        title: PropTypes.string,
+        tags: PropTypes.array,
+        createHashtag: PropTypes.func.isRequired,
+        deleteHashTag: PropTypes.func.isRequired,
+        editHashTag: PropTypes.func.isRequired,
+        showModal: PropTypes.func.isRequired,
+        addImage: PropTypes.func.isRequired,
+        color: PropTypes.string,
+        photo: PropTypes.string,
+        token: PropTypes.string.isRequired,
+    };
+
+    static defaultProps = {
+        title: '',
+        tags: [],
+        color: cardBlue,
+        photo: '',
+    };
+
     constructor() {
         super();
         this.state = {
@@ -107,20 +133,23 @@ class CreateCard extends Component {
         const uploadPhoto = (imageURI) => {
             const options = new FileUploadOptions();
             const ft = new FileTransfer();
+
             options.fileKey = 'photo';
             options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
             options.mimeType = 'image/jpeg';
+
             const params = {};
             options.params = params;
             options.chunkedMode = false;
+
             this.setState({
                 imageStatus: 'uploading',
             });
+
             ft.upload(imageURI, 'https://iceberg-project.herokuapp.com/upload', (result) => {
                 if (result.response) {
                     try {
                         const data = JSON.parse(result.response);
-                        // this.setCardStyles(data.mainColor, data.fileName)
                         this.setState({
                             imageStatus: 'uploaded',
                         });
@@ -133,10 +162,10 @@ class CreateCard extends Component {
                 this.setState({
                     imageStatus: 'none',
                 });
-                console.log(error);
                 this.props.showModal('ERROR_MESSAGE');
             }, options);
         };
+        /* eslint-enable */
 
         navigator.camera.getPicture(
             (img) => { uploadPhoto(img); },
@@ -245,27 +274,6 @@ class CreateCard extends Component {
         );
     }
 }
-
-CreateCard.defaultProps = {
-    title: '',
-    tags: [],
-    color: cardBlue,
-    photo: '',
-};
-
-CreateCard.propTypes = {
-    data: PropTypes.object.isRequired,
-    title: PropTypes.string,
-    tags: PropTypes.array,
-    createHashtag: PropTypes.func.isRequired,
-    deleteHashTag: PropTypes.func.isRequired,
-    editHashTag: PropTypes.func.isRequired,
-    showModal: PropTypes.func.isRequired,
-    addImage: PropTypes.func.isRequired,
-    color: PropTypes.string,
-    photo: PropTypes.string,
-    token: PropTypes.string.isRequired,
-};
 
 export default connect(
     state => ({
