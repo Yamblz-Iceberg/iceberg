@@ -8,7 +8,30 @@ import { changeLikeOfLinkLoader, changeSavedOfLinkLoader } from './../../reducer
 import './link-card.scss';
 import variables from './../../variables.scss';
 
+/*
+Компонент карточки ссылки. Отображает пользователя, который добавил ссылку,
+заголовок ссылки, фавиконку (если ссылка на фавиконку битая, то выводиться она
+не будет), футер с дополнительной информацией, опциональную кнопку добавления
+комментария (если компонент используется при создании ссылки).
+*/
 class LinkCard extends Component {
+    static propTypes = {
+        data: PropTypes.object.isRequired,
+        button: PropTypes.any,
+        isTransparent: PropTypes.bool,
+        editIcon: PropTypes.object,
+        changeLikeOfLinkLoader: PropTypes.func.isRequired,
+        changeSavedOfLinkLoader: PropTypes.func.isRequired,
+        token: PropTypes.any.isRequired,
+    }
+
+    static defaultProps = {
+        data: {},
+        button: null,
+        editIcon: null,
+        isTransparent: false,
+    }
+
     putToLiked = (e) => {
         this.props.changeLikeOfLinkLoader(this.props.data._id, true, this.props.token);
         e.stopPropagation();
@@ -35,6 +58,7 @@ class LinkCard extends Component {
             backgroundColor: variables.blue,
             backgroundImage: `url('${data.photo}')`,
         };
+
         const avatarOptions = {
             size: '25',
             iconColor: '#fff',
@@ -108,23 +132,6 @@ class LinkCard extends Component {
         </div>);
     }
 }
-
-LinkCard.propTypes = {
-    data: PropTypes.object.isRequired,
-    button: PropTypes.any,
-    isTransparent: PropTypes.bool,
-    editIcon: PropTypes.object,
-    changeLikeOfLinkLoader: PropTypes.func.isRequired,
-    changeSavedOfLinkLoader: PropTypes.func.isRequired,
-    token: PropTypes.any.isRequired,
-};
-
-LinkCard.defaultProps = {
-    data: {},
-    button: null,
-    editIcon: null,
-    isTransparent: false,
-};
 
 export default connect(state => ({
     token: state.authorization.access_token,
