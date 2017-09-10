@@ -5,10 +5,11 @@ import PropTypes from 'prop-types';
 import { Icon, Dropdown } from '../../../blocks';
 
 import {
-    myCollectionsLoader,
+    createdCollectionsLoader,
     savedLinksLoader,
-    myLinksLoader,
+    addedLinksLoader,
     savedCollectionsLoader,
+    openedLinksLoader,
 } from './../../../reducers/bookmarks.reducer';
 
 import './account-profile-filter.scss';
@@ -17,9 +18,9 @@ class ProfileFilter extends Component {
     static propTypes = {
         items: PropTypes.array.isRequired,
         token: PropTypes.string.isRequired,
-        myCollectionsLoader: PropTypes.func.isRequired,
+        createdCollectionsLoader: PropTypes.func.isRequired,
         savedLinksLoader: PropTypes.func.isRequired,
-        myLinksLoader: PropTypes.func.isRequired,
+        addedLinksLoader: PropTypes.func.isRequired,
         savedCollectionsLoader: PropTypes.func.isRequired,
     }
 
@@ -28,14 +29,17 @@ class ProfileFilter extends Component {
         case 'savedCollections':
             this.props.savedCollectionsLoader(this.props.token, item.name);
             break;
-        case 'myCollections':
-            this.props.myCollectionsLoader(this.props.token, item.name);
+        case 'createdCollections':
+            this.props.createdCollectionsLoader(this.props.token, item.name);
             break;
-        case 'savedLinks':
-            this.props.savedLinksLoader(this.props.token, item.name);
+        case 'newLinks':
+            this.props.savedLinksLoader(this.props.token, item.name, 'new');
             break;
-        case 'myLinks':
-            this.props.myLinksLoader(this.props.token, item.name);
+        case 'addedLinks':
+            this.props.addedLinksLoader(this.props.token, item.name);
+            break;
+        case 'openedLinks':
+            this.props.savedLinksLoader(this.props.token, item.name, 'opened');
             break;
         default:
             break;
@@ -62,8 +66,9 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-    myCollectionsLoader,
+    createdCollectionsLoader,
     savedLinksLoader,
     savedCollectionsLoader,
-    myLinksLoader,
+    addedLinksLoader,
+    openedLinksLoader,
 })(ProfileFilter);

@@ -1,22 +1,22 @@
-import { fetchSavedCollections, fetchMyCollections, fetchSavedLinks, fetchMyLinks } from '../services/bookmarks.service';
+import { fetchSavedCollections, fetchCreatedCollections, fetchSavedLinks, fetchAddedLinks } from '../services/bookmarks.service';
 import { showLoader } from './loader.reducer';
 
 export const GET_USER_COLLECTIONS = 'GET_USER_COLLECTIONS';
 export const GET_USER_LINKS = 'GET_USER_LINKS';
 
 const initialState = {
-    typeToFeed: 'myCollection',
+    typeToFeed: 'createdCollection',
     collections: [],
     links: [],
 };
 
 const getSavedCollections = (data, type) =>
     ({ type: GET_USER_COLLECTIONS, payload: data.collections, typeToFeed: type });
-const getMyCollections = (data, type) =>
+const getCreatedCollections = (data, type) =>
     ({ type: GET_USER_COLLECTIONS, payload: data.collections, typeToFeed: type });
 const getSavedLinks = (data, type) =>
     ({ type: GET_USER_LINKS, payload: data.links, typeToFeed: type });
-const getMyLinks = (data, type) =>
+const getAddedLinks = (data, type) =>
     ({ type: GET_USER_LINKS, payload: data.links, typeToFeed: type });
 
 const reducer = (state = initialState, action) => {
@@ -36,6 +36,8 @@ const reducer = (state = initialState, action) => {
     }
 };
 
+// Коллекции
+
 const savedCollectionsLoader = (token, type) => (
     (dispatch) => {
         dispatch(showLoader());
@@ -45,37 +47,40 @@ const savedCollectionsLoader = (token, type) => (
     }
 );
 
-const myCollectionsLoader = (token, type) => (
+const createdCollectionsLoader = (token, type) => (
     (dispatch) => {
         dispatch(showLoader());
-        fetchMyCollections(token).then((data) => {
-            dispatch(getMyCollections(data, type));
+        fetchCreatedCollections(token).then((data) => {
+            dispatch(getCreatedCollections(data, type));
         });
     }
 );
 
-const savedLinksLoader = (token, type) => (
+// Ссылки
+
+// TODO: подумать насчет параметра type - возможно как-то сократить
+const savedLinksLoader = (token, type, linkType) => (
     (dispatch) => {
         dispatch(showLoader());
-        fetchSavedLinks(token).then((data) => {
+        fetchSavedLinks(token, linkType).then((data) => {
             dispatch(getSavedLinks(data, type));
         });
     }
 );
 
-const myLinksLoader = (token, type) => (
+const addedLinksLoader = (token, type) => (
     (dispatch) => {
         dispatch(showLoader());
-        fetchMyLinks(token).then((data) => {
-            dispatch(getMyLinks(data, type));
+        fetchAddedLinks(token).then((data) => {
+            dispatch(getAddedLinks(data, type));
         });
     }
 );
 
 export {
     reducer,
-    myCollectionsLoader,
+    createdCollectionsLoader,
     savedLinksLoader,
     savedCollectionsLoader,
-    myLinksLoader,
+    addedLinksLoader,
 };

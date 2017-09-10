@@ -7,7 +7,7 @@ import ProfileHeader from './header/account-profile-header';
 import ProfileFeed from './feed/account-profile-feed';
 import { UserInfo, Tabs } from './../../blocks';
 
-import { myCollectionsLoader, savedLinksLoader } from './../../reducers/bookmarks.reducer';
+import { createdCollectionsLoader, savedLinksLoader } from './../../reducers/bookmarks.reducer';
 
 import './account-profile.scss';
 
@@ -16,7 +16,7 @@ class AccountProfile extends Component {
         user: PropTypes.object.isRequired,
         bookmarks: PropTypes.object.isRequired,
         token: PropTypes.string.isRequired,
-        myCollectionsLoader: PropTypes.func.isRequired,
+        createdCollectionsLoader: PropTypes.func.isRequired,
         savedLinksLoader: PropTypes.func.isRequired,
         history: PropTypes.any.isRequired,
         loader: PropTypes.bool.isRequired,
@@ -31,7 +31,7 @@ class AccountProfile extends Component {
     }
 
     getMyCollections = () => {
-        this.props.myCollectionsLoader(this.props.token, 'myCollection');
+        this.props.createdCollectionsLoader(this.props.token, 'createdCollection');
     }
 
     getSavedLinks = () => {
@@ -58,17 +58,17 @@ class AccountProfile extends Component {
             {
                 id: 0,
                 title: 'Новые',
-                name: 'savedLinks',
+                name: 'newLinks',
             },
             {
                 id: 1,
                 title: 'Прочитанные',
-                name: 'savedLinks',
+                name: 'openedLinks',
             },
             {
                 id: 2,
                 title: 'Добавленные мной',
-                name: 'myLinks',
+                name: 'addedLinks',
             },
         ];
 
@@ -76,7 +76,7 @@ class AccountProfile extends Component {
             {
                 id: 0,
                 title: 'Созданные мной',
-                name: 'myCollections',
+                name: 'createdCollections',
             },
             {
                 id: 1,
@@ -118,5 +118,5 @@ function mapStateToProps(state) {
 
 export default connect(
     mapStateToProps,
-    { myCollectionsLoader, savedLinksLoader },
+    { createdCollectionsLoader, savedLinksLoader },
 )(withRouter(AccountProfile));
