@@ -12,7 +12,7 @@ export const putCollectionToSaved = (id, token) => {
         Authorization: `Bearer ${token}`,
     });
 
-    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/collections/${id}`, {
+    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/savedCollections/${id}`, {
         headers,
         method: 'put',
     }).then(res => res.json());
@@ -23,7 +23,7 @@ export const delCollectionFromSaved = (id, token) => {
         Authorization: `Bearer ${token}`,
     });
 
-    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/collections/${id}`, {
+    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/savedCollections/${id}`, {
         headers,
         method: 'delete',
     }).then(res => res.json());

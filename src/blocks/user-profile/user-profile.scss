@@ -1,10 +1,28 @@
 .user-profile{
+
     &-wrap {
         position: relative;
     }
+
     &__tabs-wrap {
         padding-top: 16px;
         background-color: #fff;
         box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #e0e0e0;
+        padding: 18px 18px 14px;
+        width: 100%;
+
+        > p {
+            margin: 0;
+            color: #949494;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
     }
 }

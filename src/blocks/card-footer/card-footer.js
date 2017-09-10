@@ -68,7 +68,7 @@ class CardFooter extends Component {
 
 CardFooter.propTypes = {
     idCard: PropTypes.string,
-    userId: PropTypes.string.isRequired,
+    userId: PropTypes.string,
     avatarOptions: PropTypes.object.isRequired,
     userName: PropTypes.string.isRequired,
     linksCount: PropTypes.number.isRequired,
@@ -85,6 +85,7 @@ CardFooter.propTypes = {
 CardFooter.defaultProps = {
     idCard: null,
     saved: null,
+    userId: null,
 };
 
 export default connect(state => ({
