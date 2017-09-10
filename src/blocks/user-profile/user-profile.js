@@ -15,10 +15,11 @@ class AccountProfile extends Component {
         user: PropTypes.object.isRequired,
         token: PropTypes.any.isRequired,
         userLoader: PropTypes.func.isRequired,
+        params: PropTypes.object.isRequired,
     };
 
     componentDidMount() {
-        this.props.userLoader(this.props.token);
+        this.props.userLoader(this.props.token, this.props.params.id);
     }
 
     render() {

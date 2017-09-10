@@ -22,9 +22,9 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-const userLoader = token => (
+const userLoader = (token, id) => (
     (dispatch) => {
-        fetchUser(token).then((data) => {
+        fetchUser(token, id).then((data) => {
             dispatch(loadUser(data));
         });
     }
