@@ -4,6 +4,18 @@ import PropTypes from 'prop-types';
 import './tabs.scss';
 
 class Tabs extends Component {
+    static propTypes = {
+        tabs: PropTypes.arrayOf(PropTypes.shape({
+            title: PropTypes.string.isRequired,
+            id: PropTypes.number.isRequired,
+        })),
+        history: PropTypes.object.isRequired,
+    }
+
+    static defaultProps = {
+        tabs: [],
+    }
+
     componentDidMount() {
         this.animateUnderline();
     }
@@ -67,17 +79,5 @@ class Tabs extends Component {
         );
     }
 }
-
-Tabs.propTypes = {
-    tabs: PropTypes.arrayOf(PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        id: PropTypes.number.isRequired,
-    })),
-    history: PropTypes.object.isRequired,
-};
-
-Tabs.defaultProps = {
-    tabs: [],
-};
 
 export default withRouter(Tabs);
