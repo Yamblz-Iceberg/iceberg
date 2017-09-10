@@ -9,6 +9,13 @@ import { actions as modalActions } from '../../../reducers/modal.reducer';
 import './account-profile-feed-item.scss';
 
 class AccountProfileFeedItem extends Component {
+    static propTypes = {
+        data: PropTypes.object.isRequired,
+        type: PropTypes.string.isRequired,
+        history: PropTypes.any.isRequired,
+        showModal: PropTypes.func.isRequired,
+    }
+
     openLink(href, readerMode) {
         if (window.cordova) {
             window.SafariViewController.isAvailable((available) => {
@@ -85,12 +92,4 @@ class AccountProfileFeedItem extends Component {
     }
 }
 
-AccountProfileFeedItem.propTypes = {
-    data: PropTypes.object.isRequired,
-    type: PropTypes.string.isRequired,
-    history: PropTypes.any.isRequired,
-    showModal: PropTypes.func.isRequired,
-};
-
-export default
-connect(null, { ...modalActions })(withRouter(AccountProfileFeedItem));
+export default connect(null, { ...modalActions })(withRouter(AccountProfileFeedItem));

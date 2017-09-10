@@ -9,6 +9,17 @@ import { Preloader } from './../../../blocks';
 import './account-profile-feed.scss';
 
 class AccountProfileFeed extends Component {
+    static propTypes = {
+        data: PropTypes.array,
+        type: PropTypes.string.isRequired,
+        filterItems: PropTypes.array.isRequired,
+        loader: PropTypes.bool.isRequired,
+    }
+
+    static defaultProps = {
+        data: [],
+    };
+
     renderFeed = () => {
         const { data, type, loader } = this.props;
 
@@ -48,16 +59,5 @@ class AccountProfileFeed extends Component {
         );
     }
 }
-
-AccountProfileFeed.propTypes = {
-    data: PropTypes.array,
-    type: PropTypes.string.isRequired,
-    filterItems: PropTypes.array.isRequired,
-    loader: PropTypes.bool.isRequired,
-};
-
-AccountProfileFeed.defaultProps = {
-    data: [],
-};
 
 export default AccountProfileFeed;
