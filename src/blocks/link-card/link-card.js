@@ -75,7 +75,6 @@ class LinkCard extends Component {
                     <Avatar {...avatarOptions} />
                     <div className="link-card__user-info">
                         <p className="link-card__user-name">{data.userAdded.firstName}</p>
-                        <p className="link-card__user-rating">{data.userAdded.rating}</p>
                     </div>
                 </div>
                 <div className="link-card__context-menu">
