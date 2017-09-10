@@ -16,7 +16,7 @@ export const postDeleteLink = (id, token) => {
         Authorization: `Bearer ${token}`,
     });
 
-    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/myLinks/${id}`, {
+    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/addedLinks/${id}`, {
         method: 'delete',
         headers,
     }).then(res => res.json());
@@ -51,7 +51,7 @@ export const putSaveOfLink = (id, token) => {
         Authorization: `Bearer ${token}`,
     });
 
-    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/links/${id}`, {
+    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/savedLinks/${id}`, {
         headers,
         method: 'put',
     });
@@ -62,7 +62,7 @@ export const deleteSaveOfLink = (id, token) => {
         Authorization: `Bearer ${token}`,
     });
 
-    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/links/${id}`, {
+    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/savedLinks/${id}`, {
         headers,
         method: 'delete',
     });

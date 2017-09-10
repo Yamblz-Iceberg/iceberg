@@ -1,22 +1,22 @@
-import { fetchUser } from '../services/another-user.service';
+import { fetchUser, fetchCollections } from '../services/another-user.service';
 
 const FETCH_ANOTHER_USER = 'FETCH_ANOTHER_USER';
+const FETCH_ANOTHER_USER_COLLECTIONS = 'FETCH_ANOTHER_USER_COLLECTIONS';
 
 const initialState = {
     data: {},
-    typeToFeed: 'hisCollection',
-    archive: {
-        collections: [],
-        links: [],
-    },
+    collections: [],
 };
 
 const loadUser = data => ({ type: FETCH_ANOTHER_USER, payload: data });
+const loadCollections = data => ({ type: FETCH_ANOTHER_USER_COLLECTIONS, payload: data });
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
     case FETCH_ANOTHER_USER:
         return { ...state, data: action.payload };
+    case FETCH_ANOTHER_USER_COLLECTIONS:
+        return { ...state, collections: action.payload };
     default:
         return state;
     }
@@ -30,7 +30,17 @@ const userLoader = (token, id) => (
     }
 );
 
+const collectionsLoader = (token, id) => (
+    (dispatch) => {
+        fetchCollections(token, id).then((data) => {
+            console.log(data);
+            dispatch(loadCollections(data.collections));
+        });
+    }
+);
+
 export {
     reducer,
     userLoader,
+    collectionsLoader,
 };
