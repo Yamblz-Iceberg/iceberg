@@ -29,11 +29,16 @@ class CardFooter extends Component {
         e.stopPropagation();
     };
 
+    goToUserProfile = (e, id) => {
+        this.props.history.push(`/user/${id}`);
+        e.stopPropagation();
+    }
+
     render() {
         const props = this.props;
         return (
             <div className="card-footer">
-                <div className="card-footer__user">
+                <div className="card-footer__user" onClick={(e) => { this.goToUserProfile(e, props.userId); }}>
                     <Avatar {...props.avatarOptions} />
                     <span className="card-footer__user-name">{props.userName}</span>
                 </div>
@@ -63,6 +68,7 @@ class CardFooter extends Component {
 
 CardFooter.propTypes = {
     idCard: PropTypes.string,
+    userId: PropTypes.string.isRequired,
     avatarOptions: PropTypes.object.isRequired,
     userName: PropTypes.string.isRequired,
     linksCount: PropTypes.number.isRequired,
