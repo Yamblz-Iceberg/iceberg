@@ -25,9 +25,6 @@ const HomeHeader = ({ user, history, userData }) => {
                     <h4 className="home-header__title">Айсберг</h4>
                 </div>
                 <div className="home-header__block">
-                    <span onClick={() => { this.props.history.replace('/authorization'); }}>
-                        <Icon iconName={'flash'} />
-                    </span>
                     <span className="home-header__icon-user" onClick={() => { navigateTo('/profile'); }}>
                         <div>
                             {
