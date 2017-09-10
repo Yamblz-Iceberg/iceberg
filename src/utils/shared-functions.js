@@ -1,4 +1,18 @@
 /*
+Если переданная строка – цвет в hex, то функция 
+возвращает его в форме RGB.
+*/
+export const hexToRGB = (color) => {
+    if (!color.match(/^#[0-9a-f]{3,6}$/i)) {
+        return color;
+    }
+    const r = parseInt(color.slice(1, 3), 16);
+    const g = parseInt(color.slice(3, 5), 16);
+    const b = parseInt(color.slice(5, 7), 16);
+    return `rgb(${r}, ${g}, ${b})`;
+};
+
+/*
 Функция возвращает домен с убранными префиксами (например, "http://" или "www.").
 */
 export const getDomain = (url) => {
