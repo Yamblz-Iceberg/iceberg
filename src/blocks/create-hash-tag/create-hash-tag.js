@@ -5,7 +5,24 @@ import './create-hash-tag.scss';
 
 import { Icon } from './../../blocks';
 
+/*
+Компонент создания нового тега. Используется в компоненте карточки создания
+новой коллекции. Состоит из инпута и кнопки добавления ("+"). Сам не пишет
+в стор, а по нажатию на "+" вызывает переданный колбэк.
+*/
 class CreateHashTag extends Component {
+    static propTypes = {
+        text: PropTypes.string.isRequired,
+        initText: PropTypes.string.isRequired,
+        tagAddCallback: PropTypes.func.isRequired,
+        tagChangeCallback: PropTypes.func.isRequired,
+        tagDeleteCallback: PropTypes.func,
+    };
+
+    static defaultProps = {
+        tagDeleteCallback: e => e,
+    };
+
     constructor() {
         super();
         this.state = {
@@ -82,17 +99,5 @@ class CreateHashTag extends Component {
         );
     }
 }
-
-CreateHashTag.defaultProps = {
-    tagDeleteCallback: e => e,
-};
-
-CreateHashTag.propTypes = {
-    text: PropTypes.string.isRequired,
-    initText: PropTypes.string.isRequired,
-    tagAddCallback: PropTypes.func.isRequired,
-    tagChangeCallback: PropTypes.func.isRequired,
-    tagDeleteCallback: PropTypes.func,
-};
 
 export default CreateHashTag;
