@@ -14,7 +14,26 @@ import {
 
 import './create-empty.scss';
 
+/*
+Компонент экрана создания новой коллекции. Состоит из хедера, карточки создания
+коллекции, кнопки с переходом на экран редактирования описания и options элементов.
+Дочерние компоненты работают с полем "createCollection" стора.
+*/
 class CreateEmpty extends Component {
+    static propTypes = {
+        description: PropTypes.string,
+        title: PropTypes.string,
+        user: PropTypes.object.isRequired,
+        updateTitle: PropTypes.func.isRequired,
+        updateSwitcher: PropTypes.func.isRequired,
+        data: PropTypes.object.isRequired,
+    }
+
+    static defaultProps = {
+        description: '',
+        title: '',
+    }
+
     constructor() {
         super();
         this.state = {
@@ -51,12 +70,12 @@ class CreateEmpty extends Component {
             {
                 id: 1,
                 option: 'Предлагать ссылки',
-                noticeText: 'Нотификация1',
+                noticeText: 'Нотификация',
             },
             {
                 id: 2,
                 option: 'Модерировать ссылки',
-                noticeText: 'Нотификация2',
+                noticeText: 'Нотификация',
             },
         ];
 
@@ -67,7 +86,7 @@ class CreateEmpty extends Component {
         );
 
         return (
-            <main className="create-empty">
+            <div className="create-empty">
                 <CreateEmptyHeader />
                 <div className="create-empty__card-wrapper">
                     <CreateCard data={createCardProps} />
@@ -81,7 +100,7 @@ class CreateEmpty extends Component {
                             <Button
                                 icon={<Icon iconName={'plus'} />}
                                 text="Добавить описание"
-                                background="rgba(255,255,255, 0)"
+                                background="rgba(255, 255, 255, 0)"
                             />
                         </NavLink>
                     )
@@ -100,25 +119,12 @@ class CreateEmpty extends Component {
                             callback={this.handleSwitcherUpdate(option.id)}
                             key={option.id}
                             {...option}
-                        />)) }
-            </main>
+                        />))
+                }
+            </div>
         );
     }
 }
-
-CreateEmpty.defaultProps = {
-    description: '',
-    title: '',
-};
-
-CreateEmpty.propTypes = {
-    description: PropTypes.string,
-    title: PropTypes.string,
-    user: PropTypes.object.isRequired,
-    updateTitle: PropTypes.func.isRequired,
-    updateSwitcher: PropTypes.func.isRequired,
-    data: PropTypes.object.isRequired,
-};
 
 export default connect(
     state => ({
