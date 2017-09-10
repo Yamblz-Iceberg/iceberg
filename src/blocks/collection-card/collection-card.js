@@ -44,6 +44,7 @@ const CollectionCard = ({ data }) => {
                 idCard={data._id}
                 avatarOptions={avatarOptions}
                 userName={userName}
+                userId={data.author.userId}
                 linksCount={data.linksCount}
                 savedTimesCount={data.savedTimesCount}
                 saved={data.saved}

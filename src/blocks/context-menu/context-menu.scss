@@ -7,7 +7,7 @@
         bottom: 0;
         left: 0;
         right: 0;
-        z-index: 5;
+        z-index: 500;
     }
     &__list {
         position: absolute;
@@ -19,7 +19,7 @@
         box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.2);
         padding: 10px 16px;
         border-radius: 2px;
-        z-index: 10;
+        z-index: 1000;
         display: flex;
         transition: all ease-out 0.1s;
     }
