@@ -9,6 +9,13 @@ import { logOut, registerDemoUser } from '../../../reducers/authorization.reduce
 import './account-profile-header.scss';
 
 class ProfileHeader extends Component {
+    static propTypes = {
+        authorization: PropTypes.object.isRequired,
+        logOut: PropTypes.func.isRequired,
+        registerDemoUser: PropTypes.func.isRequired,
+        history: PropTypes.object.isRequired,
+    }
+
     logOut = () => {
         this.props.logOut(
             this.props.authorization.access_token,
@@ -16,16 +23,19 @@ class ProfileHeader extends Component {
             this.logOutLocal,
         );
     };
+
     logOutLocal = () => {
         authDemoUser(
             this.props.registerDemoUser,
             this.saveLocal,
         );
     };
+
     saveLocal = () => {
         localStorage.setItem('IcebergUserData', JSON.stringify(this.props.authorization));
         this.props.history.push('/feed');
     };
+
     render() {
         const contextMenuItems = [
             {
@@ -51,13 +61,6 @@ class ProfileHeader extends Component {
         );
     }
 }
-
-ProfileHeader.propTypes = {
-    authorization: PropTypes.object.isRequired,
-    logOut: PropTypes.func.isRequired,
-    registerDemoUser: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired,
-};
 
 export default connect(
     state => ({ authorization: state.authorization }),
