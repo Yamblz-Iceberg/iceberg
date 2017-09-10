@@ -33,7 +33,6 @@ const userLoader = (token, id) => (
 const collectionsLoader = (token, id) => (
     (dispatch) => {
         fetchCollections(token, id).then((data) => {
-            console.log(data);
             dispatch(loadCollections(data.collections));
         });
     }

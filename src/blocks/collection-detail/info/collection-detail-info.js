@@ -61,11 +61,9 @@ class CollectionDetailInfo extends Component {
         };
 
         const userName = `${collection.author.firstName} ${collection.author.lastName}`;
-
         const ruText = new Hypher(Ru);
         const enText = new Hypher(En);
         const hyphenateText = text => (enText.hyphenateText(ruText.hyphenateText(text, 10), 10));
-
         return (
             <section>
                 <div className="collection-detail-info">
@@ -85,6 +83,7 @@ class CollectionDetailInfo extends Component {
                             <div className="collection-detail-card__footer">
                                 <CardFooter
                                     avatarOptions={avatarOptions}
+                                    userId={collection.author.userId}
                                     userName={userName}
                                     linksCount={collection.links.length}
                                     savedTimesCount={collection.savedTimesCount}

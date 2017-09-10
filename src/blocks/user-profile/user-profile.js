@@ -36,6 +36,9 @@ class AccountProfile extends Component {
         return (<div className="user-profile-wrap">
             <UserProfileHeader />
             <UserInfo user={user} />
+            <div className="user-profile__header">
+                <p>Подборки пользователя</p>
+            </div>
             <UserProfileFeed
                 data={collections}
                 loader={loader}

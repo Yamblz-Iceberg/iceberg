@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -9,6 +10,24 @@ import './link-card.scss';
 import variables from './../../variables.scss';
 
 class LinkCard extends Component {
+    static propTypes = {
+        data: PropTypes.object.isRequired,
+        button: PropTypes.any,
+        isTransparent: PropTypes.bool,
+        editIcon: PropTypes.object,
+        changeLikeOfLinkLoader: PropTypes.func.isRequired,
+        changeSavedOfLinkLoader: PropTypes.func.isRequired,
+        token: PropTypes.any.isRequired,
+        history: PropTypes.any.isRequired,
+    };
+
+    static defaultProps = {
+        data: {},
+        button: null,
+        editIcon: null,
+        isTransparent: false,
+    };
+
     putToLiked = (e) => {
         this.props.changeLikeOfLinkLoader(this.props.data._id, true, this.props.token);
         e.stopPropagation();
@@ -29,6 +48,11 @@ class LinkCard extends Component {
         e.stopPropagation();
     }
 
+    goToUserProfile = (e, id) => {
+        this.props.history.push(`/user/${id}`);
+        e.stopPropagation();
+    }
+
     render() {
         const { data, button, isTransparent, editIcon } = this.props;
         const cardStyles = {
@@ -45,12 +69,14 @@ class LinkCard extends Component {
             e.target.style.display = 'none';
         };
 
+        const userName = `${data.userAdded.firstName} ${data.userAdded.lastName}`;
+
         return (<div className="link-card" style={cardStyles}>
             <div className="link-card__header">
-                <div className="link-card__user">
+                <div className="link-card__user" onClick={(e) => { this.goToUserProfile(e, data.userAdded.userId); }}>
                     <Avatar {...avatarOptions} />
                     <div className="link-card__user-info">
-                        <p className="link-card__user-name">{data.userAdded.firstName}</p>
+                        <p className="link-card__user-name">{userName}</p>
                     </div>
                 </div>
                 <div className="link-card__context-menu">
@@ -108,23 +134,6 @@ class LinkCard extends Component {
     }
 }
 
-LinkCard.propTypes = {
-    data: PropTypes.object.isRequired,
-    button: PropTypes.any,
-    isTransparent: PropTypes.bool,
-    editIcon: PropTypes.object,
-    changeLikeOfLinkLoader: PropTypes.func.isRequired,
-    changeSavedOfLinkLoader: PropTypes.func.isRequired,
-    token: PropTypes.any.isRequired,
-};
-
-LinkCard.defaultProps = {
-    data: {},
-    button: null,
-    editIcon: null,
-    isTransparent: false,
-};
-
 export default connect(state => ({
     token: state.authorization.access_token,
-}), { changeLikeOfLinkLoader, changeSavedOfLinkLoader })(LinkCard);
+}), { changeLikeOfLinkLoader, changeSavedOfLinkLoader })(withRouter(LinkCard));
