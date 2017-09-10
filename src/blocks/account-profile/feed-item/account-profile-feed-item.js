@@ -50,8 +50,8 @@ class AccountProfileFeedItem extends Component {
             });
         } else {
             window.open(href);
-            this.props.openLinkLoader(this.props.data._id, this.props.token);
         }
+        this.props.openLinkLoader(this.props.data._id, this.props.token);
     }
 
     openCollection(e, cardId) {
