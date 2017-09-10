@@ -14,6 +14,15 @@ import {
 import './account-profile-filter.scss';
 
 class ProfileFilter extends Component {
+    static propTypes = {
+        items: PropTypes.array.isRequired,
+        token: PropTypes.string.isRequired,
+        myCollectionsLoader: PropTypes.func.isRequired,
+        savedLinksLoader: PropTypes.func.isRequired,
+        myLinksLoader: PropTypes.func.isRequired,
+        savedCollectionsLoader: PropTypes.func.isRequired,
+    }
+
     filteringData = (item) => {
         switch (item.name) {
         case 'savedCollections':
@@ -32,6 +41,7 @@ class ProfileFilter extends Component {
             break;
         }
     }
+
     render() {
         const { items } = this.props;
         return (<div className="profile-filter">
@@ -41,27 +51,9 @@ class ProfileFilter extends Component {
             <div className="profile-filter__block profile-filter__block--dropdown-wrap">
                 <Dropdown items={items} onSelect={(item) => { this.filteringData(item); }} />
             </div>
-            {/* <div className="profile-filter__block">
-                <Icon
-                    className="home-filter__icon-settings"
-                    iconName="search"
-                    iconColor="#000"
-                    iconHeight="24"
-                    iconWidth="24"
-                />
-            </div> */}
         </div>);
     }
 }
-
-ProfileFilter.propTypes = {
-    items: PropTypes.array.isRequired,
-    token: PropTypes.string.isRequired,
-    myCollectionsLoader: PropTypes.func.isRequired,
-    savedLinksLoader: PropTypes.func.isRequired,
-    myLinksLoader: PropTypes.func.isRequired,
-    savedCollectionsLoader: PropTypes.func.isRequired,
-};
 
 function mapStateToProps(state) {
     return {
@@ -69,10 +61,9 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps,
-    {
-        myCollectionsLoader,
-        savedLinksLoader,
-        savedCollectionsLoader,
-        myLinksLoader,
-    })(ProfileFilter);
+export default connect(mapStateToProps, {
+    myCollectionsLoader,
+    savedLinksLoader,
+    savedCollectionsLoader,
+    myLinksLoader,
+})(ProfileFilter);

@@ -5,6 +5,15 @@ import { Icon } from '../../blocks';
 import './toggle-text.scss';
 
 class ToggleText extends Component {
+    static propTypes = {
+        text: PropTypes.string.isRequired,
+        component: PropTypes.object,
+    }
+
+    static defaultProps = {
+        component: {},
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -19,6 +28,7 @@ class ToggleText extends Component {
             && this.toggleTextWrapper.offsetHeight <= this.toggleText.offsetHeight) {
             /* eslint-disable */
             this.setState({ showToggleIcon: false });
+            /* eslint-enable */
         }
     }
 
@@ -31,6 +41,7 @@ class ToggleText extends Component {
             && this.toggleTextWrapper.offsetHeight <= this.toggleText.offsetHeight) {
             /* eslint-disable */
             this.setState({ showToggleIcon: false });
+            /* eslint-enable */
         }
     }
 
@@ -58,22 +69,13 @@ class ToggleText extends Component {
                 </div>
                 <div className={`${this.state.showToggleIcon === true
                     ? 'text-toggle__icon '
-                    : 'text-toggle__icon text-toggle__icon--hide'
-                }`}>
+                    : 'text-toggle__icon text-toggle__icon--hide'}`}
+                >
                     <Icon iconName={'arrow-more--popup'} />
                 </div>
             </div>
         );
     }
 }
-
-ToggleText.propTypes = {
-    text: PropTypes.string.isRequired,
-    component: PropTypes.object,
-};
-
-ToggleText.defaultProps = {
-    component: {},
-};
 
 export default ToggleText;
