@@ -9,7 +9,6 @@ import {
     getSavedLinks,
     getAddedLinks,
     getSavedCollections,
-    openedLinksLoader,
 } from './../../../reducers/bookmarks.reducer';
 
 import './account-profile-filter.scss';
@@ -70,5 +69,4 @@ export default connect(mapStateToProps, {
     getSavedLinks,
     getSavedCollections,
     getAddedLinks,
-    openedLinksLoader,
 })(ProfileFilter);
