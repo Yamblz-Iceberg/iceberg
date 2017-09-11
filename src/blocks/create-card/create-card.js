@@ -55,7 +55,8 @@ class CreateCard extends Component {
 
     componentWillReceiveProps = (nextProps) => {
         if (this.props.tags !== nextProps.tags) {
-            this.setHashTags(nextProps.tags);
+            // Переворачиваю теги, чтобы они отображались в нужном порядке
+            this.setHashTags(nextProps.tags.reverse());
         }
         if (this.props.color !== nextProps.color || this.props.photo !== nextProps.photo) {
             this.setCardStyles(nextProps.color, nextProps.photo);
