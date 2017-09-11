@@ -1,7 +1,13 @@
 .text-toggle {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        &--no-text {
+            padding-top: 25px;
+            padding-bottom: 0;
+        }
+    }
 
     &__text {
         width: calc(100% - 46px);
