@@ -25,39 +25,54 @@ class LinkCard extends Component {
         changeStatusSavedOfLink: PropTypes.func.isRequired,
         token: PropTypes.any.isRequired,
         history: PropTypes.any.isRequired,
-    }
+        userData: PropTypes.object.isRequired,
+    };
 
     static defaultProps = {
         data: {},
         button: null,
         editIcon: null,
         isTransparent: false,
-    }
+    };
 
     putToLiked = (e) => {
-        this.props.changeStatusLikeOfLink(this.props.data._id, true, this.props.token);
-        e.stopPropagation();
-    }
+        // Проверяем, что пользователь авторизован
+        if (typeof this.props.userData.accType !== 'undefined' && this.props.userData.accType !== 'demo') {
+            this.props.changeStatusLikeOfLink(this.props.data._id, true, this.props.token);
+            e.stopPropagation();
+        } else {
+            // Перенаправляем на авторизацию, если пользователь не авторизован
+            localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
+            this.props.history.push('/authorization');
+        }
+    };
 
     delFromLiked = (e) => {
         this.props.changeStatusLikeOfLink(this.props.data._id, false, this.props.token);
         e.stopPropagation();
-    }
+    };
 
     putToSaved = (e) => {
-        this.props.changeStatusSavedOfLink(this.props.data._id, true, this.props.token);
-        e.stopPropagation();
-    }
+        // Проверяем, что пользователь авторизован
+        if (typeof this.props.userData.accType !== 'undefined' && this.props.userData.accType !== 'demo') {
+            this.props.changeStatusSavedOfLink(this.props.data._id, true, this.props.token);
+            e.stopPropagation();
+        } else {
+            // Перенаправляем на авторизацию, если пользователь не авторизован
+            localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
+            this.props.history.push('/authorization');
+        }
+    };
 
     delFromSaved = (e) => {
         this.props.changeStatusSavedOfLink(this.props.data._id, false, this.props.token);
         e.stopPropagation();
-    }
+    };
 
     goToUserProfile = (e, id) => {
         this.props.history.push(`/user/${id}`);
         e.stopPropagation();
-    }
+    };
 
     render() {
         const { data, button, isTransparent, editIcon } = this.props;
@@ -143,4 +158,5 @@ class LinkCard extends Component {
 
 export default connect(state => ({
     token: state.authorization.access_token,
+    userData: state.user.data,
 }), { changeStatusLikeOfLink, changeStatusSavedOfLink })(withRouter(LinkCard));
