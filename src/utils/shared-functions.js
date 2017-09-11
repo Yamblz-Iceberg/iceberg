@@ -60,7 +60,7 @@ export const authDemoUser = (registerFn, callback) => {
 };
 
 export const socialSharing = (subject, message) => {
-    if (typeof window.plugins.socialSharing === 'undefined') return;
+    if (typeof window.cordova === 'undefined') return;
 
     const options = {
         subject,
