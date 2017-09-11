@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Tabs, CollectionDetailLinks, Button, Icon } from '../';
 import CollectionDetailInfo from './info/collection-detail-info';
 import CollectionDetailHeader from './header/collection-detail-header';
-import { collectionLoader } from '../../reducers/collection.reducer';
+import { getCollection } from '../../reducers/collection.reducer';
 
 import { putTags } from '../../services/personal-tags.service';
 
@@ -21,7 +21,7 @@ class CollectionDetail extends Component {
     }
 
     componentDidMount() {
-        this.props.collectionLoader(this.props.params.id, this.props.token);
+        this.props.getCollection(this.props.params.id, this.props.token);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -132,7 +132,7 @@ class CollectionDetail extends Component {
 CollectionDetail.propTypes = {
     params: PropTypes.object.isRequired,
     collection: PropTypes.object.isRequired,
-    collectionLoader: PropTypes.func.isRequired,
+    getCollection: PropTypes.func.isRequired,
     token: PropTypes.string.isRequired,
     history: PropTypes.object.isRequired,
     userData: PropTypes.object.isRequired,
@@ -144,5 +144,5 @@ export default connect(
         token: state.authorization.access_token,
         userData: state.user.data,
     }),
-    { collectionLoader },
+    { getCollection },
 )(withRouter(CollectionDetail));

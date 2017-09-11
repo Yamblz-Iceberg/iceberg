@@ -7,7 +7,7 @@ export const fetchUser = (token, id) => {
         .then(res => res.json());
 };
 
-export const fetchCollections = (token, id) => {
+export const getSavedCollectionsFetch = (token, id) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
     });

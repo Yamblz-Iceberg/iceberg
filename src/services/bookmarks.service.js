@@ -1,4 +1,4 @@
-export const fetchSavedCollections = (token) => {
+export const getSavedCollectionsFetch = (token) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
     });
@@ -7,7 +7,7 @@ export const fetchSavedCollections = (token) => {
         .then(res => res.json());
 };
 
-export const fetchMyCollections = (token) => {
+export const getCreatedCollectionsFetch = (token) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
     });
@@ -16,7 +16,7 @@ export const fetchMyCollections = (token) => {
         .then(res => res.json());
 };
 
-export const fetchMyLinks = (token) => {
+export const getAddedLinksFetch = (token) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
     });
@@ -25,11 +25,11 @@ export const fetchMyLinks = (token) => {
         .then(res => res.json());
 };
 
-export const fetchSavedLinks = (token) => {
+export const getSavedLinksFetch = (token, linkType) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
     });
 
-    return fetch('https://iceberg-project.herokuapp.com/users/bookmarks/savedLinks/', { headers })
+    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/savedLinks?filter=${linkType}`, { headers })
         .then(res => res.json());
 };

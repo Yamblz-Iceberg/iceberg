@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import { Icon } from './../..';
 import { actions as modalActions } from '../../../reducers/modal.reducer';
+import { setLinkAsOpened } from '../../../reducers/link.reducer';
 
 import './account-profile-feed-item.scss';
 
@@ -14,6 +15,8 @@ class AccountProfileFeedItem extends Component {
         type: PropTypes.string.isRequired,
         history: PropTypes.any.isRequired,
         showModal: PropTypes.func.isRequired,
+        setLinkAsOpened: PropTypes.func.isRequired,
+        token: PropTypes.any.isRequired,
     }
 
     openLink(href, readerMode) {
@@ -48,6 +51,7 @@ class AccountProfileFeedItem extends Component {
         } else {
             window.open(href);
         }
+        this.props.setLinkAsOpened(this.props.data._id, this.props.token);
     }
 
     openCollection(e, cardId) {
@@ -92,4 +96,12 @@ class AccountProfileFeedItem extends Component {
     }
 }
 
-export default connect(null, { ...modalActions })(withRouter(AccountProfileFeedItem));
+function mapStateToProps(state) {
+    return {
+        token: state.authorization.access_token,
+    };
+}
+
+export default
+connect(mapStateToProps,
+    { ...modalActions, setLinkAsOpened })(withRouter(AccountProfileFeedItem));
