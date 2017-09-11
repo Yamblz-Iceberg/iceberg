@@ -102,14 +102,14 @@ class CollectionDetail extends Component {
                         <div className="collection-detail__mesage-wrapper">
                             <h3 className="collection-detail__title">Ссылок пока нет</h3>
                             <div>
+                                {/* Текст для открытой подборки, для приватной будет другой */}
                                 <p className="collection-detail__text">
-                                    Поделитесь своей подборкой, и, возможно,
-                                    друзья посоветуют вам что-то полезное
+                                    Начните добавлять ссылки и ваша подборка появится в общей ленте
                                 </p>
                                 <div className="collection-detail__add-button" onClick={this.createLink} >
                                     <Button
-                                        icon={<Icon iconName={'share'} />}
-                                        text="поделиться"
+                                        icon={<Icon iconName={'link'} />}
+                                        text="добавить ссылку"
                                         type="max-width"
                                     />
                                 </div>
