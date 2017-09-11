@@ -8,27 +8,26 @@ class ToggleText extends Component {
     static propTypes = {
         text: PropTypes.string.isRequired,
         component: PropTypes.object,
-    }
+    };
 
     static defaultProps = {
         component: {},
-    }
+    };
 
     constructor(props) {
         super(props);
         this.state = {
             showToggleIcon: true,
             showAllText: false,
-            text: '',
+            isText: true,
         };
     }
 
     componentDidMount() {
         if (this.props.text.length > 0
             && this.toggleTextWrapper.offsetHeight <= this.toggleText.offsetHeight) {
-            /* eslint-disable */
+            /* eslint-disable react/no-did-mount-set-state */
             this.setState({ showToggleIcon: false });
-            /* eslint-enable */
         }
     }
 
@@ -39,9 +38,11 @@ class ToggleText extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps.text !== this.props.text
             && this.toggleTextWrapper.offsetHeight <= this.toggleText.offsetHeight) {
-            /* eslint-disable */
+            /* eslint-disable react/no-did-update-set-state */
             this.setState({ showToggleIcon: false });
-            /* eslint-enable */
+        } else if (prevProps.text === '' && prevProps.text === this.props.text && this.state.isText) {
+            /* eslint-disable react/no-did-update-set-state */
+            this.setState({ ...this.state, showToggleIcon: false, isText: false });
         }
     }
 
@@ -58,20 +59,25 @@ class ToggleText extends Component {
                 className={`text-toggle ${this.state.showAllText === true ? 'text-toggle--show-all' : ''}`}
                 onClick={() => this.showAllText()}
             >
-                <div className="text-toggle__text" ref={(el) => { this.toggleText = el; }} >
-                    <span
-                        className="text-toggle__text-wrapper"
-                        ref={(el) => { this.toggleTextWrapper = el; }}
-                    >
-                        { this.props.text }
-                        { Object.keys(this.props.component).length > 0 ? this.props.component : '' }
-                    </span>
-                </div>
-                <div className={`${this.state.showToggleIcon === true
-                    ? 'text-toggle__icon '
-                    : 'text-toggle__icon text-toggle__icon--hide'}`}
+                <div className={`text-toggle__container ${this.state.isText === false
+                    ? 'text-toggle__container--no-text'
+                    : ''}`}
                 >
-                    <Icon iconName={'arrow-more--popup'} />
+                    <div className="text-toggle__text" ref={(el) => { this.toggleText = el; }} >
+                        <span
+                            className="text-toggle__text-wrapper"
+                            ref={(el) => { this.toggleTextWrapper = el; }}
+                        >
+                            { this.props.text }
+                            { Object.keys(this.props.component).length > 0 ? this.props.component : '' }
+                        </span>
+                    </div>
+                    <div className={`${this.state.showToggleIcon === true
+                        ? 'text-toggle__icon '
+                        : 'text-toggle__icon text-toggle__icon--hide'}`}
+                    >
+                        <Icon iconName={'arrow-more--popup'} />
+                    </div>
                 </div>
             </div>
         );
