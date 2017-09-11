@@ -51,7 +51,7 @@ class CollectionDetail extends Component {
     }
 
     createLink = () => {
-        if (this.props.userData.accType === 'demo') {
+        if (typeof this.props.userData.accType !== 'undefined' && this.props.userData.accType !== 'demo') {
             this.props.history.replace({ pathname: '/create-link' });
         } else {
             localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
