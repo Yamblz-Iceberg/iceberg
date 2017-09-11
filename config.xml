@@ -56,6 +56,7 @@
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <preference name="AndroidExtraFilesystems" value="sdcard,cache" />
     <preference name="Orientation" value="portrait" />
+    <engine name="android" spec="^6.2.3" />
     <engine name="browser" spec="^4.1.0" />
     <engine name="ios" spec="^4.5.0" />
     <plugin name="cordova-plugin-camera" spec="^2.4.1">

@@ -98,6 +98,7 @@
             "cordova-plugin-x-socialsharing": {}
         },
         "platforms": [
+            "android",
             "browser",
             "ios"
         ]
