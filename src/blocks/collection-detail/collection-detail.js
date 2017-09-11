@@ -38,10 +38,12 @@ class CollectionDetail extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.collection.tags.length !== 0) {
+        if (nextProps.collection.tags.length !== 0
+            && this.props.collection.tags !== nextProps.collection.tags) {
             const tags = nextProps.collection.tags.map(tag => (tag._id));
             putTags(tags, this.props.token);
         }
+        // Скрываем лоадер, когда получены данные о коллекции детально
         if (this.props.collection.name !== nextProps.collection.name || nextProps.collection.name !== '') {
             this.props.hideLoader();
         }
@@ -57,6 +59,8 @@ class CollectionDetail extends Component {
     };
 
     emptyCollection = () => (
+        // Проверяем, что данные о коллекции детально получены
+        // (лоадер скрывает при получении данных)
         this.props.loader
             ? <div className="collection-detail__loader">
                 <Preloader />
