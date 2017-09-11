@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Tabs, CollectionDetailLinks, Button, Icon } from '../';
+import { Tabs, CollectionDetailLinks, Button, Icon, Preloader } from '../';
 import CollectionDetailInfo from './info/collection-detail-info';
 import CollectionDetailHeader from './header/collection-detail-header';
 import { getCollection } from '../../reducers/collection.reducer';
@@ -10,6 +10,7 @@ import { getCollection } from '../../reducers/collection.reducer';
 import { putTags } from '../../services/personal-tags.service';
 
 import './collection-detail.scss';
+import { hideLoader, showLoader } from '../../reducers/loader.reducer';
 
 class CollectionDetail extends Component {
     static propTypes = {
@@ -19,6 +20,9 @@ class CollectionDetail extends Component {
         token: PropTypes.string.isRequired,
         history: PropTypes.object.isRequired,
         userData: PropTypes.object.isRequired,
+        loader: PropTypes.bool.isRequired,
+        showLoader: PropTypes.func.isRequired,
+        hideLoader: PropTypes.func.isRequired,
     };
     constructor(props) {
         super(props);
@@ -26,6 +30,7 @@ class CollectionDetail extends Component {
         this.state = {
             showAllText: false,
         };
+        this.props.showLoader();
     }
 
     componentDidMount() {
@@ -37,6 +42,9 @@ class CollectionDetail extends Component {
             const tags = nextProps.collection.tags.map(tag => (tag._id));
             putTags(tags, this.props.token);
         }
+        if (this.props.collection.name !== nextProps.collection.name || nextProps.collection.name !== '') {
+            this.props.hideLoader();
+        }
     }
 
     createLink = () => {
@@ -47,6 +55,32 @@ class CollectionDetail extends Component {
             this.props.history.push('/authorization');
         }
     };
+
+    emptyCollection = () => (
+        this.props.loader
+            ? <div className="collection-detail__loader">
+                <Preloader />
+            </div>
+            : (
+                <div className="collection-detail__mesage-wrapper">
+                    <h3 className="collection-detail__title">Ссылок пока нет</h3>
+                    <div>
+                        {/* Текст для открытой подборки, для приватной будет другой */}
+                        <p className="collection-detail__text">
+                            Начните добавлять ссылки и
+                            ваша подборка появится в общей ленте
+                        </p>
+                        <div className="collection-detail__add-button" onClick={this.createLink} >
+                            <Button
+                                icon={<Icon iconName={'link'} />}
+                                text="добавить ссылку"
+                                type="max-width"
+                            />
+                        </div>
+                    </div>
+                </div>
+            )
+    );
 
     render() {
         const {
@@ -98,24 +132,7 @@ class CollectionDetail extends Component {
                         </div>
                     )
                     // Когда в подборке пока нет ссылок (подборка видна только автору)
-                    : (
-                        <div className="collection-detail__mesage-wrapper">
-                            <h3 className="collection-detail__title">Ссылок пока нет</h3>
-                            <div>
-                                {/* Текст для открытой подборки, для приватной будет другой */}
-                                <p className="collection-detail__text">
-                                    Начните добавлять ссылки и ваша подборка появится в общей ленте
-                                </p>
-                                <div className="collection-detail__add-button" onClick={this.createLink} >
-                                    <Button
-                                        icon={<Icon iconName={'link'} />}
-                                        text="добавить ссылку"
-                                        type="max-width"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    )
+                    : this.emptyCollection()
                 }
             </div>
         );
@@ -127,6 +144,7 @@ export default connect(
         collection: state.collection,
         token: state.authorization.access_token,
         userData: state.user.data,
+        loader: state.loader,
     }),
-    { getCollection },
+    { getCollection, showLoader, hideLoader },
 )(withRouter(CollectionDetail));

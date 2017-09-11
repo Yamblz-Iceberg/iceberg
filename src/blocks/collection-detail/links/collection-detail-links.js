@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { LinkCard } from './../../../blocks';
+import { LinkCard, Preloader } from './../../../blocks';
 
 import { actions as modalActions } from '../../../reducers/modal.reducer';
 import { setLinkAsOpened } from '../../../reducers/link.reducer';
@@ -11,6 +11,18 @@ import { setLinkAsOpened } from '../../../reducers/link.reducer';
 import './collection-detail-links.scss';
 
 class CollectionDetailLinks extends Component {
+    static propTypes = {
+        links: PropTypes.array.isRequired,
+        filter: PropTypes.string,
+        showModal: PropTypes.func.isRequired,
+        setLinkAsOpened: PropTypes.func.isRequired,
+        token: PropTypes.any.isRequired,
+        loader: PropTypes.bool.isRequired,
+    };
+
+    static defaultProps = {
+        filter: '',
+    };
     openLink(href, id) {
         if (window.cordova) {
             window.SafariViewController.isAvailable((available) => {
@@ -53,6 +65,11 @@ class CollectionDetailLinks extends Component {
             }
             return link;
         });
+        if (this.props.loader) {
+            return (
+                <Preloader />
+            );
+        }
 
         return (
             <section className="collection-detail-links">
@@ -68,22 +85,11 @@ class CollectionDetailLinks extends Component {
     }
 }
 
-CollectionDetailLinks.propTypes = {
-    links: PropTypes.array.isRequired,
-    filter: PropTypes.string,
-    showModal: PropTypes.func.isRequired,
-    setLinkAsOpened: PropTypes.func.isRequired,
-    token: PropTypes.any.isRequired,
-};
-
-CollectionDetailLinks.defaultProps = {
-    filter: '',
-};
-
 function mapStateToProps(state) {
     return {
         links: state.collection.links,
         token: state.authorization.access_token,
+        loader: state.loader,
     };
 }
 
