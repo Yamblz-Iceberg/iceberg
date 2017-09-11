@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import { Icon, ContextMenu } from '../../../blocks';
-import { clearCollection } from '../../../reducers/collection.reducer';
+import { clearCollection, removeCollection } from '../../../reducers/collection.reducer';
 import { socialSharing } from '../../../utils/shared-functions';
 
 import './collection-detail-header.scss';
@@ -13,10 +13,17 @@ import './collection-detail-header.scss';
 class CollectionDetailHeader extends Component {
     static propTypes = {
         collectionTitle: PropTypes.string.isRequired,
+        collectionId: PropTypes.string,
         history: PropTypes.any.isRequired,
         shareLink: PropTypes.func.isRequired,
         clearCollection: PropTypes.func.isRequired,
+        removeCollection: PropTypes.func.isRequired,
+        isAuthor: PropTypes.bool.isRequired,
     };
+
+    static defaultProps = {
+        collectionId: null,
+    }
 
     constructor(props) {
         super(props);
@@ -69,22 +76,24 @@ class CollectionDetailHeader extends Component {
                 title: 'Не хочу видеть',
                 id: 1,
                 onClick: () => {},
-                icon: <Icon iconName={'like-small'} iconColor={'#777'} iconWidth="18" iconHeight="20" />,
-            },
-            {
-                title: 'Скрыть все от автора',
-                id: 2,
-                onClick: () => {},
-                icon: <Icon iconName={'account'} iconColor={'#777'} />,
+                icon: <Icon iconName={'like-filled'} iconColor={'#777'} iconWidth="18" iconHeight="20" />,
             },
             {
                 title: 'Пожаловаться',
-                id: 3,
+                id: 2,
                 /* eslint-disable no-alert */
                 onClick: () => { alert('Ябеда!'); },
                 icon: <Icon iconName={'question'} iconColor={'#777'} />,
             },
         ];
+        if (this.props.isAuthor) {
+            contextMenuItems.push({
+                title: 'Удалить подборку',
+                id: 3,
+                onClick: () => { this.props.removeCollection(this.props.collectionId); },
+                icon: <Icon iconName={'close'} iconColor={'#777'} />,
+            });
+        }
         return (
             <header
                 className={`collection-detail-header
@@ -111,4 +120,5 @@ class CollectionDetailHeader extends Component {
     }
 }
 
-export default connect(null, { clearCollection })(withRouter(CollectionDetailHeader));
+export default
+connect(null, { clearCollection, removeCollection })(withRouter(CollectionDetailHeader));

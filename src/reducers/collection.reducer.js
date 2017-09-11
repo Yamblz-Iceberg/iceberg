@@ -1,8 +1,9 @@
-import { getCollectionFetch, setCollectionAsSavedFetch, deleteCollectionFromSavedFetch } from '../services/collection.service';
+import { getCollectionFetch, setCollectionAsSavedFetch, deleteCollectionFromSavedFetch, removeCollectionFetch } from '../services/collection.service';
 import { changeStatusLikeOfLinkFetch, setLinkAsSavedFetch, deleteLinkFromeSavedFetch } from './../services/link.service';
 
 const FETCH_COLLECTION = 'FETCH_COLLECTION';
 const CLEAR_COLLECTION = 'CLEAR_COLLECTION';
+const REMOVE_COLLECTION = 'REMOVE_COLLECTION';
 const CHANGE_SAVED_STATUS = 'CHANGE_SAVED_STATUS';
 const CHANGE_LIKED_STATUS_BY_ID = 'CHANGE_LIKED_STATUS_BY_ID';
 const CHANGE_LINK_SAVED_STATUS_BY_ID = 'CHANGE_LINK_SAVED_STATUS_BY_ID';
@@ -32,11 +33,14 @@ const changeSavedStatusOfLinkById =
 const changeOpenStatusOfLinkById =
     id => ({ type: CHANGE_LINK_OPENED_STATUS_BY_ID, id });
 const clearCollection = () => ({ type: CLEAR_COLLECTION });
+const removeCollectionAction = () => ({ type: REMOVE_COLLECTION });
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
     case FETCH_COLLECTION:
         return { ...state, ...action.payload };
+    case REMOVE_COLLECTION:
+        return initialState;
     case CHANGE_SAVED_STATUS:
         return { ...state,
             saved: action.payload,
@@ -120,6 +124,14 @@ const deleteCollectionFromSaved = (id, token) => (
     }
 );
 
+const removeCollection = (id, token) => (
+    (dispatch) => {
+        removeCollectionFetch(id, token).then(() => {
+            dispatch(removeCollectionAction());
+        });
+    }
+);
+
 const changeStatusLikeOfLink = (id, status, token) => (
     (dispatch) => {
         dispatch(changeLikedStatusOfLinkById(id, status));
@@ -147,4 +159,5 @@ export {
     changeStatusSavedOfLink,
     changeOpenStatusOfLinkById,
     clearCollection,
+    removeCollection,
 };

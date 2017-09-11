@@ -7,6 +7,17 @@ export const getCollectionFetch = (collectionId, token) => {
         .then(res => res.json());
 };
 
+export const removeCollectionFetch = (collectionId, token) => {
+    const headers = new Headers({
+        Authorization: `Bearer ${token}`,
+    });
+
+    return fetch(`https://iceberg-project.herokuapp.com/collections/${collectionId}`, {
+        headers,
+        method: 'delete',
+    }).then(res => res.json());
+};
+
 export const setCollectionAsSavedFetch = (id, token) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,

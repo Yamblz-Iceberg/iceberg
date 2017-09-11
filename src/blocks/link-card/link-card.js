@@ -3,8 +3,9 @@ import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Icon, Avatar } from '../../blocks';
+import { Icon, Avatar, ContextMenu } from '../../blocks';
 import { changeStatusLikeOfLink, changeStatusSavedOfLink } from './../../reducers/collection.reducer';
+import { removeLink } from './../../reducers/link.reducer';
 
 import './link-card.scss';
 import variables from './../../variables.scss';
@@ -26,6 +27,10 @@ class LinkCard extends Component {
         token: PropTypes.any.isRequired,
         history: PropTypes.any.isRequired,
         userData: PropTypes.object.isRequired,
+        removeLink: PropTypes.func.isRequired,
+        showModal: PropTypes.func.isRequired,
+        setLinkAsOpened: PropTypes.func.isRequired,
+        changeOpenStatusOfLinkById: PropTypes.func.isRequired,
     };
 
     static defaultProps = {
@@ -34,6 +39,54 @@ class LinkCard extends Component {
         editIcon: null,
         isTransparent: false,
     };
+
+
+    openLink(href, id, event) {
+        const { className } = event.target;
+        console.log(className);
+        // Проверяем, что клик по карточке не приходится на кнопки действий,
+        // в таком случае открываем ссылку
+        if (className !== 'link-card__context-menu'
+            && className !== 'link-card__block'
+            && className !== 'context-menu__list'
+            && (typeof className.baseVal === 'undefined'
+                || (className.baseVal
+                    && className.baseVal.trim() !== 'svg-icon'))) {
+            if (typeof window.cordova !== 'undefined') {
+                window.SafariViewController.isAvailable((available) => {
+                    if (available) {
+                        window.SafariViewController.show({
+                            url: href,
+                            hidden: false,
+                            animated: false,
+                            transition: 'curl',
+                            enterReaderModeIfAvailable: false,
+                            tintColor: '#fff',
+                            barColor: '#000',
+                            controlTintColor: '#ffffff',
+                        },
+                        // success
+                        () => {},
+                        // error
+                        () => {
+                            this.props.showModal('ERROR_MESSAGE',
+                                {
+                                    title: 'Упс!',
+                                    text: 'Такая ссылка не существует.',
+                                    buttonText: 'Понятно',
+                                });
+                        });
+                    } else {
+                        window.open(href);
+                    }
+                });
+            } else {
+                window.open(href);
+            }
+            this.props.setLinkAsOpened(id, this.props.token);
+            this.props.changeOpenStatusOfLinkById(id);
+        }
+    }
 
     putToLiked = (e) => {
         // Проверяем, что пользователь авторизован
@@ -74,12 +127,24 @@ class LinkCard extends Component {
         e.stopPropagation();
     };
 
+    isAuthor = () => this.props.data.userAdded.userId !== this.props.userData.userId;
+
     render() {
         const { data, button, isTransparent, editIcon } = this.props;
         const cardStyles = {
             backgroundColor: variables.blue,
             backgroundImage: `url('${data.photo}')`,
         };
+
+        const contextMenuItems = [];
+        if (this.isAuthor()) {
+            contextMenuItems.push({
+                title: 'Удалить ссылку',
+                id: 0,
+                onClick: () => { this.props.removeLink(data._id); },
+                icon: <Icon iconName={'close'} iconColor={'#777'} />,
+            });
+        }
 
         const avatarOptions = {
             size: '25',
@@ -92,7 +157,7 @@ class LinkCard extends Component {
         };
 
         const userName = `${data.userAdded.firstName} ${data.userAdded.lastName}`;
-
+        console.log(data);
         return (<div className="link-card" style={cardStyles}>
             <div className="link-card__header">
                 <div className="link-card__user" onClick={(e) => { this.goToUserProfile(e, data.userAdded.userId); }}>
@@ -102,7 +167,8 @@ class LinkCard extends Component {
                     </div>
                 </div>
                 <div className="link-card__context-menu">
-                    <Icon iconName={'more-vert'} iconWidth={'22'} iconHeight={'14'} iconColor={'#fff'} />
+                    { this.isAuthor() &&
+                        <ContextMenu iconColor={'#fff'} items={contextMenuItems} /> }
                 </div>
             </div>
 
@@ -159,4 +225,4 @@ class LinkCard extends Component {
 export default connect(state => ({
     token: state.authorization.access_token,
     userData: state.user.data,
-}), { changeStatusLikeOfLink, changeStatusSavedOfLink })(withRouter(LinkCard));
+}), { changeStatusLikeOfLink, changeStatusSavedOfLink, removeLink })(withRouter(LinkCard));

@@ -15,7 +15,9 @@ class ContextMenu extends Component {
     }
 
     handleOutsideClick = (event) => {
-        if (this.refContextMenu && !this.refContextMenu.contains(event.target)) {
+        event.stopPropagation();
+        if ((this.refContextMenu && !this.refContextMenu.contains(event.target))
+            || event.target.className.indexOf('context-menu__overlay') > -1) {
             this.toggle();
         }
     };
@@ -44,7 +46,7 @@ class ContextMenu extends Component {
             ref={(el) => { this.refContextMenu = el; }}
         >
             <Icon iconName={iconName} iconColor={iconColor} />
-            { this.state.isOpened && <div className="context-menu__overlay" /> }
+            { this.state.isOpened && <div className="context-menu__overlay" onClick={this.handleOutsideClick} /> }
             { this.state.isOpened && <div className="context-menu__list">
                 {
                     items.map(item => <ContextMenuItem key={item.id} item={item} />)

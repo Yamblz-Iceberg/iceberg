@@ -15,60 +15,12 @@ class CollectionDetailLinks extends Component {
     static propTypes = {
         links: PropTypes.array.isRequired,
         filter: PropTypes.string,
-        showModal: PropTypes.func.isRequired,
-        setLinkAsOpened: PropTypes.func.isRequired,
-        changeOpenStatusOfLinkById: PropTypes.func.isRequired,
-        token: PropTypes.any.isRequired,
         loader: PropTypes.bool.isRequired,
     };
 
     static defaultProps = {
         filter: '',
     };
-    openLink(href, id, event) {
-        const { className } = event.target;
-        // Проверяем, что клик по карточке не приходится на кнопки действий,
-        // в таком случае открываем ссылку
-        if (className !== 'link-card__context-menu'
-            && className !== 'link-card__block'
-            && (typeof className.baseVal === 'undefined'
-                || (className.baseVal
-                    && className.baseVal.trim() !== 'svg-icon'))) {
-            if (typeof window.cordova !== 'undefined') {
-                window.SafariViewController.isAvailable((available) => {
-                    if (available) {
-                        window.SafariViewController.show({
-                            url: href,
-                            hidden: false,
-                            animated: false,
-                            transition: 'curl',
-                            enterReaderModeIfAvailable: false,
-                            tintColor: '#fff',
-                            barColor: '#000',
-                            controlTintColor: '#ffffff',
-                        },
-                        // success
-                        () => {},
-                        // error
-                        () => {
-                            this.props.showModal('ERROR_MESSAGE',
-                                {
-                                    title: 'Упс!',
-                                    text: 'Такая ссылка не существует.',
-                                    buttonText: 'Понятно',
-                                });
-                        });
-                    } else {
-                        window.open(href);
-                    }
-                });
-            } else {
-                window.open(href);
-            }
-            this.props.setLinkAsOpened(id, this.props.token);
-            this.props.changeOpenStatusOfLinkById(id);
-        }
-    }
 
     render() {
         const filteredLinks = this.props.links.filter((link) => {
