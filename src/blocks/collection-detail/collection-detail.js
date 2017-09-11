@@ -7,6 +7,7 @@ import CollectionDetailInfo from './info/collection-detail-info';
 import CollectionDetailHeader from './header/collection-detail-header';
 import { collectionLoader } from '../../reducers/collection.reducer';
 
+import { socialSharing } from '../../utils/shared-functions';
 import { putTags } from '../../services/personal-tags.service';
 
 import './collection-detail.scss';
@@ -38,6 +39,10 @@ class CollectionDetail extends Component {
             localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
             this.props.history.push('/authorization');
         }
+    };
+
+    shareLink = name => () => {
+        socialSharing(name);
     };
 
     render() {
@@ -96,7 +101,7 @@ class CollectionDetail extends Component {
                                             Поделитесь своей подборкой, и, возможно,
                                             друзья посоветуют вам чего-то полезного
                                         </p>
-                                        <div className="collection-detail__add-button" onClick={this.createLink} >
+                                        <div className="collection-detail__add-button" onClick={this.shareLink(collection.name)} >
                                             <Button
                                                 icon={<Icon iconName={'share'} />}
                                                 text="поделиться"
