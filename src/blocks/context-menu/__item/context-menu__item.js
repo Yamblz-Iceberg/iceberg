@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './context-menu__item.scss';
 
 const ContextMenuItem = ({ item }) =>
-    (<div className="dropdown-menu-item" onClick={(e) => { item.onClick(); e.stopPropagation(); }} >
+    (<div className="dropdown-menu-item" onClick={() => { item.onClick(); }} >
         <div className="dropdown-menu-item__ico">
             { item.icon }
         </div>

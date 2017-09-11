@@ -5,10 +5,6 @@ import { connect } from 'react-redux';
 
 import { LinkCard, Preloader } from './../../../blocks';
 
-import { actions as modalActions } from '../../../reducers/modal.reducer';
-import { setLinkAsOpened } from '../../../reducers/link.reducer';
-import { changeOpenStatusOfLinkById } from '../../../reducers/collection.reducer';
-
 import './collection-detail-links.scss';
 
 class CollectionDetailLinks extends Component {
@@ -39,7 +35,7 @@ class CollectionDetailLinks extends Component {
             <section className="collection-detail-links">
                 {
                     filteredLinks.map(link => (
-                        <div className="collection-detail-links__item" key={link._id} onClick={e => this.openLink(link.url, link._id, e)}>
+                        <div className="collection-detail-links__item" key={link._id}>
                             <LinkCard data={{ ...link }} />
                         </div>
                     ))
@@ -59,10 +55,4 @@ function mapStateToProps(state) {
 
 
 export default
-connect(
-    mapStateToProps,
-    {
-        ...modalActions,
-        setLinkAsOpened,
-        changeOpenStatusOfLinkById,
-    })(withRouter(CollectionDetailLinks));
+connect(mapStateToProps)(withRouter(CollectionDetailLinks));

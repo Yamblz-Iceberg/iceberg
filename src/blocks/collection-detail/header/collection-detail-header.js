@@ -64,6 +64,11 @@ class CollectionDetailHeader extends Component {
         this.props.clearCollection();
     };
 
+    removeCollection = (id) => {
+        this.props.removeCollection(id);
+        this.handleGoBack();
+    }
+
     render() {
         const contextMenuItems = [
             {
@@ -86,11 +91,12 @@ class CollectionDetailHeader extends Component {
                 icon: <Icon iconName={'question'} iconColor={'#777'} />,
             },
         ];
+        // если коллекция принадлежит пользователю, разрешаем удаление
         if (this.props.isAuthor) {
             contextMenuItems.push({
                 title: 'Удалить подборку',
                 id: 3,
-                onClick: () => { this.props.removeCollection(this.props.collectionId); },
+                onClick: () => { this.removeCollection(this.props.collectionId); },
                 icon: <Icon iconName={'close'} iconColor={'#777'} />,
             });
         }
