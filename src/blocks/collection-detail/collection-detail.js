@@ -7,6 +7,7 @@ import CollectionDetailInfo from './info/collection-detail-info';
 import CollectionDetailHeader from './header/collection-detail-header';
 import { getCollection } from '../../reducers/collection.reducer';
 
+import { socialSharing } from '../../utils/shared-functions';
 import { putTags } from '../../services/personal-tags.service';
 
 import './collection-detail.scss';
@@ -48,6 +49,10 @@ class CollectionDetail extends Component {
         }
     };
 
+    shareLink = (title, message) => () => {
+        socialSharing(title, message);
+    };
+
     render() {
         const {
             collection,
@@ -56,6 +61,12 @@ class CollectionDetail extends Component {
                 id, filter,
             },
         } = this.props;
+
+        const {
+            name,
+            description,
+            links,
+        } = collection;
 
         const tabs = [
             {
@@ -72,9 +83,12 @@ class CollectionDetail extends Component {
 
         return (
             <div className="collection-detail">
-                <CollectionDetailHeader collectionTitle={collection.name} />
+                <CollectionDetailHeader
+                    collectionTitle={name}
+                    shareLink={this.shareLink(name, description)}
+                />
                 <CollectionDetailInfo collection={collection} />
-                { collection.links.length > 0
+                { links.length > 0
                     // Когда в подборке есть ссылки
                     ? (
                         <div>
@@ -82,7 +96,7 @@ class CollectionDetail extends Component {
                                 <Tabs tabs={tabs} />
                             </div>
                             <CollectionDetailLinks
-                                links={collection.links}
+                                links={links}
                                 filter={filter}
                             />
                             {/* Показывать кнопку добавления ссылки только автору подборки */}

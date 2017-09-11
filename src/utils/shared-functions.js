@@ -58,3 +58,16 @@ export const authDemoUser = (registerFn, callback) => {
     const lastName = 'Пользователь';
     registerFn(userId, userPassword, firstName, lastName, callback);
 };
+
+export const socialSharing = (subject, message) => {
+    if (typeof window.plugins.socialSharing === 'undefined') return;
+
+    const options = {
+        subject,
+        message,
+        url: 'https://yandex.ru',
+        chooserTitle: subject,
+    };
+
+    window.plugins.socialsharing.shareWithOptions(options);
+};
