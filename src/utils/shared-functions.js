@@ -37,3 +37,16 @@ export const authDemoUser = (registerFn, callback) => {
     const lastName = 'Пользователь';
     registerFn(userId, userPassword, firstName, lastName, callback);
 };
+
+export const socialSharing = (title) => {
+    if (typeof window.cordova === 'undefined') return;
+
+    const options = {
+        message: title,
+        subject: 'Test subject',
+        url: 'https://yandex.ru',
+        chooserTitle: 'Pick an app',
+    };
+
+    window.plugins.socialSharing.shareWithOptions(options);
+};
