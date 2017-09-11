@@ -41,8 +41,9 @@ class CollectionDetail extends Component {
         }
     };
 
-    shareLink = name => () => {
-        socialSharing(name);
+    shareLink = (title, message) => () => {
+        console.log(title, message);
+        socialSharing(title, message);
     };
 
     render() {
@@ -69,7 +70,7 @@ class CollectionDetail extends Component {
 
         return (
             <div className="collection-detail">
-                <CollectionDetailHeader collectionTitle={collection.name} />
+                <CollectionDetailHeader collectionTitle={collection.name} shareLink={this.shareLink(collection.name, collection.description)} />
                 <CollectionDetailInfo collection={collection} />
 
                 { collection.links.length > 0
@@ -101,7 +102,7 @@ class CollectionDetail extends Component {
                                             Поделитесь своей подборкой, и, возможно,
                                             друзья посоветуют вам чего-то полезного
                                         </p>
-                                        <div className="collection-detail__add-button" onClick={this.shareLink(collection.name)} >
+                                        <div className="collection-detail__add-button" onClick={this.shareLink(collection.name, collection.description)} >
                                             <Button
                                                 icon={<Icon iconName={'share'} />}
                                                 text="поделиться"

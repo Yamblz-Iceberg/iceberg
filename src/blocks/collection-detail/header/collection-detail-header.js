@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 
 import { Icon, ContextMenu } from '../../../blocks';
+import { socialSharing } from '../../../utils/shared-functions';
 
 import './collection-detail-header.scss';
 
@@ -33,6 +34,10 @@ class CollectionDetailHeader extends Component {
         }
     };
 
+    shareLink = () => {
+        socialSharing();
+    };
+
     handleGoBack = () => {
         this.props.history.goBack();
     };
@@ -46,7 +51,7 @@ class CollectionDetailHeader extends Component {
             {
                 title: 'Поделиться',
                 id: 0,
-                onClick: () => {},
+                onClick: this.props.shareLink,
                 icon: <Icon iconName={'share'} iconColor={'#777'} />,
             },
             {
@@ -97,6 +102,7 @@ class CollectionDetailHeader extends Component {
 
 CollectionDetailHeader.propTypes = {
     collectionTitle: PropTypes.string.isRequired,
+    shareLink: PropTypes.func.isRequired,
     history: PropTypes.any.isRequired,
 };
 
