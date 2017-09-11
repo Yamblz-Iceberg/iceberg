@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import { Icon, Dropdown } from '../../../blocks';
 
 import {
-    createdCollectionsLoader,
-    savedLinksLoader,
-    addedLinksLoader,
-    savedCollectionsLoader,
+    getCreatedCollections,
+    getSavedLinks,
+    getAddedLinks,
+    getSavedCollections,
     openedLinksLoader,
 } from './../../../reducers/bookmarks.reducer';
 
@@ -18,28 +18,28 @@ class ProfileFilter extends Component {
     static propTypes = {
         items: PropTypes.array.isRequired,
         token: PropTypes.string.isRequired,
-        createdCollectionsLoader: PropTypes.func.isRequired,
-        savedLinksLoader: PropTypes.func.isRequired,
-        addedLinksLoader: PropTypes.func.isRequired,
-        savedCollectionsLoader: PropTypes.func.isRequired,
+        getCreatedCollections: PropTypes.func.isRequired,
+        getSavedLinks: PropTypes.func.isRequired,
+        getAddedLinks: PropTypes.func.isRequired,
+        getSavedCollections: PropTypes.func.isRequired,
     }
 
     filteringData = (item) => {
         switch (item.name) {
         case 'savedCollections':
-            this.props.savedCollectionsLoader(this.props.token, item.name);
+            this.props.getSavedCollections(this.props.token, item.name);
             break;
         case 'createdCollections':
-            this.props.createdCollectionsLoader(this.props.token, item.name);
+            this.props.getCreatedCollections(this.props.token, item.name);
             break;
         case 'newLinks':
-            this.props.savedLinksLoader(this.props.token, item.name, 'new');
+            this.props.getSavedLinks(this.props.token, item.name, 'new');
             break;
         case 'addedLinks':
-            this.props.addedLinksLoader(this.props.token, item.name);
+            this.props.getAddedLinks(this.props.token, item.name);
             break;
         case 'openedLinks':
-            this.props.savedLinksLoader(this.props.token, item.name, 'opened');
+            this.props.getSavedLinks(this.props.token, item.name, 'opened');
             break;
         default:
             break;
@@ -66,9 +66,9 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-    createdCollectionsLoader,
-    savedLinksLoader,
-    savedCollectionsLoader,
-    addedLinksLoader,
+    getCreatedCollections,
+    getSavedLinks,
+    getSavedCollections,
+    getAddedLinks,
     openedLinksLoader,
 })(ProfileFilter);

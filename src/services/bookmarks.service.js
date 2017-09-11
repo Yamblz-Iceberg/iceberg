@@ -1,4 +1,4 @@
-export const fetchSavedCollections = (token) => {
+export const getSavedCollectionsFetch = (token) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
     });
@@ -7,7 +7,7 @@ export const fetchSavedCollections = (token) => {
         .then(res => res.json());
 };
 
-export const fetchCreatedCollections = (token) => {
+export const getCreatedCollectionsFetch = (token) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
     });
@@ -16,7 +16,7 @@ export const fetchCreatedCollections = (token) => {
         .then(res => res.json());
 };
 
-export const fetchAddedLinks = (token) => {
+export const getAddedLinksFetch = (token) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
     });
@@ -25,7 +25,7 @@ export const fetchAddedLinks = (token) => {
         .then(res => res.json());
 };
 
-export const fetchSavedLinks = (token, linkType) => {
+export const getSavedLinksFetch = (token, linkType) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
     });

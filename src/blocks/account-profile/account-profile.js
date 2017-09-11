@@ -7,7 +7,7 @@ import ProfileHeader from './header/account-profile-header';
 import ProfileFeed from './feed/account-profile-feed';
 import { UserInfo, Tabs } from './../../blocks';
 
-import { createdCollectionsLoader, savedLinksLoader } from './../../reducers/bookmarks.reducer';
+import { getCreatedCollections, getSavedLinks } from './../../reducers/bookmarks.reducer';
 
 import './account-profile.scss';
 
@@ -16,8 +16,8 @@ class AccountProfile extends Component {
         user: PropTypes.object.isRequired,
         bookmarks: PropTypes.object.isRequired,
         token: PropTypes.string.isRequired,
-        createdCollectionsLoader: PropTypes.func.isRequired,
-        savedLinksLoader: PropTypes.func.isRequired,
+        getCreatedCollections: PropTypes.func.isRequired,
+        getSavedLinks: PropTypes.func.isRequired,
         history: PropTypes.any.isRequired,
         loader: PropTypes.bool.isRequired,
     }
@@ -31,11 +31,11 @@ class AccountProfile extends Component {
     }
 
     getMyCollections = () => {
-        this.props.createdCollectionsLoader(this.props.token, 'createdCollection');
+        this.props.getCreatedCollections(this.props.token, 'createdCollection');
     }
 
     getSavedLinks = () => {
-        this.props.savedLinksLoader(this.props.token, 'savedLinks');
+        this.props.getSavedLinks(this.props.token, 'savedLinks');
     }
 
     render() {
@@ -118,5 +118,5 @@ function mapStateToProps(state) {
 
 export default connect(
     mapStateToProps,
-    { createdCollectionsLoader, savedLinksLoader },
+    { getCreatedCollections, getSavedLinks },
 )(withRouter(AccountProfile));
