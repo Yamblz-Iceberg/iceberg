@@ -1,22 +1,22 @@
-import { fetchSavedCollections, fetchMyCollections, fetchSavedLinks, fetchMyLinks } from '../services/bookmarks.service';
+import { getSavedCollectionsFetch, getCreatedCollectionsFetch, getSavedLinksFetch, getAddedLinksFetch } from '../services/bookmarks.service';
 import { showLoader } from './loader.reducer';
 
 export const GET_USER_COLLECTIONS = 'GET_USER_COLLECTIONS';
 export const GET_USER_LINKS = 'GET_USER_LINKS';
 
 const initialState = {
-    typeToFeed: 'myCollection',
+    typeToFeed: 'createdCollection',
     collections: [],
     links: [],
 };
 
-const getSavedCollections = (data, type) =>
+const getSavedCollectionsAction = (data, type) =>
     ({ type: GET_USER_COLLECTIONS, payload: data.collections, typeToFeed: type });
-const getMyCollections = (data, type) =>
+const getCreatedCollectionsAction = (data, type) =>
     ({ type: GET_USER_COLLECTIONS, payload: data.collections, typeToFeed: type });
-const getSavedLinks = (data, type) =>
+const getSavedLinksAction = (data, type) =>
     ({ type: GET_USER_LINKS, payload: data.links, typeToFeed: type });
-const getMyLinks = (data, type) =>
+const getAddedLinksAction = (data, type) =>
     ({ type: GET_USER_LINKS, payload: data.links, typeToFeed: type });
 
 const reducer = (state = initialState, action) => {
@@ -36,46 +36,51 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-const savedCollectionsLoader = (token, type) => (
+// Коллекции
+
+const getSavedCollections = (token, type) => (
     (dispatch) => {
         dispatch(showLoader());
-        fetchSavedCollections(token).then((data) => {
-            dispatch(getSavedCollections(data, type));
+        getSavedCollectionsFetch(token).then((data) => {
+            dispatch(getSavedCollectionsAction(data, type));
         });
     }
 );
 
-const myCollectionsLoader = (token, type) => (
+const getCreatedCollections = (token, type) => (
     (dispatch) => {
         dispatch(showLoader());
-        fetchMyCollections(token).then((data) => {
-            dispatch(getMyCollections(data, type));
+        getCreatedCollectionsFetch(token).then((data) => {
+            dispatch(getCreatedCollectionsAction(data, type));
         });
     }
 );
 
-const savedLinksLoader = (token, type) => (
+// Ссылки
+
+// TODO: подумать насчет параметра type - возможно как-то сократить
+const getSavedLinks = (token, type, linkType) => (
     (dispatch) => {
         dispatch(showLoader());
-        fetchSavedLinks(token).then((data) => {
-            dispatch(getSavedLinks(data, type));
+        getSavedLinksFetch(token, linkType).then((data) => {
+            dispatch(getSavedLinksAction(data, type));
         });
     }
 );
 
-const myLinksLoader = (token, type) => (
+const getAddedLinks = (token, type) => (
     (dispatch) => {
         dispatch(showLoader());
-        fetchMyLinks(token).then((data) => {
-            dispatch(getMyLinks(data, type));
+        getAddedLinksFetch(token).then((data) => {
+            dispatch(getAddedLinksAction(data, type));
         });
     }
 );
 
 export {
     reducer,
-    myCollectionsLoader,
-    savedLinksLoader,
-    savedCollectionsLoader,
-    myLinksLoader,
+    getCreatedCollections,
+    getSavedLinks,
+    getSavedCollections,
+    getAddedLinks,
 };

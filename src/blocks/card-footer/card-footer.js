@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { Icon, Avatar } from './../../blocks';
-import { putToSavedLoader, delFromSavedLoader } from './../../reducers/collection.reducer';
+import { setCollectionAsSaved, deleteCollectionFromSaved } from './../../reducers/collection.reducer';
 import { changeSavedStatusOfCardById } from './../../reducers/feed.reducer';
 
 import './card-footer.scss';
@@ -14,7 +14,7 @@ import { mainYellow } from './../../variables.scss';
 class CardFooter extends Component {
     putToSaved = (e) => {
         if (typeof this.props.userData.accType !== 'undefined' && this.props.userData.accType !== 'demo') {
-            this.props.putToSavedLoader(this.props.idCard, this.props.token);
+            this.props.setCollectionAsSaved(this.props.idCard, this.props.token);
             this.props.changeSavedStatusOfCardById(this.props.idCard, true);
             e.stopPropagation();
         } else {
@@ -24,16 +24,21 @@ class CardFooter extends Component {
     };
 
     delFromSaved = (e) => {
-        this.props.delFromSavedLoader(this.props.idCard, this.props.token);
+        this.props.deleteCollectionFromSaved(this.props.idCard, this.props.token);
         this.props.changeSavedStatusOfCardById(this.props.idCard, false);
         e.stopPropagation();
     };
+
+    goToUserProfile = (e, id) => {
+        this.props.history.push(`/user/${id}`);
+        e.stopPropagation();
+    }
 
     render() {
         const props = this.props;
         return (
             <div className="card-footer">
-                <div className="card-footer__user">
+                <div className="card-footer__user" onClick={(e) => { this.goToUserProfile(e, props.userId); }}>
                     <Avatar {...props.avatarOptions} />
                     <span className="card-footer__user-name">{props.userName}</span>
                 </div>
@@ -63,14 +68,15 @@ class CardFooter extends Component {
 
 CardFooter.propTypes = {
     idCard: PropTypes.string,
+    userId: PropTypes.string,
     avatarOptions: PropTypes.object.isRequired,
     userName: PropTypes.string.isRequired,
     linksCount: PropTypes.number.isRequired,
     savedTimesCount: PropTypes.number.isRequired,
     saved: PropTypes.bool,
     token: PropTypes.any.isRequired,
-    putToSavedLoader: PropTypes.func.isRequired,
-    delFromSavedLoader: PropTypes.func.isRequired,
+    setCollectionAsSaved: PropTypes.func.isRequired,
+    deleteCollectionFromSaved: PropTypes.func.isRequired,
     changeSavedStatusOfCardById: PropTypes.func.isRequired,
     userData: PropTypes.object.isRequired,
     history: PropTypes.any.isRequired,
@@ -79,6 +85,7 @@ CardFooter.propTypes = {
 CardFooter.defaultProps = {
     idCard: null,
     saved: null,
+    userId: null,
 };
 
 export default connect(state => ({
@@ -86,5 +93,5 @@ export default connect(state => ({
     token: state.authorization.access_token,
     userData: state.user.data,
 }),
-{ putToSavedLoader, delFromSavedLoader, changeSavedStatusOfCardById },
+{ setCollectionAsSaved, deleteCollectionFromSaved, changeSavedStatusOfCardById },
 )(withRouter(CardFooter));

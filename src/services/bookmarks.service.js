@@ -1,35 +1,35 @@
-export const fetchSavedCollections = (token) => {
+export const getSavedCollectionsFetch = (token) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
     });
 
-    return fetch('https://iceberg-project.herokuapp.com/users/bookmarks/collections/', { headers })
+    return fetch('https://iceberg-project.herokuapp.com/users/bookmarks/savedCollections/', { headers })
         .then(res => res.json());
 };
 
-export const fetchMyCollections = (token) => {
+export const getCreatedCollectionsFetch = (token) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
     });
 
-    return fetch('https://iceberg-project.herokuapp.com/users/bookmarks/myCollections/', { headers })
+    return fetch('https://iceberg-project.herokuapp.com/users/bookmarks/createdCollections/', { headers })
         .then(res => res.json());
 };
 
-export const fetchMyLinks = (token) => {
+export const getAddedLinksFetch = (token) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
     });
 
-    return fetch('https://iceberg-project.herokuapp.com/users/bookmarks/myLinks/', { headers })
+    return fetch('https://iceberg-project.herokuapp.com/users/bookmarks/addedLinks/', { headers })
         .then(res => res.json());
 };
 
-export const fetchSavedLinks = (token) => {
+export const getSavedLinksFetch = (token, linkType) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
     });
 
-    return fetch('https://iceberg-project.herokuapp.com/users/bookmarks/links/', { headers })
+    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/savedLinks?filter=${linkType}`, { headers })
         .then(res => res.json());
 };

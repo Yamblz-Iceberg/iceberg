@@ -1,31 +1,61 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Icon, Avatar } from '../../blocks';
-import { changeLikeOfLinkLoader, changeSavedOfLinkLoader } from './../../reducers/collection.reducer';
+import { changeStatusLikeOfLink, changeStatusSavedOfLink } from './../../reducers/collection.reducer';
 
 import './link-card.scss';
 import variables from './../../variables.scss';
 
+/*
+Компонент карточки ссылки. Отображает пользователя, который добавил ссылку,
+заголовок ссылки, фавиконку (если ссылка на фавиконку битая, то выводиться она
+не будет), футер с дополнительной информацией, опциональную кнопку добавления
+комментария (если компонент используется при создании ссылки).
+*/
 class LinkCard extends Component {
+    static propTypes = {
+        data: PropTypes.object.isRequired,
+        button: PropTypes.any,
+        isTransparent: PropTypes.bool,
+        editIcon: PropTypes.object,
+        changeStatusLikeOfLink: PropTypes.func.isRequired,
+        changeStatusSavedOfLink: PropTypes.func.isRequired,
+        token: PropTypes.any.isRequired,
+        history: PropTypes.any.isRequired,
+    }
+
+    static defaultProps = {
+        data: {},
+        button: null,
+        editIcon: null,
+        isTransparent: false,
+    }
+
     putToLiked = (e) => {
-        this.props.changeLikeOfLinkLoader(this.props.data._id, true, this.props.token);
+        this.props.changeStatusLikeOfLink(this.props.data._id, true, this.props.token);
         e.stopPropagation();
     }
 
     delFromLiked = (e) => {
-        this.props.changeLikeOfLinkLoader(this.props.data._id, false, this.props.token);
+        this.props.changeStatusLikeOfLink(this.props.data._id, false, this.props.token);
         e.stopPropagation();
     }
 
     putToSaved = (e) => {
-        this.props.changeSavedOfLinkLoader(this.props.data._id, true, this.props.token);
+        this.props.changeStatusSavedOfLink(this.props.data._id, true, this.props.token);
         e.stopPropagation();
     }
 
     delFromSaved = (e) => {
-        this.props.changeSavedOfLinkLoader(this.props.data._id, false, this.props.token);
+        this.props.changeStatusSavedOfLink(this.props.data._id, false, this.props.token);
+        e.stopPropagation();
+    }
+
+    goToUserProfile = (e, id) => {
+        this.props.history.push(`/user/${id}`);
         e.stopPropagation();
     }
 
@@ -35,6 +65,7 @@ class LinkCard extends Component {
             backgroundColor: variables.blue,
             backgroundImage: `url('${data.photo}')`,
         };
+
         const avatarOptions = {
             size: '25',
             iconColor: '#fff',
@@ -45,13 +76,14 @@ class LinkCard extends Component {
             e.target.style.display = 'none';
         };
 
+        const userName = `${data.userAdded.firstName} ${data.userAdded.lastName}`;
+
         return (<div className="link-card" style={cardStyles}>
             <div className="link-card__header">
-                <div className="link-card__user">
+                <div className="link-card__user" onClick={(e) => { this.goToUserProfile(e, data.userAdded.userId); }}>
                     <Avatar {...avatarOptions} />
                     <div className="link-card__user-info">
-                        <p className="link-card__user-name">{data.userAdded.firstName}</p>
-                        <p className="link-card__user-rating">{data.userAdded.rating}</p>
+                        <p className="link-card__user-name">{userName}</p>
                     </div>
                 </div>
                 <div className="link-card__context-menu">
@@ -109,23 +141,6 @@ class LinkCard extends Component {
     }
 }
 
-LinkCard.propTypes = {
-    data: PropTypes.object.isRequired,
-    button: PropTypes.any,
-    isTransparent: PropTypes.bool,
-    editIcon: PropTypes.object,
-    changeLikeOfLinkLoader: PropTypes.func.isRequired,
-    changeSavedOfLinkLoader: PropTypes.func.isRequired,
-    token: PropTypes.any.isRequired,
-};
-
-LinkCard.defaultProps = {
-    data: {},
-    button: null,
-    editIcon: null,
-    isTransparent: false,
-};
-
 export default connect(state => ({
     token: state.authorization.access_token,
-}), { changeLikeOfLinkLoader, changeSavedOfLinkLoader })(LinkCard);
+}), { changeStatusLikeOfLink, changeStatusSavedOfLink })(withRouter(LinkCard));

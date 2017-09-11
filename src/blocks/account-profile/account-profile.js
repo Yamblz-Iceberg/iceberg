@@ -7,11 +7,21 @@ import ProfileHeader from './header/account-profile-header';
 import ProfileFeed from './feed/account-profile-feed';
 import { UserInfo, Tabs } from './../../blocks';
 
-import { myCollectionsLoader, savedLinksLoader } from './../../reducers/bookmarks.reducer';
+import { getCreatedCollections, getSavedLinks } from './../../reducers/bookmarks.reducer';
 
 import './account-profile.scss';
 
 class AccountProfile extends Component {
+    static propTypes = {
+        user: PropTypes.object.isRequired,
+        bookmarks: PropTypes.object.isRequired,
+        token: PropTypes.string.isRequired,
+        getCreatedCollections: PropTypes.func.isRequired,
+        getSavedLinks: PropTypes.func.isRequired,
+        history: PropTypes.any.isRequired,
+        loader: PropTypes.bool.isRequired,
+    }
+
     componentDidMount() {
         if (this.props.history.location.pathname.indexOf('links') >= 0) {
             this.getSavedLinks();
@@ -21,15 +31,16 @@ class AccountProfile extends Component {
     }
 
     getMyCollections = () => {
-        this.props.myCollectionsLoader(this.props.token, 'myCollection');
+        this.props.getCreatedCollections(this.props.token, 'createdCollection');
     }
 
     getSavedLinks = () => {
-        this.props.savedLinksLoader(this.props.token, 'savedLinks');
+        this.props.getSavedLinks(this.props.token, 'savedLinks');
     }
 
     render() {
         const { user, bookmarks } = this.props;
+
         const tabs = [
             {
                 id: 1,
@@ -43,27 +54,29 @@ class AccountProfile extends Component {
             },
         ];
 
-        const filterItems = this.props.history.location.pathname.indexOf('links') > -1 ? [
+        const linksFilters = [
             {
                 id: 0,
                 title: 'Новые',
-                name: 'savedLinks',
+                name: 'newLinks',
             },
             {
                 id: 1,
                 title: 'Прочитанные',
-                name: 'savedLinks',
+                name: 'openedLinks',
             },
             {
                 id: 2,
                 title: 'Добавленные мной',
-                name: 'myLinks',
+                name: 'addedLinks',
             },
-        ] : [
+        ];
+
+        const collectionsFilters = [
             {
                 id: 0,
                 title: 'Созданные мной',
-                name: 'myCollections',
+                name: 'createdCollections',
             },
             {
                 id: 1,
@@ -71,32 +84,27 @@ class AccountProfile extends Component {
                 name: 'savedCollections',
             },
         ];
+
+        const filterItems = this.props.history.location.pathname.indexOf('links') > -1 ? linksFilters : collectionsFilters;
         const data = bookmarks.typeToFeed.toLowerCase().indexOf('links') > -1 ? bookmarks.links : bookmarks.collections;
-        return (<div className="account-profile-wrap">
-            <ProfileHeader />
-            <UserInfo user={user} />
-            <div className="account-profile__tabs-wrap">
-                <Tabs tabs={tabs} />
+
+        return (
+            <div className="account-profile-wrap">
+                <ProfileHeader />
+                <UserInfo user={user} />
+                <div className="account-profile__tabs-wrap">
+                    <Tabs tabs={tabs} />
+                </div>
+                <ProfileFeed
+                    data={data}
+                    type={bookmarks.typeToFeed}
+                    filterItems={filterItems}
+                    loader={this.props.loader}
+                />
             </div>
-            <ProfileFeed
-                data={data}
-                type={bookmarks.typeToFeed}
-                filterItems={filterItems}
-                loader={this.props.loader}
-            />
-        </div>);
+        );
     }
 }
-
-AccountProfile.propTypes = {
-    user: PropTypes.object.isRequired,
-    bookmarks: PropTypes.object.isRequired,
-    token: PropTypes.string.isRequired,
-    myCollectionsLoader: PropTypes.func.isRequired,
-    savedLinksLoader: PropTypes.func.isRequired,
-    history: PropTypes.any.isRequired,
-    loader: PropTypes.bool.isRequired,
-};
 
 function mapStateToProps(state) {
     return {
@@ -108,5 +116,7 @@ function mapStateToProps(state) {
     };
 }
 
-export default
-connect(mapStateToProps, { myCollectionsLoader, savedLinksLoader })(withRouter(AccountProfile));
+export default connect(
+    mapStateToProps,
+    { getCreatedCollections, getSavedLinks },
+)(withRouter(AccountProfile));

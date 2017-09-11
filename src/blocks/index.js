@@ -13,6 +13,7 @@ export { default as ModalError } from './modal-error';
 export { default as Modal } from './modal-root';
 export { default as ToggleText } from './toggle-text';
 export { default as AccountProfile } from './account-profile';
+export { default as UserProfile } from './user-profile';
 export { default as CollectionDetail } from './collection-detail';
 export { default as CreateDescription } from './create-description';
 export { default as CreateEmpty } from './create-empty';

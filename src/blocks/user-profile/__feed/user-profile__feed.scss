@@ -1,0 +1,30 @@
+.user-profile-feed {
+    
+    &__empty-block {
+        padding: 16px;
+        text-align: center;
+    }
+
+    &__preloader {
+        padding: 16px;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__message {
+        font-size: 18px;
+        line-height: 26px;
+        text-align: center;
+        color: #777777;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    > .button {
+        margin: auto;
+    }
+}

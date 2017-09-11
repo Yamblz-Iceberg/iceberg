@@ -12,6 +12,7 @@ import reducer from './reducers';
 
 import {
     AccountProfile,
+    UserProfile,
     CollectionDetail,
     CreateEmpty,
     CreateDescription,
@@ -67,6 +68,12 @@ function onDeviceReady() {
                             )}
                         />
                         <Route path="/profile" component={AccountProfile} />
+                        <Route
+                            path="/user/:id?"
+                            render={({ match }) => (
+                                <UserProfile params={match.params} />
+                            )}
+                        />
                         <Route path="/search" component={Search} />
                         <Route path="/preview" component={LinkPreview} />
                         <Route path="/onboarding" component={Onboarding} />

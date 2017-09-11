@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Avatar, RatingInfo } from './../../blocks';
+import { Avatar } from './../../blocks';
 
 import './user-info.scss';
 
@@ -17,7 +17,6 @@ const UserInfo = ({ user }) => {
         </div>
         <div className="user-info__avatar">
             <Avatar photo={user.photo} size="70" />
-            <RatingInfo count={user.rating || 0} />
         </div>
     </div>);
 };

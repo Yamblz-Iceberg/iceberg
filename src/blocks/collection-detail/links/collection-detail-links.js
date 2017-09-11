@@ -6,11 +6,12 @@ import { connect } from 'react-redux';
 import { LinkCard } from './../../../blocks';
 
 import { actions as modalActions } from '../../../reducers/modal.reducer';
+import { setLinkAsOpened } from '../../../reducers/link.reducer';
 
 import './collection-detail-links.scss';
 
 class CollectionDetailLinks extends Component {
-    openLink(href, readerMode) {
+    openLink(href, id) {
         if (window.cordova) {
             window.SafariViewController.isAvailable((available) => {
                 if (available) {
@@ -19,7 +20,7 @@ class CollectionDetailLinks extends Component {
                         hidden: false,
                         animated: false,
                         transition: 'curl',
-                        enterReaderModeIfAvailable: readerMode,
+                        enterReaderModeIfAvailable: false,
                         tintColor: '#fff',
                         barColor: '#000',
                         controlTintColor: '#ffffff',
@@ -42,6 +43,7 @@ class CollectionDetailLinks extends Component {
         } else {
             window.open(href);
         }
+        this.props.setLinkAsOpened(id, this.props.token);
     }
 
     render() {
@@ -56,7 +58,7 @@ class CollectionDetailLinks extends Component {
             <section className="collection-detail-links">
                 {
                     filteredLinks.map(link => (
-                        <div className="collection-detail-links__item" key={link._id} onClick={() => this.openLink(link.url)}>
+                        <div className="collection-detail-links__item" key={link._id} onClick={() => this.openLink(link.url, link._id)}>
                             <LinkCard data={{ ...link }} />
                         </div>
                     ))
@@ -70,6 +72,8 @@ CollectionDetailLinks.propTypes = {
     links: PropTypes.array.isRequired,
     filter: PropTypes.string,
     showModal: PropTypes.func.isRequired,
+    setLinkAsOpened: PropTypes.func.isRequired,
+    token: PropTypes.any.isRequired,
 };
 
 CollectionDetailLinks.defaultProps = {
@@ -79,9 +83,12 @@ CollectionDetailLinks.defaultProps = {
 function mapStateToProps(state) {
     return {
         links: state.collection.links,
+        token: state.authorization.access_token,
     };
 }
 
 
 export default
-connect(mapStateToProps, { ...modalActions })(withRouter(CollectionDetailLinks));
+connect(
+    mapStateToProps,
+    { ...modalActions, setLinkAsOpened })(withRouter(CollectionDetailLinks));

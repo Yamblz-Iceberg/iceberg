@@ -11,18 +11,18 @@ export const postLink = (data, token) => {
     }).then(res => res.json());
 };
 
-export const postDeleteLink = (id, token) => {
+export const removeLinkFetch = (id, token) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
     });
 
-    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/myLinks/${id}`, {
+    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/addedLinks/${id}`, {
         method: 'delete',
         headers,
     }).then(res => res.json());
 };
 
-export const postLinkToCollection = (collectionId, linkId, token, description) => {
+export const addLinkToCollectionFetch = (collectionId, linkId, token, description) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -35,7 +35,18 @@ export const postLinkToCollection = (collectionId, linkId, token, description) =
     });
 };
 
-export const changeLikeOfLink = (id, token) => {
+export const setLinkAsOpenedFetch = (id, token) => {
+    const headers = new Headers({
+        Authorization: `Bearer ${token}`,
+    });
+
+    return fetch(`https://iceberg-project.herokuapp.com/links/open/${id}`, {
+        headers,
+        method: 'put',
+    });
+};
+
+export const changeStatusLikeOfLinkFetch = (id, token) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
     });
@@ -46,23 +57,23 @@ export const changeLikeOfLink = (id, token) => {
     });
 };
 
-export const putSaveOfLink = (id, token) => {
+export const setLinkAsSavedFetch = (id, token) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
     });
 
-    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/links/${id}`, {
+    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/savedLinks/${id}`, {
         headers,
         method: 'put',
     });
 };
 
-export const deleteSaveOfLink = (id, token) => {
+export const deleteLinkFromeSavedFetch = (id, token) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
     });
 
-    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/links/${id}`, {
+    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/savedLinks/${id}`, {
         headers,
         method: 'delete',
     });

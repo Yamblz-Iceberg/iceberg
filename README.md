@@ -54,6 +54,7 @@
 - titanic
 - empty-profile
 - like-filled
+- exit
 
 
 ### Запуск приложения

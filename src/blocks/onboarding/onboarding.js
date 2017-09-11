@@ -37,7 +37,28 @@ const slides = [
     },
 ];
 
+/*
+Компонент онбординга. Содержит экраны с текстовой информацией и интерактивный экран
+с выбором пользовательских тегов. Работает с полем "onboarding" стора, отсылает серверу
+информацию о выбранных тегах.
+*/
 class Onboarding extends Component {
+    static propTypes = {
+        selectedTags: PropTypes.array,
+        hashTags: PropTypes.array,
+        addTag: PropTypes.func.isRequired,
+        deleteTag: PropTypes.func.isRequired,
+        getTags: PropTypes.func.isRequired,
+        sendTags: PropTypes.func.isRequired,
+        token: PropTypes.string.isRequired,
+        history: PropTypes.any.isRequired,
+    }
+
+    static defaultProps = {
+        selectedTags: [],
+        hashTags: [],
+    };
+
     constructor() {
         super();
         this.state = {
@@ -177,22 +198,6 @@ class Onboarding extends Component {
         );
     }
 }
-
-Onboarding.propTypes = {
-    selectedTags: PropTypes.array,
-    hashTags: PropTypes.array,
-    addTag: PropTypes.func.isRequired,
-    deleteTag: PropTypes.func.isRequired,
-    getTags: PropTypes.func.isRequired,
-    sendTags: PropTypes.func.isRequired,
-    token: PropTypes.string.isRequired,
-    history: PropTypes.any.isRequired,
-};
-
-Onboarding.defaultProps = {
-    selectedTags: [],
-    hashTags: [],
-};
 
 export default connect(
     state => ({

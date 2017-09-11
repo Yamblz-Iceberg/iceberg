@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { putToSavedLoader, delFromSavedLoader } from '../../../reducers/collection.reducer';
+import { setCollectionAsSaved, deleteCollectionFromSaved } from '../../../reducers/collection.reducer';
 import { ToggleText } from '../../index';
 import { HashTape, Icon, Button, CardFooter } from '../../../blocks';
 
@@ -34,7 +34,7 @@ class CollectionDetailInfo extends Component {
 
     putToSaved = () => {
         if (typeof this.props.userData.accType !== 'undefined' && this.props.userData.accType !== 'demo') {
-            this.props.putToSavedLoader(
+            this.props.setCollectionAsSaved(
                 this.props.collection._id,
                 this.props.token,
             );
@@ -45,7 +45,7 @@ class CollectionDetailInfo extends Component {
     };
 
     delFromSaved = () => {
-        this.props.delFromSavedLoader(
+        this.props.deleteCollectionFromSaved(
             this.props.collection._id,
             this.props.token,
         );
@@ -61,11 +61,9 @@ class CollectionDetailInfo extends Component {
         };
 
         const userName = `${collection.author.firstName} ${collection.author.lastName}`;
-
         const ruText = new Hypher(Ru);
         const enText = new Hypher(En);
         const hyphenateText = text => (enText.hyphenateText(ruText.hyphenateText(text, 10), 10));
-
         return (
             <section>
                 <div className="collection-detail-info">
@@ -85,6 +83,7 @@ class CollectionDetailInfo extends Component {
                             <div className="collection-detail-card__footer">
                                 <CardFooter
                                     avatarOptions={avatarOptions}
+                                    userId={collection.author.userId}
                                     userName={userName}
                                     linksCount={collection.links.length}
                                     savedTimesCount={collection.savedTimesCount}
@@ -134,8 +133,8 @@ CollectionDetailInfo.propTypes = {
     token: PropTypes.string.isRequired,
     userData: PropTypes.object.isRequired,
     history: PropTypes.any.isRequired,
-    putToSavedLoader: PropTypes.func.isRequired,
-    delFromSavedLoader: PropTypes.func.isRequired,
+    setCollectionAsSaved: PropTypes.func.isRequired,
+    deleteCollectionFromSaved: PropTypes.func.isRequired,
 };
 
 export default connect(
@@ -144,5 +143,5 @@ export default connect(
         token: state.authorization.access_token,
         userData: state.user.data,
     }),
-    { putToSavedLoader, delFromSavedLoader },
+    { setCollectionAsSaved, deleteCollectionFromSaved },
 )(withRouter(CollectionDetailInfo));

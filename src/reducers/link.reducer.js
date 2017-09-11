@@ -1,4 +1,4 @@
-import { postLink, postLinkToCollection, postDeleteLink } from './../services/link.service';
+import { postLink, addLinkToCollectionFetch, removeLinkFetch, setLinkAsOpenedFetch } from './../services/link.service';
 import { showLoader } from './../reducers/loader.reducer';
 
 export const ADD_LINK = 'ADD_LINK';
@@ -6,6 +6,7 @@ const DELETE_LINK = 'DELETE_LINK';
 const ADD_COMMENT = 'ADD_COMMENT';
 const CLEAR_LINK = 'CLEAR_LINK';
 const PUSH_LINK_TO_COLLECTION = 'PUSH_LINK_TO_COLLECTION';
+const OPEN_LINK = 'OPEN_LINK';
 
 const initialState = {
     result: {
@@ -14,6 +15,10 @@ const initialState = {
         favicon: '',
         name: '',
     },
+    metrics: {
+        openTime: null,
+        opened: false,
+    },
     created: false,
     saved: false,
     liked: false,
@@ -21,16 +26,19 @@ const initialState = {
     description: '',
 };
 
-const addLink = res => ({ type: ADD_LINK, payload: res });
-const deleteLink = () => ({ type: DELETE_LINK });
+const createLinkAction = res => ({ type: ADD_LINK, payload: res });
+const removeLinkAction = () => ({ type: DELETE_LINK });
 const addComment = description => ({ type: ADD_COMMENT, payload: description });
+const openLinkAction = () => ({ type: OPEN_LINK });
 const clearLink = () => ({ type: CLEAR_LINK });
-const pushLinkToCollection = () => ({ type: PUSH_LINK_TO_COLLECTION });
+const addLinkToCollectionAction = () => ({ type: PUSH_LINK_TO_COLLECTION });
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
     case ADD_LINK:
         return { ...state, ...action.payload };
+    case OPEN_LINK:
+        return { ...state, metrics: { ...state.metrics, opened: true } };
     case DELETE_LINK:
         return { ...initialState };
     case ADD_COMMENT:
@@ -48,23 +56,31 @@ export const createLink = (data, token) => (
     (dispatch) => {
         dispatch(showLoader());
         postLink(data, token).then((res) => {
-            dispatch(addLink(res));
+            dispatch(createLinkAction(res));
+        });
+    }
+);
+
+export const setLinkAsOpened = (id, token) => (
+    (dispatch) => {
+        setLinkAsOpenedFetch(id, token).then(() => {
+            dispatch(openLinkAction(true));
         });
     }
 );
 
 export const removeLink = (id, token) => (
     (dispatch) => {
-        postDeleteLink(id, token).then((res) => {
-            dispatch(deleteLink(res));
+        removeLinkFetch(id, token).then((res) => {
+            dispatch(removeLinkAction(res));
         });
     }
 );
 
 export const addLinkToCollection = (collectionId, linkId, token, description, callback) => (
     (dispatch) => {
-        postLinkToCollection(collectionId, linkId, token, description).then(() => {
-            dispatch(pushLinkToCollection());
+        addLinkToCollectionFetch(collectionId, linkId, token, description).then(() => {
+            dispatch(addLinkToCollectionAction());
         }).then(() => callback);
     }
 );

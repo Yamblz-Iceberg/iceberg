@@ -5,33 +5,47 @@ import PropTypes from 'prop-types';
 import { Icon, Dropdown } from '../../../blocks';
 
 import {
-    myCollectionsLoader,
-    savedLinksLoader,
-    myLinksLoader,
-    savedCollectionsLoader,
+    getCreatedCollections,
+    getSavedLinks,
+    getAddedLinks,
+    getSavedCollections,
+    openedLinksLoader,
 } from './../../../reducers/bookmarks.reducer';
 
 import './account-profile-filter.scss';
 
 class ProfileFilter extends Component {
+    static propTypes = {
+        items: PropTypes.array.isRequired,
+        token: PropTypes.string.isRequired,
+        getCreatedCollections: PropTypes.func.isRequired,
+        getSavedLinks: PropTypes.func.isRequired,
+        getAddedLinks: PropTypes.func.isRequired,
+        getSavedCollections: PropTypes.func.isRequired,
+    }
+
     filteringData = (item) => {
         switch (item.name) {
         case 'savedCollections':
-            this.props.savedCollectionsLoader(this.props.token, item.name);
+            this.props.getSavedCollections(this.props.token, item.name);
             break;
-        case 'myCollections':
-            this.props.myCollectionsLoader(this.props.token, item.name);
+        case 'createdCollections':
+            this.props.getCreatedCollections(this.props.token, item.name);
             break;
-        case 'savedLinks':
-            this.props.savedLinksLoader(this.props.token, item.name);
+        case 'newLinks':
+            this.props.getSavedLinks(this.props.token, item.name, 'new');
             break;
-        case 'myLinks':
-            this.props.myLinksLoader(this.props.token, item.name);
+        case 'addedLinks':
+            this.props.getAddedLinks(this.props.token, item.name);
+            break;
+        case 'openedLinks':
+            this.props.getSavedLinks(this.props.token, item.name, 'opened');
             break;
         default:
             break;
         }
     }
+
     render() {
         const { items } = this.props;
         return (<div className="profile-filter">
@@ -41,27 +55,9 @@ class ProfileFilter extends Component {
             <div className="profile-filter__block profile-filter__block--dropdown-wrap">
                 <Dropdown items={items} onSelect={(item) => { this.filteringData(item); }} />
             </div>
-            {/* <div className="profile-filter__block">
-                <Icon
-                    className="home-filter__icon-settings"
-                    iconName="search"
-                    iconColor="#000"
-                    iconHeight="24"
-                    iconWidth="24"
-                />
-            </div> */}
         </div>);
     }
 }
-
-ProfileFilter.propTypes = {
-    items: PropTypes.array.isRequired,
-    token: PropTypes.string.isRequired,
-    myCollectionsLoader: PropTypes.func.isRequired,
-    savedLinksLoader: PropTypes.func.isRequired,
-    myLinksLoader: PropTypes.func.isRequired,
-    savedCollectionsLoader: PropTypes.func.isRequired,
-};
 
 function mapStateToProps(state) {
     return {
@@ -69,10 +65,10 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps,
-    {
-        myCollectionsLoader,
-        savedLinksLoader,
-        savedCollectionsLoader,
-        myLinksLoader,
-    })(ProfileFilter);
+export default connect(mapStateToProps, {
+    getCreatedCollections,
+    getSavedLinks,
+    getSavedCollections,
+    getAddedLinks,
+    openedLinksLoader,
+})(ProfileFilter);
