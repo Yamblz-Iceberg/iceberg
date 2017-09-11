@@ -52,7 +52,7 @@ class CollectionDetailInfo extends Component {
     };
 
     render() {
-        const collection = this.props.collection;
+        const { collection, userData } = this.props;
 
         const avatarOptions = {
             size: '25',
@@ -117,10 +117,13 @@ class CollectionDetailInfo extends Component {
                                     onClick={this.putToSaved}
                                 />
                         }
-                        <button className="collection-detail-actions__add-link" onClick={this.createLink}>
-                            <Icon iconName={'link'} />
-                            <Icon iconName={'plus'} />
-                        </button>
+                        { collection.author.userId === userData.userId
+                            ? <button className="collection-detail-actions__add-link" onClick={this.createLink}>
+                                <Icon iconName={'link'} />
+                                <Icon iconName={'plus'} />
+                            </button>
+                            : null
+                        }
                     </div>
                 </div>
             </section>
