@@ -1,4 +1,4 @@
-import { fetchUser, fetchCollections } from '../services/another-user.service';
+import { fetchUser, getSavedCollectionsFetch } from '../services/another-user.service';
 
 const FETCH_ANOTHER_USER = 'FETCH_ANOTHER_USER';
 const FETCH_ANOTHER_USER_COLLECTIONS = 'FETCH_ANOTHER_USER_COLLECTIONS';
@@ -32,7 +32,7 @@ const userLoader = (token, id) => (
 
 const collectionsLoader = (token, id) => (
     (dispatch) => {
-        fetchCollections(token, id).then((data) => {
+        getSavedCollectionsFetch(token, id).then((data) => {
             dispatch(loadCollections(data.collections));
         });
     }

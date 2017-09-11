@@ -1,4 +1,4 @@
-import { postLink, postLinkToCollection, postDeleteLink, putOpenLink } from './../services/link.service';
+import { postLink, addLinkToCollectionFetch, removeLinkFetch, setLinkAsOpenedFetch } from './../services/link.service';
 import { showLoader } from './../reducers/loader.reducer';
 
 export const ADD_LINK = 'ADD_LINK';
@@ -26,12 +26,12 @@ const initialState = {
     description: '',
 };
 
-const addLink = res => ({ type: ADD_LINK, payload: res });
-const deleteLink = () => ({ type: DELETE_LINK });
+const createLinkAction = res => ({ type: ADD_LINK, payload: res });
+const removeLinkAction = () => ({ type: DELETE_LINK });
 const addComment = description => ({ type: ADD_COMMENT, payload: description });
-const openLink = () => ({ type: OPEN_LINK });
+const openLinkAction = () => ({ type: OPEN_LINK });
 const clearLink = () => ({ type: CLEAR_LINK });
-const pushLinkToCollection = () => ({ type: PUSH_LINK_TO_COLLECTION });
+const addLinkToCollectionAction = () => ({ type: PUSH_LINK_TO_COLLECTION });
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -56,31 +56,31 @@ export const createLink = (data, token) => (
     (dispatch) => {
         dispatch(showLoader());
         postLink(data, token).then((res) => {
-            dispatch(addLink(res));
+            dispatch(createLinkAction(res));
         });
     }
 );
 
-export const openLinkLoader = (id, token) => (
+export const setLinkAsOpened = (id, token) => (
     (dispatch) => {
-        putOpenLink(id, token).then(() => {
-            dispatch(openLink(true));
+        setLinkAsOpenedFetch(id, token).then(() => {
+            dispatch(openLinkAction(true));
         });
     }
 );
 
 export const removeLink = (id, token) => (
     (dispatch) => {
-        postDeleteLink(id, token).then((res) => {
-            dispatch(deleteLink(res));
+        removeLinkFetch(id, token).then((res) => {
+            dispatch(removeLinkAction(res));
         });
     }
 );
 
 export const addLinkToCollection = (collectionId, linkId, token, description, callback) => (
     (dispatch) => {
-        postLinkToCollection(collectionId, linkId, token, description).then(() => {
-            dispatch(pushLinkToCollection());
+        addLinkToCollectionFetch(collectionId, linkId, token, description).then(() => {
+            dispatch(addLinkToCollectionAction());
         }).then(() => callback);
     }
 );

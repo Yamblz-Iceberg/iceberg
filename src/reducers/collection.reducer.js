@@ -1,5 +1,5 @@
-import { fetchCollection, putCollectionToSaved, delCollectionFromSaved } from '../services/collection.service';
-import { changeLikeOfLink, putSaveOfLink, deleteSaveOfLink } from './../services/link.service';
+import { getCollectionFetch, setCollectionAsSavedFetch, deleteCollectionFromSavedFetch } from '../services/collection.service';
+import { changeStatusLikeOfLinkFetch, setLinkAsSavedFetch, deleteLinkFromeSavedFetch } from './../services/link.service';
 
 const FETCH_COLLECTION = 'FETCH_COLLECTION';
 const CHANGE_SAVED_STATUS = 'CHANGE_SAVED_STATUS';
@@ -23,8 +23,9 @@ const initialState = {
 
 const loadCollection = collection => ({ type: FETCH_COLLECTION, payload: collection });
 const changeSavedStatus = status => ({ type: CHANGE_SAVED_STATUS, payload: status });
-const changeLikedStatusById = (id, status) => ({ type: CHANGE_LIKED_STATUS_BY_ID, id, status });
-const changeSavedStatusById =
+const changeLikedStatusOfLinkById =
+    (id, status) => ({ type: CHANGE_LIKED_STATUS_BY_ID, id, status });
+const changeSavedStatusOfLinkById =
     (id, status) => ({ type: CHANGE_LINK_SAVED_STATUS_BY_ID, id, status });
 
 const reducer = (state = initialState, action) => {
@@ -75,53 +76,53 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-const collectionLoader = (collectionId, token) => (
+const getCollection = (collectionId, token) => (
     (dispatch) => {
-        fetchCollection(collectionId, token).then((res) => {
+        getCollectionFetch(collectionId, token).then((res) => {
             dispatch(loadCollection(res.collection));
         });
     }
 );
 
-const putToSavedLoader = (id, token) => (
+const setCollectionAsSaved = (id, token) => (
     (dispatch) => {
-        putCollectionToSaved(id, token).then(() => {
+        setCollectionAsSavedFetch(id, token).then(() => {
             dispatch(changeSavedStatus(true));
         });
     }
 );
 
-const delFromSavedLoader = (id, token) => (
+const deleteCollectionFromSaved = (id, token) => (
     (dispatch) => {
-        delCollectionFromSaved(id, token).then(() => {
+        deleteCollectionFromSavedFetch(id, token).then(() => {
             dispatch(changeSavedStatus(false));
         });
     }
 );
 
-const changeLikeOfLinkLoader = (id, status, token) => (
+const changeStatusLikeOfLink = (id, status, token) => (
     (dispatch) => {
-        dispatch(changeLikedStatusById(id, status));
-        changeLikeOfLink(id, token);
+        dispatch(changeLikedStatusOfLinkById(id, status));
+        changeStatusLikeOfLinkFetch(id, token);
     }
 );
 
-const changeSavedOfLinkLoader = (id, status, token) => (
+const changeStatusSavedOfLink = (id, status, token) => (
     (dispatch) => {
-        dispatch(changeSavedStatusById(id, status));
+        dispatch(changeSavedStatusOfLinkById(id, status));
         if (!status) {
-            deleteSaveOfLink(id, token);
+            deleteLinkFromeSavedFetch(id, token);
         } else {
-            putSaveOfLink(id, token);
+            setLinkAsSavedFetch(id, token);
         }
     }
 );
 
 export {
     reducer,
-    collectionLoader,
-    putToSavedLoader,
-    delFromSavedLoader,
-    changeLikeOfLinkLoader,
-    changeSavedOfLinkLoader,
+    getCollection,
+    setCollectionAsSaved,
+    deleteCollectionFromSaved,
+    changeStatusLikeOfLink,
+    changeStatusSavedOfLink,
 };

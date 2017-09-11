@@ -1,4 +1,4 @@
-export const fetchCollection = (collectionId, token) => {
+export const getCollectionFetch = (collectionId, token) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
     });
@@ -7,7 +7,7 @@ export const fetchCollection = (collectionId, token) => {
         .then(res => res.json());
 };
 
-export const putCollectionToSaved = (id, token) => {
+export const setCollectionAsSavedFetch = (id, token) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
     });
@@ -18,7 +18,7 @@ export const putCollectionToSaved = (id, token) => {
     }).then(res => res.json());
 };
 
-export const delCollectionFromSaved = (id, token) => {
+export const deleteCollectionFromSavedFetch = (id, token) => {
     const headers = new Headers({
         Authorization: `Bearer ${token}`,
     });

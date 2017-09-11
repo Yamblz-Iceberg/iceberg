@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { LinkCard } from './../../../blocks';
 
 import { actions as modalActions } from '../../../reducers/modal.reducer';
-import { openLinkLoader } from '../../../reducers/link.reducer';
+import { setLinkAsOpened } from '../../../reducers/link.reducer';
 
 import './collection-detail-links.scss';
 
@@ -43,7 +43,7 @@ class CollectionDetailLinks extends Component {
         } else {
             window.open(href);
         }
-        this.props.openLinkLoader(id, this.props.token);
+        this.props.setLinkAsOpened(id, this.props.token);
     }
 
     render() {
@@ -72,7 +72,7 @@ CollectionDetailLinks.propTypes = {
     links: PropTypes.array.isRequired,
     filter: PropTypes.string,
     showModal: PropTypes.func.isRequired,
-    openLinkLoader: PropTypes.func.isRequired,
+    setLinkAsOpened: PropTypes.func.isRequired,
     token: PropTypes.any.isRequired,
 };
 
@@ -89,4 +89,6 @@ function mapStateToProps(state) {
 
 
 export default
-connect(mapStateToProps, { ...modalActions, openLinkLoader })(withRouter(CollectionDetailLinks));
+connect(
+    mapStateToProps,
+    { ...modalActions, setLinkAsOpened })(withRouter(CollectionDetailLinks));

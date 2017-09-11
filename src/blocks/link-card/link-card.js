@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Icon, Avatar } from '../../blocks';
-import { changeLikeOfLinkLoader, changeSavedOfLinkLoader } from './../../reducers/collection.reducer';
+import { changeStatusLikeOfLink, changeStatusSavedOfLink } from './../../reducers/collection.reducer';
 
 import './link-card.scss';
 import variables from './../../variables.scss';
@@ -21,8 +21,8 @@ class LinkCard extends Component {
         button: PropTypes.any,
         isTransparent: PropTypes.bool,
         editIcon: PropTypes.object,
-        changeLikeOfLinkLoader: PropTypes.func.isRequired,
-        changeSavedOfLinkLoader: PropTypes.func.isRequired,
+        changeStatusLikeOfLink: PropTypes.func.isRequired,
+        changeStatusSavedOfLink: PropTypes.func.isRequired,
         token: PropTypes.any.isRequired,
         history: PropTypes.any.isRequired,
     }
@@ -35,22 +35,22 @@ class LinkCard extends Component {
     }
 
     putToLiked = (e) => {
-        this.props.changeLikeOfLinkLoader(this.props.data._id, true, this.props.token);
+        this.props.changeStatusLikeOfLink(this.props.data._id, true, this.props.token);
         e.stopPropagation();
     }
 
     delFromLiked = (e) => {
-        this.props.changeLikeOfLinkLoader(this.props.data._id, false, this.props.token);
+        this.props.changeStatusLikeOfLink(this.props.data._id, false, this.props.token);
         e.stopPropagation();
     }
 
     putToSaved = (e) => {
-        this.props.changeSavedOfLinkLoader(this.props.data._id, true, this.props.token);
+        this.props.changeStatusSavedOfLink(this.props.data._id, true, this.props.token);
         e.stopPropagation();
     }
 
     delFromSaved = (e) => {
-        this.props.changeSavedOfLinkLoader(this.props.data._id, false, this.props.token);
+        this.props.changeStatusSavedOfLink(this.props.data._id, false, this.props.token);
         e.stopPropagation();
     }
 
@@ -143,4 +143,4 @@ class LinkCard extends Component {
 
 export default connect(state => ({
     token: state.authorization.access_token,
-}), { changeLikeOfLinkLoader, changeSavedOfLinkLoader })(withRouter(LinkCard));
+}), { changeStatusLikeOfLink, changeStatusSavedOfLink })(withRouter(LinkCard));
