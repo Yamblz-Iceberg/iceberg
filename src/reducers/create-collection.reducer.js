@@ -16,11 +16,12 @@ const initialState = {
     tags: [],
     color: '',
     photo: '',
+    closed: false,
 };
 
 const updateDescription = description => ({ type: UPDATE_DESCRIPTION, payload: description });
 const updateTitle = title => ({ type: UPDATE_TITLE, payload: title });
-const updateSwitcher = (id, status) => ({ type: UPDATE_SWITCHER, payload: { [id]: status } });
+const updateSwitcher = (name, status) => ({ type: UPDATE_SWITCHER, payload: { [name]: status } });
 const clearCollection = () => ({ type: CLEAR_COLLECTION });
 const addHashTag = tag =>
     ({ type: ADD_HASHTAG, name: tag.result.name, id: tag.result._id });
@@ -35,7 +36,7 @@ const reducer = (state = initialState, action) => {
     case UPDATE_TITLE:
         return { ...state, title: action.payload };
     case UPDATE_SWITCHER:
-        return { ...state, options: { ...state.options, ...action.payload } };
+        return { ...state, ...action.payload };
     case ADD_IMAGE: {
         return {
             ...state,

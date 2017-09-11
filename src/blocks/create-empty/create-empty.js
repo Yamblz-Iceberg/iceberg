@@ -52,7 +52,7 @@ class CreateEmpty extends Component {
         this.setTitle(value);
     };
 
-    handleSwitcherUpdate = id => value => this.props.updateSwitcher(id, value);
+    handleSwitcherUpdate = name => value => this.props.updateSwitcher(name, value);
 
     render() {
         const {
@@ -69,13 +69,9 @@ class CreateEmpty extends Component {
         const optionsProperties = [
             {
                 id: 1,
-                option: 'Предлагать ссылки',
-                noticeText: 'Нотификация',
-            },
-            {
-                id: 2,
-                option: 'Модерировать ссылки',
-                noticeText: 'Нотификация',
+                name: 'closed',
+                option: 'Личная подборка',
+                noticeText: 'Данная подборка будет видна только вам',
             },
         ];
 
@@ -116,7 +112,7 @@ class CreateEmpty extends Component {
                 { optionsProperties
                     .map(option => (
                         <Option
-                            callback={this.handleSwitcherUpdate(option.id)}
+                            callback={this.handleSwitcherUpdate(option.name)}
                             key={option.id}
                             {...option}
                         />))

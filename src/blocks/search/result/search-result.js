@@ -42,7 +42,7 @@ class SearchResult extends Component {
                     </div>
                 </div>
             );
-        } else if (!loader) {
+        } else if (!loader && searchText !== '') {
             return (
                 <div className="search-result__empty-block">
                     <p className="search-result__message">Мы не нашли точных результатов. Создайте тему и люди помогут</p>
@@ -51,6 +51,15 @@ class SearchResult extends Component {
                         icon={<Icon iconName="lock" />}
                         onClick={this.createNewCollection}
                     />
+                </div>
+            );
+        } else if (searchText === '') {
+            return (
+                <div className="search-result__empty-block">
+                    <p className="search-result__message">
+                        Ищите по названиям подборок или категориям.
+                        Чтобы искать по категориям, поставьте знак # перед запросом.
+                    </p>
                 </div>
             );
         } else if (searchText !== '') {

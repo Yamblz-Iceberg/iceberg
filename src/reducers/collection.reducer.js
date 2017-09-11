@@ -2,6 +2,7 @@ import { getCollectionFetch, setCollectionAsSavedFetch, deleteCollectionFromSave
 import { changeStatusLikeOfLinkFetch, setLinkAsSavedFetch, deleteLinkFromeSavedFetch } from './../services/link.service';
 
 const FETCH_COLLECTION = 'FETCH_COLLECTION';
+const CLEAR_COLLECTION = 'CLEAR_COLLECTION';
 const CHANGE_SAVED_STATUS = 'CHANGE_SAVED_STATUS';
 const CHANGE_LIKED_STATUS_BY_ID = 'CHANGE_LIKED_STATUS_BY_ID';
 const CHANGE_LINK_SAVED_STATUS_BY_ID = 'CHANGE_LINK_SAVED_STATUS_BY_ID';
@@ -30,6 +31,7 @@ const changeSavedStatusOfLinkById =
     (id, status) => ({ type: CHANGE_LINK_SAVED_STATUS_BY_ID, id, status });
 const changeOpenStatusOfLinkById =
     id => ({ type: CHANGE_LINK_OPENED_STATUS_BY_ID, id });
+const clearCollection = () => ({ type: CLEAR_COLLECTION });
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -86,6 +88,9 @@ const reducer = (state = initialState, action) => {
             links: update([...state.links], action.id),
         };
     }
+    case CLEAR_COLLECTION: {
+        return initialState;
+    }
     default:
         return state;
     }
@@ -141,4 +146,5 @@ export {
     changeStatusLikeOfLink,
     changeStatusSavedOfLink,
     changeOpenStatusOfLinkById,
+    clearCollection,
 };

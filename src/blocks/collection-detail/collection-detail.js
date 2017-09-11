@@ -70,18 +70,24 @@ class CollectionDetail extends Component {
                 <div className="collection-detail__mesage-wrapper">
                     <h3 className="collection-detail__title">Ссылок пока нет</h3>
                     <div>
-                        {/* Текст для открытой подборки, для приватной будет другой */}
-                        <p className="collection-detail__text">
-                            Начните добавлять ссылки и
-                            ваша подборка появится в общей ленте
-                        </p>
-                        <div className="collection-detail__add-button" onClick={this.createLink} >
-                            <Button
-                                icon={<Icon iconName={'link'} />}
-                                text="добавить ссылку"
-                                type="max-width"
-                            />
-                        </div>
+                        { this.props.collection.author.userId === this.props.userData.userId &&
+                            (
+                                <div>
+                                    <p className="collection-detail__text">
+                                        { this.props.collection.closed ?
+                                            'Добавьте ссылки, которые вы хотите сохранить только для себя' :
+                                            'Начните добавлять ссылки и ваша подборка появится в общей ленте' }
+                                    </p>
+                                    <div className="collection-detail__add-button" onClick={this.createLink} >
+                                        <Button
+                                            icon={<Icon iconName={'link'} />}
+                                            text="добавить ссылку"
+                                            type="max-width"
+                                        />
+                                    </div>
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
             )
