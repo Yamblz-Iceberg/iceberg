@@ -43,7 +43,6 @@ class HomeFeed extends Component {
         const { tags } = this.props;
         let { collections } = this.props;
         collections = this.hyphenateCardNames(collections);
-
         const feedToRender = [];
 
         let collectionsIndex = 0;
