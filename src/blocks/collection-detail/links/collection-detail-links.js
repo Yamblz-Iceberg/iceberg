@@ -7,6 +7,7 @@ import { LinkCard } from './../../../blocks';
 
 import { actions as modalActions } from '../../../reducers/modal.reducer';
 import { setLinkAsOpened } from '../../../reducers/link.reducer';
+import { changeOpenStatusOfLinkById } from '../../../reducers/collection.reducer';
 
 import './collection-detail-links.scss';
 
@@ -44,16 +45,16 @@ class CollectionDetailLinks extends Component {
             window.open(href);
         }
         this.props.setLinkAsOpened(id, this.props.token);
+        this.props.changeOpenStatusOfLinkById(id);
     }
 
     render() {
         const filteredLinks = this.props.links.filter((link) => {
-            if (this.props.filter !== '') {
-                return link.name.length > 60;
+            if (this.props.filter === 'unread') {
+                return link.opened !== true;
             }
             return link;
         });
-
         return (
             <section className="collection-detail-links">
                 {
@@ -73,6 +74,7 @@ CollectionDetailLinks.propTypes = {
     filter: PropTypes.string,
     showModal: PropTypes.func.isRequired,
     setLinkAsOpened: PropTypes.func.isRequired,
+    changeOpenStatusOfLinkById: PropTypes.func.isRequired,
     token: PropTypes.any.isRequired,
 };
 
@@ -91,4 +93,8 @@ function mapStateToProps(state) {
 export default
 connect(
     mapStateToProps,
-    { ...modalActions, setLinkAsOpened })(withRouter(CollectionDetailLinks));
+    {
+        ...modalActions,
+        setLinkAsOpened,
+        changeOpenStatusOfLinkById,
+    })(withRouter(CollectionDetailLinks));

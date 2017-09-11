@@ -13,6 +13,14 @@ import { putTags } from '../../services/personal-tags.service';
 import './collection-detail.scss';
 
 class CollectionDetail extends Component {
+    static propTypes = {
+        params: PropTypes.object.isRequired,
+        collection: PropTypes.object.isRequired,
+        getCollection: PropTypes.func.isRequired,
+        token: PropTypes.string.isRequired,
+        history: PropTypes.object.isRequired,
+        userData: PropTypes.object.isRequired,
+    };
     constructor(props) {
         super(props);
 
@@ -33,7 +41,7 @@ class CollectionDetail extends Component {
     }
 
     createLink = () => {
-        if (this.props.userData.accType !== 'demo') {
+        if (this.props.userData.accType === 'demo') {
             this.props.history.replace({ pathname: '/create-link' });
         } else {
             localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
@@ -42,7 +50,6 @@ class CollectionDetail extends Component {
     };
 
     shareLink = (title, message) => () => {
-        console.log(title, message);
         socialSharing(title, message);
     };
 
@@ -54,6 +61,12 @@ class CollectionDetail extends Component {
                 id, filter,
             },
         } = this.props;
+
+        const {
+            name,
+            description,
+            links,
+        } = collection;
 
         const tabs = [
             {
@@ -70,63 +83,51 @@ class CollectionDetail extends Component {
 
         return (
             <div className="collection-detail">
-                <CollectionDetailHeader collectionTitle={collection.name} shareLink={this.shareLink(collection.name, collection.description)} />
+                <CollectionDetailHeader
+                    collectionTitle={name}
+                    shareLink={this.shareLink(name, description)}
+                />
                 <CollectionDetailInfo collection={collection} />
-
-                { collection.links.length > 0
+                { links.length > 0
+                    // Когда в подборке есть ссылки
                     ? (
                         <div>
                             <div className="collection-detail-tabs">
                                 <Tabs tabs={tabs} />
                             </div>
                             <CollectionDetailLinks
-                                links={collection.links}
+                                links={links}
                                 filter={filter}
                             />
-                            <div className="collection-detail__add-button" onClick={this.createLink} >
-                                <Button
-                                    icon={<Icon iconName={'link'} />}
-                                    text="добавить ссылку"
-                                    type="max-width"
-                                />
-                            </div>
+                            {/* Показывать кнопку добавления ссылки только автору подборки */}
+                            { collection.author.userId === userData.userId
+                                ? <div className="collection-detail__add-button" onClick={this.createLink} >
+                                    <Button
+                                        icon={<Icon iconName={'link'} />}
+                                        text="добавить ссылку"
+                                        type="max-width"
+                                    />
+                                </div>
+                                : null }
                         </div>
                     )
+                    // Когда в подборке пока нет ссылок (подборка видна только автору)
                     : (
                         <div className="collection-detail__mesage-wrapper">
                             <h3 className="collection-detail__title">Ссылок пока нет</h3>
-                            { collection.author.userId === userData.userId
-                                ? (
-                                    <div>
-                                        <p className="collection-detail__text">
-                                            Поделитесь своей подборкой, и, возможно,
-                                            друзья посоветуют вам чего-то полезного
-                                        </p>
-                                        <div className="collection-detail__add-button" onClick={this.shareLink(collection.name, collection.description)} >
-                                            <Button
-                                                icon={<Icon iconName={'share'} />}
-                                                text="поделиться"
-                                                type="max-width"
-                                            />
-                                        </div>
-                                    </div>
-                                )
-                                : (
-                                    <div>
-                                        <p className="collection-detail__text">
-                                            Добавьте ссылку сами или поделитесь с
-                                            друзьями и они посоветуют что-то полезное
-                                        </p>
-                                        <div className="collection-detail__add-button" onClick={this.createLink} >
-                                            <Button
-                                                icon={<Icon iconName={'link'} />}
-                                                text="добавить ссылку"
-                                                type="max-width"
-                                            />
-                                        </div>
-                                    </div>
-                                )
-                            }
+                            <div>
+                                {/* Текст для открытой подборки, для приватной будет другой */}
+                                <p className="collection-detail__text">
+                                    Начните добавлять ссылки и ваша подборка появится в общей ленте
+                                </p>
+                                <div className="collection-detail__add-button" onClick={this.createLink} >
+                                    <Button
+                                        icon={<Icon iconName={'link'} />}
+                                        text="добавить ссылку"
+                                        type="max-width"
+                                    />
+                                </div>
+                            </div>
                         </div>
                     )
                 }
@@ -134,15 +135,6 @@ class CollectionDetail extends Component {
         );
     }
 }
-
-CollectionDetail.propTypes = {
-    params: PropTypes.object.isRequired,
-    collection: PropTypes.object.isRequired,
-    getCollection: PropTypes.func.isRequired,
-    token: PropTypes.string.isRequired,
-    history: PropTypes.object.isRequired,
-    userData: PropTypes.object.isRequired,
-};
 
 export default connect(
     state => ({
