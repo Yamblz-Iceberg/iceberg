@@ -60,11 +60,13 @@ export const authDemoUser = (registerFn, callback) => {
 };
 
 export const socialSharing = (subject, message) => {
+    if (typeof window.plugins.socialSharing === 'undefined') return;
+
     const options = {
         subject,
         message,
         url: 'https://yandex.ru',
-        chooserTitle: 'Pick an app',
+        chooserTitle: subject,
     };
 
     window.plugins.socialsharing.shareWithOptions(options);
