@@ -6,6 +6,7 @@ import _ from 'lodash';
 
 import { Icon, ContextMenu } from '../../../blocks';
 import { clearCollection } from '../../../reducers/collection.reducer';
+import { socialSharing } from '../../../utils/shared-functions';
 
 import './collection-detail-header.scss';
 
@@ -13,6 +14,7 @@ class CollectionDetailHeader extends Component {
     static propTypes = {
         collectionTitle: PropTypes.string.isRequired,
         history: PropTypes.any.isRequired,
+        shareLink: PropTypes.func.isRequired,
         clearCollection: PropTypes.func.isRequired,
     };
 
@@ -41,6 +43,10 @@ class CollectionDetailHeader extends Component {
         }
     };
 
+    shareLink = () => {
+        socialSharing();
+    };
+
     handleGoBack = () => {
         this.props.history.goBack();
         this.props.clearCollection();
@@ -56,7 +62,7 @@ class CollectionDetailHeader extends Component {
             {
                 title: 'Поделиться',
                 id: 0,
-                onClick: () => {},
+                onClick: this.props.shareLink,
                 icon: <Icon iconName={'share'} iconColor={'#777'} />,
             },
             {

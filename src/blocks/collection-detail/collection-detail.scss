@@ -22,6 +22,11 @@
         color: gray;
         text-align: center;
     }
+    &__loader {
+        display: flex;
+        justify-content: center;
+        padding-top: 50px;
+    }
 }
 
 .collection-detail-tabs {

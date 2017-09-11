@@ -6,7 +6,7 @@ import './creating-successfully.scss';
 
 import { CollectionCard, Button, Icon } from '../../blocks';
 import CreatingSuccessfullyHeader from './header/creating-successfully-header';
-import { handleClickToCollection } from '../../utils/shared-functions';
+import { handleClickToCollection, socialSharing } from '../../utils/shared-functions';
 
 class CreatingSuccessfully extends Component {
     componentWillMount() {
@@ -50,6 +50,10 @@ class CreatingSuccessfully extends Component {
         handleClickToCollection(e, cardId, this.props.history);
     }
 
+    shareLink = (title, message) => {
+        socialSharing(title, message);
+    }
+
     render() {
         const { collection } = this.state;
 
@@ -64,7 +68,7 @@ class CreatingSuccessfully extends Component {
                 </div>
                 <div className="creating-successfully__button-wrapper">
                     <Button
-                        onClick={this.handleClick}
+                        onClick={this.shareLink(collection.name, collection.description)}
                         icon={<Icon iconName={'share'} />}
                         text="Поделиться"
                     />

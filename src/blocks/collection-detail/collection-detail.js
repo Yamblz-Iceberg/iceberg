@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Tabs, CollectionDetailLinks, Button, Icon } from '../';
+import { Tabs, CollectionDetailLinks, Button, Icon, Preloader } from '../';
 import CollectionDetailInfo from './info/collection-detail-info';
 import CollectionDetailHeader from './header/collection-detail-header';
 import { getCollection } from '../../reducers/collection.reducer';
+import { hideLoader, showLoader } from '../../reducers/loader.reducer';
 
+import { socialSharing } from '../../utils/shared-functions';
 import { putTags } from '../../services/personal-tags.service';
 
 import './collection-detail.scss';
@@ -19,6 +21,9 @@ class CollectionDetail extends Component {
         token: PropTypes.string.isRequired,
         history: PropTypes.object.isRequired,
         userData: PropTypes.object.isRequired,
+        loader: PropTypes.bool.isRequired,
+        showLoader: PropTypes.func.isRequired,
+        hideLoader: PropTypes.func.isRequired,
     };
     constructor(props) {
         super(props);
@@ -26,6 +31,7 @@ class CollectionDetail extends Component {
         this.state = {
             showAllText: false,
         };
+        this.props.showLoader();
     }
 
     componentDidMount() {
@@ -33,9 +39,14 @@ class CollectionDetail extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.collection.tags.length !== 0) {
+        if (nextProps.collection.tags.length !== 0
+            && this.props.collection.tags !== nextProps.collection.tags) {
             const tags = nextProps.collection.tags.map(tag => (tag._id));
             putTags(tags, this.props.token);
+        }
+        // Скрываем лоадер, когда получены данные о коллекции детально
+        if (this.props.collection.name !== nextProps.collection.name || nextProps.collection.name !== '') {
+            this.props.hideLoader();
         }
     }
 
@@ -48,6 +59,43 @@ class CollectionDetail extends Component {
         }
     };
 
+    emptyCollection = () => (
+        // Проверяем, что данные о коллекции детально получены
+        // (лоадер скрывает при получении данных)
+        this.props.loader
+            ? <div className="collection-detail__loader">
+                <Preloader />
+            </div>
+            : (
+                <div className="collection-detail__mesage-wrapper">
+                    <h3 className="collection-detail__title">Ссылок пока нет</h3>
+                    <div>
+                        { this.props.collection.author.userId === this.props.userData.userId &&
+                            (
+                                <div>
+                                    <p className="collection-detail__text">
+                                        { this.props.collection.closed ?
+                                            'Добавьте ссылки, которые вы хотите сохранить только для себя' :
+                                            'Начните добавлять ссылки и ваша подборка появится в общей ленте' }
+                                    </p>
+                                    <div className="collection-detail__add-button" onClick={this.createLink} >
+                                        <Button
+                                            icon={<Icon iconName={'link'} />}
+                                            text="добавить ссылку"
+                                            type="max-width"
+                                        />
+                                    </div>
+                                </div>
+                            )
+                        }
+                    </div>
+                </div>
+            )
+    );
+    shareLink = (title, message) => () => {
+        socialSharing(title, message);
+    };
+
     render() {
         const {
             collection,
@@ -56,6 +104,12 @@ class CollectionDetail extends Component {
                 id, filter,
             },
         } = this.props;
+
+        const {
+            name,
+            description,
+            links,
+        } = collection;
 
         const tabs = [
             {
@@ -72,9 +126,12 @@ class CollectionDetail extends Component {
 
         return (
             <div className="collection-detail">
-                <CollectionDetailHeader collectionTitle={collection.name} />
+                <CollectionDetailHeader
+                    collectionTitle={name}
+                    shareLink={this.shareLink(name, description)}
+                />
                 <CollectionDetailInfo collection={collection} />
-                { collection.links.length > 0
+                { links.length > 0
                     // Когда в подборке есть ссылки
                     ? (
                         <div>
@@ -82,7 +139,7 @@ class CollectionDetail extends Component {
                                 <Tabs tabs={tabs} />
                             </div>
                             <CollectionDetailLinks
-                                links={collection.links}
+                                links={links}
                                 filter={filter}
                             />
                             {/* Показывать кнопку добавления ссылки только автору подборки */}
@@ -98,32 +155,7 @@ class CollectionDetail extends Component {
                         </div>
                     )
                     // Когда в подборке пока нет ссылок (подборка видна только автору)
-                    : (
-                        <div className="collection-detail__mesage-wrapper">
-                            <h3 className="collection-detail__title">Ссылок пока нет</h3>
-                            <div>
-                                {/* Текст для открытой подборки и только для автора подборки */}
-                                { collection.author.userId === userData.userId &&
-                                (
-                                    <div>
-                                        <p className="collection-detail__text">
-                                            { collection.closed ?
-                                                'Добавьте ссылки, которые вы хотите сохранить только для себя' :
-                                                'Начните добавлять ссылки и ваша подборка появится в общей ленте' }
-                                        </p>
-                                        <div className="collection-detail__add-button" onClick={this.createLink} >
-                                            <Button
-                                                icon={<Icon iconName={'link'} />}
-                                                text="добавить ссылку"
-                                                type="max-width"
-                                            />
-                                        </div>
-                                    </div>
-                                )
-                                }
-                            </div>
-                        </div>
-                    )
+                    : this.emptyCollection()
                 }
             </div>
         );
@@ -135,6 +167,7 @@ export default connect(
         collection: state.collection,
         token: state.authorization.access_token,
         userData: state.user.data,
+        loader: state.loader,
     }),
-    { getCollection },
+    { getCollection, showLoader, hideLoader },
 )(withRouter(CollectionDetail));

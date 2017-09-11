@@ -12,6 +12,27 @@ import './card-footer.scss';
 import { mainYellow } from './../../variables.scss';
 
 class CardFooter extends Component {
+    static propTypes = {
+        idCard: PropTypes.string,
+        userId: PropTypes.string,
+        avatarOptions: PropTypes.object.isRequired,
+        userName: PropTypes.string.isRequired,
+        linksCount: PropTypes.number.isRequired,
+        savedTimesCount: PropTypes.number.isRequired,
+        saved: PropTypes.bool,
+        token: PropTypes.any.isRequired,
+        setCollectionAsSaved: PropTypes.func.isRequired,
+        deleteCollectionFromSaved: PropTypes.func.isRequired,
+        changeSavedStatusOfCardById: PropTypes.func.isRequired,
+        userData: PropTypes.object.isRequired,
+        history: PropTypes.any.isRequired,
+    };
+
+    static defaultProps = {
+        idCard: null,
+        saved: null,
+        userId: null,
+    };
     putToSaved = (e) => {
         if (typeof this.props.userData.accType !== 'undefined' && this.props.userData.accType !== 'demo') {
             this.props.setCollectionAsSaved(this.props.idCard, this.props.token);
@@ -32,7 +53,7 @@ class CardFooter extends Component {
     goToUserProfile = (e, id) => {
         this.props.history.push(`/user/${id}`);
         e.stopPropagation();
-    }
+    };
 
     render() {
         const props = this.props;
@@ -65,28 +86,6 @@ class CardFooter extends Component {
         );
     }
 }
-
-CardFooter.propTypes = {
-    idCard: PropTypes.string,
-    userId: PropTypes.string,
-    avatarOptions: PropTypes.object.isRequired,
-    userName: PropTypes.string.isRequired,
-    linksCount: PropTypes.number.isRequired,
-    savedTimesCount: PropTypes.number.isRequired,
-    saved: PropTypes.bool,
-    token: PropTypes.any.isRequired,
-    setCollectionAsSaved: PropTypes.func.isRequired,
-    deleteCollectionFromSaved: PropTypes.func.isRequired,
-    changeSavedStatusOfCardById: PropTypes.func.isRequired,
-    userData: PropTypes.object.isRequired,
-    history: PropTypes.any.isRequired,
-};
-
-CardFooter.defaultProps = {
-    idCard: null,
-    saved: null,
-    userId: null,
-};
 
 export default connect(state => ({
     collection: state.collection,
