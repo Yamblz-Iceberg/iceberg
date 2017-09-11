@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Icon, Avatar, ContextMenu } from '../../blocks';
-import { changeStatusLikeOfLink, changeStatusSavedOfLink } from './../../reducers/collection.reducer';
+import { changeStatusLikeOfLink, changeStatusSavedOfLink, deleteLinkFromCollection } from './../../reducers/collection.reducer';
 import { removeLink } from './../../reducers/link.reducer';
 
 import { actions as modalActions } from './../../reducers/modal.reducer';
@@ -35,6 +35,7 @@ class LinkCard extends Component {
         showModal: PropTypes.func.isRequired,
         setLinkAsOpened: PropTypes.func.isRequired,
         changeOpenStatusOfLinkById: PropTypes.func.isRequired,
+        deleteLinkFromCollection: PropTypes.func.isRequired,
     };
 
     static defaultProps = {
@@ -121,6 +122,11 @@ class LinkCard extends Component {
 
     isAuthor = () => this.props.data.userAdded.userId === this.props.userData.userId;
 
+    removeLink = (id) => {
+        this.props.deleteLinkFromCollection(id);
+        this.props.removeLink(id, this.props.token);
+    }
+
     render() {
         const { data, button, isTransparent, editIcon } = this.props;
         const cardStyles = {
@@ -132,7 +138,7 @@ class LinkCard extends Component {
             {
                 title: 'Удалить ссылку',
                 id: 0,
-                onClick: (e) => { e.stopPropagation(); this.props.removeLink(data._id); },
+                onClick: () => { this.removeLink(this.props.data._id); },
                 icon: <Icon iconName={'close'} iconColor={'#777'} />,
             },
         ];
@@ -157,7 +163,7 @@ class LinkCard extends Component {
                     </div>
                 </div>
                 <div className="link-card__context-menu">
-                    { this.isAuthor() &&
+                    { this.isAuthor() && !isTransparent &&
                         <ContextMenu iconColor={'#fff'} items={contextMenuItems} /> }
                 </div>
             </div>
@@ -222,4 +228,5 @@ export default connect(state => ({
     ...modalActions,
     setLinkAsOpened,
     changeOpenStatusOfLinkById,
+    deleteLinkFromCollection,
 })(withRouter(LinkCard));

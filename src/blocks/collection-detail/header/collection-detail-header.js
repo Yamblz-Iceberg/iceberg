@@ -19,6 +19,7 @@ class CollectionDetailHeader extends Component {
         clearCollection: PropTypes.func.isRequired,
         removeCollection: PropTypes.func.isRequired,
         isAuthor: PropTypes.bool.isRequired,
+        token: PropTypes.string.isRequired,
     };
 
     static defaultProps = {
@@ -65,7 +66,7 @@ class CollectionDetailHeader extends Component {
     };
 
     removeCollection = (id) => {
-        this.props.removeCollection(id);
+        this.props.removeCollection(id, this.props.token);
         this.handleGoBack();
     }
 
@@ -96,7 +97,9 @@ class CollectionDetailHeader extends Component {
             contextMenuItems.push({
                 title: 'Удалить подборку',
                 id: 3,
-                onClick: () => { this.removeCollection(this.props.collectionId); },
+                onClick: () => {
+                    this.removeCollection(this.props.collectionId);
+                },
                 icon: <Icon iconName={'close'} iconColor={'#777'} />,
             });
         }
@@ -127,4 +130,6 @@ class CollectionDetailHeader extends Component {
 }
 
 export default
-connect(null, { clearCollection, removeCollection })(withRouter(CollectionDetailHeader));
+connect(state => ({
+    token: state.authorization.access_token,
+}), { clearCollection, removeCollection })(withRouter(CollectionDetailHeader));
