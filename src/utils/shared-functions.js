@@ -59,15 +59,13 @@ export const authDemoUser = (registerFn, callback) => {
     registerFn(userId, userPassword, firstName, lastName, callback);
 };
 
-export const socialSharing = (title) => {
-    if (typeof window.cordova === 'undefined') return;
-
+export const socialSharing = (subject, message) => {
     const options = {
-        message: title,
-        subject: 'Test subject',
+        subject,
+        message,
         url: 'https://yandex.ru',
         chooserTitle: 'Pick an app',
     };
 
-    window.plugins.socialSharing.shareWithOptions(options);
+    window.plugins.socialsharing.shareWithOptions(options);
 };
