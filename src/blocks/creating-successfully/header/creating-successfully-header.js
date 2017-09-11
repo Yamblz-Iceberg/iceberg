@@ -10,7 +10,14 @@ import { clearCollection } from '../../../reducers/create-collection.reducer';
 class CreatingSuccessfullyHeader extends Component {
     handleClickClose = () => {
         this.props.clearCollection();
-        this.props.history.push('/feed/time');
+        /* Если создаем закрытую подборку, то переходим в профиль,
+        * иначе в ленту "Новое"
+        */
+        if (this.props.closed) {
+            this.props.history.push('/profile');
+        } else {
+            this.props.history.push('/feed/time');
+        }
     }
 
     render() {
@@ -28,6 +35,7 @@ class CreatingSuccessfullyHeader extends Component {
 CreatingSuccessfullyHeader.propTypes = {
     history: PropTypes.object.isRequired,
     clearCollection: PropTypes.func.isRequired,
+    closed: PropTypes.bool.isRequired,
 };
 
 export default connect(

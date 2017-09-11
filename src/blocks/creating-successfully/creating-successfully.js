@@ -55,7 +55,7 @@ class CreatingSuccessfully extends Component {
 
         return (
             <div className="creating-successfully">
-                <CreatingSuccessfullyHeader />
+                <CreatingSuccessfullyHeader closed={collection.closed} />
                 <div
                     className="creating-successfully__collection-card-wrapper"
                     onClick={this.handleClick(collection._id)}

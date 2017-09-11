@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import { Icon, ContextMenu } from '../../../blocks';
+import { clearCollection } from '../../../reducers/collection.reducer';
 
 import './collection-detail-header.scss';
 
 class CollectionDetailHeader extends Component {
+    static propTypes = {
+        collectionTitle: PropTypes.string.isRequired,
+        history: PropTypes.any.isRequired,
+        clearCollection: PropTypes.func.isRequired,
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -35,10 +43,12 @@ class CollectionDetailHeader extends Component {
 
     handleGoBack = () => {
         this.props.history.goBack();
+        this.props.clearCollection();
     };
 
     handleGoHome = () => {
         this.props.history.push({ pathname: '/feed' });
+        this.props.clearCollection();
     };
 
     render() {
@@ -95,9 +105,4 @@ class CollectionDetailHeader extends Component {
     }
 }
 
-CollectionDetailHeader.propTypes = {
-    collectionTitle: PropTypes.string.isRequired,
-    history: PropTypes.any.isRequired,
-};
-
-export default withRouter(CollectionDetailHeader);
+export default connect(null, { clearCollection })(withRouter(CollectionDetailHeader));

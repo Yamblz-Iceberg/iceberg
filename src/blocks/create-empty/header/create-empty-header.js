@@ -23,6 +23,7 @@ class CreateEmptyHeader extends Component {
         title: PropTypes.string,
         photo: PropTypes.string,
         color: PropTypes.string,
+        closed: PropTypes.bool,
         description: PropTypes.string,
         tags: PropTypes.array,
         token: PropTypes.string.isRequired,
@@ -37,6 +38,7 @@ class CreateEmptyHeader extends Component {
         tags: [],
         photo: '',
         color: cardBlue,
+        closed: false,
     };
 
     constructor() {
@@ -86,7 +88,6 @@ class CreateEmptyHeader extends Component {
             },
             tags,
         } = this.props;
-
         const collection = {
             ...data.collection,
             tags,
@@ -96,7 +97,6 @@ class CreateEmptyHeader extends Component {
                 lastName,
             },
         };
-
         this.props.history.push({
             pathname: '/creating-successfully',
             state: { collection },
@@ -117,9 +117,9 @@ class CreateEmptyHeader extends Component {
                 color: hexToRGB(this.props.color || cardBlue),
                 tags: this.props.tags.map(tag => tag.id),
             };
-
             if (this.props.photo) { body.photo = this.props.photo; }
             if (this.props.description) { body.description = this.props.description; }
+            if (this.props.closed) { body.closed = this.props.closed; }
             this.props.createCollection(body, this.props.token, this.changeRoute);
         }
     };
@@ -145,6 +145,7 @@ export default connect(
         user: state.user.data,
         title: state.createCollection.title,
         description: state.createCollection.description,
+        closed: state.createCollection.closed,
         tags: state.createCollection.tags,
         token: state.authorization.access_token,
         color: state.createCollection.color,
