@@ -1,24 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Icon } from '../../../blocks';
+import { Icon, ContextMenu } from '../../../blocks';
 
 import './create-description-header.scss';
 
 class CreateDescriptionHeader extends Component {
-    constructor() {
-        super();
-        this.state = {
-            menuOpened: false,
-        };
-    }
-
-    toggleMenu = () => {
-        this.setState({
-            menuOpened: !this.state.menuOpened,
-        });
-    };
-
     clearTextArea = () => {
         this.toggleMenu();
         this.props.callback();
@@ -29,6 +16,15 @@ class CreateDescriptionHeader extends Component {
     };
 
     render() {
+        const contextMenuItems = [
+            {
+                title: 'Очистить',
+                id: 0,
+                onClick: this.clearTextArea,
+                icon: null,
+            },
+        ];
+
         return (
             <header className="create-description-header">
                 <span
@@ -38,18 +34,9 @@ class CreateDescriptionHeader extends Component {
                     <Icon iconName={'arrow-details'} />
                 </span>
                 <h4 className="create-description-header__title">Описание</h4>
-                <span onClick={this.toggleMenu}>
-                    <Icon iconName={'more-vert'} />
-                </span>
-                {this.state.menuOpened &&
-                    (<ul className="create-description-header__dropdown dropdown">
-                        <li
-                            role="menuitem"
-                            tabIndex="0"
-                            className="dropdown__item"
-                            onClick={this.clearTextArea}
-                        >Очистить</li>
-                    </ul>)}
+                <div className="create-description-header__menu-wrapper">
+                    <ContextMenu iconColor="#000" items={contextMenuItems} />
+                </div>
             </header>
         );
     }
