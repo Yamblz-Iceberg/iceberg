@@ -85,7 +85,8 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-export const addImage = data => ({ type: ADD_IMAGE, color: data.color, photo: data.photo });
+export const addImage = data => dispatch =>
+    dispatch({ type: ADD_IMAGE, color: data.color, photo: data.photo });
 
 export const createCollection = (data, token, callback) => (
     (dispatch) => {
