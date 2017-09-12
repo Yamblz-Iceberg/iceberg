@@ -31,7 +31,7 @@ class CreateDescriptionHeader extends Component {
                     className="create-description-header__back"
                     onClick={this.goBack}
                 >
-                    <Icon iconName={'arrow-details'} />
+                    <Icon iconName={'arrow-back'} />
                 </span>
                 <h4 className="create-description-header__title">Описание</h4>
                 <div className="create-description-header__menu-wrapper">
