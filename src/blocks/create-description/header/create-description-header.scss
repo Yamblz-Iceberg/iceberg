@@ -1,12 +1,11 @@
 .create-description-header {
+    position: fixed;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
     padding: 0 20px;
     height: 56px;
     box-shadow: 0 0 13px 0 rgba(0,0,0, .3);
-    position: fixed;
     width: 100%;
     z-index: 1000;
     &__back {

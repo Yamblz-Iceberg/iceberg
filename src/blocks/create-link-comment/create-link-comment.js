@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { LimitedTextarea } from '../../../blocks';
-import CreateLinkHeader from '../header/create-link-header';
-import { addComment } from '../../../reducers/link.reducer';
-
+import CreateLinkCommentHeader from './__header/create-link-comment__header';
+import { LimitedTextarea } from '../index';
+import { addComment } from '../../reducers/link.reducer';
 import './create-link-comment.scss';
 
 class CreateLinkComment extends Component {
+    static propTypes = {
+        addComment: PropTypes.func.isRequired,
+        description: PropTypes.string,
+    };
+    static defaultProps = {
+        description: '',
+    };
     constructor() {
         super();
         this.state = {
@@ -32,18 +38,15 @@ class CreateLinkComment extends Component {
     };
 
     render() {
-        const showAddButton = false;
         return (
             <main className="add-comment">
-                <CreateLinkHeader
+                <CreateLinkCommentHeader
                     callback={this.resetTextContent}
                     title="Комментарий"
-                    isLinkConstructor={false}
-                    showAddButton={showAddButton}
                 />
                 <div className="add-comment__limited-textarea">
                     <LimitedTextarea
-                        max={300}
+                        max={100}
                         handleChange={this.handleTextContentChange}
                         resetTextContent={this.state.resetText}
                         initialText={this.props.description}
@@ -53,15 +56,6 @@ class CreateLinkComment extends Component {
         );
     }
 }
-
-CreateLinkComment.propTypes = {
-    addComment: PropTypes.func.isRequired,
-    description: PropTypes.string,
-};
-
-CreateLinkComment.defaultProps = {
-    description: '',
-};
 
 export default connect(
     state => ({ description: state.link.description }),

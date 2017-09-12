@@ -1,0 +1,33 @@
+.create-link-comment {
+    &__header {
+        position: fixed;
+        width: 100%;
+        height: 56px;
+        z-index: 1000;
+        box-shadow: 0 0 13px 0 rgba(0,0,0, .3);
+    }
+
+    &__header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        height: 100%;
+    }
+
+    &__header-block {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    &__header-title {
+        display: block;
+        font-weight: 500;
+        margin-left: 25px;
+        max-width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+}
