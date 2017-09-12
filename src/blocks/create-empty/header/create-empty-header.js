@@ -117,7 +117,7 @@ class CreateEmptyHeader extends Component {
             const body = {
                 name: this.props.title,
                 color: hexToRGB(this.props.color || cardBlue),
-                tags: this.props.tags.map(tag => tag.id),
+                tags: this.props.tags.map(tag => tag.id).reverse(),
             };
             if (this.props.photo) { body.photo = this.props.photo; }
             if (this.props.description) { body.description = this.props.description; }

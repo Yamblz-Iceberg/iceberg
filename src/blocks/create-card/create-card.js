@@ -41,46 +41,14 @@ class CreateCard extends Component {
         super();
         this.state = {
             currentHashTagText: '',
-            tags: [],
             canCreateTag: false,
-            cardStyles: {},
             imageStatus: 'none',
         };
-    }
-
-    componentWillMount = () => {
-        this.setHashTags(this.props.tags);
-        this.setCardStyles(this.props.color, this.props.photo);
-    }
-
-    componentWillReceiveProps = (nextProps) => {
-        if (this.props.tags !== nextProps.tags) {
-            // Переворачиваю теги, чтобы они отображались в нужном порядке
-            this.setHashTags(nextProps.tags.reverse());
-        }
-        if (this.props.color !== nextProps.color || this.props.photo !== nextProps.photo) {
-            this.setCardStyles(nextProps.color, nextProps.photo);
-        }
-    }
-
-    setCardStyles = (color, photo) => {
-        this.setState({
-            cardStyles: {
-                backgroundColor: color,
-                backgroundImage: `url(${photo})`,
-            },
-        });
     }
 
     setTagText = (text) => {
         this.setState({
             currentHashTagText: text,
-        });
-    }
-
-    setHashTags = (tags) => {
-        this.setState({
-            tags,
         });
     }
 
@@ -188,9 +156,10 @@ class CreateCard extends Component {
 
         const {
             currentHashTagText,
-            tags,
             canCreateTag,
         } = this.state;
+
+        const tags = this.props.tags;
 
         const avatarOptions = {
             size: '25',
@@ -209,37 +178,42 @@ class CreateCard extends Component {
             break;
         }
 
+        const cardStyles = {
+            backgroundColor: this.props.color,
+            backgroundImage: `url(${this.props.photo})`,
+        };
+
         return (
-            <div className="create-card" style={this.state.cardStyles}>
-                <div>
-                    <div className="create-card__hashtags-wrapper">
-                        { tags.length > 0 && tags.map(hashTag => (
-                            <CreateHashTag
-                                initText={initText}
-                                text={hashTag.name}
-                                key={hashTag.id}
-                                tagChangeCallback={event => this.handleEditTag(hashTag.id, event)}
-                                tagAddCallback={this.handleAddTag}
-                                tagDeleteCallback={() => this.handleDeleteTag(hashTag.id)}
-                            />))
-                        }
-                        { ((canCreateTag && tags.length < 4) || tags.length === 0) && (
-                            <CreateHashTag
-                                initText={initText}
-                                text={currentHashTagText}
-                                tagChangeCallback={this.handleHashTagChange}
-                                tagAddCallback={this.handleAddTag}
-                            />)
-                        }
-                        { (!canCreateTag && tags.length > 0 && tags.length < 4) && (
-                            <button
-                                className="create-card__add-button"
-                                onClick={this.handleAddButtonClick}
-                            >
-                                <Icon iconName="plus" iconColor="#fff" />
-                            </button>
-                        ) }
-                    </div>
+            <div className="create-card" style={cardStyles}>
+                <div className="create-card__hashtags-wrapper">
+                    { tags.length > 0 && tags.map(hashTag => (
+                        <CreateHashTag
+                            initText={initText}
+                            text={hashTag.name}
+                            key={hashTag.id}
+                            tagChangeCallback={event => this.handleEditTag(hashTag.id, event)}
+                            tagAddCallback={this.handleAddTag}
+                            tagDeleteCallback={() => this.handleDeleteTag(hashTag.id)}
+                        />))
+                    }
+                    { ((canCreateTag && tags.length < 4) || tags.length === 0) && (
+                        <CreateHashTag
+                            initText={initText}
+                            text={currentHashTagText}
+                            tagChangeCallback={this.handleHashTagChange}
+                            tagAddCallback={this.handleAddTag}
+                        />)
+                    }
+                    { (!canCreateTag && tags.length > 0 && tags.length < 4) && (
+                        <button
+                            className="create-card__add-button"
+                            onClick={this.handleAddButtonClick}
+                        >
+                            <Icon iconName="plus" iconColor="#fff" />
+                        </button>
+                    ) }
+                </div>
+                <div className="create-card__input-wrap">
                     <textarea
                         className="create-card__input"
                         onChange={this.handleTitleChange}
@@ -248,29 +222,31 @@ class CreateCard extends Component {
                         maxLength="50"
                         placeholder="Введите название темы"
                     />
-                    {
-                        window.cordova ? (
-                            <div className="create-card__upload-photo-container" onClick={this.state.imageStatus === 'uploading' ? () => {} : this.handleUploadPicture}>
-                                <div className="create-card__upload-photo-wrap">{ uploaderImg }</div>
-                            </div>
-                        ) :
-                            (
-                                <div className="create-card__upload-photo-container">
-                                    <Icon iconName="picture" iconColor="#fff" iconWidth="24" iconHeight="24" />
-                                    <p className="create-card__upload-photo-title">Недоступно в браузере</p>
-                                </div>
-                            )
-                    }
                 </div>
+                {
+                    window.cordova ? (
+                        <div className="create-card__upload-photo-container" onClick={this.state.imageStatus === 'uploading' ? () => {} : this.handleUploadPicture}>
+                            <div className="create-card__upload-photo-wrap">{ uploaderImg }</div>
+                        </div>
+                    ) :
+                        (
+                            <div className="create-card__upload-photo-container">
+                                <Icon iconName="picture" iconColor="#fff" iconWidth="24" iconHeight="24" />
+                                <p className="create-card__upload-photo-title">Недоступно в браузере</p>
+                            </div>
+                        )
+                }
 
                 <div className="create-card__footer">
                     <CardFooter
+                        isCreatingCard
                         avatarOptions={avatarOptions}
                         userName={userName}
                         linksCount={0}
                         savedTimesCount={0}
                     />
                 </div>
+                { this.props.photo ? <div className="create-card__overlay" /> : null }
             </div>
         );
     }
