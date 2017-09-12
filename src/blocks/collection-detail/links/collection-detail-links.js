@@ -34,8 +34,8 @@ class CollectionDetailLinks extends Component {
             <section className="collection-detail-links">
                 {
                     filteredLinks.map(link => (
-                        <div className="collection-detail-links__item">
-                            <LinkCard data={{ ...link }} key={link._id} />
+                        <div className="collection-detail-links__item" key={link._id}>
+                            <LinkCard data={{ ...link }} />
                         </div>
                     ))
                 }

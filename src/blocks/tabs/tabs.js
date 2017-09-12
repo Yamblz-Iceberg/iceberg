@@ -36,12 +36,10 @@ class Tabs extends Component {
         if (typeof this.activeListItem !== 'undefined') {
             const {
                 offsetLeft,
-                offsetWidth,
             } = this.activeListItem;
 
             this.underline.style.cssText = `
                 left:${offsetLeft}px;
-                width:${offsetWidth}px;
             `;
         }
     }
@@ -59,7 +57,7 @@ class Tabs extends Component {
                     { tabs.length > 0 && tabs.map((tab) => {
                         const isItemActive = history.location.pathname === tab.linkTo;
                         const itemProps = {
-                            className: `tab__item ${isItemActive ? 'tabs__item--active' : ''}`,
+                            className: `tabs__item ${isItemActive ? 'tabs__item--active' : ''}`,
                             key: `${tab.id}`,
                             onClick: tab.onClick,
                             ref: isItemActive ? this.refItemListActive : null,
