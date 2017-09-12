@@ -5,6 +5,14 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+
+    &__ico {
+        justify-content: center;
+        display: flex;
+        flex-shrink: 0;
+        min-width: 20px;
+    }
+
     &__title {
         padding: 0;
         margin: 0;
