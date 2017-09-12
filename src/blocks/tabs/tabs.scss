@@ -3,6 +3,7 @@
 .tabs {
     &__item {
         display: inline-block;
+        width: 50%;
         &:hover {
             text-decoration: none;
         }
@@ -44,6 +45,6 @@
         width: 50%;
         height: 3px;
         background-color: $main-yellow;
-        transition: left .5s, width .5s;
+        transition: left .5s;
     }
 }
