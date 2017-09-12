@@ -1,12 +1,30 @@
-import { getCollectionFetch, setCollectionAsSavedFetch, deleteCollectionFromSavedFetch } from '../services/collection.service';
-import { changeStatusLikeOfLinkFetch, setLinkAsSavedFetch, deleteLinkFromeSavedFetch } from './../services/link.service';
+import {
+    getCollectionFetch,
+    setCollectionAsSavedFetch,
+    deleteCollectionFromSavedFetch,
+    removeCollectionFetch,
+} from '../services/collection.service';
+
+import {
+    changeStatusLikeOfLinkFetch,
+    setLinkAsSavedFetch,
+    deleteLinkFromeSavedFetch,
+} from './../services/link.service';
+
+import {
+    updateLikeStatusOfLinkInList,
+    updateSavedStatusOfLinkInList,
+    setLinkAsOpenInList,
+} from './../utils/shared-functions';
 
 const FETCH_COLLECTION = 'FETCH_COLLECTION';
 const CLEAR_COLLECTION = 'CLEAR_COLLECTION';
+const REMOVE_COLLECTION = 'REMOVE_COLLECTION';
 const CHANGE_SAVED_STATUS = 'CHANGE_SAVED_STATUS';
 const CHANGE_LIKED_STATUS_BY_ID = 'CHANGE_LIKED_STATUS_BY_ID';
 const CHANGE_LINK_SAVED_STATUS_BY_ID = 'CHANGE_LINK_SAVED_STATUS_BY_ID';
 const CHANGE_LINK_OPENED_STATUS_BY_ID = 'CHANGE_LINK_OPENED_STATUS_BY_ID';
+const REMOVE_FROM_COLLECTION = 'REMOVE_FROM_COLLECTION';
 
 const initialState = {
     description: '',
@@ -23,6 +41,7 @@ const initialState = {
     saved: false,
 };
 
+/* actions */
 const loadCollection = collection => ({ type: FETCH_COLLECTION, payload: collection });
 const changeSavedStatus = status => ({ type: CHANGE_SAVED_STATUS, payload: status });
 const changeLikedStatusOfLinkById =
@@ -32,60 +51,39 @@ const changeSavedStatusOfLinkById =
 const changeOpenStatusOfLinkById =
     id => ({ type: CHANGE_LINK_OPENED_STATUS_BY_ID, id });
 const clearCollection = () => ({ type: CLEAR_COLLECTION });
+const removeCollectionAction = () => ({ type: REMOVE_COLLECTION });
+const deleteLinkFromCollection = id => ({ type: REMOVE_FROM_COLLECTION, id });
 
+/* reducer */
 const reducer = (state = initialState, action) => {
     switch (action.type) {
     case FETCH_COLLECTION:
         return { ...state, ...action.payload };
+    case REMOVE_COLLECTION:
+        return initialState;
     case CHANGE_SAVED_STATUS:
         return { ...state,
             saved: action.payload,
             savedTimesCount: state.savedTimesCount + (action.payload ? 1 : -1),
         };
     case CHANGE_LIKED_STATUS_BY_ID: {
-        const update = (items, id, status) => {
-            const editedLinksList = [].concat(items);
-            const editindLink = editedLinksList[items.findIndex(x => x._id === id)];
-            editindLink.liked = status;
-            if (status) {
-                editindLink.likes += 1;
-            } else {
-                editindLink.likes -= 1;
-            }
-            return editedLinksList;
-        };
-
         return { ...state,
-            links: update([...state.links], action.id, action.status),
+            links: updateLikeStatusOfLinkInList([...state.links], action.id, action.status),
         };
     }
     case CHANGE_LINK_SAVED_STATUS_BY_ID: {
-        const update = (items, id, status) => {
-            const editedLinksList = [].concat(items);
-            const editindLink = editedLinksList[items.findIndex(x => x._id === id)];
-            editindLink.saved = status;
-            if (status) {
-                editindLink.savedTimesCount += 1;
-            } else {
-                editindLink.savedTimesCount -= 1;
-            }
-            return editedLinksList;
-        };
-
         return { ...state,
-            links: update([...state.links], action.id, action.status),
+            links: updateSavedStatusOfLinkInList([...state.links], action.id, action.status),
         };
     }
     case CHANGE_LINK_OPENED_STATUS_BY_ID: {
-        const update = (items, id) => {
-            const editedLinksList = [].concat(items);
-            const editindLink = editedLinksList[items.findIndex(x => x._id === id)];
-            editindLink.opened = true;
-            return editedLinksList;
-        };
-
         return { ...state,
-            links: update([...state.links], action.id),
+            links: setLinkAsOpenInList([...state.links], action.id),
+        };
+    }
+    case REMOVE_FROM_COLLECTION: {
+        return { ...state,
+            links: state.links.filter(x => x._id !== action.id),
         };
     }
     case CLEAR_COLLECTION: {
@@ -120,6 +118,14 @@ const deleteCollectionFromSaved = (id, token) => (
     }
 );
 
+const removeCollection = (id, token) => (
+    (dispatch) => {
+        removeCollectionFetch(id, token).then(() => {
+            dispatch(removeCollectionAction());
+        });
+    }
+);
+
 const changeStatusLikeOfLink = (id, status, token) => (
     (dispatch) => {
         dispatch(changeLikedStatusOfLinkById(id, status));
@@ -147,4 +153,6 @@ export {
     changeStatusSavedOfLink,
     changeOpenStatusOfLinkById,
     clearCollection,
+    removeCollection,
+    deleteLinkFromCollection,
 };

@@ -9,7 +9,7 @@ import { hexToRGB } from '../../../utils/shared-functions';
 import './create-empty-header.scss';
 import { cardBlue } from '../../../variables.scss';
 
-import { createCollection } from '../../../reducers/create-collection.reducer';
+import { createCollection, clearCollection } from '../../../reducers/create-collection.reducer';
 import { actions as modalActions } from '../../../reducers/modal.reducer';
 
 /*
@@ -30,6 +30,7 @@ class CreateEmptyHeader extends Component {
         history: PropTypes.any.isRequired,
         showModal: PropTypes.func.isRequired,
         createCollection: PropTypes.func.isRequired,
+        clearCollection: PropTypes.func.isRequired,
     }
 
     static defaultProps = {
@@ -77,6 +78,7 @@ class CreateEmptyHeader extends Component {
 
     goBack = () => {
         this.props.history.goBack();
+        this.props.clearCollection();
     };
 
     changeRoute = (data) => {
@@ -115,7 +117,7 @@ class CreateEmptyHeader extends Component {
             const body = {
                 name: this.props.title,
                 color: hexToRGB(this.props.color || cardBlue),
-                tags: this.props.tags.map(tag => tag.id),
+                tags: this.props.tags.map(tag => tag.id).reverse(),
             };
             if (this.props.photo) { body.photo = this.props.photo; }
             if (this.props.description) { body.description = this.props.description; }
@@ -151,5 +153,5 @@ export default connect(
         color: state.createCollection.color,
         photo: state.createCollection.photo,
     }),
-    { createCollection, ...modalActions },
+    { createCollection, ...modalActions, clearCollection },
 )(withRouter(CreateEmptyHeader));

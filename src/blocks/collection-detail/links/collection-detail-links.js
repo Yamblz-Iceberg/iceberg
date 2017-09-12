@@ -5,70 +5,18 @@ import { connect } from 'react-redux';
 
 import { LinkCard, Preloader } from './../../../blocks';
 
-import { actions as modalActions } from '../../../reducers/modal.reducer';
-import { setLinkAsOpened } from '../../../reducers/link.reducer';
-import { changeOpenStatusOfLinkById } from '../../../reducers/collection.reducer';
-
 import './collection-detail-links.scss';
 
 class CollectionDetailLinks extends Component {
     static propTypes = {
         links: PropTypes.array.isRequired,
         filter: PropTypes.string,
-        showModal: PropTypes.func.isRequired,
-        setLinkAsOpened: PropTypes.func.isRequired,
-        changeOpenStatusOfLinkById: PropTypes.func.isRequired,
-        token: PropTypes.any.isRequired,
         loader: PropTypes.bool.isRequired,
     };
 
     static defaultProps = {
         filter: '',
     };
-    openLink(href, id, event) {
-        const { className } = event.target;
-        // Проверяем, что клик по карточке не приходится на кнопки действий,
-        // в таком случае открываем ссылку
-        if (className !== 'link-card__context-menu'
-            && className !== 'link-card__block'
-            && (typeof className.baseVal === 'undefined'
-                || (className.baseVal
-                    && className.baseVal.trim() !== 'svg-icon'))) {
-            if (typeof window.cordova !== 'undefined') {
-                window.SafariViewController.isAvailable((available) => {
-                    if (available) {
-                        window.SafariViewController.show({
-                            url: href,
-                            hidden: false,
-                            animated: false,
-                            transition: 'curl',
-                            enterReaderModeIfAvailable: false,
-                            tintColor: '#fff',
-                            barColor: '#000',
-                            controlTintColor: '#ffffff',
-                        },
-                        // success
-                        () => {},
-                        // error
-                        () => {
-                            this.props.showModal('ERROR_MESSAGE',
-                                {
-                                    title: 'Упс!',
-                                    text: 'Такая ссылка не существует.',
-                                    buttonText: 'Понятно',
-                                });
-                        });
-                    } else {
-                        window.open(href);
-                    }
-                });
-            } else {
-                window.open(href);
-            }
-            this.props.setLinkAsOpened(id, this.props.token);
-            this.props.changeOpenStatusOfLinkById(id);
-        }
-    }
 
     render() {
         const filteredLinks = this.props.links.filter((link) => {
@@ -82,12 +30,11 @@ class CollectionDetailLinks extends Component {
                 <Preloader />
             );
         }
-
         return (
             <section className="collection-detail-links">
                 {
                     filteredLinks.map(link => (
-                        <div className="collection-detail-links__item" key={link._id} onClick={e => this.openLink(link.url, link._id, e)}>
+                        <div className="collection-detail-links__item" key={link._id}>
                             <LinkCard data={{ ...link }} />
                         </div>
                     ))
@@ -107,10 +54,4 @@ function mapStateToProps(state) {
 
 
 export default
-connect(
-    mapStateToProps,
-    {
-        ...modalActions,
-        setLinkAsOpened,
-        changeOpenStatusOfLinkById,
-    })(withRouter(CollectionDetailLinks));
+connect(mapStateToProps)(withRouter(CollectionDetailLinks));

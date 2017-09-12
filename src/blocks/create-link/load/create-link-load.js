@@ -36,7 +36,8 @@ class CreateLinkLoad extends Component {
         });
     }
 
-    addComment = () => {
+    addComment = (e) => {
+        e.stopPropagation();
         this.props.history.push('./load-link/add-comment');
     };
 
@@ -71,13 +72,14 @@ class CreateLinkLoad extends Component {
                 && this.props.link.name.length > 0 ? this.renderLinkButton() : null}
                 isTransparent
                 editIcon={
-                    <span onClick={this.addComment}>
+                    <span onClick={e => this.addComment(e)}>
                         <Icon iconName={'edit'} />
                     </span>
                 }
+                enableOpenLink={false}
             />
         );
-    }
+    };
 
     render() {
         return (

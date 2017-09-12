@@ -26,12 +26,14 @@ class CardFooter extends Component {
         changeSavedStatusOfCardById: PropTypes.func.isRequired,
         userData: PropTypes.object.isRequired,
         history: PropTypes.any.isRequired,
+        isCreatingCard: PropTypes.bool,
     };
 
     static defaultProps = {
         idCard: null,
         saved: null,
         userId: null,
+        isCreatingCard: false,
     };
     putToSaved = (e) => {
         if (typeof this.props.userData.accType !== 'undefined' && this.props.userData.accType !== 'demo') {
@@ -51,7 +53,9 @@ class CardFooter extends Component {
     };
 
     goToUserProfile = (e, id) => {
-        this.props.history.push(`/user/${id}`);
+        if (!this.props.isCreatingCard) {
+            this.props.history.push(`/user/${id}`);
+        }
         e.stopPropagation();
     };
 

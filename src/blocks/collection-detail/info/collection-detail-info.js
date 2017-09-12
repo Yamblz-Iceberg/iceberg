@@ -15,6 +15,14 @@ import './collection-detail-info.scss';
 import { mainYellow } from '../../../variables.scss';
 
 class CollectionDetailInfo extends Component {
+    static propTypes = {
+        collection: PropTypes.object.isRequired,
+        token: PropTypes.string.isRequired,
+        userData: PropTypes.object.isRequired,
+        history: PropTypes.any.isRequired,
+        setCollectionAsSaved: PropTypes.func.isRequired,
+        deleteCollectionFromSaved: PropTypes.func.isRequired,
+    };
     constructor(props) {
         super(props);
 
@@ -24,12 +32,7 @@ class CollectionDetailInfo extends Component {
     }
 
     createLink = () => {
-        if (typeof this.props.userData.accType !== 'undefined' && this.props.userData.accType !== 'demo') {
-            this.props.history.replace({ pathname: '/create-link' });
-        } else {
-            localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
-            this.props.history.push('/authorization');
-        }
+        this.props.history.replace({ pathname: '/create-link' });
     };
 
     putToSaved = () => {
@@ -130,15 +133,6 @@ class CollectionDetailInfo extends Component {
         );
     }
 }
-
-CollectionDetailInfo.propTypes = {
-    collection: PropTypes.object.isRequired,
-    token: PropTypes.string.isRequired,
-    userData: PropTypes.object.isRequired,
-    history: PropTypes.any.isRequired,
-    setCollectionAsSaved: PropTypes.func.isRequired,
-    deleteCollectionFromSaved: PropTypes.func.isRequired,
-};
 
 export default connect(
     state => ({

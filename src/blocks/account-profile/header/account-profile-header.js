@@ -7,6 +7,7 @@ import { Icon } from '../../../blocks';
 import { logOut, registerDemoUser } from '../../../reducers/authorization.reducer';
 
 import './account-profile-header.scss';
+import { ContextMenu } from '../../index';
 
 class ProfileHeader extends Component {
     static propTypes = {
@@ -14,7 +15,7 @@ class ProfileHeader extends Component {
         logOut: PropTypes.func.isRequired,
         registerDemoUser: PropTypes.func.isRequired,
         history: PropTypes.object.isRequired,
-    }
+    };
 
     logOutProfile = () => {
         this.props.logOut(
@@ -37,6 +38,14 @@ class ProfileHeader extends Component {
     };
 
     render() {
+        const contextMenuItems = [
+            {
+                title: 'Выйти из профиля',
+                id: 0,
+                icon: <Icon iconName={'exit'} />,
+                onClick: () => this.logOutLocal(),
+            },
+        ];
         return (
             <header className="profile-header">
                 <div className="profile-header__container">
@@ -46,7 +55,7 @@ class ProfileHeader extends Component {
                         </NavLink>
                     </div>
                     <div className="profile-header__block" onClick={this.logOutProfile}>
-                        <Icon iconName={'exit'} iconColor="#fff" />
+                        <ContextMenu iconName="settings" items={contextMenuItems} />
                     </div>
                 </div>
             </header>
