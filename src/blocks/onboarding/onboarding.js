@@ -169,13 +169,14 @@ class Onboarding extends Component {
                             />))
                         }
                     </div>
-                    <button
-                        onClick={this.prevSlide}
-                        className={`
-                        onboarding__link onboarding-slider__prev
-                        ${currentSlide === 0 ? 'onboarding__link--inactive' : ''}
-                        `}
-                    >Назад</button>
+                    { currentSlide !== 0
+                        && (
+                            <button
+                                onClick={this.prevSlide}
+                                className="onboarding__link onboarding-slider__prev"
+                            >Назад</button>
+                        )
+                    }
                     { currentSlide === (slides.length - 1) && selectedTags.length > 0
                         ? (
                             <button
