@@ -10,6 +10,11 @@ const initialState = {
     },
 };
 
+const showModalAction = (text, modalText = initialState.modalProps) => ({
+    type: SHOW_MODAL, modalType: text, modalProps: modalText,
+});
+const hideModalAction = () => ({ type: HIDE_MODAL });
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
     case SHOW_MODAL:
@@ -30,12 +35,12 @@ const handleTouchMove = (e) => {
 
 const hideModal = () => {
     document.body.removeEventListener('touchmove', handleTouchMove);
-    return { type: HIDE_MODAL };
+    hideModalAction();
 };
-const showModal = (text, modalText = initialState.modalProps) => {
-    // TODO: придумать что-нибудь красивое с блокировкой скрола
+
+const showModal = (text, modalText) => {
     document.body.addEventListener('touchmove', handleTouchMove, false);
-    return { type: SHOW_MODAL, modalType: text, modalProps: modalText };
+    showModalAction(text, modalText);
 };
 
 const actions = {
