@@ -12,7 +12,7 @@
         "android-device": "npm run build && cordova run android --device",
         "android-emulator": "npm run build && cordova emulate android",
         "ios-device": "npm run build && cordova run ios --device",
-        "ios-emulator": "npm run build && cordova emulate ios"
+        "ios-emulator": "npm run build && cordova emulate ios --target 'iPhone-6, 10.3'"
     },
     "author": "",
     "license": "ISC",

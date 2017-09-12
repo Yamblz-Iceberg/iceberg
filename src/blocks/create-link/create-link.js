@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { CreateLinkComment } from '../../blocks';
 
 import CreateLinkAdd from './add/create-link-add';
 import CreateLinkLoad from './load/create-link-load';
-import CreateLinkComment from './comment/create-link-comment';
 
 
 import './create-link.scss';
