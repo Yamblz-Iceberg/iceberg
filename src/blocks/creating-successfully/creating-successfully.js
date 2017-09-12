@@ -35,7 +35,7 @@ class CreatingSuccessfully extends Component {
         this.setState({
             collection,
         });
-    }
+    };
 
     setLinks = (links) => {
         this.setLinks({
@@ -44,15 +44,15 @@ class CreatingSuccessfully extends Component {
                 links,
             },
         });
-    }
+    };
 
     handleClick = cardId => (e) => {
         handleClickToCollection(e, cardId, this.props.history);
-    }
+    };
 
     shareLink = (title, message) => {
         socialSharing(title, message);
-    }
+    };
 
     render() {
         const { collection } = this.state;
@@ -68,7 +68,7 @@ class CreatingSuccessfully extends Component {
                 </div>
                 <div className="creating-successfully__button-wrapper">
                     <Button
-                        onClick={this.shareLink(collection.name, collection.description)}
+                        onClick={() => this.shareLink(collection.name, collection.description)}
                         icon={<Icon iconName={'share'} />}
                         text="Поделиться"
                     />
