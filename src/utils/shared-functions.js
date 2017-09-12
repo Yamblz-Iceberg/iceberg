@@ -71,3 +71,51 @@ export const socialSharing = (subject, message) => {
 
     window.plugins.socialsharing.shareWithOptions(options);
 };
+
+/**
+ * Обновить статус лайка для конкретной ссылки в списке коллекции
+ * @param {array} links - список всех ссылок в коллекции
+ * @param {string} id - id ссылки
+ * @param {bool} status - на какое состояние меняем
+ */
+export const updateLikeStatusOfLinkInList = (links, id, status) => {
+    const editedLinksList = [].concat(links);
+    const editindLink = editedLinksList[links.findIndex(x => x._id === id)];
+    editindLink.liked = status;
+    if (status) {
+        editindLink.likes += 1;
+    } else {
+        editindLink.likes -= 1;
+    }
+    return editedLinksList;
+};
+
+/**
+ * Обновить статус сохранения к себе в профиль для конкретной ссылки в списке коллекции
+ * @param {array} links - список всех ссылок в коллекции
+ * @param {string} id - id ссылки
+ * @param {bool} status - на какое состояние меняем
+ */
+export const updateSavedStatusOfLinkInList = (links, id, status) => {
+    const editedLinksList = [].concat(links);
+    const editindLink = editedLinksList[links.findIndex(x => x._id === id)];
+    editindLink.saved = status;
+    if (status) {
+        editindLink.savedTimesCount += 1;
+    } else {
+        editindLink.savedTimesCount -= 1;
+    }
+    return editedLinksList;
+};
+
+/**
+ * Обновить состояние открытия для конктреной ссылки в списке коллекции
+ * @param {array} links - список всех ссылок в коллекции
+ * @param {string} id - id ссылки
+ */
+export const setLinkAsOpenInList = (links, id) => {
+    const editedLinksList = [].concat(links);
+    const editindLink = editedLinksList[links.findIndex(x => x._id === id)];
+    editindLink.opened = true;
+    return editedLinksList;
+};
