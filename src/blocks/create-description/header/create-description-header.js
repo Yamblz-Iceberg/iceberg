@@ -6,11 +6,6 @@ import { Icon, ContextMenu } from '../../../blocks';
 import './create-description-header.scss';
 
 class CreateDescriptionHeader extends Component {
-    clearTextArea = () => {
-        this.toggleMenu();
-        this.props.callback();
-    };
-
     goBack = () => {
         this.props.history.goBack();
     };
@@ -20,7 +15,7 @@ class CreateDescriptionHeader extends Component {
             {
                 title: 'Очистить',
                 id: 0,
-                onClick: this.clearTextArea,
+                onClick: this.props.callback,
                 icon: null,
             },
         ];
