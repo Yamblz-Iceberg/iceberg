@@ -36,6 +36,7 @@ class LinkCard extends Component {
         setLinkAsOpened: PropTypes.func.isRequired,
         changeOpenStatusOfLinkById: PropTypes.func.isRequired,
         deleteLinkFromCollection: PropTypes.func.isRequired,
+        enableOpenLink: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -43,42 +44,45 @@ class LinkCard extends Component {
         button: null,
         editIcon: null,
         isTransparent: false,
+        enableOpenLink: true,
     };
 
     openLink(href, id) {
-        if (typeof window.cordova !== 'undefined') {
-            window.SafariViewController.isAvailable((available) => {
-                if (available) {
-                    window.SafariViewController.show({
-                        url: href,
-                        hidden: false,
-                        animated: false,
-                        transition: 'curl',
-                        enterReaderModeIfAvailable: false,
-                        tintColor: '#fff',
-                        barColor: '#000',
-                        controlTintColor: '#ffffff',
-                    },
-                    // success
-                    () => {},
-                    // error
-                    () => {
-                        this.props.showModal('ERROR_MESSAGE',
-                            {
-                                title: 'Упс!',
-                                text: 'Такая ссылка не существует.',
-                                buttonText: 'Понятно',
-                            });
-                    });
-                } else {
-                    window.open(href);
-                }
-            });
-        } else {
-            window.open(href);
+        if (this.props.enableOpenLink) {
+            if (typeof window.cordova !== 'undefined') {
+                window.SafariViewController.isAvailable((available) => {
+                    if (available) {
+                        window.SafariViewController.show({
+                            url: href,
+                            hidden: false,
+                            animated: false,
+                            transition: 'curl',
+                            enterReaderModeIfAvailable: false,
+                            tintColor: '#fff',
+                            barColor: '#000',
+                            controlTintColor: '#ffffff',
+                        },
+                        // success
+                        () => {},
+                        // error
+                        () => {
+                            this.props.showModal('ERROR_MESSAGE',
+                                {
+                                    title: 'Упс!',
+                                    text: 'Такая ссылка не существует.',
+                                    buttonText: 'Понятно',
+                                });
+                        });
+                    } else {
+                        window.open(href);
+                    }
+                });
+            } else {
+                window.open(href);
+            }
+            this.props.setLinkAsOpened(id, this.props.token);
+            this.props.changeOpenStatusOfLinkById(id);
         }
-        this.props.setLinkAsOpened(id, this.props.token);
-        this.props.changeOpenStatusOfLinkById(id);
     }
 
     putToLiked = (e) => {
@@ -125,7 +129,7 @@ class LinkCard extends Component {
     removeLink = (id) => {
         this.props.deleteLinkFromCollection(id);
         this.props.removeLink(id, this.props.token);
-    }
+    };
 
     render() {
         const { data, button, isTransparent, editIcon } = this.props;
