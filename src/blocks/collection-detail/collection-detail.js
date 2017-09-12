@@ -36,6 +36,7 @@ class CollectionDetail extends Component {
 
     componentDidMount() {
         this.props.getCollection(this.props.params.id, this.props.token);
+        this.scrollToTop();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -49,6 +50,9 @@ class CollectionDetail extends Component {
             this.props.hideLoader();
         }
     }
+    scrollToTop = () => {
+        window.scrollTo(0, 0);
+    };
 
     createLink = () => {
         if (typeof this.props.userData.accType !== 'undefined' && this.props.userData.accType !== 'demo') {
