@@ -76,9 +76,10 @@ class CreateLinkLoad extends Component {
                         <Icon iconName={'edit'} />
                     </span>
                 }
+                enableOpenLink={false}
             />
         );
-    }
+    };
 
     render() {
         return (
