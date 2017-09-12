@@ -8,7 +8,7 @@ import { Icon, Button } from '../../../blocks';
 
 import './create-link-header.scss';
 
-class AddLinkHeader extends Component {
+class CreateLinkHeader extends Component {
     handleReturnToCreatingLink = () => {
         this.props.history.goBack();
     };
@@ -42,13 +42,13 @@ class AddLinkHeader extends Component {
                         {
                             !this.props.isLinkConstructor &&
                             <span onClick={this.handleReturnToCreatingLink} className="create-link-header__back-to-link">
-                                <Icon iconName={'arrow-details'} iconColor="#000" />
+                                <Icon iconName={'arrow-details'} />
                             </span>
                         }
                         {
                             this.props.isLinkConstructor &&
                             <span onClick={this.handleReturnToCard}>
-                                <Icon iconName={'arrow-back'} iconColor="#000" />
+                                <Icon iconName={'arrow-back'} />
                             </span>
                         }
                     </div>
@@ -68,7 +68,7 @@ class AddLinkHeader extends Component {
     }
 }
 
-AddLinkHeader.propTypes = {
+CreateLinkHeader.propTypes = {
     title: PropTypes.string.isRequired,
     showAddButton: PropTypes.bool.isRequired,
     isLinkConstructor: PropTypes.bool,
@@ -81,7 +81,7 @@ AddLinkHeader.propTypes = {
     history: PropTypes.any.isRequired,
 };
 
-AddLinkHeader.defaultProps = {
+CreateLinkHeader.defaultProps = {
     description: '',
     isLinkConstructor: true,
 };
@@ -94,4 +94,4 @@ export default connect(
         collection: state.collection,
     }),
     { addLinkToCollection, removeLink },
-)(withRouter(AddLinkHeader));
+)(withRouter(CreateLinkHeader));

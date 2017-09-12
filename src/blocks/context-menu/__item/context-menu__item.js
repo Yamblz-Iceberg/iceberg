@@ -5,9 +5,13 @@ import './context-menu__item.scss';
 
 const ContextMenuItem = ({ item }) =>
     (<div className="dropdown-menu-item" onClick={() => { item.onClick(); }} >
-        <div className="dropdown-menu-item__ico">
-            { item.icon }
-        </div>
+        {
+            item.icon !== null
+                ? <div className="dropdown-menu-item__ico">
+                    { item.icon }
+                </div>
+                : null
+        }
         <p className="dropdown-menu-item__title">
             { item.title }
         </p>
@@ -17,8 +21,8 @@ ContextMenuItem.propTypes = {
     item: PropTypes.shape({
         title: PropTypes.string.isRequired,
         id: PropTypes.number.isRequired,
-        onClick: PropTypes.any,
-        icon: PropTypes.any,
+        onClick: PropTypes.func,
+        icon: PropTypes.object,
     }).isRequired,
 };
 
