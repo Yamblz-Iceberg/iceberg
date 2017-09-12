@@ -7,8 +7,8 @@ if (authInProgress) {
     initialState = { ...initialState, ...{ authInProgress: JSON.parse(authInProgress) } };
 }
 
-const START_AUTH = 'START_AUTH';
-const STOP_AUTH = 'STOP_AUTH';
+export const START_AUTH = 'START_AUTH';
+export const STOP_AUTH = 'STOP_AUTH';
 
 const authStarts = () => ({ type: START_AUTH, payload: true });
 const authStops = () => ({ type: STOP_AUTH, payload: false });
@@ -16,9 +16,9 @@ const authStops = () => ({ type: STOP_AUTH, payload: false });
 const reducer = (state = initialState, action) => {
     switch (action.type) {
     case START_AUTH:
-        return { ...state, ...action.payload };
+        return { ...state, authInProgress: action.payload };
     case STOP_AUTH:
-        return { ...state, ...action.payload };
+        return { ...state, authInProgress: action.payload };
     default:
         return state;
     }
