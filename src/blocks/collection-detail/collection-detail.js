@@ -59,6 +59,8 @@ class CollectionDetail extends Component {
         }
     };
 
+    isAuthor = () => this.props.collection.author.userId === this.props.userData.userId;
+
     emptyCollection = () => (
         // Проверяем, что данные о коллекции детально получены
         // (лоадер скрывает при получении данных)
@@ -70,7 +72,7 @@ class CollectionDetail extends Component {
                 <div className="collection-detail__mesage-wrapper">
                     <h3 className="collection-detail__title">Ссылок пока нет</h3>
                     <div>
-                        { this.props.collection.author.userId === this.props.userData.userId &&
+                        { this.isAuthor() &&
                             (
                                 <div>
                                     <p className="collection-detail__text">
@@ -92,6 +94,7 @@ class CollectionDetail extends Component {
                 </div>
             )
     );
+
     shareLink = (title, message) => () => {
         socialSharing(title, message);
     };
@@ -99,7 +102,6 @@ class CollectionDetail extends Component {
     render() {
         const {
             collection,
-            userData,
             params: {
                 id, filter,
             },
@@ -123,11 +125,12 @@ class CollectionDetail extends Component {
                 linkTo: `/collection/${id}/unread`,
             },
         ];
-
         return (
             <div className="collection-detail">
                 <CollectionDetailHeader
                     collectionTitle={name}
+                    isAuthor={this.isAuthor()}
+                    collectionId={collection._id}
                     shareLink={this.shareLink(name, description)}
                 />
                 <CollectionDetailInfo collection={collection} />
@@ -143,7 +146,7 @@ class CollectionDetail extends Component {
                                 filter={filter}
                             />
                             {/* Показывать кнопку добавления ссылки только автору подборки */}
-                            { collection.author.userId === userData.userId
+                            { this.isAuthor()
                                 ? <div className="collection-detail__add-button" onClick={this.createLink} >
                                     <Button
                                         icon={<Icon iconName={'link'} />}

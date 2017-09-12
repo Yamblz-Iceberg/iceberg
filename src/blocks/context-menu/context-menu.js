@@ -14,10 +14,8 @@ class ContextMenu extends Component {
         };
     }
 
-    handleOutsideClick = (event) => {
-        if (this.refContextMenu && !this.refContextMenu.contains(event.target)) {
-            this.toggle();
-        }
+    handleOutsideClick = () => {
+        this.toggle();
     };
 
     handleTouchMove = () => {
@@ -25,13 +23,12 @@ class ContextMenu extends Component {
     };
 
     toggle = () => {
+        event.stopPropagation();
         if (this.state.isOpened === true) {
             this.setState({ isOpened: false });
-            document.removeEventListener('click', this.handleOutsideClick, false);
             document.body.removeEventListener('touchmove', this.handleTouchMove, false);
         } else {
             this.setState({ isOpened: true });
-            document.addEventListener('click', this.handleOutsideClick, false);
             document.body.addEventListener('touchmove', this.handleTouchMove, false);
         }
     };
@@ -44,8 +41,8 @@ class ContextMenu extends Component {
             ref={(el) => { this.refContextMenu = el; }}
         >
             <Icon iconName={iconName} iconColor={iconColor} />
-            { this.state.isOpened && <div className="context-menu__overlay" /> }
-            { this.state.isOpened && <div className="context-menu__list">
+            { this.state.isOpened && <div className="context-menu__overlay" onClick={this.handleOutsideClick} /> }
+            { this.state.isOpened && <div className="context-menu__list" onClick={this.toggle}>
                 {
                     items.map(item => <ContextMenuItem key={item.id} item={item} />)
                 }
