@@ -13,8 +13,6 @@ import { socialSharing } from '../../../utils/shared-functions';
 
 import './collection-detail-info.scss';
 
-import { mainYellow } from '../../../variables.scss';
-
 class CollectionDetailInfo extends Component {
     static propTypes = {
         collection: PropTypes.object.isRequired,
