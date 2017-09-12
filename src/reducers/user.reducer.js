@@ -1,14 +1,9 @@
 import { fetchUser } from '../services/user.service';
 
-const FETCH_USER = 'FETCH_USER';
+export const FETCH_USER = 'FETCH_USER';
 
 const initialState = {
     data: {},
-    typeToFeed: 'myCollection',
-    archive: {
-        collections: [],
-        links: [],
-    },
 };
 
 const loadUser = data => ({ type: FETCH_USER, payload: data });

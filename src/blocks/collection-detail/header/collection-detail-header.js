@@ -24,7 +24,7 @@ class CollectionDetailHeader extends Component {
 
     static defaultProps = {
         collectionId: null,
-    }
+    };
 
     constructor(props) {
         super(props);
@@ -68,7 +68,7 @@ class CollectionDetailHeader extends Component {
     removeCollection = (id) => {
         this.props.removeCollection(id, this.props.token);
         this.handleGoBack();
-    }
+    };
 
     render() {
         const contextMenuItems = [

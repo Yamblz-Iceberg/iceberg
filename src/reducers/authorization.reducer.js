@@ -53,4 +53,4 @@ export const logOut = (token, refreshToken, callback) => (
     }
 );
 
-export { reducer, addRealUser, ADD_REAL_USER };
+export { reducer, addRealUser, ADD_REAL_USER, ADD_DEMO_USER };

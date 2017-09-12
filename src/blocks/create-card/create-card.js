@@ -224,7 +224,7 @@ class CreateCard extends Component {
                     />
                 </div>
                 {
-                    window.cordova ? (
+                    typeof window.cordova !== 'undefined' ? (
                         <div className="create-card__upload-photo-container" onClick={this.state.imageStatus === 'uploading' ? () => {} : this.handleUploadPicture}>
                             <div className="create-card__upload-photo-wrap">{ uploaderImg }</div>
                         </div>
