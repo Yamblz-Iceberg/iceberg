@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { Button, Icon } from '../../blocks';
 import { CreateCard, Option, ToggleText } from '../../blocks';
-import CreateEmptyHeader from './header/create-empty-header';
+import CreateEmptyHeader from './__header/create-empty__header';
 
 import {
     updateTitle,
@@ -87,7 +87,7 @@ class CreateEmpty extends Component {
                 <div className="create-empty__card-wrapper">
                     <CreateCard data={createCardProps} />
                 </div>
-                {description === ''
+                { description === ''
                     ? (
                         <NavLink
                             to={'/add-description'}

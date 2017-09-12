@@ -6,7 +6,7 @@ import { Icon } from '../../../blocks';
 
 import { hexToRGB } from '../../../utils/shared-functions';
 
-import './create-empty-header.scss';
+import './create-empty__header.scss';
 import { cardBlue } from '../../../variables.scss';
 
 import { createCollection, clearCollection } from '../../../reducers/create-collection.reducer';
@@ -128,7 +128,7 @@ class CreateEmptyHeader extends Component {
 
     render() {
         return (
-            <header className="create-empty-header">
+            <header className="create-empty__header create-empty-header">
                 <span onClick={this.goBack}>
                     <Icon iconName={'arrow-back'} />
                 </span>
