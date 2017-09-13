@@ -52,7 +52,7 @@ class Onboarding extends Component {
         sendTags: PropTypes.func.isRequired,
         token: PropTypes.string.isRequired,
         history: PropTypes.any.isRequired,
-    }
+    };
 
     static defaultProps = {
         selectedTags: [],
@@ -81,39 +81,39 @@ class Onboarding extends Component {
         this.setState({
             currentSlide: slide,
         });
-    }
+    };
 
     setTags = (selectedTags) => {
         this.setState({
             selectedTags,
         });
-    }
+    };
 
     handleClickTag = id => (event) => {
         const target = event.target;
         const className = 'onboarding-slider__hash-tag--selected';
 
-        if (target.classList.value.includes(className)) {
+        if (target.classList.contains(className)) {
             target.classList.remove(className);
             this.props.deleteTag(id);
         } else {
             target.classList.add(className);
             this.props.addTag(id);
         }
-    }
+    };
 
     handleReady = () => {
-        this.props.sendTags(this.props.token);
+        this.props.sendTags(this.state.selectedTags, this.props.token);
         this.props.history.push('/feed');
-    }
+    };
 
     nextSlide = () => {
         this.setCurrentSlide(this.state.currentSlide + 1);
-    }
+    };
 
     prevSlide = () => {
         this.setCurrentSlide(this.state.currentSlide - 1);
-    }
+    };
 
     render() {
         const { currentSlide, selectedTags } = this.state;

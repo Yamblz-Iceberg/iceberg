@@ -3,7 +3,6 @@ import { putTags } from '../services/personal-tags.service';
 
 const ADD_TAG = 'ADD_TAG';
 const DELETE_TAG = 'DELETE_TAG';
-const RESET_TAGS = 'RESET_TAGS';
 const GET_TAGS = 'GET_TAGS';
 const SEND_TAGS = 'SEND_TAGS';
 
@@ -14,8 +13,7 @@ const initialState = {
 
 const addTag = id => ({ type: ADD_TAG, payload: id });
 const deleteTag = id => ({ type: DELETE_TAG, payload: id });
-const resetTags = () => ({ type: RESET_TAGS });
-const sendTags = token => ({ type: SEND_TAGS, payload: token });
+const sendTagsAction = () => ({ type: SEND_TAGS });
 const getHashTags = tags => ({ type: GET_TAGS, payload: tags });
 
 const reducer = (state = initialState, action) => {
@@ -28,11 +26,8 @@ const reducer = (state = initialState, action) => {
         return { ...state, selectedTags: filteredTags };
     }
     case SEND_TAGS: {
-        putTags(state.selectedTags, action.payload);
         return { initialState };
     }
-    case RESET_TAGS:
-        return { ...state, selectedTags: [] };
     case GET_TAGS:
         return { ...state, hashTags: action.payload };
     default:
@@ -40,7 +35,7 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-export const getTags = token => (
+const getTags = token => (
     (dispatch) => {
         fetchTags(token).then((result) => {
             dispatch(getHashTags(result.tags));
@@ -48,4 +43,12 @@ export const getTags = token => (
     }
 );
 
-export { reducer, addTag, deleteTag, resetTags, sendTags };
+const sendTags = (tags, token) => (
+    (dispatch) => {
+        putTags(tags, token).then(() => {
+            dispatch(sendTagsAction());
+        });
+    }
+);
+
+export { reducer, addTag, getTags, deleteTag, sendTags };
