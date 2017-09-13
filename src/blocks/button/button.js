@@ -3,8 +3,17 @@ import PropTypes from 'prop-types';
 
 import './button.scss';
 
-const Button = ({ type, size, icon, text, isDisabled, onClick }) => (
-    // TODO убрать инлайненные стили
+/*
+Компонент 'Button' принимает следующие параметры для модификаторов:
+ - 'type', 'size', 'isDisabled'
+Доступные модификаторы для параметра 'type':
+ - 'disable', 'light', 'transparent', 'yellow', 'fb', 'vk', 'yandex', 'white'
+Доступные модификаторы для параметра 'size':
+ - 'small', 'medium', 'max-width'
+
+Добавить/Посмотреть модификаторы можно в файле 'button.scss'
+*/
+const Button = ({ type, size, isDisabled, icon, text, onClick }) => (
     <button
         className={`button
         button--${type}
