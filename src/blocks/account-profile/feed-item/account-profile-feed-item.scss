@@ -4,6 +4,17 @@
     display: flex;
     flex-shrink: 0;
 
+    &__lock-icon-wrapper {
+        position: absolute;
+        left: 8px;
+        top: 8px;
+        z-index: 1;
+    }
+
+    &__photo-wrapper {
+        position: relative;
+    }
+
     &__photo {
         display: block;
         width: 70px;

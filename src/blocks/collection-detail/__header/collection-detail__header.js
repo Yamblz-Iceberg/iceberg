@@ -8,7 +8,7 @@ import { Icon, ContextMenu } from '../../../blocks';
 import { clearCollection, removeCollection } from '../../../reducers/collection.reducer';
 import { socialSharing } from '../../../utils/shared-functions';
 
-import './collection-detail-header.scss';
+import './collection-detail__header.scss';
 
 class CollectionDetailHeader extends Component {
     static propTypes = {
@@ -105,22 +105,22 @@ class CollectionDetailHeader extends Component {
         }
         return (
             <header
-                className={`collection-detail-header
-                ${this.state.fixedHeader === true ? 'collection-detail-header--fixed' : ''}`}
+                className={`collection-detail__header
+                ${this.state.fixedHeader === true ? 'collection-detail__header--fixed' : ''}`}
             >
-                <div className="collection-detail-header__container">
-                    <div className="collection-detail-header__block">
+                <div className="collection-detail__header-container">
+                    <div className="collection-detail__header-block">
                         <span onClick={this.handleGoBack}>
                             <Icon iconName={'arrow-back'} iconColor={this.state.fixedHeader ? '#000' : '#fff'} />
                         </span>
                     </div>
-                    <h4 className="collection-detail-header__title">
+                    <h4 className="collection-detail__header-title">
                         {this.state.fixedHeader === true ? this.props.collectionTitle : false}
                     </h4>
-                    <div className="collection-detail-header__block collection-detail-header__home-wrap" onClick={this.handleGoHome}>
+                    <div className="collection-detail__header-block collection-detail__header-home-wrap" onClick={this.handleGoHome}>
                         <Icon iconName={'home'} iconColor={this.state.fixedHeader ? '#000' : '#fff'} />
                     </div>
-                    <div className="collection-detail-header__block">
+                    <div className="collection-detail__header-block">
                         <ContextMenu iconColor={this.state.fixedHeader ? '#000' : '#fff'} items={contextMenuItems} />
                     </div>
                 </div>
