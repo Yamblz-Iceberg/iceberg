@@ -80,17 +80,10 @@ class CollectionDetail extends Component {
                             (
                                 <div>
                                     <p className="collection-detail__text">
-                                        { this.props.collection.closed ?
-                                            'Добавьте ссылки, которые вы хотите сохранить только для себя' :
-                                            'Начните добавлять ссылки и ваша подборка появится в общей ленте' }
+                                        { this.props.collection.closed
+                                            ? 'Добавьте ссылки, которые вы хотите сохранить только для себя'
+                                            : 'Начните добавлять ссылки, и ваша подборка появится в общей ленте' }
                                     </p>
-                                    <div className="collection-detail__add-button" onClick={this.createLink} >
-                                        <Button
-                                            icon={<Icon iconName={'link'} />}
-                                            text="добавить ссылку"
-                                            type="max-width"
-                                        />
-                                    </div>
                                 </div>
                             )
                         }

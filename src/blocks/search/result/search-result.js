@@ -30,9 +30,6 @@ class SearchResult extends Component {
         if (result.collections.length !== 0) {
             return (
                 <div className="search-result__info">
-                    <div className="search-result__count">
-                        <p>Найдено подборок: {result.collections.length}</p>
-                    </div>
                     <div className="search-result__list">
                         {
                             result.collections.map(item => (

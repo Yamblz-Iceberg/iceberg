@@ -9,19 +9,15 @@ import { connect } from 'react-redux';
 import { setCollectionAsSaved, deleteCollectionFromSaved } from '../../../reducers/collection.reducer';
 import { ToggleText } from '../../index';
 import { HashTape, Icon, Button, CardFooter } from '../../../blocks';
+import { socialSharing } from '../../../utils/shared-functions';
 
 import './collection-detail-info.scss';
-
-import { mainYellow } from '../../../variables.scss';
 
 class CollectionDetailInfo extends Component {
     static propTypes = {
         collection: PropTypes.object.isRequired,
-        token: PropTypes.string.isRequired,
         userData: PropTypes.object.isRequired,
         history: PropTypes.any.isRequired,
-        setCollectionAsSaved: PropTypes.func.isRequired,
-        deleteCollectionFromSaved: PropTypes.func.isRequired,
     };
     constructor(props) {
         super(props);
@@ -35,23 +31,8 @@ class CollectionDetailInfo extends Component {
         this.props.history.replace({ pathname: '/create-link' });
     };
 
-    putToSaved = () => {
-        if (typeof this.props.userData.accType !== 'undefined' && this.props.userData.accType !== 'demo') {
-            this.props.setCollectionAsSaved(
-                this.props.collection._id,
-                this.props.token,
-            );
-        } else {
-            localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
-            this.props.history.push('/authorization');
-        }
-    };
-
-    delFromSaved = () => {
-        this.props.deleteCollectionFromSaved(
-            this.props.collection._id,
-            this.props.token,
-        );
+    shareLink = (title, message) => {
+        socialSharing(title, message);
     };
 
     render() {
@@ -85,6 +66,7 @@ class CollectionDetailInfo extends Component {
                             </div>
                             <div className="collection-detail-card__footer">
                                 <CardFooter
+                                    idCard={collection._id}
                                     avatarOptions={avatarOptions}
                                     userId={collection.author.userId}
                                     userName={userName}
@@ -101,25 +83,12 @@ class CollectionDetailInfo extends Component {
                     <ToggleText text={this.props.collection.description} />
 
                     <div className="collection-detail-actions">
-                        {
-                            collection.saved &&
-                                <Button
-                                    type="light"
-                                    icon={<Icon iconName="save-small" iconColor={mainYellow} />}
-                                    text="вы подписаны"
-                                    size="max-width"
-                                    onClick={this.delFromSaved}
-                                />
-                        }
-                        {
-                            !collection.saved &&
-                                <Button
-                                    icon={<Icon iconName="save-big" />}
-                                    text="подписаться"
-                                    size="max-width"
-                                    onClick={this.putToSaved}
-                                />
-                        }
+                        <Button
+                            onClick={() => this.shareLink(collection.name, collection.description)}
+                            icon={<Icon iconName={'share'} />}
+                            text="Поделиться"
+                            size="max-width"
+                        />
                         { collection.author.userId === userData.userId
                             ? <button className="collection-detail-actions__add-link" onClick={this.createLink}>
                                 <Icon iconName={'link'} />
@@ -137,7 +106,6 @@ class CollectionDetailInfo extends Component {
 export default connect(
     state => ({
         collection: state.collection,
-        token: state.authorization.access_token,
         userData: state.user.data,
     }),
     { setCollectionAsSaved, deleteCollectionFromSaved },

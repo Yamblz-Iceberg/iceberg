@@ -1,5 +1,5 @@
-const SHOW_MODAL = 'SHOW_MODAL';
-const HIDE_MODAL = 'HIDE_MODAL';
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';
 
 const initialState = {
     modalType: null,
@@ -10,8 +10,8 @@ const initialState = {
     },
 };
 
-const showModalAction = (text, modalText = initialState.modalProps) => ({
-    type: SHOW_MODAL, modalType: text, modalProps: modalText,
+const showModalAction = (modalType, modalProps = initialState.modalProps) => ({
+    type: SHOW_MODAL, modalType, modalProps,
 });
 const hideModalAction = () => ({ type: HIDE_MODAL });
 
@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
     case SHOW_MODAL:
         return {
             modalType: action.modalType,
-            modalProps: { ...state.modalProps, ...action.modalProps },
+            modalProps: { ...action.modalProps },
         };
     case HIDE_MODAL:
         return initialState;
@@ -33,15 +33,19 @@ const handleTouchMove = (e) => {
     e.preventDefault();
 };
 
-const hideModal = () => {
-    document.body.removeEventListener('touchmove', handleTouchMove);
-    hideModalAction();
-};
+const hideModal = () => (
+    (dispatch) => {
+        document.body.removeEventListener('touchmove', handleTouchMove);
+        dispatch(hideModalAction());
+    }
+);
 
-const showModal = (text, modalText) => {
-    document.body.addEventListener('touchmove', handleTouchMove, false);
-    showModalAction(text, modalText);
-};
+const showModal = (text, modalText) => (
+    (dispatch) => {
+        document.body.addEventListener('touchmove', handleTouchMove);
+        dispatch(showModalAction(text, modalText));
+    }
+);
 
 const actions = {
     hideModal,
