@@ -1,63 +1,100 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { deleteCollectionFromSaved, setCollectionAsSaved } from '../../reducers/collection.reducer';
+import { changeSavedStatusOfCardById } from '../../reducers/feed.reducer';
+import { HashTag, CardFooter } from './../../blocks';
 
 import './collection-card.scss';
 
-import { HashTag, CardFooter } from './../../blocks';
-
-const CollectionCard = ({ data }) => {
-    const hashes = data.tags;
-    const cardStyles = {
-        background: `${data.color} url(${data.photo})`,
+class CollectionCard extends Component {
+    static propTypes = {
+        data: PropTypes.object.isRequired,
+        token: PropTypes.string.isRequired,
+        userData: PropTypes.object.isRequired,
+        setCollectionAsSaved: PropTypes.func.isRequired,
+        deleteCollectionFromSaved: PropTypes.func.isRequired,
+        changeSavedStatusOfCardById: PropTypes.func.isRequired,
+        history: PropTypes.object.isRequired,
     };
 
-    const avatarOptions = {
-        size: '25',
-        photo: data.author.photo,
-        iconColor: '#fff',
+    putToSaved = (e) => {
+        if (typeof this.props.userData.accType !== 'undefined' && this.props.userData.accType !== 'demo') {
+            this.props.setCollectionAsSaved(this.props.data._id, this.props.token);
+            this.props.changeSavedStatusOfCardById(this.props.data._id, true);
+            e.stopPropagation();
+        } else {
+            localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
+            this.props.history.push('/authorization');
+        }
     };
 
-    const userName = `${data.author.firstName} ${data.author.lastName}`;
+    delFromSaved = (e) => {
+        this.props.deleteCollectionFromSaved(this.props.data._id, this.props.token);
+        this.props.changeSavedStatusOfCardById(this.props.data._id, false);
+        e.stopPropagation();
+    };
 
-    const hashesCount = hashes.length - 1;
+    render() {
+        const { data } = this.props;
 
-    return (
-        <div className="collection-card" style={cardStyles}>
-            <div className="collection-card__header">
-                {
-                    hashes[0] && <HashTag
-                        name={hashes[0].name}
-                        size={'small'}
-                        key={hashes[0]._id}
-                        id={hashes[0]._id}
-                    />
-                }
-                {
-                    (hashesCount > 0) && <div className="hash-tag hash-tag--small hash-tag__count">
-                        <span className="hash-tag__text">{`+ ${hashesCount}`}</span>
-                    </div>
-                }
-                <h2 className="collection-card__title">{ data.name }</h2>
+        const hashes = data.tags;
+
+        const cardStyles = {
+            background: `${data.color} url(${data.photo})`,
+        };
+
+        const avatarOptions = {
+            size: '25',
+            photo: data.author.photo,
+            iconColor: '#fff',
+        };
+
+        const userName = `${data.author.firstName} ${data.author.lastName}`;
+
+        const hashesCount = hashes.length - 1;
+        return (
+            <div className="collection-card" style={cardStyles}>
+                <div className="collection-card__header">
+                    {
+                        hashes[0] && <HashTag
+                            name={hashes[0].name}
+                            size={'small'}
+                            key={hashes[0]._id}
+                            id={hashes[0]._id}
+                        />
+                    }
+                    {
+                        (hashesCount > 0) && <div className="hash-tag hash-tag--small hash-tag__count">
+                            <span className="hash-tag__text">{`+ ${hashesCount}`}</span>
+                        </div>
+                    }
+                    <h2 className="collection-card__title">{ data.name }</h2>
+                </div>
+
+                <CardFooter
+                    idCard={data._id}
+                    avatarOptions={avatarOptions}
+                    userName={userName}
+                    userId={data.author.userId}
+                    linksCount={data.linksCount}
+                    savedTimesCount={data.savedTimesCount}
+                    saved={data.saved}
+                    putToSaved={this.putToSaved}
+                    delFromSaved={this.delFromSaved}
+                />
+
+                { data.photo ? <div className="collection-card__overlay" /> : null }
             </div>
+        );
+    }
+}
 
-            <CardFooter
-                idCard={data._id}
-                avatarOptions={avatarOptions}
-                userName={userName}
-                userId={data.author.userId}
-                linksCount={data.linksCount}
-                savedTimesCount={data.savedTimesCount}
-                saved={data.saved}
-            />
-
-            { data.photo ? <div className="collection-card__overlay" /> : null }
-        </div>
-    );
-};
-
-CollectionCard.propTypes = {
-    data: PropTypes.object.isRequired,
-};
-
-
-export default CollectionCard;
+export default connect(
+    state => ({
+        token: state.authorization.access_token,
+        userData: state.user.data,
+    }),
+    { setCollectionAsSaved, deleteCollectionFromSaved, changeSavedStatusOfCardById },
+)(withRouter(CollectionCard));
