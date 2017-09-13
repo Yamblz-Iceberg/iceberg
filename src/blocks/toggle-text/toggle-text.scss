@@ -37,6 +37,8 @@
     .text-toggle {
         &__text {
             max-height: none;
+            // для поддержки iOS ниже 9.3
+            -webkit-line-clamp: 20;
             -webkit-line-clamp: unset;
             overflow: visible;
             text-overflow: unset;
