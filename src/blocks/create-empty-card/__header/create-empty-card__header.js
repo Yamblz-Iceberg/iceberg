@@ -114,15 +114,19 @@ class CreateEmptyCardHeader extends Component {
                     buttonText: 'Ок',
                 });
         } else {
+            const {
+                title, color, tags, photo, description, closed, token,
+            } = this.props;
+
             const body = {
-                name: this.props.title,
-                color: hexToRGB(this.props.color || cardBlue),
-                tags: this.props.tags.map(tag => tag.id).reverse(),
+                name: title,
+                color: hexToRGB(color || cardBlue),
+                tags: tags.map(tag => tag.id).reverse(),
             };
-            if (this.props.photo) { body.photo = this.props.photo; }
-            if (this.props.description) { body.description = this.props.description; }
-            if (this.props.closed) { body.closed = this.props.closed; }
-            this.props.createCollection(body, this.props.token, this.changeRoute);
+            if (photo) { body.photo = photo; }
+            if (description) { body.description = description; }
+            if (closed) { body.closed = closed; }
+            this.props.createCollection(body, token, this.changeRoute);
         }
     };
 
