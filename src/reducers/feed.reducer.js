@@ -2,7 +2,7 @@ import { fetchFeed } from '../services/feed.service';
 import { showLoader } from './loader.reducer';
 
 export const FETCH_FEED = 'FETCH_FEED';
-const CHANGE_SAVED_STATUS_BY_ID = 'CHANGE_SAVED_STATUS_BY_ID';
+export const CHANGE_SAVED_STATUS_BY_ID = 'CHANGE_SAVED_STATUS_BY_ID';
 
 const initialState = {
     tags: [],
@@ -22,6 +22,7 @@ const reducer = (state = initialState, action) => {
             const editedCollection = [].concat(items);
             const editindCard = editedCollection[items.findIndex(x => x._id === id)];
             editindCard.saved = status;
+
             if (status) {
                 editindCard.savedTimesCount += 1;
             } else {

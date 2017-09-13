@@ -85,7 +85,14 @@ class CollectionDetailInfo extends Component {
                                 <HashTape hashes={collection.tags} size="small" />
                             </div>
                             <div className="collection-detail-card__header">
-                                <h2 className="collection-detail-card__title">{ hyphenateText(collection.name) }</h2>
+                                <h2 className="collection-detail-card__title">
+                                    { hyphenateText(collection.name) }
+                                    { collection.closed && (
+                                        <span className="collection-detail-card__lock-icon-wrapper">
+                                            <Icon iconColor="white" iconName="lock" />
+                                        </span>
+                                    ) }
+                                </h2>
                             </div>
                             <div className="collection-detail-card__footer">
                                 <CardFooter
