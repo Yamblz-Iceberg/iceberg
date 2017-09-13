@@ -121,12 +121,14 @@ class Onboarding extends Component {
 
         return (
             <main className="onboarding">
-                <button
-                    onClick={this.handleReady}
-                    className="onboarding__link onboarding__skip"
-                >Пропустить</button>
+                <header className="onboarding__header">
+                    <button
+                        onClick={this.handleReady}
+                        className="onboarding-link"
+                    >Пропустить</button>
+                </header>
 
-                <div className="onboarding__slider onboarding-slider">
+                <div className="onboarding-slider">
                     <div className="onboarding-slider__track" style={{ transform: `translateX(-${100 * currentSlide}%)` }}>
                         { slides.map(slide => (
                             <div className="onboarding-slider__slide" key={slide._id}>
@@ -157,6 +159,18 @@ class Onboarding extends Component {
                             </div>
                         )) }
                     </div>
+                </div>
+                <footer className="onboarding__footer">
+                    <div className="onboarding-slider__nav-block">
+                        { currentSlide !== 0
+                            && (
+                                <button
+                                    onClick={this.prevSlide}
+                                    className="onboarding-link onboarding-slider__prev"
+                                >Назад</button>
+                            )
+                        }
+                    </div>
                     <div className="onboarding-slider__pagination-wrapper">
                         { slides.length > 1 && slides.map(slide => (
                             <span
@@ -169,32 +183,24 @@ class Onboarding extends Component {
                             />))
                         }
                     </div>
-                    { currentSlide !== 0
-                        && (
-                            <button
-                                onClick={this.prevSlide}
-                                className="onboarding__link onboarding-slider__prev"
-                            >Назад</button>
-                        )
-                    }
-                    { currentSlide === (slides.length - 1) && selectedTags.length > 0
-                        ? (
-                            <button
+                    <div className="onboarding-slider__nav-block">
+                        {
+                            currentSlide === (slides.length - 1) && <button
                                 onClick={this.handleReady}
-                                className="onboarding__link onboarding-slider__next"
+                                className={
+                                    `onboarding-link onboarding-slider__next 
+                                    ${selectedTags.length === 0 ? 'onboarding-link--inactive' : ''}`
+                                }
                             >Готово</button>
-                        )
-                        : (
-                            <button
+                        }
+                        {
+                            currentSlide !== (slides.length - 1) && <button
                                 onClick={this.nextSlide}
-                                className={`
-                                onboarding__link onboarding-slider__next
-                                ${currentSlide === (slides.length - 1) ? 'onboarding__link--inactive' : ''}
-                                `}
+                                className="onboarding-link onboarding-slider__next"
                             >Далее</button>
-                        )
-                    }
-                </div>
+                        }
+                    </div>
+                </footer>
             </main>
         );
     }
