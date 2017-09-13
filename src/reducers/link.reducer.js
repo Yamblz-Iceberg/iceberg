@@ -2,11 +2,11 @@ import { postLink, addLinkToCollectionFetch, removeLinkFetch, setLinkAsOpenedFet
 import { showLoader } from './../reducers/loader.reducer';
 
 export const ADD_LINK = 'ADD_LINK';
-const DELETE_LINK = 'DELETE_LINK';
-const ADD_COMMENT = 'ADD_COMMENT';
-const CLEAR_LINK = 'CLEAR_LINK';
-const PUSH_LINK_TO_COLLECTION = 'PUSH_LINK_TO_COLLECTION';
-const OPEN_LINK = 'OPEN_LINK';
+export const DELETE_LINK = 'DELETE_LINK';
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const CLEAR_LINK = 'CLEAR_LINK';
+export const PUSH_LINK_TO_COLLECTION = 'PUSH_LINK_TO_COLLECTION';
+export const OPEN_LINK = 'OPEN_LINK';
 
 const initialState = {
     result: {
