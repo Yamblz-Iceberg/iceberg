@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Tabs, CollectionDetailLinks, Button, Icon, Preloader } from '../';
-import CollectionDetailInfo from './info/collection-detail-info';
-import CollectionDetailHeader from './header/collection-detail-header';
+import { Tabs, CollectionDetailLinks, Button, Icon, Preloader } from '../../blocks';
 import { getCollection } from '../../reducers/collection.reducer';
 import { hideLoader, showLoader } from '../../reducers/loader.reducer';
-
 import { socialSharing } from '../../utils/shared-functions';
 import { putTags } from '../../services/personal-tags.service';
+
+import CollectionDetailInfo from './info/collection-detail-info';
+import CollectionDetailHeader from './__header/collection-detail__header';
 
 import './collection-detail.scss';
 
@@ -25,18 +25,11 @@ class CollectionDetail extends Component {
         showLoader: PropTypes.func.isRequired,
         hideLoader: PropTypes.func.isRequired,
     };
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            showAllText: false,
-        };
-        this.props.showLoader();
-    }
 
     componentDidMount() {
         this.props.getCollection(this.props.params.id, this.props.token);
         this.scrollToTop();
+        this.props.showLoader();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -55,14 +48,22 @@ class CollectionDetail extends Component {
     };
 
     createLink = () => {
+        // если пользователь авторизован - перенаправляем на добавление ссылки
         if (typeof this.props.userData.accType !== 'undefined' && this.props.userData.accType !== 'demo') {
             this.props.history.replace({ pathname: '/create-link' });
         } else {
+            // если пользователь не авторизован - перенаправляем на авторизацию
             localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
             this.props.history.push('/authorization');
         }
     };
 
+    // поделиться поборкой
+    shareLink = (title, message) => () => {
+        socialSharing(title, message);
+    };
+
+    // проверяем, является ли пользователь автором подборки
     isAuthor = () => this.props.collection.author.userId === this.props.userData.userId;
 
     emptyCollection = () => (
@@ -91,10 +92,6 @@ class CollectionDetail extends Component {
                 </div>
             )
     );
-
-    shareLink = (title, message) => () => {
-        socialSharing(title, message);
-    };
 
     render() {
         const {
