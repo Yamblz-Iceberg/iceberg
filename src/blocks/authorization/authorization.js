@@ -85,18 +85,21 @@ class Authorization extends Component {
                         <Button
                             text="facebook"
                             size="max-width"
-                            background="#3b5998"
-                            textColor="#fff"
+                            type="fb"
                             onClick={this.logInFB}
                         />
                         <Button
                             text="вконтакте"
                             size="max-width"
-                            background="#5181b8"
-                            textColor="#fff"
+                            type="vk"
                             onClick={this.logInVK}
                         />
-                        <Button text="яндекс" size="max-width" background="#ffcc00" onClick={this.logInYandex} />
+                        <Button
+                            text="яндекс"
+                            size="max-width"
+                            type="yandex"
+                            onClick={this.logInYandex}
+                        />
                     </section>
                 </div>
             </main>
