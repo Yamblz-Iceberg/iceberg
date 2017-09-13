@@ -6,7 +6,7 @@ import { Icon } from '../../../blocks';
 
 import { hexToRGB } from '../../../utils/shared-functions';
 
-import './create-empty-header.scss';
+import './create-empty-card__header.scss';
 import { cardBlue } from '../../../variables.scss';
 
 import { createCollection, clearCollection } from '../../../reducers/create-collection.reducer';
@@ -17,7 +17,7 @@ import { actions as modalActions } from '../../../reducers/modal.reducer';
 обращается к серверу и создаёт новую коллекцию. Данные берёт из поля
 "createCollection" стора.
 */
-class CreateEmptyHeader extends Component {
+class CreateEmptyCardHeader extends Component {
     static propTypes = {
         user: PropTypes.object.isRequired,
         title: PropTypes.string,
@@ -114,27 +114,31 @@ class CreateEmptyHeader extends Component {
                     buttonText: 'Ок',
                 });
         } else {
+            const {
+                title, color, tags, photo, description, closed, token,
+            } = this.props;
+
             const body = {
-                name: this.props.title,
-                color: hexToRGB(this.props.color || cardBlue),
-                tags: this.props.tags.map(tag => tag.id).reverse(),
+                name: title,
+                color: hexToRGB(color || cardBlue),
+                tags: tags.map(tag => tag.id).reverse(),
             };
-            if (this.props.photo) { body.photo = this.props.photo; }
-            if (this.props.description) { body.description = this.props.description; }
-            if (this.props.closed) { body.closed = this.props.closed; }
-            this.props.createCollection(body, this.props.token, this.changeRoute);
+            if (photo) { body.photo = photo; }
+            if (description) { body.description = description; }
+            if (closed) { body.closed = closed; }
+            this.props.createCollection(body, token, this.changeRoute);
         }
     };
 
     render() {
         return (
-            <header className="create-empty-header">
+            <header className="create-empty-card__header create-empty-card-header">
                 <span onClick={this.goBack}>
                     <Icon iconName={'arrow-back'} />
                 </span>
-                <h4 className="create-empty-header__title">Новая тема</h4>
+                <h4 className="create-empty-card-header__title">Новая тема</h4>
                 <button
-                    className={`create-empty-header__submit ${this.state.submitStatus ? 'create-empty-header__submit--active' : ''}`}
+                    className={`create-empty-card-header__submit ${this.state.submitStatus ? 'create-empty-card-header__submit--active' : ''}`}
                     onClick={this.handleSubmitData}
                 >Создать</button>
             </header>
@@ -154,4 +158,4 @@ export default connect(
         photo: state.createCollection.photo,
     }),
     { createCollection, ...modalActions, clearCollection },
-)(withRouter(CreateEmptyHeader));
+)(withRouter(CreateEmptyCardHeader));
