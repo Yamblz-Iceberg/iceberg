@@ -3,9 +3,14 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Icon, ContextMenu } from '../../../blocks';
 
-import './create-description-header.scss';
+import './create-card-description__header.scss';
 
-class CreateDescriptionHeader extends Component {
+class CreateCardDescriptionHeader extends Component {
+    static propTypes = {
+        callback: PropTypes.func.isRequired,
+        history: PropTypes.object.isRequired,
+    };
+
     goBack = () => {
         this.props.history.goBack();
     };
@@ -21,15 +26,15 @@ class CreateDescriptionHeader extends Component {
         ];
 
         return (
-            <header className="create-description-header">
+            <header className="create-card-description-header">
                 <span
-                    className="create-description-header__back"
+                    className="create-card-description-header__back"
                     onClick={this.goBack}
                 >
                     <Icon iconName={'arrow-back'} />
                 </span>
-                <h4 className="create-description-header__title">Описание</h4>
-                <div className="create-description-header__menu-wrapper">
+                <h4 className="create-card-description-header__title">Описание</h4>
+                <div className="create-card-description-header__menu-wrapper">
                     <ContextMenu iconColor="#000" items={contextMenuItems} />
                 </div>
             </header>
@@ -37,9 +42,4 @@ class CreateDescriptionHeader extends Component {
     }
 }
 
-CreateDescriptionHeader.propTypes = {
-    callback: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired,
-};
-
-export default withRouter(CreateDescriptionHeader);
+export default withRouter(CreateCardDescriptionHeader);

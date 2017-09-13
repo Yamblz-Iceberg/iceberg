@@ -3,12 +3,23 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { LimitedTextarea } from '../';
-import CreateDescriptionHeader from './header/create-description-header';
+import CreateCardDescriptionHeader from './__header/create-card-description__header';
 import { updateDescription } from '../../reducers/create-collection.reducer';
 
-import './create-description.scss';
+import './create-card-description.scss';
 
+/*
+Компонент экрана добавления описания при создании коллекции.
+Состоит из шапки с кнопкой перехода на экран создания коллекции
+и контекстным меню с возможностью очистить описание, ограниченным полем "textarea".
+Дочерний компонент "textarea" работает с полем "createCollection" из "redux state"
+*/
 class CreateDescription extends Component {
+    static propTypes = {
+        updateDescription: PropTypes.func.isRequired,
+        description: PropTypes.string.isRequired,
+    }
+
     constructor() {
         super();
         this.state = {
@@ -33,9 +44,9 @@ class CreateDescription extends Component {
 
     render() {
         return (
-            <main className="create-description">
-                <CreateDescriptionHeader callback={this.resetTextContent} />
-                <div className="create-description__limited-textarea">
+            <main className="create-card-description">
+                <CreateCardDescriptionHeader callback={this.resetTextContent} />
+                <div className="create-card-description__limited-textarea">
                     <LimitedTextarea
                         max={300}
                         handleChange={this.handleTextContentChange}
@@ -47,11 +58,6 @@ class CreateDescription extends Component {
         );
     }
 }
-
-CreateDescription.propTypes = {
-    updateDescription: PropTypes.func.isRequired,
-    description: PropTypes.string.isRequired,
-};
 
 export default connect(
     state => ({ description: state.createCollection.description }),

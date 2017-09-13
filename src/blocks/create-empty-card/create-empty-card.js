@@ -5,21 +5,21 @@ import { connect } from 'react-redux';
 
 import { Button, Icon } from '../../blocks';
 import { CreateCard, Option, ToggleText } from '../../blocks';
-import CreateEmptyHeader from './header/create-empty-header';
+import CreateEmptyHeader from './__header/create-empty-card__header';
 
 import {
     updateTitle,
     updateSwitcher,
 } from '../../reducers/create-collection.reducer';
 
-import './create-empty.scss';
+import './create-empty-card.scss';
 
 /*
 Компонент экрана создания новой коллекции. Состоит из хедера, карточки создания
 коллекции, кнопки с переходом на экран редактирования описания и options элементов.
 Дочерние компоненты работают с полем "createCollection" стора.
 */
-class CreateEmpty extends Component {
+class CreateEmptyCard extends Component {
     static propTypes = {
         description: PropTypes.string,
         title: PropTypes.string,
@@ -76,22 +76,22 @@ class CreateEmpty extends Component {
         ];
 
         const editDescriptionIcon = (
-            <NavLink to={'/add-description'} className="create-empty__edit-description">
+            <NavLink to={'/add-description'} className="create-empty-card__edit-description">
                 <Icon iconName={'edit'} />
             </NavLink>
         );
 
         return (
-            <div className="create-empty">
+            <div className="create-empty-card">
                 <CreateEmptyHeader />
-                <div className="create-empty__card-wrapper">
+                <div className="create-empty-card__card-wrapper">
                     <CreateCard data={createCardProps} />
                 </div>
-                {description === ''
+                { description === ''
                     ? (
                         <NavLink
                             to={'/add-description'}
-                            className="create-empty__add-description"
+                            className="create-empty-card__add-description"
                         >
                             <Button
                                 icon={<Icon iconName={'plus'} />}
@@ -101,7 +101,7 @@ class CreateEmpty extends Component {
                         </NavLink>
                     )
                     : (
-                        <div className="create-empty__toggle-text">
+                        <div className="create-empty-card__toggle-text">
                             <ToggleText
                                 text={description}
                                 component={editDescriptionIcon}
@@ -130,4 +130,4 @@ export default connect(
         data: state.createCollection,
     }),
     { updateTitle, updateSwitcher },
-)(CreateEmpty);
+)(CreateEmptyCard);
