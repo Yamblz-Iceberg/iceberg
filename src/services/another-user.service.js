@@ -1,17 +1,13 @@
-export const fetchUser = (token, id) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-    });
+import { fetchConstructor } from './../utils/shared-functions';
 
-    return fetch(`https://iceberg-project.herokuapp.com/users/${id}`, { headers })
-        .then(res => res.json());
+export const fetchUser = (token, id) => {
+    const request = `users/${id}`;
+
+    return fetchConstructor(token, request).then(res => res.json());
 };
 
 export const getSavedCollectionsFetch = (token, id) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-    });
+    const request = `users/bookmarks/createdCollections?userId=${id}`;
 
-    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/createdCollections?userId=${id}`, { headers })
-        .then(res => res.json());
+    return fetchConstructor(token, request).then(res => res.json());
 };

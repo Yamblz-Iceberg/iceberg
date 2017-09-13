@@ -1,37 +1,31 @@
 import { CLIENT_ID, CLIENT_SECRET } from '../config';
+import { fetchConstructor } from './../utils/shared-functions';
 
 const encodedAuth = window.btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
 
 export const postRegisterDemoUser = (userId, password, firstName, lastName) => {
-    const headers = new Headers({
-        Authorization: `Basic ${encodedAuth}`,
-        'Content-Type': 'application/json',
-    });
+    const request = 'register/demo';
+    const body = JSON.stringify({ userId, password, firstName, lastName });
 
-    return fetch('https://iceberg-project.herokuapp.com/register/demo', {
-        method: 'post',
-        body: JSON.stringify({ userId, password, firstName, lastName }),
-        headers,
-    }).then(res => res.json());
+    return fetchConstructor(encodedAuth, request, 'post', body).then(res => res.json());
 };
 
 export const postRefreshToken = (refreshToken) => {
-    const data = `grant_type=refresh_token&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&refresh_token=${refreshToken}`;
-    return fetch('https://iceberg-project.herokuapp.com/oauth/token', {
-        method: 'post',
-        body: data,
-    }).then(res => res.json());
+    const body = `grant_type=refresh_token&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&refresh_token=${refreshToken}`;
+    const request = 'oauth/token';
+
+    return fetchConstructor(null, request, 'post', body).then(res => res.json());
 };
 
 export const putLogOut = (accessToken, refreshToken) => {
-    const headers = new Headers({
-        Authorization: `Basic ${encodedAuth}`,
-        'Content-Type': 'application/json',
-    });
+    const otherHeaders = [
+        {
+            name: 'Content-Type',
+            value: 'application/json',
+        },
+    ];
+    const body = JSON.stringify({ accessToken, refreshToken });
+    const request = 'register/logout';
 
-    return fetch('https://iceberg-project.herokuapp.com/register/logout', {
-        method: 'put',
-        body: JSON.stringify({ accessToken, refreshToken }),
-        headers,
-    });
+    return fetchConstructor(encodedAuth, request, 'put', body, otherHeaders).then(res => res.json());
 };

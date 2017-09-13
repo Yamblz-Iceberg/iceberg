@@ -1,3 +1,5 @@
+import { SERVER_URL } from './../config';
+
 /*
 Если переданная строка – цвет в hex, то функция 
 возвращает его в форме RGB.
@@ -118,4 +120,34 @@ export const setLinkAsOpenInList = (links, id) => {
     const editindLink = editedLinksList[links.findIndex(x => x._id === id)];
     editindLink.opened = true;
     return editedLinksList;
+};
+
+/**
+ * Конструктор для запросов на сервер
+ * @param {string} token - token пользователя
+ * @param {string} request - url запроса
+ * @param {string} methodInput - метод запроса
+ * @param {any} bodyInput - тело запроса
+ * @param {array} otherHeaders - список дополнительных заголовков вида [{ name: '', value: '' }]
+ */
+export const fetchConstructor = (token, request, methodInput, bodyInput, otherHeaders) => {
+    const headers = new Headers();
+
+    if (token) {
+        headers.append('Authorization', `Bearer ${token}`);
+    }
+
+    if (otherHeaders) {
+        otherHeaders.map(header => headers.append(header.name, header.value));
+    }
+
+    const init = { headers };
+    if (methodInput) {
+        init.method = methodInput;
+    }
+    if (bodyInput) {
+        init.body = bodyInput;
+    }
+
+    return fetch(`${SERVER_URL}/${request}`, init);
 };

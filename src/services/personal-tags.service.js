@@ -1,12 +1,13 @@
-export const putTags = (tags, token) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-    });
+import { fetchConstructor } from './../utils/shared-functions';
 
-    return fetch('https://iceberg-project.herokuapp.com/tags/personal/', {
-        method: 'put',
-        body: JSON.stringify({ tags }),
-        headers,
-    });
+export const putTags = (tags, token) => {
+    const otherHeaders = [
+        {
+            name: 'Content-Type',
+            value: 'application/json',
+        },
+    ];
+    const body = JSON.stringify({ tags });
+    const request = 'tags/personal/';
+    return fetchConstructor(token, request, 'put', body, otherHeaders);
 };

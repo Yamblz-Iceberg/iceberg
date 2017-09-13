@@ -1,8 +1,6 @@
-export const fetchFeed = (queryParam, token) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-    });
+import { fetchConstructor } from './../utils/shared-functions';
 
-    return fetch(`https://iceberg-project.herokuapp.com/feed?sort=${queryParam}`, { headers })
-        .then(res => res.json());
+export const fetchFeed = (queryParam, token) => {
+    const request = `feed?sort=${queryParam}`;
+    return fetchConstructor(token, request).then(res => res.json());
 };

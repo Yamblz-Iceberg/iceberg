@@ -1,8 +1,6 @@
-export const fetchUser = (token) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-    });
+import { fetchConstructor } from './../utils/shared-functions';
 
-    return fetch('https://iceberg-project.herokuapp.com/users/', { headers })
-        .then(res => res.json());
+export const fetchUser = (token) => {
+    const request = 'users/';
+    return fetchConstructor(token, request).then(res => res.json());
 };

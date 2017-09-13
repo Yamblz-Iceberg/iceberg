@@ -1,41 +1,21 @@
-export const getCollectionFetch = (collectionId, token) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-    });
+import { fetchConstructor } from './../utils/shared-functions';
 
-    return fetch(`https://iceberg-project.herokuapp.com/collections/${collectionId}`, { headers })
-        .then(res => res.json());
+export const getCollectionFetch = (collectionId, token) => {
+    const request = `collections/${collectionId}`;
+    return fetchConstructor(token, request).then(res => res.json());
 };
 
 export const removeCollectionFetch = (id, token) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-    });
-
-    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/createdCollections/${id}`, {
-        headers,
-        method: 'delete',
-    });
+    const request = `users/bookmarks/createdCollections/${id}`;
+    return fetchConstructor(token, request, 'delete');
 };
 
 export const setCollectionAsSavedFetch = (id, token) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-    });
-
-    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/savedCollections/${id}`, {
-        headers,
-        method: 'put',
-    });
+    const request = `users/bookmarks/savedCollections/${id}`;
+    return fetchConstructor(token, request, 'put');
 };
 
 export const deleteCollectionFromSavedFetch = (id, token) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-    });
-
-    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/savedCollections/${id}`, {
-        headers,
-        method: 'delete',
-    });
+    const request = `users/bookmarks/savedCollections/${id}`;
+    return fetchConstructor(token, request, 'delete');
 };

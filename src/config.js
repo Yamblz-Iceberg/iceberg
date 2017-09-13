@@ -1,4 +1,4 @@
-const SERVER = 'https://iceberg-project.herokuapp.com';
+const SERVER_URL = 'https://iceberg-project.herokuapp.com';
 
 const CLIENT_SECRET = 'SomeRandomCharsAndNumbers';
 
@@ -17,5 +17,5 @@ const USER_DATA = localStorage.getItem('IcebergUserData') !== null
     ? JSON.parse(localStorage.getItem('IcebergUserData'))
     : null;
 
-export { SERVER, CLIENT_SECRET, CLIENT_ID, USER_DATA, YANDEX_APP_ID, VK_APP_ID, FB_APP_ID };
+export { SERVER_URL, CLIENT_SECRET, CLIENT_ID, USER_DATA, YANDEX_APP_ID, VK_APP_ID, FB_APP_ID };
 

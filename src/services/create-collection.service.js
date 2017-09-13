@@ -1,22 +1,19 @@
+import { fetchConstructor } from './../utils/shared-functions';
+
 export const postCollection = (data, token) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-    });
-    return fetch('https://iceberg-project.herokuapp.com/collections/', {
-        method: 'post',
-        body: JSON.stringify(data),
-        headers,
-    });
+    const otherHeaders = [
+        {
+            name: 'Content-Type',
+            value: 'application/json',
+        },
+    ];
+    const body = JSON.stringify(data);
+    const request = 'collections';
+
+    return fetchConstructor(token, request, 'post', body, otherHeaders).then(res => res.json());
 };
 
 export const postHashtagToSaved = (name, token) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-    });
-
-    return fetch(`https://iceberg-project.herokuapp.com/tags/${name}`, {
-        headers,
-        method: 'post',
-    }).then(res => res.json());
+    const request = `tags/${name}`;
+    return fetchConstructor(token, request, 'post').then(res => res.json());
 };
