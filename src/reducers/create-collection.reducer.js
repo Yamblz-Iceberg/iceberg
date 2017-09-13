@@ -28,6 +28,7 @@ const addHashTag = tag =>
 const deleteHashTag = id => ({ type: DELETE_HASHTAG, payload: id });
 const editHashTag = (id, name) => ({ type: EDIT_HASHTAG, payload: { id, name } });
 const putCollection = () => ({ type: PUT_COLLECTION });
+const addPhoto = data => ({ type: ADD_IMAGE, color: data.color, photo: data.photo });
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -85,10 +86,10 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-export const addImage = data => dispatch =>
-    dispatch({ type: ADD_IMAGE, color: data.color, photo: data.photo });
+const addImage = data => dispatch =>
+    dispatch(addPhoto(data));
 
-export const createCollection = (data, token, callback) => (
+const createCollection = (data, token, callback) => (
     (dispatch) => {
         postCollection(data, token)
             .then(res => res.json())
@@ -97,7 +98,7 @@ export const createCollection = (data, token, callback) => (
     }
 );
 
-export const createHashtag = (name, token) => (
+const createHashtag = (name, token) => (
     (dispatch) => {
         postHashtagToSaved(name, token).then((result) => {
             dispatch(addHashTag(result.tag));
@@ -114,4 +115,16 @@ export {
     deleteHashTag,
     editHashTag,
     clearCollection,
+    addImage,
+    createCollection,
+    createHashtag,
+    UPDATE_DESCRIPTION,
+    UPDATE_TITLE,
+    UPDATE_SWITCHER,
+    ADD_IMAGE,
+    ADD_HASHTAG,
+    DELETE_HASHTAG,
+    EDIT_HASHTAG,
+    PUT_COLLECTION,
+    CLEAR_COLLECTION,
 };
