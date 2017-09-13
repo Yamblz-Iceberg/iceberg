@@ -10,6 +10,12 @@ import './authorization.scss';
 import { startAuth } from '../../reducers/app.reducer';
 
 class Authorization extends Component {
+    static propTypes = {
+        history: PropTypes.object.isRequired,
+        authorization: PropTypes.object.isRequired,
+        startAuth: PropTypes.func.isRequired,
+        showModal: PropTypes.func.isRequired,
+    };
     /* eslint class-methods-use-this: ["error", { "exceptMethods": ["openLink"] }] */
     openLink(href, readerMode) {
         if (window.cordova) {
@@ -106,13 +112,6 @@ class Authorization extends Component {
         );
     }
 }
-
-Authorization.propTypes = {
-    history: PropTypes.object.isRequired,
-    authorization: PropTypes.object.isRequired,
-    startAuth: PropTypes.func.isRequired,
-    showModal: PropTypes.func.isRequired,
-};
 
 export default connect(
     state => ({
