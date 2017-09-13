@@ -10,7 +10,7 @@ import { setCollectionAsSaved, deleteCollectionFromSaved } from '../../../reduce
 import { HashTape, Icon, Button, CardFooter, ToggleText } from '../../../blocks';
 import { socialSharing } from '../../../utils/shared-functions';
 
-import './collection-detail-info.scss';
+import './collection-detail__card.scss';
 
 class CollectionDetailInfo extends Component {
     static propTypes = {
@@ -65,28 +65,28 @@ class CollectionDetailInfo extends Component {
         const hyphenateText = text => (enText.hyphenateText(ruText.hyphenateText(text, 10), 10));
         return (
             <section>
-                <div className="collection-detail-info">
-                    <div className="collection-detail-card">
+                <div>
+                    <div className="collection-detail__card">
                         <div
-                            className="collection-detail-card__img"
+                            className="collection-detail__card-img"
                             style={{ backgroundImage: `url(${collection.photo})` }}
                         />
 
-                        <div className="collection-detail-card__info">
-                            <div className="collection-detail-card__tape">
+                        <div className="collection-detail__card-info">
+                            <div className="collection-detail__card-tape">
                                 <HashTape hashes={collection.tags} size="small" />
                             </div>
-                            <div className="collection-detail-card__header">
-                                <h2 className="collection-detail-card__title">
+                            <div className="collection-detail__card-header">
+                                <h2 className="collection-detail__card-title">
                                     { hyphenateText(collection.name) }
                                     { collection.closed && (
-                                        <span className="collection-detail-card__lock-icon-wrapper">
+                                        <span className="collection-detail__card-lock-icon-wrapper">
                                             <Icon iconColor="white" iconName="lock" />
                                         </span>
                                     ) }
                                 </h2>
                             </div>
-                            <div className="collection-detail-card__footer">
+                            <div className="collection-detail__card-footer">
                                 <CardFooter
                                     idCard={collection._id}
                                     avatarOptions={avatarOptions}
@@ -101,12 +101,12 @@ class CollectionDetailInfo extends Component {
                             </div>
                         </div>
 
-                        <div className="collection-detail-card__overlay" />
+                        <div className="collection-detail__card-overlay" />
                     </div>
 
                     <ToggleText text={this.props.collection.description} />
 
-                    <div className="collection-detail-actions">
+                    <div className="collection-detail__actions">
                         <Button
                             onClick={this.shareLink(collection.name, collection.description)}
                             icon={<Icon iconName={'share'} />}
@@ -114,7 +114,7 @@ class CollectionDetailInfo extends Component {
                             size="max-width"
                         />
                         { collection.author.userId === userData.userId
-                            ? <button className="collection-detail-actions__add-link" onClick={this.createLink}>
+                            ? <button className="collection-detail__actions-add-link" onClick={this.createLink}>
                                 <Icon iconName={'link'} />
                                 <Icon iconName={'plus'} />
                             </button>

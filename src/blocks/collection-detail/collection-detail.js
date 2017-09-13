@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Tabs, CollectionDetailLinks, Button, Icon, Preloader } from '../../blocks';
+import { Tabs, Button, Icon, Preloader } from '../../blocks';
 import { getCollection } from '../../reducers/collection.reducer';
 import { hideLoader, showLoader } from '../../reducers/loader.reducer';
 import { socialSharing } from '../../utils/shared-functions';
 import { putTags } from '../../services/personal-tags.service';
 
-import CollectionDetailInfo from './info/collection-detail-info';
 import CollectionDetailHeader from './__header/collection-detail__header';
+import CollectionDetailInfo from './__card/collection-detail__card';
+import CollectionDetailLinks from './__links/collection-detail__links';
 
 import './collection-detail.scss';
 

@@ -7,7 +7,6 @@ export { default as ListGroup } from './list-group';
 export { default as CreateCard } from './create-card';
 export { default as Option } from './option';
 export { default as LimitedTextarea } from './limited-textarea';
-export { default as CollectionDetailLinks } from './collection-detail/links/index';
 export { default as ModalTemplate } from './modal-template';
 export { default as ModalError } from './modal-error';
 export { default as Modal } from './modal-root';

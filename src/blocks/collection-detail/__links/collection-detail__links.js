@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { LinkCard, Preloader } from './../../../blocks';
 
-import './collection-detail-links.scss';
+import './collection-detail__links.scss';
 
 class CollectionDetailLinks extends Component {
     static propTypes = {
@@ -31,10 +31,10 @@ class CollectionDetailLinks extends Component {
             );
         }
         return (
-            <section className="collection-detail-links">
+            <section className="collection-detail__links">
                 {
                     filteredLinks.map(link => (
-                        <div className="collection-detail-links__item" key={link._id}>
+                        <div className="collection-detail__links-item" key={link._id}>
                             <LinkCard data={{ ...link }} />
                         </div>
                     ))
