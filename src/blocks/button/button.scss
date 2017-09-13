@@ -8,12 +8,14 @@
     border: 0;
     border-radius: 4px;
     outline-color: yellow;
-    color: #000;
+    color: #000000;
+
     &__wrap {
         display: flex;
         width: 100%;
         justify-content: center;
     }
+
     &__text {
         * + & {
             margin-left: 10px;
@@ -26,29 +28,36 @@
     // Модификаторы для цвета
     &--disable {
         background: #e6e6e6;
-        color: #666;
+        color: #666666;
     }
+
     &--light {
         background: transparent;
         border: 2px solid $border-gray;
     }
+
     &--transparent {
         background-color: transparent;
     }
+
     &--yellow {
         background-color: $main-yellow;
     }
+
     &--fb {
         background-color: $fb;
         color: white;
     }
+
     &--vk {
         background-color: $vk;
         color: white;
     }
+
     &--yandex {
         background-color: $yandex;
     }
+
     &--white {
         background-color: white;
     }
@@ -58,15 +67,18 @@
         padding-left: 16px;
         padding-right: 16px;
     }
+
     &--medium {
         display: flex;
         justify-content: center;
         width: 122px;
+
         &.button--disable {
             background: transparent;
             color: rgba(0, 0, 0, 0.24);
         }
     }
+
     &--max-width {
         padding: 0;
         width: 100%;

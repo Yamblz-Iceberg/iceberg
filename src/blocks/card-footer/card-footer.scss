@@ -13,7 +13,7 @@
         display: inline-block;
         align-items: center;
         margin-left: 8px;
-        color: #fff;
+        color: #ffffff;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
@@ -22,7 +22,7 @@
 
     &__actions {
         display: flex;
-        color: #fff;
+        color: #ffffff;
         width: 50%;
         justify-content: flex-end;
     }
@@ -31,7 +31,8 @@
         margin-right: 20px;
     }
 
-    &__save-action, &__link-action {
+    &__save-action,
+    &__link-action {
         display: flex;
         align-items: center;
 

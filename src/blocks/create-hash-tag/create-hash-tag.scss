@@ -1,4 +1,4 @@
-@import './../../variables';
+@import "./../../variables";
 
 .create-hash-tag {
     display: inline-flex;
@@ -10,8 +10,9 @@
     height: 30px;
     border: none;
     border-radius: 50px;
-    background-color: rgba(0,0,0, .2);
+    background-color: rgba(0, 0, 0, 0.2);
     color: white;
+
     &:last-child {
         margin-right: 0;
     }
@@ -30,12 +31,15 @@
         max-width: 142px;
         background-color: transparent;
         color: white;
+
         &[value=""] {
             padding-right: 0;
         }
+
         &:focus::placeholder {
             color: transparent;
         }
+
         &::placeholder {
             color: white;
         }

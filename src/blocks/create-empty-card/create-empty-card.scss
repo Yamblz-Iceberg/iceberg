@@ -2,6 +2,7 @@
     &__card-wrapper {
         padding: 20px 20px 0;
     }
+
     &__add-description {
         display: flex;
         justify-content: center;
@@ -9,6 +10,7 @@
         text-align: center;
         text-decoration: none;
     }
+
     &__edit-description {
         display: inline-flex;
         align-items: center;
@@ -20,6 +22,7 @@
         width: 20px;
         height: 20px;
     }
+
     &__toggle-text {
         .text-toggle {
             &__text-wrapper {

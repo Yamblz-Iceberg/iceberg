@@ -2,6 +2,7 @@
     position: relative;
     display: flex;
     z-index: 500;
+
     &__overlay {
         position: fixed;
         top: 0;
@@ -10,12 +11,13 @@
         right: 0;
         z-index: 500;
     }
+
     &__list {
         position: absolute;
         top: -5px;
         right: -6px;
         flex-direction: column;
-        background-color: #fff;
+        background-color: #ffffff;
         box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.2);
         padding: 10px 16px;
         border-radius: 2px;
