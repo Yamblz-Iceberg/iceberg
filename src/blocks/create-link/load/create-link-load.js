@@ -45,7 +45,7 @@ class CreateLinkLoad extends Component {
         <Button
             text="комментарий"
             icon={<Icon iconName="plus" />}
-            background="#fff"
+            type="white"
             size="max-width"
             onClick={this.addComment}
         />

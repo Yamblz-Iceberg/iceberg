@@ -50,7 +50,7 @@ class CreatingSuccessfully extends Component {
         handleClickToCollection(e, cardId, this.props.history);
     };
 
-    shareLink = (title, message) => {
+    shareLink = (title, message) => () => {
         socialSharing(title, message);
     };
 
@@ -68,7 +68,7 @@ class CreatingSuccessfully extends Component {
                 </div>
                 <div className="creating-successfully__button-wrapper">
                     <Button
-                        onClick={() => this.shareLink(collection.name, collection.description)}
+                        onClick={this.shareLink(collection.name, collection.description)}
                         icon={<Icon iconName={'share'} />}
                         text="Поделиться"
                     />

@@ -16,7 +16,7 @@ class ModalError extends Component {
             <h3 className="modal__title">{title}</h3>
             <p className="modal__text">{text}</p>
             <div className="modal__buttons-block">
-                <Button type={'light'} text={buttonText} onClick={this.handleClose} />
+                <Button type="light" text={buttonText} onClick={this.handleClose} />
             </div>
         </div>);
         return (<ModalTemplate content={content} />);

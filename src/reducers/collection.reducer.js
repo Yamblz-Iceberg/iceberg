@@ -155,4 +155,12 @@ export {
     clearCollection,
     removeCollection,
     deleteLinkFromCollection,
+    FETCH_COLLECTION,
+    REMOVE_COLLECTION,
+    CHANGE_SAVED_STATUS,
+    CHANGE_LIKED_STATUS_BY_ID,
+    CHANGE_LINK_SAVED_STATUS_BY_ID,
+    CHANGE_LINK_OPENED_STATUS_BY_ID,
+    REMOVE_FROM_COLLECTION,
+    CLEAR_COLLECTION,
 };

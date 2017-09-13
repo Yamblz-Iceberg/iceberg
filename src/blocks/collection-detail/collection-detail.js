@@ -148,7 +148,7 @@ class CollectionDetail extends Component {
                                     <Button
                                         icon={<Icon iconName={'link'} />}
                                         text="добавить ссылку"
-                                        type="max-width"
+                                        size="max-width"
                                     />
                                 </div>
                                 : null }
