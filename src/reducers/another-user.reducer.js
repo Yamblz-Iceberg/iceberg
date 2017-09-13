@@ -42,4 +42,6 @@ export {
     reducer,
     userLoader,
     collectionsLoader,
+    FETCH_ANOTHER_USER,
+    FETCH_ANOTHER_USER_COLLECTIONS,
 };
