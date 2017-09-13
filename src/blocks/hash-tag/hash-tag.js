@@ -16,7 +16,7 @@ class HashTag extends Component {
 
         this.props.changeSearch(`#${this.props.name}`);
         this.props.history.push({ pathname: '/search' });
-    }
+    };
 
     render() {
         const { name, size } = this.props;
