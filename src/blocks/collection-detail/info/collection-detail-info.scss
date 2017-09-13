@@ -6,6 +6,11 @@
     padding-top: 56px;
     overflow: hidden;
 
+    &__lock-icon-wrapper {
+        display: inline-block;
+        margin-left: 10px;
+    }
+
     &__img {
         background-color: $blue;
         background-size: cover;
