@@ -6,7 +6,7 @@ import { Icon } from '../../../blocks';
 
 import { hexToRGB } from '../../../utils/shared-functions';
 
-import './create-empty__header.scss';
+import './create-empty-card__header.scss';
 import { cardBlue } from '../../../variables.scss';
 
 import { createCollection, clearCollection } from '../../../reducers/create-collection.reducer';
@@ -17,7 +17,7 @@ import { actions as modalActions } from '../../../reducers/modal.reducer';
 обращается к серверу и создаёт новую коллекцию. Данные берёт из поля
 "createCollection" стора.
 */
-class CreateEmptyHeader extends Component {
+class CreateEmptyCardHeader extends Component {
     static propTypes = {
         user: PropTypes.object.isRequired,
         title: PropTypes.string,
@@ -128,13 +128,13 @@ class CreateEmptyHeader extends Component {
 
     render() {
         return (
-            <header className="create-empty__header create-empty-header">
+            <header className="create-empty-card__header create-empty-card-header">
                 <span onClick={this.goBack}>
                     <Icon iconName={'arrow-back'} />
                 </span>
-                <h4 className="create-empty-header__title">Новая тема</h4>
+                <h4 className="create-empty-card-header__title">Новая тема</h4>
                 <button
-                    className={`create-empty-header__submit ${this.state.submitStatus ? 'create-empty-header__submit--active' : ''}`}
+                    className={`create-empty-card-header__submit ${this.state.submitStatus ? 'create-empty-card-header__submit--active' : ''}`}
                     onClick={this.handleSubmitData}
                 >Создать</button>
             </header>
@@ -154,4 +154,4 @@ export default connect(
         photo: state.createCollection.photo,
     }),
     { createCollection, ...modalActions, clearCollection },
-)(withRouter(CreateEmptyHeader));
+)(withRouter(CreateEmptyCardHeader));

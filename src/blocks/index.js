@@ -16,7 +16,7 @@ export { default as AccountProfile } from './account-profile';
 export { default as UserProfile } from './user-profile';
 export { default as CollectionDetail } from './collection-detail';
 export { default as CreateDescription } from './create-description';
-export { default as CreateEmpty } from './create-empty';
+export { default as CreateEmptyCard } from './create-empty-card';
 export { default as CreateLink } from './create-link';
 export { default as Search } from './search';
 export { default as Home } from './home';

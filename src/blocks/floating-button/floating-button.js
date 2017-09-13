@@ -9,7 +9,7 @@ import './floating-button.scss';
 class FloatingButton extends Component {
     onButtonClick = () => {
         if (typeof this.props.userData.accType !== 'undefined' && this.props.userData.accType !== 'demo') {
-            this.props.history.push({ pathname: '/create-empty' });
+            this.props.history.push({ pathname: '/create-empty-card' });
         } else {
             localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
             this.props.history.push('/authorization');
