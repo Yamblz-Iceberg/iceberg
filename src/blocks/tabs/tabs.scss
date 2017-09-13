@@ -1,12 +1,14 @@
-@import '../../variables';
+@import "../../variables";
 
 .tabs {
     &__item {
         display: inline-block;
         width: 50%;
+
         &:hover {
             text-decoration: none;
         }
+
         &--active {
             .tabs__link {
                 color: black;
@@ -31,7 +33,7 @@
         margin: 0;
         padding: 0;
         letter-spacing: normal;
-        
+
         > * {
             flex-grow: 1;
             list-style-type: none;
@@ -45,6 +47,6 @@
         width: 50%;
         height: 3px;
         background-color: $main-yellow;
-        transition: left .5s;
+        transition: left 0.5s;
     }
 }

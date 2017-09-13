@@ -1,14 +1,15 @@
-@import '../../variables';
+@import "../../variables";
 
 .switch-button {
     position: relative;
     display: inline-block;
+
     &__label {
         display: block;
         position: relative;
         width: 34px;
         height: 14px;
-        background: #fff;
+        background: #ffffff;
         cursor: pointer;
         will-change: background;
 
@@ -17,17 +18,18 @@
             height: 16px;
             border-radius: 100px;
             transition: 0s background 0.25s ease-in-out;
+
             &::before,
             &::after {
-                content: '';
+                content: "";
                 display: block;
                 position: absolute;
-                background-color: #fff;
+                background-color: #ffffff;
                 border-radius: 100px;
                 transition: all 0.25s ease-in-out;
             }
-            
-            &::before{
+
+            &::before {
                 top: 0;
                 left: 0;
                 height: 100%;
@@ -39,7 +41,7 @@
             &::after {
                 top: 0;
                 left: 1px;
-                transform: translateX(0px);
+                transform: translateX(0);
                 height: 16px;
                 width: 16px;
                 box-shadow: 0 10px 30px rgba(black, 0.2);
@@ -60,7 +62,7 @@
 
             &::before,
             &::after {
-                content: '';
+                content: "";
                 display: block;
                 position: absolute;
                 top: 0;
@@ -75,7 +77,7 @@
                 width: 20px;
                 background-color: #eaeaeb;
                 transition: all 0.25s ease-in-out;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06), 0 2px 3px rgba(0,0,0, .3);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06), 0 2px 3px rgba(0, 0, 0, 0.3);
             }
 
             &::before {
@@ -114,7 +116,7 @@
                 }
 
                 &::before {
-                    transform:  translateX(15px) scale(0.1)
+                    transform: translateX(15px) scale(0.1);
                 }
             }
 

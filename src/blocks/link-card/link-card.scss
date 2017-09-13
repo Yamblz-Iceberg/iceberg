@@ -12,7 +12,6 @@
     background-position: center;
     background-repeat: no-repeat;
     text-decoration: none;
-    background-position: center;
 
     &__overlay {
         position: absolute;
@@ -31,22 +30,23 @@
     }
 
     &__user-info {
-        padding-left: 6px;
         display: flex;
         justify-content: center;
         flex-direction: column;
+        padding-left: 6px;
     }
 
     &__user-name {
         font-size: 14px;
-        color: #fff;
+        color: #ffffff;
         margin: 0;
     }
+
     &__user-rating {
         margin: 0;
         font-size: 8px;
         font-weight: 500;
-        color: #fff;
+        color: #ffffff;
     }
 
     &__title {
@@ -58,18 +58,19 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
-        color: #fff;
+        color: #ffffff;
     }
 
     &__favicon {
         height: 20px;
         max-height: 20px;
     }
-    
+
     &__block {
         display: flex;
         align-items: center;
-        color: #fff;
+        color: #ffffff;
+
         & > span {
             margin-left: 5px;
         }
@@ -93,15 +94,15 @@
     }
 
     &__comment {
-        background-color: #fff;
-        color: #000;
+        background-color: #ffffff;
+        color: #000000;
         margin: 0;
         padding: 16px;
         width: 225px;
         position: absolute;
         top: 55%;
         right: -12px;
-    
+
         > p {
             display: flex;
             display: -webkit-box;
@@ -112,13 +113,14 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
+
             > span {
                 margin-left: 5px;
             }
         }
-    
+
         &::before {
-            content: '‘‘';
+            content: "‘‘";
             color: #ffe200;
             font-size: 70px;
             font-weight: bold;

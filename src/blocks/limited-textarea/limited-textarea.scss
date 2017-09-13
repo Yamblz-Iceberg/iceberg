@@ -1,5 +1,6 @@
 .limited-textarea {
     position: relative;
+
     &__counter {
         position: absolute;
         top: 0;
@@ -8,6 +9,7 @@
         font-size: 14px;
         color: #8b8b8b;
     }
+
     &__input {
         padding: 0 20px 40px;
         width: 100%;

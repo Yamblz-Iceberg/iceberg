@@ -11,7 +11,7 @@
     text-align: center;
     text-decoration: none;
     background-color: #414141;
-    color: #fff;
+    color: #ffffff;
 
     &:last-child {
         margin-right: 0;
@@ -19,11 +19,11 @@
 
     &--small {
         min-width: 0;
-        color: #fff;
+        color: #ffffff;
         height: 25px;
         font-size: 12px;
         line-height: 24px;
-        background-color: rgba(0, 0, 0, .5);
+        background-color: rgba(0, 0, 0, 0.5);
         box-shadow: none;
     }
 
