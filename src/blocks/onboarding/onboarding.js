@@ -124,7 +124,7 @@ class Onboarding extends Component {
                 <header className="onboarding__header">
                     <button
                         onClick={this.handleReady}
-                        className="onboarding-link"
+                        className="onboarding__link"
                     >Пропустить</button>
                 </header>
 
@@ -166,7 +166,7 @@ class Onboarding extends Component {
                             && (
                                 <button
                                     onClick={this.prevSlide}
-                                    className="onboarding-link onboarding-slider__prev"
+                                    className="onboarding__link onboarding-slider__prev"
                                 >Назад</button>
                             )
                         }
@@ -188,15 +188,15 @@ class Onboarding extends Component {
                             currentSlide === (slides.length - 1) && <button
                                 onClick={this.handleReady}
                                 className={
-                                    `onboarding-link onboarding-slider__next 
-                                    ${selectedTags.length === 0 ? 'onboarding-link--inactive' : ''}`
+                                    `onboarding__link onboarding-slider__next 
+                                    ${selectedTags.length === 0 ? 'onboarding__link--inactive' : ''}`
                                 }
                             >Готово</button>
                         }
                         {
                             currentSlide !== (slides.length - 1) && <button
                                 onClick={this.nextSlide}
-                                className="onboarding-link onboarding-slider__next"
+                                className="onboarding__link onboarding-slider__next"
                             >Далее</button>
                         }
                     </div>
