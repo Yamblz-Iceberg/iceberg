@@ -4,11 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { Icon, Avatar } from './../../blocks';
-import { setCollectionAsSaved, deleteCollectionFromSaved } from './../../reducers/collection.reducer';
-import { changeSavedStatusOfCardById } from './../../reducers/feed.reducer';
 
 import './card-footer.scss';
-
 import { mainYellow } from './../../variables.scss';
 
 class CardFooter extends Component {
@@ -20,12 +17,7 @@ class CardFooter extends Component {
         linksCount: PropTypes.number.isRequired,
         savedTimesCount: PropTypes.number.isRequired,
         saved: PropTypes.bool,
-        token: PropTypes.any.isRequired,
-        setCollectionAsSaved: PropTypes.func.isRequired,
-        deleteCollectionFromSaved: PropTypes.func.isRequired,
-        changeSavedStatusOfCardById: PropTypes.func.isRequired,
-        userData: PropTypes.object.isRequired,
-        history: PropTypes.any.isRequired,
+        history: PropTypes.object.isRequired,
         isCreatingCard: PropTypes.bool,
     };
 
@@ -34,22 +26,6 @@ class CardFooter extends Component {
         saved: null,
         userId: null,
         isCreatingCard: false,
-    };
-    putToSaved = (e) => {
-        if (typeof this.props.userData.accType !== 'undefined' && this.props.userData.accType !== 'demo') {
-            this.props.setCollectionAsSaved(this.props.idCard, this.props.token);
-            this.props.changeSavedStatusOfCardById(this.props.idCard, true);
-            e.stopPropagation();
-        } else {
-            localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
-            this.props.history.push('/authorization');
-        }
-    };
-
-    delFromSaved = (e) => {
-        this.props.deleteCollectionFromSaved(this.props.idCard, this.props.token);
-        this.props.changeSavedStatusOfCardById(this.props.idCard, false);
-        e.stopPropagation();
     };
 
     goToUserProfile = (e, id) => {
@@ -74,13 +50,13 @@ class CardFooter extends Component {
                         <span>{props.linksCount}</span>
                     </div>
                     {
-                        props.saved && <div className="card-footer__save-action" onClick={this.props.idCard ? this.delFromSaved : null}>
+                        props.saved && <div className="card-footer__save-action" onClick={props.idCard ? props.delFromSaved : null}>
                             <Icon iconName={'save-small'} iconColor={mainYellow} />
                             <span>{props.savedTimesCount}</span>
                         </div>
                     }
                     {
-                        !props.saved && <div className="card-footer__save-action" onClick={this.props.idCard ? this.putToSaved : null}>
+                        !props.saved && <div className="card-footer__save-action" onClick={props.idCard ? props.putToSaved : null}>
                             <Icon iconName={'save-big'} iconColor={'#fff'} />
                             <span>{props.savedTimesCount}</span>
                         </div>
@@ -93,8 +69,5 @@ class CardFooter extends Component {
 
 export default connect(state => ({
     collection: state.collection,
-    token: state.authorization.access_token,
-    userData: state.user.data,
 }),
-{ setCollectionAsSaved, deleteCollectionFromSaved, changeSavedStatusOfCardById },
 )(withRouter(CardFooter));

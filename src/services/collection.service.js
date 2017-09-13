@@ -26,7 +26,7 @@ export const setCollectionAsSavedFetch = (id, token) => {
     return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/savedCollections/${id}`, {
         headers,
         method: 'put',
-    }).then(res => res.json());
+    });
 };
 
 export const deleteCollectionFromSavedFetch = (id, token) => {
@@ -37,5 +37,5 @@ export const deleteCollectionFromSavedFetch = (id, token) => {
     return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/savedCollections/${id}`, {
         headers,
         method: 'delete',
-    }).then(res => res.json());
+    });
 };

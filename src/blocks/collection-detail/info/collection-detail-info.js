@@ -16,8 +16,11 @@ import './collection-detail-info.scss';
 class CollectionDetailInfo extends Component {
     static propTypes = {
         collection: PropTypes.object.isRequired,
+        token: PropTypes.string.isRequired,
         userData: PropTypes.object.isRequired,
         history: PropTypes.any.isRequired,
+        setCollectionAsSaved: PropTypes.func.isRequired,
+        deleteCollectionFromSaved: PropTypes.func.isRequired,
     };
     constructor(props) {
         super(props);
@@ -29,6 +32,26 @@ class CollectionDetailInfo extends Component {
 
     createLink = () => {
         this.props.history.replace({ pathname: '/create-link' });
+    };
+
+    putToSaved = () => {
+        if (typeof this.props.userData.accType !== 'undefined' &&
+        this.props.userData.accType !== 'demo') {
+            this.props.setCollectionAsSaved(
+                this.props.collection._id,
+                this.props.token,
+            );
+        } else {
+            localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
+            this.props.history.push('/authorization');
+        }
+    };
+
+    delFromSaved = () => {
+        this.props.deleteCollectionFromSaved(
+            this.props.collection._id,
+            this.props.token,
+        );
     };
 
     shareLink = (title, message) => () => {
@@ -80,6 +103,8 @@ class CollectionDetailInfo extends Component {
                                     linksCount={collection.links.length}
                                     savedTimesCount={collection.savedTimesCount}
                                     saved={collection.saved}
+                                    putToSaved={this.putToSaved}
+                                    delFromSaved={this.delFromSaved}
                                 />
                             </div>
                         </div>
@@ -113,6 +138,7 @@ class CollectionDetailInfo extends Component {
 export default connect(
     state => ({
         collection: state.collection,
+        token: state.authorization.access_token,
         userData: state.user.data,
     }),
     { setCollectionAsSaved, deleteCollectionFromSaved },
