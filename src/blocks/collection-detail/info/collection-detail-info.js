@@ -31,7 +31,7 @@ class CollectionDetailInfo extends Component {
         this.props.history.replace({ pathname: '/create-link' });
     };
 
-    shareLink = (title, message) => {
+    shareLink = (title, message) => () => {
         socialSharing(title, message);
     };
 
@@ -84,7 +84,7 @@ class CollectionDetailInfo extends Component {
 
                     <div className="collection-detail-actions">
                         <Button
-                            onClick={() => this.shareLink(collection.name, collection.description)}
+                            onClick={this.shareLink(collection.name, collection.description)}
                             icon={<Icon iconName={'share'} />}
                             text="Поделиться"
                             size="max-width"

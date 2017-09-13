@@ -8,6 +8,7 @@
     border: 0;
     border-radius: 4px;
     outline-color: yellow;
+    color: #000;
     &__wrap {
         display: flex;
         width: 100%;
@@ -22,16 +23,36 @@
         font-weight: 500;
         text-transform: uppercase;
     }
-    //TODO убрать important, когда уберем инлайненные стили
-    &--light {
-        background: transparent!important;
-        border: 2px solid $border-gray;
-        color: #000;
-    }
+    // Модификаторы для цвета
     &--disable {
-        background: #e6e6e6!important;
+        background: #e6e6e6;
         color: #666;
     }
+    &--light {
+        background: transparent;
+        border: 2px solid $border-gray;
+    }
+    &--transparent {
+        background-color: transparent;
+    }
+    &--yellow {
+        background-color: $main-yellow;
+    }
+    &--fb {
+        background-color: $fb;
+        color: white;
+    }
+    &--vk {
+        background-color: $vk;
+        color: white;
+    }
+    &--yandex {
+        background-color: $yandex;
+    }
+    &--white {
+        background-color: white;
+    }
+    // Модификаторы для размера
     &--small {
         height: 36px;
         padding-left: 16px;
@@ -41,9 +62,8 @@
         display: flex;
         justify-content: center;
         width: 122px;
-        color: #000;
         &.button--disable {
-            background: transparent!important;
+            background: transparent;
             color: rgba(0, 0, 0, 0.24);
         }
     }

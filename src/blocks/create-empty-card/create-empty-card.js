@@ -96,7 +96,7 @@ class CreateEmptyCard extends Component {
                             <Button
                                 icon={<Icon iconName={'plus'} />}
                                 text="Добавить описание"
-                                background="rgba(255, 255, 255, 0)"
+                                type="transparent"
                             />
                         </NavLink>
                     )
