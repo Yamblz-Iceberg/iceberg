@@ -13,7 +13,6 @@ const UserInfo = ({ user }) => {
         <div className="user-info__background" style={infoStyles} />
         <div className="user-info__text">
             <h4 className="user-info__name">{user.firstName} {user.lastName}</h4>
-            <p className="user-info__description">{user.description}</p>
         </div>
         <div className="user-info__avatar">
             <Avatar photo={user.photo} size="70" />
