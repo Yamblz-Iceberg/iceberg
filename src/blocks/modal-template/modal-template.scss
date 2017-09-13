@@ -6,7 +6,7 @@
         left: 0;
         right: 0;
         padding: 20px;
-        background-color: rgba(0, 0, 0, .2);
+        background-color: rgba(0, 0, 0, 0.2);
         z-index: 1000;
         display: flex;
         justify-content: center;
@@ -20,7 +20,7 @@
         max-width: 320px;
         max-height: 440px;
         border-radius: 10px;
-        background-color: #fff;
+        background-color: #ffffff;
     }
 
     &__header {

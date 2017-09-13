@@ -3,6 +3,7 @@
         display: flex;
         justify-content: space-between;
         padding: 20px;
+
         &--no-text {
             padding-top: 25px;
             padding-bottom: 0;
@@ -43,6 +44,7 @@
             overflow: visible;
             text-overflow: unset;
         }
+
         &__icon {
             svg {
                 transform: rotate(180deg);
