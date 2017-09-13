@@ -70,7 +70,14 @@ class AccountProfileFeedItem extends Component {
         };
 
         const collection = (<div className="account-profile-feed-collection" onClick={e => this.openCollection(e, data._id)}>
-            <div className="account-profile-feed-collection__photo" style={resultStyles} />
+            <div className="account-profile-feed-collection__photo-wrapper">
+                <div className="account-profile-feed-collection__photo" style={resultStyles} />
+                { !data.closed && (
+                    <span className="account-profile-feed-collection__lock-icon-wrapper">
+                        <Icon iconColor="white" iconName="lock" />
+                    </span>
+                ) }
+            </div>
             <div className="account-profile-feed-collection__details">
                 <h5 className="account-profile-feed-collection__title">{data.name || 'Нет названия'}</h5>
                 <div className="account-profile-feed-collection__links-container">
