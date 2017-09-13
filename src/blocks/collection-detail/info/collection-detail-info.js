@@ -7,8 +7,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { setCollectionAsSaved, deleteCollectionFromSaved } from '../../../reducers/collection.reducer';
-import { ToggleText } from '../../index';
-import { HashTape, Icon, Button, CardFooter } from '../../../blocks';
+import { HashTape, Icon, Button, CardFooter, ToggleText } from '../../../blocks';
 import { socialSharing } from '../../../utils/shared-functions';
 
 import './collection-detail-info.scss';
@@ -22,13 +21,6 @@ class CollectionDetailInfo extends Component {
         setCollectionAsSaved: PropTypes.func.isRequired,
         deleteCollectionFromSaved: PropTypes.func.isRequired,
     };
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            showAllText: false,
-        };
-    }
 
     createLink = () => {
         this.props.history.replace({ pathname: '/create-link' });

@@ -1,18 +1,19 @@
-.collection-detail-header {
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    height: 56px;
-    z-index: 10;
-    transition: all 0.3s ease-out;
+.collection-detail {
+    &__header {
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        height: 56px;
+        z-index: 10;
+        transition: all 0.3s ease-out;
 
-    &--fixed {
-        background-color: #fff;
-        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+        &--fixed {
+            background-color: #fff;
+            box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+        }
     }
-
-    &__container {
+    &__header-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -20,17 +21,17 @@
         height: 100%;
     }
 
-    &__block {
+    &__header-block {
         display: flex;
         align-items: center;
         height: 100%;
     }
 
-    &__home-wrap {
+    &__header-home-wrap {
         margin-right: 10px;
     }
 
-    &__title {
+    &__header-title {
         flex-grow: 1;
         font-weight: 500;
         max-width: calc(100% - 100px);
