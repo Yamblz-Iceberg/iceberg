@@ -44,9 +44,9 @@ class CreateDescription extends Component {
 
     render() {
         return (
-            <main className="create-description">
+            <main className="create-card-description">
                 <CreateCardDescriptionHeader callback={this.resetTextContent} />
-                <div className="create-description__limited-textarea">
+                <div className="create-card-description__limited-textarea">
                     <LimitedTextarea
                         max={300}
                         handleChange={this.handleTextContentChange}
