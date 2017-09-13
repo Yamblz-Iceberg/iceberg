@@ -1,5 +1,4 @@
-import { fetchTags } from '../services/onboarding.service';
-import { putTags } from '../services/personal-tags.service';
+import { fetchTags, putTags } from '../services/onboarding.service';
 
 const ADD_TAG = 'ADD_TAG';
 const DELETE_TAG = 'DELETE_TAG';
