@@ -35,6 +35,7 @@ module.exports = merge([{
                                 minimize: true
                             }
                         },
+                        { loader: 'postcss-loader' },
                         { loader: 'sass-loader' }
                     ]
                 })
