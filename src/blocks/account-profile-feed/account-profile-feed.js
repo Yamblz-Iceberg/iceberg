@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import AccountProfileFeedItem from './../feed-item/account-profile-feed-item';
-import ProfileFilter from './../filter/account-profile-filter';
-
-import { Preloader } from './../../../blocks';
+import { AccountProfileFeedItem, Preloader } from '../../blocks';
+import AccountProfileFilter from './__filter/account-profile__filter';
 
 import './account-profile-feed.scss';
 
@@ -14,7 +12,7 @@ class AccountProfileFeed extends Component {
         type: PropTypes.string.isRequired,
         filterItems: PropTypes.array.isRequired,
         loader: PropTypes.bool.isRequired,
-    }
+    };
 
     static defaultProps = {
         data: [],
@@ -48,12 +46,12 @@ class AccountProfileFeed extends Component {
                 <p className="account-profile-feed__message">Здесь пока пусто</p>
             </div>
         );
-    }
+    };
 
     render() {
         return (
             <div>
-                <ProfileFilter items={this.props.filterItems} />
+                <AccountProfileFilter items={this.props.filterItems} />
                 {this.renderFeed()}
             </div>
         );
