@@ -15,7 +15,7 @@ export { default as ToggleText } from './toggle-text';
 export { default as AccountProfile } from './account-profile';
 export { default as UserProfile } from './user-profile';
 export { default as CollectionDetail } from './collection-detail';
-export { default as CreateDescription } from './create-description';
+export { default as CreateCardDescription } from './create-card-description';
 export { default as CreateEmptyCard } from './create-empty-card';
 export { default as CreateLink } from './create-link';
 export { default as Search } from './search';

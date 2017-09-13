@@ -15,7 +15,7 @@ import {
     UserProfile,
     CollectionDetail,
     CreateEmptyCard,
-    CreateDescription,
+    CreateCardDescription,
     CreatingSuccessfully,
     CreateLink,
     Search,
@@ -60,7 +60,7 @@ function onDeviceReady() {
                         <Route path="/create-link" component={CreateLink} />
                         <Route path="/creating-successfully" component={CreatingSuccessfully} />
                         <Route path="/create-empty-card" component={CreateEmptyCard} />
-                        <Route path="/add-description" component={CreateDescription} />
+                        <Route path="/add-description" component={CreateCardDescription} />
                         <Route
                             path="/collection/:id/:filter?"
                             render={({ match }) => (
