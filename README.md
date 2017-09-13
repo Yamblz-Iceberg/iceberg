@@ -22,7 +22,7 @@
 
 #### Имена иконок в `icons-sprite.svg`
 - search
-- themes
+- theme
 - arrow-back
 - arrow-details
 - account

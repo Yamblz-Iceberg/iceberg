@@ -62,10 +62,6 @@ const iconsSizes = {
         width: '14px',
         height: '14px',
     },
-    themes: {
-        width: '20px',
-        height: '20px',
-    },
     share: {
         width: '18px',
         height: '20px',
@@ -90,7 +86,7 @@ const iconsSizes = {
         width: '18px',
         height: '18px',
     },
-    lock: {
+    theme: {
         width: '16px',
         height: '19px',
     },
@@ -145,6 +141,10 @@ const iconsSizes = {
     exit: {
         width: '22px',
         height: '20px',
+    },
+    lock: {
+        width: '16px',
+        height: '21px',
     },
 };
 
