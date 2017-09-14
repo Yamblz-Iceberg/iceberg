@@ -151,3 +151,31 @@ export const fetchConstructor = (token, request, methodInput, bodyInput, otherHe
 
     return fetch(`${SERVER_URL}/${request}`, init);
 };
+
+/**
+ * Функция открывает переданную ссылку в браузере и вызывает 
+ * соответствующие коолбэки при успешном/неуспешном действии
+ * @param {string} href - url для перехода
+ * @param {boolean} readerMode - войти или нет в режим чтения, если он доступен
+ */
+export const showSafariViewController = (
+    href,
+    readerMode,
+    successCallback = () => {},
+    errorCallback = () => {},
+) => {
+    window.SafariViewController.show(
+        {
+            url: href,
+            hidden: false,
+            animated: false,
+            transition: 'curl',
+            enterReaderModeIfAvailable: readerMode,
+            tintColor: '#fff',
+            barColor: '#000',
+            controlTintColor: '#ffffff',
+        },
+        successCallback,
+        errorCallback,
+    );
+};
