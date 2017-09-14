@@ -13,13 +13,17 @@ const Avatar = ({ photo, size, iconColor }) => {
     };
 
     if (photo) {
-        template = (<div className="user__avatar" style={avatarStyles}>
-            <img className="user__photo" src={photo} alt="user" width={size} />
-        </div>);
+        template = (
+            <div className="avatar" style={avatarStyles}>
+                <img className="avatar__photo" src={photo} alt="user" width={size} />
+            </div>
+        );
     } else {
-        template = (<span className="user__avatar--no-photo">
-            <Icon iconName="empty-profile" iconColor={iconColor} iconWidth={size} iconHeight={size} />
-        </span>);
+        template = (
+            <span className="avatar--no-photo">
+                <Icon iconName="empty-profile" iconColor={iconColor} iconWidth={size} iconHeight={size} />
+            </span>
+        );
     }
     return template;
 };
