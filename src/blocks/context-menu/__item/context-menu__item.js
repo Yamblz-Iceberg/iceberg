@@ -1,18 +1,18 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import './context-menu__item.scss';
 
 const ContextMenuItem = ({ item }) =>
-    (<div className="dropdown-menu-item" onClick={() => { item.onClick(); }} >
+    (<div className="context-menu__item" onClick={() => { item.onClick(); }} >
         {
             item.icon !== null
-                ? <div className="dropdown-menu-item__ico">
+                ? <div className="context-menu__item-ico">
                     { item.icon }
                 </div>
                 : null
         }
-        <p className="dropdown-menu-item__title">
+        <p className="context-menu__item-title">
             { item.title }
         </p>
     </div>);
