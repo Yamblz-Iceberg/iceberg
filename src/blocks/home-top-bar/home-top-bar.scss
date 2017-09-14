@@ -1,13 +1,9 @@
-.home-header {
+.home-top-bar {
     height: 56px;
-
-    &__container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 20px;
-        height: 100%;
-    }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
 
     &__block {
         display: flex;
