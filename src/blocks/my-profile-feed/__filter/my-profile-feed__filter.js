@@ -11,9 +11,9 @@ import {
     getSavedCollections,
 } from '../../../reducers/bookmarks.reducer';
 
-import './account-profile__filter.scss';
+import './my-profile-feed__filter.scss';
 
-class AccountProfileFilter extends Component {
+class MyProfileFeedFilter extends Component {
     static propTypes = {
         items: PropTypes.array.isRequired,
         token: PropTypes.string.isRequired,
@@ -47,11 +47,11 @@ class AccountProfileFilter extends Component {
 
     render() {
         const { items } = this.props;
-        return (<div className="account-profile__filter">
-            <div className="account-profile__filter-block">
-                <Icon iconName="filter" iconColor="#000" iconHeight="20" iconWidth="20" />
+        return (<div className="my-profile__filter">
+            <div className="my-profile__filter-block">
+                <Icon iconName="filter" />
             </div>
-            <div className="account-profile__filter-block account-profile__filter-block--dropdown-wrap">
+            <div className="my-profile__filter-block my-profile__filter-block--dropdown-wrap">
                 <Dropdown items={items} onSelect={(item) => { this.filteringData(item); }} />
             </div>
         </div>);
@@ -68,4 +68,4 @@ export default connect(
         getSavedCollections,
         getAddedLinks,
     },
-)(AccountProfileFilter);
+)(MyProfileFeedFilter);
