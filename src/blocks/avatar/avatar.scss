@@ -1,4 +1,4 @@
-.user__avatar {
+.avatar {
     display: flex;
     align-items: center;
     align-content: center;
@@ -10,13 +10,13 @@
     overflow: hidden;
     flex-shrink: 0;
 
+    &__photo {
+        display: block;
+    }
+
     &--no-photo {
         svg {
             border-radius: 50%;
         }
     }
-}
-
-.user__photo {
-    display: block;
 }
