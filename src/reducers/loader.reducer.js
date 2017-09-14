@@ -3,8 +3,8 @@ import { FETCH_FEED } from './feed.reducer';
 import { GET_USER_COLLECTIONS, GET_USER_LINKS } from './bookmarks.reducer';
 import { ADD_LINK } from './link.reducer';
 
-const SHOW_LOADER = 'SHOW_LOADER';
-const HIDE_LOADER = 'HIDE_LOADER';
+export const SHOW_LOADER = 'SHOW_LOADER';
+export const HIDE_LOADER = 'HIDE_LOADER';
 
 const showLoader = () => ({ type: SHOW_LOADER });
 const hideLoader = () => ({ type: HIDE_LOADER });

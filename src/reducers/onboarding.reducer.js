@@ -1,9 +1,9 @@
 import { fetchTags, putTags } from '../services/onboarding.service';
 
-const ADD_TAG = 'ADD_TAG';
-const DELETE_TAG = 'DELETE_TAG';
-const GET_TAGS = 'GET_TAGS';
-const SEND_TAGS = 'SEND_TAGS';
+export const ADD_TAG = 'ADD_TAG';
+export const DELETE_TAG = 'DELETE_TAG';
+export const GET_TAGS = 'GET_TAGS';
+export const SEND_TAGS = 'SEND_TAGS';
 
 const initialState = {
     selectedTags: [],
@@ -25,7 +25,7 @@ const reducer = (state = initialState, action) => {
         return { ...state, selectedTags: filteredTags };
     }
     case SEND_TAGS: {
-        return { initialState };
+        return { ...initialState };
     }
     case GET_TAGS:
         return { ...state, hashTags: action.payload };
