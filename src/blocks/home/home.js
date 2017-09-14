@@ -1,32 +1,25 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { Tabs } from '../index';
-import HomeFeed from './feed/home-feed';
-import HomeHeader from './header/home-header';
-import { FloatingButton } from '../../blocks';
-import { userLoader } from '../../reducers/user.reducer';
+import HomeHeader from './__header/home__header';
+import { FloatingButton, HomeFeed } from './../../blocks';
 
 import './home.scss';
 
-const tabs = [
-    {
-        id: 1,
-        title: 'Моя лента',
-        linkTo: '/feed',
-    },
-    {
-        id: 2,
-        title: 'Новое',
-        linkTo: '/feed/time',
-    },
-];
-
+/**
+ * Компонент главного экрана приложения.
+ * Состоит из шапки, самой ленты и кнопки добавления коллекции.
+ */
 class Home extends Component {
-    componentDidMount() {
-        this.props.userLoader(this.props.authorization.access_token);
-    }
+    static propTypes = {
+        filter: PropTypes.string,
+    };
+
+    static defaultProps = {
+        user: {},
+        authorization: {},
+        filter: 'rating',
+    };
 
     componentDidUpdate = () => {
         this.scrollToTop();
@@ -37,13 +30,9 @@ class Home extends Component {
     };
 
     render() {
-        const { user } = this.props;
         return (
             <main className="home">
-                <div className="home__floating-header">
-                    <HomeHeader user={user} />
-                    <Tabs tabs={tabs} />
-                </div>
+                <HomeHeader />
                 <FloatingButton />
                 <HomeFeed queryParam={this.props.filter} />
             </main>
@@ -51,25 +40,4 @@ class Home extends Component {
     }
 }
 
-Home.propTypes = {
-    user: PropTypes.object,
-    authorization: PropTypes.object.isRequired,
-    userLoader: PropTypes.func.isRequired,
-    filter: PropTypes.string,
-};
-
-Home.defaultProps = {
-    user: {},
-    authorization: {},
-    filter: 'rating',
-};
-
-function mapStateToProps(state) {
-    return {
-        authorization: state.authorization,
-        user: state.user.data,
-        loader: state.loader,
-    };
-}
-
-export default connect(mapStateToProps, { userLoader })(Home);
+export default Home;

@@ -6,33 +6,44 @@ import UserProfileFeedItem from './../__feed-item/user-profile__feed-item';
 
 import './user-profile__feed.scss';
 
-class AccountProfileFeed extends Component {
+class UserProfileFeed extends Component {
+    static propTypes = {
+        data: PropTypes.array,
+        loader: PropTypes.bool.isRequired,
+    };
+
+    static defaultProps = {
+        data: [],
+    };
+
     renderFeed = () => {
         const { data, loader } = this.props;
+
+        // Показываем лоадер, пока данные не пришли
         if (loader) {
             return (
-                <div className="user-profile-feed__preloader">
+                <div className="user-profile__feed-preloader">
                     <Preloader />
                 </div>
             );
-        } else if (data.length) {
+        } else if (data.length > 0) {
+            // Когда пришли данные, показывае список открытых подборок
             return (
-                <div>
-                    <div className="user-profile-feed__list">
-                        {
-                            data.map(item => <UserProfileFeedItem key={item._id} data={item} />)
-                        }
-                    </div>
+                <div className="user-profile__feed-list">
+                    {
+                        data.map(item => <UserProfileFeedItem key={item._id} data={item} />)
+                    }
                 </div>
             );
         }
 
+        // Когда данные получены, но массив подборок пустой - показываем сообщение
         return (
-            <div className="user-profile-feed__empty-block">
-                <p className="user-profile-feed__message">Здесь пока пусто</p>
+            <div className="user-profile__feed-empty-block">
+                <p className="user-profile__feed-message">Здесь пока пусто</p>
             </div>
         );
-    }
+    };
 
     render() {
         return (
@@ -43,13 +54,4 @@ class AccountProfileFeed extends Component {
     }
 }
 
-AccountProfileFeed.propTypes = {
-    data: PropTypes.array,
-    loader: PropTypes.bool.isRequired,
-};
-
-AccountProfileFeed.defaultProps = {
-    data: [],
-};
-
-export default AccountProfileFeed;
+export default UserProfileFeed;

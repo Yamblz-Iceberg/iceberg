@@ -7,7 +7,7 @@ import { Icon } from './../..';
 import './user-profile__feed-item.scss';
 
 class UserProfileFeedItem extends Component {
-    openCollection(e, cardId) {
+    openCollection(cardId) {
         this.props.history.push({ pathname: `/collection/${cardId}` });
     }
 
@@ -18,18 +18,18 @@ class UserProfileFeedItem extends Component {
             backgroundColor: data.color,
         };
 
-        const collection = (<div className="user-profile-feed-collection" onClick={e => this.openCollection(e, data._id)}>
-            <div className="user-profile-feed-collection__photo" style={resultStyles} />
-            <div className="user-profile-feed-collection__details">
-                <h5 className="user-profile-feed-collection__title">{data.name || 'Нет названия'}</h5>
-                <div className="user-profile-feed-collection__links-container">
-                    <Icon iconName={'link'} iconWidth="24" iconHeight="24" iconColor="#d0d0d0" />
-                    <p className="user-profile-feed-collection__linksCount"> {data.linksCount || 0}</p>
+        return (
+            <div className="user-profile__feed-item" onClick={() => this.openCollection(data._id)}>
+                <div className="user-profile__feed-item-photo" style={resultStyles} />
+                <div className="user-profile__feed-item-details">
+                    <h5 className="user-profile__feed-item-title">{data.name || 'Нет названия'}</h5>
+                    <div className="user-profile__feed-item-links-container">
+                        <Icon iconName={'link'} iconColor="#d0d0d0" />
+                        <p className="user-profile__feed-item-linksCount"> {data.linksCount || 0}</p>
+                    </div>
                 </div>
             </div>
-        </div>);
-
-        return collection;
+        );
     }
 }
 
