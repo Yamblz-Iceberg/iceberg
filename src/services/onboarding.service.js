@@ -1,21 +1,18 @@
-export const fetchTags = (token) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-    });
+import { fetchConstructor } from './../utils/shared-functions';
 
-    return fetch('https://iceberg-project.herokuapp.com/feed?only=tags&count=9', { headers })
-        .then(res => res.json());
+export const fetchTags = (token) => {
+    const request = 'feed?only=tags&count=9';
+    return fetchConstructor(token, request).then(res => res.json());
 };
 
 export const putTags = (tags, token) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-    });
-
-    return fetch('https://iceberg-project.herokuapp.com/tags/personal?firstLogin=true', {
-        method: 'put',
-        body: JSON.stringify({ tags }),
-        headers,
-    });
+    const otherHeaders = [
+        {
+            name: 'Content-Type',
+            value: 'application/json',
+        },
+    ];
+    const body = JSON.stringify({ tags });
+    const request = 'tags/personal?firstLogin=true';
+    return fetchConstructor(token, request, 'put', body, otherHeaders);
 };

@@ -1,7 +1,6 @@
+import { fetchConstructor } from './../utils/shared-functions';
+
 export const fetchSearchResult = (searchText, token) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-    });
-    return fetch(`https://iceberg-project.herokuapp.com/feed?search=${encodeURIComponent(searchText)}`, { headers })
-        .then(res => res.json());
+    const request = `feed?search=${encodeURIComponent(searchText)}`;
+    return fetchConstructor(token, request).then(res => res.json());
 };

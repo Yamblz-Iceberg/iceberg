@@ -1,80 +1,50 @@
-export const postLink = (data, token) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-    });
+import { fetchConstructor } from './../utils/shared-functions';
 
-    return fetch('https://iceberg-project.herokuapp.com/links/', {
-        method: 'post',
-        body: JSON.stringify(data),
-        headers,
-    }).then(res => res.json());
+export const postLink = (data, token) => {
+    const otherHeaders = [
+        {
+            name: 'Content-Type',
+            value: 'application/json',
+        },
+    ];
+    const body = JSON.stringify(data);
+    const request = 'links/';
+    return fetchConstructor(token, request, 'post', body, otherHeaders).then(res => res.json());
 };
 
 export const removeLinkFetch = (id, token) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-    });
-
-    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/addedLinks/${id}`, {
-        method: 'delete',
-        headers,
-    }).then(res => res.json());
+    const request = `users/bookmarks/addedLinks/${id}`;
+    return fetchConstructor(token, request, 'delete').then(res => res.json());
 };
 
 export const addLinkToCollectionFetch = (collectionId, linkId, token, description) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-    });
-
-    return fetch(`https://iceberg-project.herokuapp.com/collections/addLink/${collectionId}/${linkId}`, {
-        method: 'post',
-        body: JSON.stringify({ description }),
-        headers,
-    });
+    const otherHeaders = [
+        {
+            name: 'Content-Type',
+            value: 'application/json',
+        },
+    ];
+    const body = JSON.stringify({ description });
+    const request = `collections/addLink/${collectionId}/${linkId}`;
+    return fetchConstructor(token, request, 'post', body, otherHeaders);
 };
 
 export const setLinkAsOpenedFetch = (id, token) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-    });
-
-    return fetch(`https://iceberg-project.herokuapp.com/links/open/${id}`, {
-        headers,
-        method: 'put',
-    });
+    const request = `links/open/${id}`;
+    return fetchConstructor(token, request, 'put');
 };
 
 export const changeStatusLikeOfLinkFetch = (id, token) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-    });
-
-    return fetch(`https://iceberg-project.herokuapp.com/links/like/${id}`, {
-        headers,
-        method: 'put',
-    });
+    const request = `links/like/${id}`;
+    return fetchConstructor(token, request, 'put');
 };
 
 export const setLinkAsSavedFetch = (id, token) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-    });
-
-    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/savedLinks/${id}`, {
-        headers,
-        method: 'put',
-    });
+    const request = `users/bookmarks/savedLinks/${id}`;
+    return fetchConstructor(token, request, 'put');
 };
 
 export const deleteLinkFromeSavedFetch = (id, token) => {
-    const headers = new Headers({
-        Authorization: `Bearer ${token}`,
-    });
-
-    return fetch(`https://iceberg-project.herokuapp.com/users/bookmarks/savedLinks/${id}`, {
-        headers,
-        method: 'delete',
-    });
+    const request = `users/bookmarks/savedLinks/${id}`;
+    return fetchConstructor(token, request, 'delete').then(res => res.json());
 };
