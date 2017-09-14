@@ -26,7 +26,14 @@ class CreateCardDescriptionHeader extends Component {
         ];
 
         return (
-            <header className="create-card-description-header">
+            <header
+                className="create-card-description-header"
+                data-role="header"
+                data-position="fixed"
+                data-tap-toggle="false"
+                data-update-page-padding="false"
+                data-hide-during-focus="false"
+            >
                 <span
                     className="create-card-description-header__back"
                     onClick={this.goBack}
