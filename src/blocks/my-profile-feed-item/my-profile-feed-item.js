@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { Icon } from '../../blocks';
 import { actions as modalActions } from '../../reducers/modal.reducer';
 import { setLinkAsOpened } from '../../reducers/link.reducer';
+import { showSafariViewController } from './../../utils/shared-functions';
 
 import './my-profile-feed-item.scss';
 
@@ -24,26 +25,17 @@ class MyProfileFeedItem extends Component {
         if (typeof window.cordova !== 'undefined') {
             window.SafariViewController.isAvailable((available) => {
                 if (available) {
-                    window.SafariViewController.show({
-                        url: href,
-                        hidden: false,
-                        animated: false,
-                        transition: 'curl',
-                        enterReaderModeIfAvailable: readerMode,
-                        tintColor: '#fff',
-                        barColor: '#000',
-                        controlTintColor: '#ffffff',
-                    },
-                    // success
-                    () => {},
-                    // error
-                    () => {
-                        this.props.showErrorModal({
-                            title: 'Упс!',
-                            text: 'Такая ссылка не существует.',
-                            buttonText: 'Понятно',
-                        });
-                    });
+                    showSafariViewController(
+                        href,
+                        readerMode,
+                        () => {
+                            this.props.showErrorModal({
+                                title: 'Упс!',
+                                text: 'Такая ссылка не существует.',
+                                buttonText: 'Понятно',
+                            });
+                        },
+                    );
                 } else {
                     window.open(href);
                 }

@@ -161,8 +161,8 @@ export const fetchConstructor = (token, request, methodInput, bodyInput, otherHe
 export const showSafariViewController = (
     href,
     readerMode,
-    successCallback = () => {},
     errorCallback = () => {},
+    successCallback = () => {},
 ) => {
     window.SafariViewController.show(
         {
