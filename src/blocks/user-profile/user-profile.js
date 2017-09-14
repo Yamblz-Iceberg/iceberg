@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import UserProfileHeader from './__header/user-profile__header';
@@ -11,7 +10,11 @@ import { userLoader, collectionsLoader } from './../../reducers/another-user.red
 
 import './user-profile.scss';
 
-class AccountProfile extends Component {
+/*
+Компонент экрана профиля другого пользователя, в нём отображается информация о пользователе,
+а также список его открытых подборок.
+ */
+class UserProfile extends Component {
     static propTypes = {
         user: PropTypes.object.isRequired,
         collections: PropTypes.array.isRequired,
@@ -29,34 +32,34 @@ class AccountProfile extends Component {
 
     getCollections = () => {
         this.props.collectionsLoader(this.props.token, this.props.params.id);
-    }
+    };
 
     render() {
         const { user, collections, loader } = this.props;
-        return (<div className="user-profile-wrap">
-            <UserProfileHeader />
-            <UserInfo user={user} />
-            <div className="user-profile__header">
-                <p>Подборки пользователя</p>
+        return (
+            <div className="user-profile__wrapper">
+                <UserProfileHeader />
+                <UserInfo user={user} />
+                <div className="user-profile__title">
+                    <p>Подборки пользователя</p>
+                </div>
+                <UserProfileFeed
+                    data={collections}
+                    loader={loader}
+                />
             </div>
-            <UserProfileFeed
-                data={collections}
-                loader={loader}
-            />
-        </div>);
+        );
     }
 }
 
-function mapStateToProps(state) {
-    return {
+export default connect(
+    state => ({
         user: state.anotherUser.data,
         collections: state.anotherUser.collections,
         token: state.authorization.access_token,
         bookmarks: state.bookmarks,
         typeToFeed: state.user.typeToFeed,
         loader: state.loader,
-    };
-}
-
-export default
-connect(mapStateToProps, { userLoader, collectionsLoader })(withRouter(AccountProfile));
+    }),
+    { userLoader, collectionsLoader },
+)(UserProfile);

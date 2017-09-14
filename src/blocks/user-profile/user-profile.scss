@@ -1,5 +1,5 @@
 .user-profile {
-    &-wrap {
+    &__wrapper {
         position: relative;
     }
 
@@ -9,12 +9,12 @@
         box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
     }
 
-    &__header {
+    &__title {
         display: flex;
         align-items: center;
-        border-bottom: 1px solid #e0e0e0;
-        padding: 18px 18px 14px;
         width: 100%;
+        padding: 18px 18px 14px;
+        border-bottom: 1px solid #e0e0e0;
 
         > p {
             margin: 0;
