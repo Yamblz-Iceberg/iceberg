@@ -36,6 +36,11 @@ class CreateLinkHeader extends Component {
                 ${this.props.showAddButton
                 ? 'create-link-header--show-button'
                 : ''}`}
+                data-role="header"
+                data-position="fixed"
+                data-tap-toggle="false"
+                data-update-page-padding="false"
+                data-hide-during-focus="false"
             >
                 <div className="create-link-header__container">
                     <div className="create-link-header__block">

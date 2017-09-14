@@ -76,7 +76,14 @@ class SearchHeader extends Component {
 
     render() {
         return (
-            <header className="search-header">
+            <header
+                className="search-header"
+                data-role="header"
+                data-position="fixed"
+                data-tap-toggle="false"
+                data-update-page-padding="false"
+                data-hide-during-focus="false"
+            >
                 <div className="search-header__container">
                     <div className="search-header__block" onClick={this.handleGoBack}>
                         <Icon iconName={'arrow-back'} />
