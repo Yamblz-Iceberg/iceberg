@@ -1,0 +1,17 @@
+#!/bin/bash
+
+BLUE_COLOR='\033[0;34m'
+NO_COLOR='\033[0m'
+
+echo -e "\n${BLUE_COLOR}Start generating svg-sprite...${NO_COLOR}"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $DIR
+
+echo -e "\n${BLUE_COLOR}Remove icons sprite...${NO_COLOR}"
+rm ./../src/assets/svg/icons-sprite.svg
+
+echo -e "\n${BLUE_COLOR}Optimize icons...${NO_COLOR}"
+find icons/ -type f -name '*.svg' -print0 | xargs -0 -n 1 -P 6 svgo --multipass --config=.svgo.yml;
+
+echo -e "\n${BLUE_COLOR}Creating sprite...${NO_COLOR}"
+svgstore -o ../src/assets/svg/icons-sprite.svg icons/*.svg
