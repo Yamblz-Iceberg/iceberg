@@ -54,7 +54,7 @@ class HomeTopBar extends Component {
                         <div>
                             {
                                 typeof userData.accType !== 'undefined' && userData.accType !== 'demo'
-                                    ? <Avatar photo={this.props.user.photo} />
+                                    ? <Avatar photo={userData.photo} />
                                     : <Icon iconName="account" />
                             }
                         </div>
