@@ -10,7 +10,7 @@ import './create-empty-card__header.scss';
 import { cardBlue } from '../../../variables.scss';
 
 import { createCollection, clearCollection } from '../../../reducers/create-collection.reducer';
-import { showErrorModal } from '../../../reducers/modal.reducer';
+import { actions as modalActions } from '../../../reducers/modal.reducer';
 
 /*
 Компонент хедера экрана создания новой коллекции. По нажатию на кнопку "Создать"
@@ -156,5 +156,5 @@ export default connect(
         color: state.createCollection.color,
         photo: state.createCollection.photo,
     }),
-    { createCollection, showErrorModal, clearCollection },
+    { createCollection, ...modalActions, clearCollection },
 )(withRouter(CreateEmptyCardHeader));

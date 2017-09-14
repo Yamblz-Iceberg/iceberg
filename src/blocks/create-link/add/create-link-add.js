@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Button, Icon } from '../../../blocks';
 import { compareLinks } from '../../../utils/shared-functions';
 import CreateLinkHeader from '../header/create-link-header';
-import { showErrorModal } from '../../../reducers/modal.reducer';
+import { actions as modalActions } from '../../../reducers/modal.reducer';
 
 import './create-link-add.scss';
 import { clearLink } from '../../../reducers/link.reducer';
@@ -96,5 +96,5 @@ CreateLinkAdd.propTypes = {
 
 export default connect(
     state => ({ collection: state.collection }),
-    { showErrorModal, clearLink },
+    { ...modalActions, clearLink },
 )(withRouter(CreateLinkAdd));

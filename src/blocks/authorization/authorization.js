@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Icon, Button } from '../';
 import { CLIENT_ID, CLIENT_SECRET, VK_APP_ID, YANDEX_APP_ID, FB_APP_ID } from '../../config';
-import { showErrorModal, hideModal } from '../../reducers/modal.reducer';
+import { actions as modalActions } from '../../reducers/modal.reducer';
 
 import './authorization.scss';
 import { startAuth } from '../../reducers/app.reducer';
@@ -117,5 +117,5 @@ export default connect(
     state => ({
         authorization: state.authorization,
     }),
-    { showErrorModal, hideModal, startAuth },
+    { ...modalActions, startAuth },
 )(withRouter(Authorization));

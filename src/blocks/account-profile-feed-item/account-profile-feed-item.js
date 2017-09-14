@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { Icon } from '../../blocks';
-import { showErrorModal, hideModal } from '../../reducers/modal.reducer';
+import { actions as modalActions } from '../../reducers/modal.reducer';
 import { setLinkAsOpened } from '../../reducers/link.reducer';
 
 import './account-profile-feed-item.scss';
@@ -107,5 +107,5 @@ connect(
     state => ({
         token: state.authorization.access_token,
     }),
-    { showErrorModal, hideModal, setLinkAsOpened },
+    { ...modalActions, setLinkAsOpened },
 )(withRouter(AccountProfileFeedItem));

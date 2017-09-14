@@ -7,7 +7,7 @@ import { Icon, Avatar, ContextMenu } from '../../blocks';
 import { changeStatusLikeOfLink, changeStatusSavedOfLink, deleteLinkFromCollection } from './../../reducers/collection.reducer';
 import { removeLink } from './../../reducers/link.reducer';
 
-import { showErrorModal } from './../../reducers/modal.reducer';
+import { actions as modalActions } from './../../reducers/modal.reducer';
 import { setLinkAsOpened } from './../../reducers/link.reducer';
 import { changeOpenStatusOfLinkById } from './../../reducers/collection.reducer';
 
@@ -228,7 +228,7 @@ export default connect(state => ({
     changeStatusLikeOfLink,
     changeStatusSavedOfLink,
     removeLink,
-    showErrorModal,
+    ...modalActions,
     setLinkAsOpened,
     changeOpenStatusOfLinkById,
     deleteLinkFromCollection,

@@ -7,7 +7,7 @@ import { cardBlue } from './../../variables.scss';
 
 import { CreateHashTag, Icon, CardFooter } from './../../blocks';
 
-import { showErrorModal } from './../../reducers/modal.reducer';
+import { actions as modalActions } from './../../reducers/modal.reducer';
 import { createHashtag, deleteHashTag, editHashTag, addImage } from '../../reducers/create-collection.reducer';
 
 /*
@@ -260,5 +260,5 @@ export default connect(
         color: state.createCollection.color,
         photo: state.createCollection.photo,
     }),
-    { createHashtag, deleteHashTag, editHashTag, addImage, showErrorModal },
+    { createHashtag, deleteHashTag, editHashTag, addImage, ...modalActions },
 )(CreateCard);
