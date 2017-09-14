@@ -4,23 +4,23 @@
     align-items: center;
     padding: 113px 0 80px 0;
 
-    &__tape {
+    &__hashtags {
         margin: 25px 0;
         width: 100%;
     }
 
-    &__collection-card {
+    &__collection {
         width: 100%;
-        max-width: 370px;
+        max-width: 375px;
         height: 320px;
-        padding: 0 25px;
+        padding: 0 20px;
 
         &:not(:first-child) {
             margin-top: 25px;
         }
     }
 
-    &__tape + &__collection-card {
+    &__hashtags + &__collection {
         margin-top: 0;
     }
 }

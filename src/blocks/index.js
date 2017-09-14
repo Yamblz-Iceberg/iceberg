@@ -20,6 +20,8 @@ export { default as CreateEmptyCard } from './create-empty-card';
 export { default as CreateLink } from './create-link';
 export { default as Search } from './search';
 export { default as Home } from './home';
+export { default as HomeTopBar } from './home-top-bar';
+export { default as HomeFeed } from './home-feed';
 export { default as Icon } from './icon';
 export { default as HashTag } from './hash-tag';
 export { default as Button } from './button';
