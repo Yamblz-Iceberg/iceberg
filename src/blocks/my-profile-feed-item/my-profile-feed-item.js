@@ -7,9 +7,9 @@ import { Icon } from '../../blocks';
 import { actions as modalActions } from '../../reducers/modal.reducer';
 import { setLinkAsOpened } from '../../reducers/link.reducer';
 
-import './account-profile-feed-item.scss';
+import './my-profile-feed-item.scss';
 
-class AccountProfileFeedItem extends Component {
+class MyProfileFeedItem extends Component {
     static propTypes = {
         data: PropTypes.object.isRequired,
         type: PropTypes.string.isRequired,
@@ -19,6 +19,7 @@ class AccountProfileFeedItem extends Component {
         token: PropTypes.any.isRequired,
     };
 
+    // Открыть ссылку в браузере внутри приложения
     openLink(href, readerMode) {
         if (typeof window.cordova !== 'undefined') {
             window.SafariViewController.isAvailable((available) => {
@@ -54,6 +55,7 @@ class AccountProfileFeedItem extends Component {
         this.props.setLinkAsOpened(this.props.data._id, this.props.token);
     }
 
+    // Открыть подборку в детальном виде
     openCollection(cardId) {
         this.props.history.push({ pathname: `/collection/${cardId}` });
     }
@@ -69,32 +71,34 @@ class AccountProfileFeedItem extends Component {
             backgroundColor: data.color,
         };
 
-        const collection = (<div className="account-profile-feed-collection" onClick={() => this.openCollection(data._id)}>
-            <div className="account-profile-feed-collection__photo-wrapper">
-                <div className="account-profile-feed-collection__photo" style={resultStyles} />
+        // Компонент для элемента из списка подборок
+        const collection = (<div className="my-profile-feed-collection" onClick={() => this.openCollection(data._id)}>
+            <div className="my-profile-feed-collection__photo-wrapper">
+                <div className="my-profile-feed-collection__photo" style={resultStyles} />
                 { data.closed && (
-                    <span className="account-profile-feed-collection__lock-icon-wrapper">
+                    <span className="my-profile-feed-collection__lock-icon-wrapper">
                         <Icon iconColor="white" iconName="lock" />
                     </span>
                 ) }
             </div>
-            <div className="account-profile-feed-collection__details">
-                <h5 className="account-profile-feed-collection__title">{data.name || 'Нет названия'}</h5>
-                <div className="account-profile-feed-collection__links-container">
+            <div className="my-profile-feed-collection__details">
+                <h5 className="my-profile-feed-collection__title">{data.name || 'Нет названия'}</h5>
+                <div className="my-profile-feed-collection__links-container">
                     <Icon iconName={'link'} iconWidth="24" iconHeight="24" iconColor="#d0d0d0" />
-                    <p className="account-profile-feed-collection__linksCount"> {data.linksCount || 0}</p>
+                    <p className="my-profile-feed-collection__linksCount"> {data.linksCount || 0}</p>
                 </div>
             </div>
         </div>);
 
-        const link = (<div className="account-profile-feed-link" onClick={() => this.openLink(data.url)}>
-            <div className="account-profile-feed-link__photo" style={resultStyles} />
-            <div className="account-profile-feed-link__details">
-                <h5 className="account-profile-feed-link__title">{data.name || 'Нет названия'}</h5>
-                <div className="account-profile-feed-link__url-container">
+        // Компонент для элемента из списка ссылок
+        const link = (<div className="my-profile-feed-link" onClick={() => this.openLink(data.url)}>
+            <div className="my-profile-feed-link__photo" style={resultStyles} />
+            <div className="my-profile-feed-link__details">
+                <h5 className="my-profile-feed-link__title">{data.name || 'Нет названия'}</h5>
+                <div className="my-profile-feed-link__url-container">
                     { data.favicon && data.favicon.length
-                        && (<img src={data.favicon} onError={this.handleOnErrorFavicon} className="account-profile-feed-link__favicon" alt="link_ico" />) }
-                    <p className="account-profile-feed-link__url">{data.url}</p>
+                        && (<img src={data.favicon} onError={this.handleOnErrorFavicon} className="my-profile-feed-link__favicon" alt="link_ico" />) }
+                    <p className="my-profile-feed-link__url">{data.url}</p>
                 </div>
             </div>
         </div>);
@@ -109,4 +113,4 @@ connect(
         token: state.authorization.access_token,
     }),
     { ...modalActions, setLinkAsOpened },
-)(withRouter(AccountProfileFeedItem));
+)(withRouter(MyProfileFeedItem));

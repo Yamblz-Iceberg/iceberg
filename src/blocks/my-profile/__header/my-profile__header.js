@@ -6,10 +6,10 @@ import { authDemoUser } from '../../../utils/shared-functions';
 import { Icon } from '../../../blocks';
 import { logOut, registerDemoUser } from '../../../reducers/authorization.reducer';
 
-import './account-profile__header.scss';
+import './my-profile__header.scss';
 import { ContextMenu } from '../../index';
 
-class AccountProfileHeader extends Component {
+class MyProfileHeader extends Component {
     static propTypes = {
         authorization: PropTypes.object.isRequired,
         logOut: PropTypes.func.isRequired,
@@ -47,14 +47,14 @@ class AccountProfileHeader extends Component {
             },
         ];
         return (
-            <header className="account-profile__header">
-                <div className="account-profile__header-container">
-                    <div className="account-profile__header-block">
+            <header className="my-profile__header">
+                <div className="my-profile__header-container">
+                    <div className="my-profile__header-block">
                         <NavLink to={'/feed'}>
                             <Icon iconName="arrow-back" iconColor="#fff" />
                         </NavLink>
                     </div>
-                    <div className="account-profile__header-block" onClick={this.logOutProfile}>
+                    <div className="my-profile__header-block" onClick={this.logOutProfile}>
                         <ContextMenu iconName="settings" items={contextMenuItems} />
                     </div>
                 </div>
@@ -66,4 +66,4 @@ class AccountProfileHeader extends Component {
 export default connect(
     state => ({ authorization: state.authorization }),
     { logOut, registerDemoUser },
-)(withRouter(AccountProfileHeader));
+)(withRouter(MyProfileHeader));
