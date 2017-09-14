@@ -157,6 +157,8 @@ export const fetchConstructor = (token, request, methodInput, bodyInput, otherHe
  * соответствующие коолбэки при успешном/неуспешном действии
  * @param {string} href - url для перехода
  * @param {boolean} readerMode - войти или нет в режим чтения, если он доступен
+ * @param {func} errorCallback - необязательный параметр, вызывается при неуспешном действии
+ * @param {func} successCallback - необязательный параметр, вызывается при успешном действии
  */
 export const showSafariViewController = (
     href,
