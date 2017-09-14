@@ -12,6 +12,8 @@ export { default as ModalError } from './modal-error';
 export { default as Modal } from './modal-root';
 export { default as ToggleText } from './toggle-text';
 export { default as AccountProfile } from './account-profile';
+export { default as AccountProfileFeed } from './account-profile-feed';
+export { default as AccountProfileFeedItem } from './account-profile-feed-item';
 export { default as UserProfile } from './user-profile';
 export { default as CollectionDetail } from './collection-detail';
 export { default as CreateCardDescription } from './create-card-description';

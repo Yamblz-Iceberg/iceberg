@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Icon } from './../..';
-import { actions as modalActions } from '../../../reducers/modal.reducer';
-import { setLinkAsOpened } from '../../../reducers/link.reducer';
+import { Icon } from '../../blocks';
+import { actions as modalActions } from '../../reducers/modal.reducer';
+import { setLinkAsOpened } from '../../reducers/link.reducer';
 
 import './account-profile-feed-item.scss';
 
@@ -17,10 +17,10 @@ class AccountProfileFeedItem extends Component {
         showModal: PropTypes.func.isRequired,
         setLinkAsOpened: PropTypes.func.isRequired,
         token: PropTypes.any.isRequired,
-    }
+    };
 
     openLink(href, readerMode) {
-        if (window.cordova) {
+        if (typeof window.cordova !== 'undefined') {
             window.SafariViewController.isAvailable((available) => {
                 if (available) {
                     window.SafariViewController.show({
@@ -54,13 +54,13 @@ class AccountProfileFeedItem extends Component {
         this.props.setLinkAsOpened(this.props.data._id, this.props.token);
     }
 
-    openCollection(e, cardId) {
+    openCollection(cardId) {
         this.props.history.push({ pathname: `/collection/${cardId}` });
     }
 
     handleOnErrorFavicon = (e) => {
         e.target.style.display = 'none';
-    }
+    };
 
     render() {
         const { data, type } = this.props;
@@ -69,7 +69,7 @@ class AccountProfileFeedItem extends Component {
             backgroundColor: data.color,
         };
 
-        const collection = (<div className="account-profile-feed-collection" onClick={e => this.openCollection(e, data._id)}>
+        const collection = (<div className="account-profile-feed-collection" onClick={() => this.openCollection(data._id)}>
             <div className="account-profile-feed-collection__photo-wrapper">
                 <div className="account-profile-feed-collection__photo" style={resultStyles} />
                 { data.closed && (
@@ -103,12 +103,10 @@ class AccountProfileFeedItem extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        token: state.authorization.access_token,
-    };
-}
-
 export default
-connect(mapStateToProps,
-    { ...modalActions, setLinkAsOpened })(withRouter(AccountProfileFeedItem));
+connect(
+    state => ({
+        token: state.authorization.access_token,
+    }),
+    { ...modalActions, setLinkAsOpened },
+)(withRouter(AccountProfileFeedItem));
