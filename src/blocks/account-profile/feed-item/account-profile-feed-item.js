@@ -72,7 +72,7 @@ class AccountProfileFeedItem extends Component {
         const collection = (<div className="account-profile-feed-collection" onClick={e => this.openCollection(e, data._id)}>
             <div className="account-profile-feed-collection__photo-wrapper">
                 <div className="account-profile-feed-collection__photo" style={resultStyles} />
-                { !data.closed && (
+                { data.closed && (
                     <span className="account-profile-feed-collection__lock-icon-wrapper">
                         <Icon iconColor="white" iconName="lock" />
                     </span>
