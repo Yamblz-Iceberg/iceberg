@@ -7,7 +7,7 @@ import { Icon, Avatar, ContextMenu } from '../../blocks';
 import { changeStatusLikeOfLink, changeStatusSavedOfLink, deleteLinkFromCollection } from './../../reducers/collection.reducer';
 import { removeLink } from './../../reducers/link.reducer';
 
-import { actions as modalActions } from './../../reducers/modal.reducer';
+import { showErrorModal } from './../../reducers/modal.reducer';
 import { setLinkAsOpened } from './../../reducers/link.reducer';
 import { changeOpenStatusOfLinkById } from './../../reducers/collection.reducer';
 
@@ -32,7 +32,7 @@ class LinkCard extends Component {
         history: PropTypes.any.isRequired,
         userData: PropTypes.object.isRequired,
         removeLink: PropTypes.func.isRequired,
-        showModal: PropTypes.func.isRequired,
+        showErrorModal: PropTypes.func.isRequired,
         setLinkAsOpened: PropTypes.func.isRequired,
         changeOpenStatusOfLinkById: PropTypes.func.isRequired,
         deleteLinkFromCollection: PropTypes.func.isRequired,
@@ -66,12 +66,11 @@ class LinkCard extends Component {
                         () => {},
                         // error
                         () => {
-                            this.props.showModal('ERROR_MESSAGE',
-                                {
-                                    title: 'Упс!',
-                                    text: 'Такая ссылка не существует.',
-                                    buttonText: 'Понятно',
-                                });
+                            this.props.showErrorModal({
+                                title: 'Упс!',
+                                text: 'Такая ссылка не существует.',
+                                buttonText: 'Понятно',
+                            });
                         });
                     } else {
                         window.open(href);
@@ -229,7 +228,7 @@ export default connect(state => ({
     changeStatusLikeOfLink,
     changeStatusSavedOfLink,
     removeLink,
-    ...modalActions,
+    showErrorModal,
     setLinkAsOpened,
     changeOpenStatusOfLinkById,
     deleteLinkFromCollection,

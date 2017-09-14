@@ -10,7 +10,7 @@ import './create-empty-card__header.scss';
 import { cardBlue } from '../../../variables.scss';
 
 import { createCollection, clearCollection } from '../../../reducers/create-collection.reducer';
-import { actions as modalActions } from '../../../reducers/modal.reducer';
+import { showErrorModal } from '../../../reducers/modal.reducer';
 
 /*
 Компонент хедера экрана создания новой коллекции. По нажатию на кнопку "Создать"
@@ -28,7 +28,7 @@ class CreateEmptyCardHeader extends Component {
         tags: PropTypes.array,
         token: PropTypes.string.isRequired,
         history: PropTypes.any.isRequired,
-        showModal: PropTypes.func.isRequired,
+        showErrorModal: PropTypes.func.isRequired,
         createCollection: PropTypes.func.isRequired,
         clearCollection: PropTypes.func.isRequired,
     }
@@ -107,12 +107,11 @@ class CreateEmptyCardHeader extends Component {
 
     handleSubmitData = () => {
         if (!this.state.submitStatus) {
-            this.props.showModal('ERROR_MESSAGE',
-                {
-                    title: 'Укажите категорию и название темы',
-                    text: 'Укажите хотя бы одну категорию и введите название темы (не менее 5 символов), чтобы другим было проще найти вашу подборку',
-                    buttonText: 'Ок',
-                });
+            this.props.showErrorModal({
+                title: 'Укажите категорию и название темы',
+                text: 'Укажите хотя бы одну категорию и введите название темы (не менее 5 символов), чтобы другим было проще найти вашу подборку',
+                buttonText: 'Ок',
+            });
         } else {
             const {
                 title, color, tags, photo, description, closed, token,
@@ -157,5 +156,5 @@ export default connect(
         color: state.createCollection.color,
         photo: state.createCollection.photo,
     }),
-    { createCollection, ...modalActions, clearCollection },
+    { createCollection, showErrorModal, clearCollection },
 )(withRouter(CreateEmptyCardHeader));

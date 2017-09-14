@@ -40,16 +40,20 @@ const hideModal = () => (
     }
 );
 
-const showModal = (text, modalText) => (
+const showModal = (modalType, modalProps) => (
     (dispatch) => {
         document.body.addEventListener('touchmove', handleTouchMove);
-        dispatch(showModalAction(text, modalText));
+        dispatch(showModalAction(modalType, modalProps));
     }
+);
+
+const showErrorModal = modalProps => (
+    showModal('ERROR_MESSAGE', modalProps)
 );
 
 const actions = {
     hideModal,
-    showModal,
+    showErrorModal,
 };
 
 export { reducer, actions };

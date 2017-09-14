@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Icon, Button } from '../';
 import { CLIENT_ID, CLIENT_SECRET, VK_APP_ID, YANDEX_APP_ID, FB_APP_ID } from '../../config';
-import { actions as modalActions } from '../../reducers/modal.reducer';
+import { showErrorModal, hideModal } from '../../reducers/modal.reducer';
 
 import './authorization.scss';
 import { startAuth } from '../../reducers/app.reducer';
@@ -14,7 +14,7 @@ class Authorization extends Component {
         history: PropTypes.object.isRequired,
         authorization: PropTypes.object.isRequired,
         startAuth: PropTypes.func.isRequired,
-        showModal: PropTypes.func.isRequired,
+        showErrorModal: PropTypes.func.isRequired,
     };
     /* eslint class-methods-use-this: ["error", { "exceptMethods": ["openLink"] }] */
     openLink(href, readerMode) {
@@ -35,7 +35,7 @@ class Authorization extends Component {
                     () => {},
                     // error
                     () => {
-                        this.props.showModal('ERROR_MESSAGE');
+                        this.props.showErrorModal();
                     });
                 } else {
                     window.open(href);
@@ -117,5 +117,5 @@ export default connect(
     state => ({
         authorization: state.authorization,
     }),
-    { ...modalActions, startAuth },
+    { showErrorModal, hideModal, startAuth },
 )(withRouter(Authorization));

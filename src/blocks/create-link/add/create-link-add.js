@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Button, Icon } from '../../../blocks';
 import { compareLinks } from '../../../utils/shared-functions';
 import CreateLinkHeader from '../header/create-link-header';
-import { actions as modalActions } from '../../../reducers/modal.reducer';
+import { showErrorModal } from '../../../reducers/modal.reducer';
 
 import './create-link-add.scss';
 import { clearLink } from '../../../reducers/link.reducer';
@@ -29,12 +29,11 @@ class CreateLinkAdd extends Component {
             linksInCollection.filter(link => compareLinks(link.url, enteredLink)).length > 0;
         if (linkExist) {
             // show modal
-            this.props.showModal('ERROR_MESSAGE',
-                {
-                    title: 'Ошибка при добавлении',
-                    text: 'Упс! Кажется, такая ссылка уже добавлена в эту подборку.',
-                    buttonText: 'Ясненько',
-                });
+            this.props.showErrorModal({
+                title: 'Ошибка при добавлении',
+                text: 'Упс! Кажется, такая ссылка уже добавлена в эту подборку.',
+                buttonText: 'Ясненько',
+            });
         } else {
             this.props.history.replace({ pathname: '/create-link/load-link', state: this.state.url });
         }
@@ -91,11 +90,11 @@ class CreateLinkAdd extends Component {
 CreateLinkAdd.propTypes = {
     collection: PropTypes.object.isRequired,
     history: PropTypes.any.isRequired,
-    showModal: PropTypes.func.isRequired,
+    showErrorModal: PropTypes.func.isRequired,
     clearLink: PropTypes.func.isRequired,
 };
 
 export default connect(
     state => ({ collection: state.collection }),
-    { ...modalActions, clearLink },
+    { showErrorModal, clearLink },
 )(withRouter(CreateLinkAdd));

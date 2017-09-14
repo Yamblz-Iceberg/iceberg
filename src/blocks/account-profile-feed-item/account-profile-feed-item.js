@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { Icon } from '../../blocks';
-import { actions as modalActions } from '../../reducers/modal.reducer';
+import { showErrorModal, hideModal } from '../../reducers/modal.reducer';
 import { setLinkAsOpened } from '../../reducers/link.reducer';
 
 import './account-profile-feed-item.scss';
@@ -14,7 +14,7 @@ class AccountProfileFeedItem extends Component {
         data: PropTypes.object.isRequired,
         type: PropTypes.string.isRequired,
         history: PropTypes.any.isRequired,
-        showModal: PropTypes.func.isRequired,
+        showErrorModal: PropTypes.func.isRequired,
         setLinkAsOpened: PropTypes.func.isRequired,
         token: PropTypes.any.isRequired,
     };
@@ -37,12 +37,11 @@ class AccountProfileFeedItem extends Component {
                     () => {},
                     // error
                     () => {
-                        this.props.showModal('ERROR_MESSAGE',
-                            {
-                                title: 'Упс!',
-                                text: 'Такая ссылка не существует.',
-                                buttonText: 'Понятно',
-                            });
+                        this.props.showErrorModal({
+                            title: 'Упс!',
+                            text: 'Такая ссылка не существует.',
+                            buttonText: 'Понятно',
+                        });
                     });
                 } else {
                     window.open(href);
@@ -108,5 +107,5 @@ connect(
     state => ({
         token: state.authorization.access_token,
     }),
-    { ...modalActions, setLinkAsOpened },
+    { showErrorModal, hideModal, setLinkAsOpened },
 )(withRouter(AccountProfileFeedItem));

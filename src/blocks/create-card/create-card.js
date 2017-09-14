@@ -7,7 +7,7 @@ import { cardBlue } from './../../variables.scss';
 
 import { CreateHashTag, Icon, CardFooter } from './../../blocks';
 
-import { actions as modalActions } from './../../reducers/modal.reducer';
+import { showErrorModal } from './../../reducers/modal.reducer';
 import { createHashtag, deleteHashTag, editHashTag, addImage } from '../../reducers/create-collection.reducer';
 
 /*
@@ -23,7 +23,7 @@ class CreateCard extends Component {
         createHashtag: PropTypes.func.isRequired,
         deleteHashTag: PropTypes.func.isRequired,
         editHashTag: PropTypes.func.isRequired,
-        showModal: PropTypes.func.isRequired,
+        showErrorModal: PropTypes.func.isRequired,
         addImage: PropTypes.func.isRequired,
         color: PropTypes.string,
         photo: PropTypes.string,
@@ -124,14 +124,14 @@ class CreateCard extends Component {
                         });
                         this.props.addImage({ color: data.mainColor, photo: data.fileName });
                     } catch (e) {
-                        this.props.showModal('ERROR_MESSAGE');
+                        this.props.showErrorModal();
                     }
                 }
             }, (error) => {
                 this.setState({
                     imageStatus: 'none',
                 });
-                this.props.showModal('ERROR_MESSAGE');
+                this.props.showErrorModal();
             }, options);
         };
         /* eslint-enable */
@@ -260,5 +260,5 @@ export default connect(
         color: state.createCollection.color,
         photo: state.createCollection.photo,
     }),
-    { createHashtag, deleteHashTag, editHashTag, addImage, ...modalActions },
+    { createHashtag, deleteHashTag, editHashTag, addImage, showErrorModal },
 )(CreateCard);
