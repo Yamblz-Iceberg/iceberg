@@ -129,23 +129,26 @@ export const setLinkAsOpenInList = (links, id) => {
  * @param {string} methodInput - метод запроса
  * @param {any} bodyInput - тело запроса
  * @param {array} otherHeaders - список дополнительных заголовков вида [{ name: '', value: '' }]
+ * @param {string} tokenType - тип токена
  */
-export const fetchConstructor = (token, request, methodInput, bodyInput, otherHeaders) => {
+export const fetchConstructor = (
+    token, request, methodInput = '', bodyInput, otherHeaders, tokenType = 'Bearer') => {
     const headers = new Headers();
 
-    if (token) {
-        headers.append('Authorization', `Bearer ${token}`);
+    if (token !== '') {
+        headers.append('Authorization', `${tokenType} ${token}`);
     }
 
-    if (otherHeaders) {
+    if (typeof otherHeaders !== 'undefined') {
         otherHeaders.map(header => headers.append(header.name, header.value));
     }
 
     const init = { headers };
-    if (methodInput) {
+    if (methodInput !== '') {
         init.method = methodInput;
     }
-    if (bodyInput) {
+
+    if (typeof bodyInput !== 'undefined') {
         init.body = bodyInput;
     }
 
