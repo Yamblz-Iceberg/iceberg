@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { Icon } from '../../blocks';
 import { actions as modalActions } from '../../reducers/modal.reducer';
 import { setLinkAsOpened } from '../../reducers/link.reducer';
+import { showSafariViewController } from './../../utils/shared-functions';
 
 import './my-profile-feed-item.scss';
 
@@ -14,7 +15,7 @@ class MyProfileFeedItem extends Component {
         data: PropTypes.object.isRequired,
         type: PropTypes.string.isRequired,
         history: PropTypes.any.isRequired,
-        showModal: PropTypes.func.isRequired,
+        showErrorModal: PropTypes.func.isRequired,
         setLinkAsOpened: PropTypes.func.isRequired,
         token: PropTypes.any.isRequired,
     };
@@ -24,27 +25,17 @@ class MyProfileFeedItem extends Component {
         if (typeof window.cordova !== 'undefined') {
             window.SafariViewController.isAvailable((available) => {
                 if (available) {
-                    window.SafariViewController.show({
-                        url: href,
-                        hidden: false,
-                        animated: false,
-                        transition: 'curl',
-                        enterReaderModeIfAvailable: readerMode,
-                        tintColor: '#fff',
-                        barColor: '#000',
-                        controlTintColor: '#ffffff',
-                    },
-                    // success
-                    () => {},
-                    // error
-                    () => {
-                        this.props.showModal('ERROR_MESSAGE',
-                            {
+                    showSafariViewController(
+                        href,
+                        readerMode,
+                        () => {
+                            this.props.showErrorModal({
                                 title: 'Упс!',
                                 text: 'Такая ссылка не существует.',
                                 buttonText: 'Понятно',
                             });
-                    });
+                        },
+                    );
                 } else {
                     window.open(href);
                 }

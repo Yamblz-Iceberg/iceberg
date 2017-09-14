@@ -23,7 +23,7 @@ class CreateCard extends Component {
         createHashtag: PropTypes.func.isRequired,
         deleteHashTag: PropTypes.func.isRequired,
         editHashTag: PropTypes.func.isRequired,
-        showModal: PropTypes.func.isRequired,
+        showErrorModal: PropTypes.func.isRequired,
         addImage: PropTypes.func.isRequired,
         color: PropTypes.string,
         photo: PropTypes.string,
@@ -124,14 +124,14 @@ class CreateCard extends Component {
                         });
                         this.props.addImage({ color: data.mainColor, photo: data.fileName });
                     } catch (e) {
-                        this.props.showModal('ERROR_MESSAGE');
+                        this.props.showErrorModal();
                     }
                 }
             }, (error) => {
                 this.setState({
                     imageStatus: 'none',
                 });
-                this.props.showModal('ERROR_MESSAGE');
+                this.props.showErrorModal();
             }, options);
         };
         /* eslint-enable */

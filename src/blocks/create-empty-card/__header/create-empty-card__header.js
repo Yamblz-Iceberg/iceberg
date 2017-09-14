@@ -28,7 +28,7 @@ class CreateEmptyCardHeader extends Component {
         tags: PropTypes.array,
         token: PropTypes.string.isRequired,
         history: PropTypes.any.isRequired,
-        showModal: PropTypes.func.isRequired,
+        showErrorModal: PropTypes.func.isRequired,
         createCollection: PropTypes.func.isRequired,
         clearCollection: PropTypes.func.isRequired,
     }
@@ -107,12 +107,11 @@ class CreateEmptyCardHeader extends Component {
 
     handleSubmitData = () => {
         if (!this.state.submitStatus) {
-            this.props.showModal('ERROR_MESSAGE',
-                {
-                    title: 'Укажите категорию и название темы',
-                    text: 'Укажите хотя бы одну категорию и введите название темы (не менее 5 символов), чтобы другим было проще найти вашу подборку',
-                    buttonText: 'Ок',
-                });
+            this.props.showErrorModal({
+                title: 'Укажите категорию и название темы',
+                text: 'Укажите хотя бы одну категорию и введите название темы (не менее 5 символов), чтобы другим было проще найти вашу подборку',
+                buttonText: 'Ок',
+            });
         } else {
             const {
                 title, color, tags, photo, description, closed, token,

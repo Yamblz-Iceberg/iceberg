@@ -10,6 +10,7 @@ import { removeLink } from './../../reducers/link.reducer';
 import { actions as modalActions } from './../../reducers/modal.reducer';
 import { setLinkAsOpened } from './../../reducers/link.reducer';
 import { changeOpenStatusOfLinkById } from './../../reducers/collection.reducer';
+import { showSafariViewController } from './../../utils/shared-functions';
 
 import './link-card.scss';
 import variables from './../../variables.scss';
@@ -32,7 +33,7 @@ class LinkCard extends Component {
         history: PropTypes.any.isRequired,
         userData: PropTypes.object.isRequired,
         removeLink: PropTypes.func.isRequired,
-        showModal: PropTypes.func.isRequired,
+        showErrorModal: PropTypes.func.isRequired,
         setLinkAsOpened: PropTypes.func.isRequired,
         changeOpenStatusOfLinkById: PropTypes.func.isRequired,
         deleteLinkFromCollection: PropTypes.func.isRequired,
@@ -52,27 +53,17 @@ class LinkCard extends Component {
             if (typeof window.cordova !== 'undefined') {
                 window.SafariViewController.isAvailable((available) => {
                     if (available) {
-                        window.SafariViewController.show({
-                            url: href,
-                            hidden: false,
-                            animated: false,
-                            transition: 'curl',
-                            enterReaderModeIfAvailable: false,
-                            tintColor: '#fff',
-                            barColor: '#000',
-                            controlTintColor: '#ffffff',
-                        },
-                        // success
-                        () => {},
-                        // error
-                        () => {
-                            this.props.showModal('ERROR_MESSAGE',
-                                {
+                        showSafariViewController(
+                            href,
+                            false,
+                            () => {
+                                this.props.showErrorModal({
                                     title: 'Упс!',
                                     text: 'Такая ссылка не существует.',
                                     buttonText: 'Понятно',
                                 });
-                        });
+                            },
+                        );
                     } else {
                         window.open(href);
                     }
