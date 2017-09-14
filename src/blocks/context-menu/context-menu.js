@@ -6,7 +6,28 @@ import { Icon } from './../../blocks';
 
 import './context-menu.scss';
 
+/*
+Компонент выпадающего меню
+ */
 class ContextMenu extends Component {
+    static propTypes = {
+        items: PropTypes.arrayOf(PropTypes.shape({
+            title: PropTypes.string.isRequired,
+            id: PropTypes.number.isRequired,
+            icon: PropTypes.any,
+            onClick: PropTypes.func,
+        })),
+        iconName: PropTypes.string,
+        iconColor: PropTypes.string,
+    };
+
+    static defaultProps = {
+        icon: null,
+        items: [],
+        iconName: 'more-vert',
+        iconColor: '#fff',
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -22,6 +43,7 @@ class ContextMenu extends Component {
         this.setState({ isOpened: false });
     };
 
+    // Переключение режима отображения выпадающего меню
     toggle = () => {
         event.stopPropagation();
         if (this.state.isOpened === true) {
@@ -35,39 +57,27 @@ class ContextMenu extends Component {
 
     render() {
         const { items, iconName, iconColor } = this.props;
-        return (<div
-            className="context-menu"
-            onClick={this.toggle}
-            ref={(el) => { this.refContextMenu = el; }}
-        >
-            <Icon iconName={iconName} iconColor={iconColor} />
-            { this.state.isOpened && <div className="context-menu__overlay" onClick={this.handleOutsideClick} /> }
-            { this.state.isOpened && <div className="context-menu__list" onClick={this.toggle}>
+        return (
+            <div
+                className="context-menu"
+                onClick={this.toggle}
+            >
+                <Icon iconName={iconName} iconColor={iconColor} />
                 {
-                    items.map(item => <ContextMenuItem key={item.id} item={item} />)
+                    this.state.isOpened === true
+                        ? <div>
+                            <div className="context-menu__overlay" onClick={this.handleOutsideClick} />
+                            <div className="context-menu__list" onClick={this.toggle}>
+                                {
+                                    items.map(item => <ContextMenuItem key={item.id} item={item} />)
+                                }
+                            </div>
+                        </div>
+                        : null
                 }
             </div>
-            }
-        </div>);
+        );
     }
 }
-
-ContextMenu.propTypes = {
-    items: PropTypes.arrayOf(PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        id: PropTypes.number.isRequired,
-        icon: PropTypes.any,
-        onClick: PropTypes.func,
-    })),
-    iconName: PropTypes.string,
-    iconColor: PropTypes.string,
-};
-
-ContextMenu.defaultProps = {
-    icon: null,
-    items: [],
-    iconName: 'more-vert',
-    iconColor: '#fff',
-};
 
 export default ContextMenu;
