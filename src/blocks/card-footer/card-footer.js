@@ -8,6 +8,10 @@ import { Icon, Avatar } from './../../blocks';
 import './card-footer.scss';
 import { mainYellow } from './../../variables.scss';
 
+/*
+Компонент нижней части карточки с информацией о пользователе,
+иконкой с индикацией количества ссылок, а также кнопкой "Подписаться"
+ */
 class CardFooter extends Component {
     static propTypes = {
         idCard: PropTypes.string,

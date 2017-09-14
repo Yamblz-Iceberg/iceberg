@@ -23,7 +23,7 @@ const Button = ({ type, size, isDisabled, icon, text, onClick }) => (
         onClick={onClick}
         disabled={isDisabled}
     >
-        <span className="button__wrap">
+        <span className="button__wrapper">
             {icon}
             <span className="button__text">{text}</span>
         </span>
