@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { AccountProfileFeedItem, Preloader } from '../../blocks';
-import AccountProfileFilter from './__filter/account-profile__filter';
+import { MyProfileFeedItem, Preloader } from '../../blocks';
+import MyProfileFeedFilter from './__filter/my-profile-feed__filter';
 
-import './account-profile-feed.scss';
+import './my-profile-feed.scss';
 
-class AccountProfileFeed extends Component {
+class MyProfileFeed extends Component {
     static propTypes = {
         data: PropTypes.array,
         type: PropTypes.string.isRequired,
@@ -23,17 +23,17 @@ class AccountProfileFeed extends Component {
 
         if (loader) {
             return (
-                <div className="account-profile-feed__preloader">
+                <div className="my-profile-feed__preloader">
                     <Preloader />
                 </div>
             );
-        } else if (data.length) {
+        } else if (data.length > 0) {
             return (
                 <div>
-                    <div className="account-profile-feed__list">
+                    <div className="my-profile-feed__list">
                         {
                             data.map(item => (
-                                <AccountProfileFeedItem key={item._id} data={item} type={type} />
+                                <MyProfileFeedItem key={item._id} data={item} type={type} />
                             ))
                         }
                     </div>
@@ -42,8 +42,8 @@ class AccountProfileFeed extends Component {
         }
 
         return (
-            <div className="account-profile-feed__empty-block">
-                <p className="account-profile-feed__message">Здесь пока пусто</p>
+            <div className="my-profile-feed__empty-block">
+                <p className="my-profile-feed__message">Здесь пока пусто</p>
             </div>
         );
     };
@@ -51,11 +51,11 @@ class AccountProfileFeed extends Component {
     render() {
         return (
             <div>
-                <AccountProfileFilter items={this.props.filterItems} />
+                <MyProfileFeedFilter items={this.props.filterItems} />
                 {this.renderFeed()}
             </div>
         );
     }
 }
 
-export default AccountProfileFeed;
+export default MyProfileFeed;

@@ -1,34 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import AccountProfileHeader from './__header/account-profile__header';
-import { AccountProfileFeed, UserInfo, Tabs } from './../../blocks';
+import MyProfileHeader from './__header/my-profile__header';
+import { MyProfileFeed, UserInfo, Tabs } from './../../blocks';
 
 import { getCreatedCollections, getSavedLinks } from './../../reducers/bookmarks.reducer';
 
-import './account-profile.scss';
+import './my-profile.scss';
 
 /*
-Компонент аккаунта пользователя, используется для своего профиля и профиля другого пользователя.
-Состоит из шапки, блока с аватаркой пользователя и информацией о нем,
-блока с фильтрацией по подборкам и ссылкам, а также лентой подборок и ссылок.
-Лента делится на два блока: подборки и ссылки, навигация между которыми осуществляется по табам.
+Компонент аккаунта, который используется для своего профиля. Состоит из шапки, блока с аватаркой 
+пользователя и информацией о нем, блока с фильтрацией по подборкам и ссылкам, а также лентой 
+подборок и ссылок. Лента делится на два блока: подборки и ссылки, навигация между которыми 
+осуществляется по табам.
 */
-class AccountProfile extends Component {
+class MyProfile extends Component {
     static propTypes = {
         user: PropTypes.object.isRequired,
         bookmarks: PropTypes.object.isRequired,
         token: PropTypes.string.isRequired,
         getCreatedCollections: PropTypes.func.isRequired,
         getSavedLinks: PropTypes.func.isRequired,
-        history: PropTypes.object.isRequired,
         loader: PropTypes.bool.isRequired,
+        filter: PropTypes.string,
+    };
+
+    static defaultProps = {
+        filter: '',
     };
 
     componentDidMount() {
-        if (this.props.history.location.pathname.indexOf('links') >= 0) {
+        if (this.props.filter === 'links') {
             this.getSavedLinks();
         } else {
             this.getMyCollections();
@@ -61,6 +64,7 @@ class AccountProfile extends Component {
             },
         ];
 
+        // Фильтр ссылок
         const linksFilters = [
             {
                 id: 0,
@@ -79,6 +83,7 @@ class AccountProfile extends Component {
             },
         ];
 
+        // Фильтр коллекций
         const collectionsFilters = [
             {
                 id: 0,
@@ -92,17 +97,18 @@ class AccountProfile extends Component {
             },
         ];
 
-        const filterItems = this.props.history.location.pathname.indexOf('links') > -1 ? linksFilters : collectionsFilters;
+        // Фильтрация по табам: подборки или ссылки
+        const filterItems = this.props.filter === 'links' ? linksFilters : collectionsFilters;
         const data = bookmarks.typeToFeed.toLowerCase().indexOf('links') > -1 ? bookmarks.links : bookmarks.collections;
 
         return (
-            <div className="account-profile__wrapper">
-                <AccountProfileHeader />
+            <div className="my-profile__wrapper">
+                <MyProfileHeader />
                 <UserInfo user={user} />
-                <div className="account-profile__tabs-wrapper">
+                <div className="my-profile__tabs-wrapper">
                     <Tabs tabs={tabs} />
                 </div>
-                <AccountProfileFeed
+                <MyProfileFeed
                     data={data}
                     type={bookmarks.typeToFeed}
                     filterItems={filterItems}
@@ -122,4 +128,4 @@ export default connect(
         loader: state.loader,
     }),
     { getCreatedCollections, getSavedLinks },
-)(withRouter(AccountProfile));
+)(MyProfile);

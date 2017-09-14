@@ -11,7 +11,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import reducer from './reducers';
 
 import {
-    AccountProfile,
+    MyProfile,
     UserProfile,
     CollectionDetail,
     CreateEmptyCard,
@@ -67,7 +67,12 @@ function onDeviceReady() {
                                 <CollectionDetail params={match.params} />
                             )}
                         />
-                        <Route path="/profile" component={AccountProfile} />
+                        <Route
+                            path="/profile/:filter?"
+                            render={({ match }) => (
+                                <MyProfile filter={match.params.filter} />
+                            )}
+                        />
                         <Route
                             path="/user/:id?"
                             render={({ match }) => (
