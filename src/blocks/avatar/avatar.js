@@ -4,6 +4,10 @@ import { Icon } from '../../blocks';
 
 import './avatar.scss';
 
+/*
+Компонент аватарки пользователя, если есть фотография - показываем фотку,
+если нет - медведя.
+ */
 const Avatar = ({ photo, size, iconColor }) => {
     let template;
 
@@ -12,7 +16,7 @@ const Avatar = ({ photo, size, iconColor }) => {
         height: `${size}px`,
     };
 
-    if (photo) {
+    if (photo !== null) {
         template = (
             <div className="avatar" style={avatarStyles}>
                 <img className="avatar__photo" src={photo} alt="user" width={size} />
@@ -35,7 +39,7 @@ Avatar.propTypes = {
 };
 
 Avatar.defaultProps = {
-    photo: '',
+    photo: null,
     size: '24',
     iconColor: '#000',
 };
