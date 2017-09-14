@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { Icon, Dropdown } from '../../../blocks';
+import { Icon, Dropdown } from '../../index';
 
 import {
     getCreatedCollections,
     getSavedLinks,
     getAddedLinks,
     getSavedCollections,
-} from './../../../reducers/bookmarks.reducer';
+} from '../../../reducers/bookmarks.reducer';
 
-import './account-profile-filter.scss';
+import './account-profile__filter.scss';
 
-class ProfileFilter extends Component {
+class AccountProfileFilter extends Component {
     static propTypes = {
         items: PropTypes.array.isRequired,
         token: PropTypes.string.isRequired,
@@ -21,7 +21,7 @@ class ProfileFilter extends Component {
         getSavedLinks: PropTypes.func.isRequired,
         getAddedLinks: PropTypes.func.isRequired,
         getSavedCollections: PropTypes.func.isRequired,
-    }
+    };
 
     filteringData = (item) => {
         switch (item.name) {
@@ -43,30 +43,29 @@ class ProfileFilter extends Component {
         default:
             break;
         }
-    }
+    };
 
     render() {
         const { items } = this.props;
-        return (<div className="profile-filter">
-            <div className="profile-filter__block">
+        return (<div className="account-profile__filter">
+            <div className="account-profile__filter-block">
                 <Icon iconName="filter" iconColor="#000" iconHeight="20" iconWidth="20" />
             </div>
-            <div className="profile-filter__block profile-filter__block--dropdown-wrap">
+            <div className="account-profile__filter-block account-profile__filter-block--dropdown-wrap">
                 <Dropdown items={items} onSelect={(item) => { this.filteringData(item); }} />
             </div>
         </div>);
     }
 }
 
-function mapStateToProps(state) {
-    return {
+export default connect(
+    state => ({
         token: state.authorization.access_token,
-    };
-}
-
-export default connect(mapStateToProps, {
-    getCreatedCollections,
-    getSavedLinks,
-    getSavedCollections,
-    getAddedLinks,
-})(ProfileFilter);
+    }),
+    {
+        getCreatedCollections,
+        getSavedLinks,
+        getSavedCollections,
+        getAddedLinks,
+    },
+)(AccountProfileFilter);
