@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { Button, Icon, Preloader } from '../../../blocks';
+import { Preloader } from '../../../blocks';
 import SearchResultItem from '../__result-item/search__result-item';
 
 import './search__result.scss';
@@ -57,12 +57,7 @@ class SearchResult extends Component {
             if (!loader) {
                 return (
                     <div className="search__result-empty-block">
-                        <p className="search__result-message">Мы не нашли точных результатов. Создайте тему и люди помогут</p>
-                        <Button
-                            text="Создать тему"
-                            icon={<Icon iconName="theme" />}
-                            onClick={this.createNewCollection}
-                        />
+                        <p className="search__result-message">Подборок по вашему запросу не найдено.</p>
                     </div>
                 );
             }
