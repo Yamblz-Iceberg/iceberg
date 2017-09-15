@@ -11,6 +11,14 @@ import { Icon } from '../../../blocks';
 import './search__header.scss';
 
 class SearchHeader extends Component {
+    static propTypes = {
+        search: PropTypes.object.isRequired,
+        changeSearch: PropTypes.func.isRequired,
+        searchResultLoader: PropTypes.func.isRequired,
+        history: PropTypes.any.isRequired,
+        token: PropTypes.string.isRequired,
+    };
+
     constructor(props) {
         super(props);
 
@@ -96,14 +104,6 @@ class SearchHeader extends Component {
         );
     }
 }
-
-SearchHeader.propTypes = {
-    search: PropTypes.object.isRequired,
-    changeSearch: PropTypes.func.isRequired,
-    searchResultLoader: PropTypes.func.isRequired,
-    history: PropTypes.any.isRequired,
-    token: PropTypes.string.isRequired,
-};
 
 function mapStateToProps(state) {
     return {
