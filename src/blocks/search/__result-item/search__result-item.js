@@ -12,7 +12,7 @@ class SearchResultItem extends Component {
         history: PropTypes.any.isRequired,
     };
 
-    handlerOnClick(e, cardId) {
+    handlerOnClick = cardId => () => {
         this.props.history.push({ pathname: `/collection/${cardId}` });
     }
 
@@ -23,16 +23,18 @@ class SearchResultItem extends Component {
             backgroundColor: data.color,
         };
 
-        return (<div className="search-result-item" onClick={e => this.handlerOnClick(e, data._id)}>
-            <div className="search-result-item__photo" style={resultStyles} />
-            <div className="search-result-item__details">
-                <h5 className="search-result-item__title">{data.name}</h5>
-                <div className="search-result-item__links-container">
-                    <Icon iconName={'link'} iconWidth="24" iconHeight="24" iconColor="#d0d0d0" />
-                    <p className="search-result-item__linksCount"> {data.linksCount}</p>
+        return (
+            <div className="search-result-item" onClick={this.handlerOnClick(data._id)}>
+                <div className="search-result-item__photo" style={resultStyles} />
+                <div className="search-result-item__details">
+                    <h5 className="search-result-item__title">{data.name}</h5>
+                    <div className="search-result-item__links-container">
+                        <Icon iconName={'link'} iconWidth="24" iconHeight="24" iconColor="#d0d0d0" />
+                        <p className="search-result-item__linksCount"> {data.linksCount}</p>
+                    </div>
                 </div>
             </div>
-        </div>);
+        );
     }
 }
 
