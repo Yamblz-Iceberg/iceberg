@@ -17,7 +17,7 @@ class ToggleText extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showToggleIcon: true,
+            showToggleIcon: false,
             showAllText: false,
             isText: true,
         };
@@ -25,9 +25,9 @@ class ToggleText extends Component {
 
     componentDidMount() {
         if (this.props.text.length > 0
-            && this.toggleTextWrapper.offsetHeight <= this.toggleText.offsetHeight) {
+            && this.toggleTextWrapper.offsetHeight > this.toggleText.offsetHeight) {
             /* eslint-disable react/no-did-mount-set-state */
-            this.setState({ showToggleIcon: false });
+            this.setState({ showToggleIcon: true });
         }
     }
 
@@ -37,12 +37,16 @@ class ToggleText extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.text !== this.props.text
-            && this.toggleTextWrapper.offsetHeight <= this.toggleText.offsetHeight) {
+            && this.toggleTextWrapper.offsetHeight > this.toggleText.offsetHeight) {
             /* eslint-disable react/no-did-update-set-state */
-            this.setState({ showToggleIcon: false });
+            this.setState({ showToggleIcon: true, isText: true });
         } else if (prevProps.text === '' && prevProps.text === this.props.text && this.state.isText) {
             /* eslint-disable react/no-did-update-set-state */
             this.setState({ ...this.state, showToggleIcon: false, isText: false });
+        } else if (prevProps.text !== this.props.text
+            && this.toggleTextWrapper.offsetHeight <= this.toggleText.offsetHeight) {
+            /* eslint-disable react/no-did-update-set-state */
+            this.setState({ ...this.state, showToggleIcon: false, isText: true });
         }
     }
 
@@ -72,9 +76,9 @@ class ToggleText extends Component {
                             { Object.keys(this.props.component).length > 0 ? this.props.component : '' }
                         </span>
                     </div>
-                    <div className={`${this.state.showToggleIcon === true
+                    <div className={this.state.showToggleIcon === true
                         ? 'text-toggle__icon '
-                        : 'text-toggle__icon text-toggle__icon--hide'}`}
+                        : 'text-toggle__icon text-toggle__icon--hide'}
                     >
                         <Icon iconName={'arrow-more--popup'} />
                     </div>
