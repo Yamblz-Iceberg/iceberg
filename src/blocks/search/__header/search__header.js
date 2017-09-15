@@ -59,21 +59,20 @@ class SearchHeader extends Component {
         this.props.changeSearch(event.target.value);
     }
 
-    handleClearSearch = () => {
+    clearSearch = () => {
         this.setState({ text: '' });
         this.props.changeSearch('');
     }
 
     handleGoBack = () => {
-        this.setState({ text: '' });
-        this.props.changeSearch('');
+        this.clearSearch();
         this.props.history.goBack();
     }
 
     renderClearBlock() {
         if (this.props.search.text !== '') {
             return (
-                <div className="search-header__block" onClick={this.handleClearSearch}>
+                <div className="search-header__block" onClick={this.clearSearch}>
                     <Icon iconName={'close'} />
                 </div>
             );
@@ -96,7 +95,13 @@ class SearchHeader extends Component {
                         <Icon iconName={'arrow-back'} />
                     </div>
                     <div className="search-header__input-block">
-                        <input type="text" className="search-header__input" placeholder="Поиск" value={this.state.text} onChange={this.handleChangeSearch} />
+                        <input
+                            type="text"
+                            className="search-header__input"
+                            placeholder="Поиск"
+                            value={this.state.text}
+                            onChange={this.handleChangeSearch}
+                        />
                     </div>
                     { this.renderClearBlock() }
                 </div>
