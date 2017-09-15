@@ -18,16 +18,18 @@ class LinkPreviewHeader extends Component {
     }
 
     render() {
-        return (<header className="link-preview__header">
-            <div className="link-preview__header-container">
-                <div className="link-preview__header-block" onClick={this.handleGoBack}>
-                    <Icon iconName={'arrow-back'} iconColor="#fff" />
+        return (
+            <header className="link-preview__header">
+                <div className="link-preview__header-container">
+                    <div className="link-preview__header-block" onClick={this.handleGoBack}>
+                        <Icon iconName={'arrow-back'} iconColor="#fff" />
+                    </div>
+                    <div className="link-preview__header-block" onClick={this.handleGoBack}>
+                        <Icon iconName={'more-vert'} iconColor="#fff" />
+                    </div>
                 </div>
-                <div className="link-preview__header-block" onClick={this.handleGoBack}>
-                    <Icon iconName={'more-vert'} iconColor="#fff" />
-                </div>
-            </div>
-        </header>);
+            </header>
+        );
     }
 }
 
