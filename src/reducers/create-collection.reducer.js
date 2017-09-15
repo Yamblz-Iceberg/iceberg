@@ -91,10 +91,8 @@ const addImage = data => dispatch =>
 
 const createCollection = (data, token, callback) => (
     (dispatch) => {
-        postCollection(data, token)
-            .then(res => res.json())
-            .then(res => callback(res))
-            .then(() => { dispatch(putCollection()); });
+        dispatch(putCollection());
+        postCollection(data, token).then(res => callback(res));
     }
 );
 
