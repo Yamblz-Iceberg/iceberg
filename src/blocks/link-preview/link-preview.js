@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import LinkPreviewHeader from './header/link-preview-header';
-import LinkPreviewFooter from './footer/link-preview-footer';
+import LinkPreviewHeader from './__header/link-preview__header';
+import LinkPreviewFooter from './__footer/link-preview__footer';
 import { showSafariViewController } from './../../utils/shared-functions';
 
 import './link-preview.scss';

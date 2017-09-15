@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import { Icon } from '../../../blocks';
 
-import './link-preview-header.scss';
+import './link-preview__header.scss';
 
 class LinkPreviewHeader extends Component {
     handleGoBack = () => {
@@ -12,12 +12,12 @@ class LinkPreviewHeader extends Component {
         this.props.history.goBack();
     }
     render() {
-        return (<header className="link-preview-header">
-            <div className="link-preview-header__container">
-                <div className="link-preview-header__block" onClick={this.handleGoBack}>
+        return (<header className="link-preview__header">
+            <div className="link-preview__header-container">
+                <div className="link-preview__header-block" onClick={this.handleGoBack}>
                     <Icon iconName={'arrow-back'} iconColor="#fff" />
                 </div>
-                <div className="link-preview-header__block" onClick={this.handleGoBack}>
+                <div className="link-preview__header-block" onClick={this.handleGoBack}>
                     <Icon iconName={'more-vert'} iconColor="#fff" />
                 </div>
             </div>
