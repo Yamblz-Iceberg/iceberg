@@ -57,7 +57,7 @@ class SearchResult extends Component {
             if (!loader) {
                 return (
                     <div className="search__result-empty-block">
-                        <p className="search__result-message">Мы не нашли точных результатов.</p>
+                        <p className="search__result-message">Подборок по вашему запросу не найдено.</p>
                     </div>
                 );
             }
