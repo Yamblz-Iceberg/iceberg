@@ -63,7 +63,6 @@ class LimitedTextarea extends Component {
                     placeholder="Введите текст описания"
                     value={this.state.textContent}
                     onFocus={this.handleFocusTextarea}
-                    autoFocus
                 />
             </div>
         );
