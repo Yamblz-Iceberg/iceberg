@@ -9,6 +9,10 @@ import { showSafariViewController } from './../../utils/shared-functions';
 import './link-preview.scss';
 // TODO: решить что делать с этим окном: быть ему или не быть - вот в чем вопрос.
 class LinkPreview extends Component {
+    static propTypes = {
+        link: PropTypes.object.isRequired,
+    };
+
     onClickUrl = () => {
         const target = '_system';
         const options = '';
@@ -41,14 +45,8 @@ class LinkPreview extends Component {
     }
 }
 
-LinkPreview.propTypes = {
-    link: PropTypes.object.isRequired,
-};
-
-function mapStateToProps(state) {
-    return {
+export default connect(
+    state => ({
         link: state.link,
-    };
-}
-
-export default connect(mapStateToProps)(LinkPreview);
+    }),
+)(LinkPreview);
