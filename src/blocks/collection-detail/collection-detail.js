@@ -9,7 +9,7 @@ import { socialSharing } from '../../utils/shared-functions';
 import { putTags } from '../../services/personal-tags.service';
 
 import CollectionDetailHeader from './__header/collection-detail__header';
-import CollectionDetailInfo from './__card/collection-detail__card';
+import CollectionDetailCard from './__card/collection-detail__card';
 import CollectionDetailLinks from './__links/collection-detail__links';
 
 import './collection-detail.scss';
@@ -128,7 +128,7 @@ class CollectionDetail extends Component {
                     collectionId={collection._id}
                     shareLink={this.shareLink(name, description)}
                 />
-                <CollectionDetailInfo collection={collection} />
+                <CollectionDetailCard collection={collection} />
                 { links.length > 0
                     // Когда в подборке есть ссылки
                     ? (

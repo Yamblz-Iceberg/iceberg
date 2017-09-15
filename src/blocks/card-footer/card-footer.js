@@ -23,6 +23,7 @@ class CardFooter extends Component {
         saved: PropTypes.bool,
         history: PropTypes.object.isRequired,
         isCreatingCard: PropTypes.bool,
+        userData: PropTypes.object.isRequired,
     };
 
     static defaultProps = {
@@ -34,7 +35,11 @@ class CardFooter extends Component {
 
     goToUserProfile = (e, id) => {
         if (!this.props.isCreatingCard) {
-            this.props.history.push(`/user/${id}`);
+            if (this.props.userId === this.props.userData.userId) {
+                this.props.history.push('/profile');
+            } else {
+                this.props.history.push(`/user/${id}`);
+            }
         }
         e.stopPropagation();
     };
@@ -72,6 +77,6 @@ class CardFooter extends Component {
 }
 
 export default connect(state => ({
-    collection: state.collection,
+    userData: state.user.data,
 }),
 )(withRouter(CardFooter));
