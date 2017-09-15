@@ -1,8 +1,8 @@
-.link-preview-header {
+.link-preview__header {
     height: 56px;
     background-color: #000000;
 
-    &__container {
+    &-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -10,7 +10,7 @@
         height: 100%;
     }
 
-    &__block {
+    &-block {
         display: flex;
         align-items: center;
         height: 100%;
