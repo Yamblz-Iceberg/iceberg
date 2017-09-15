@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import SearchHeader from './header/search-header';
+import SearchHeader from './__header/search__header';
 import SearchResult from './result/search-result';
 
 import './search.scss';

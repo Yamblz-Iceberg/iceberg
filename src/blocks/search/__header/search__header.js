@@ -8,7 +8,7 @@ import { actions } from '../../../reducers/search.reducer';
 
 import { Icon } from '../../../blocks';
 
-import './search-header.scss';
+import './search__header.scss';
 
 class SearchHeader extends Component {
     constructor(props) {
