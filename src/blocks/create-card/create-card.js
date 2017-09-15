@@ -138,15 +138,18 @@ class CreateCard extends Component {
 
         navigator.camera.getPicture(
             (img) => { uploadPhoto(img); },
-            () => {},
+            (error) => { console.error('Ошибка при загрузке фотографии с телефона', error); },
             {
                 quality: 20,
                 destinationType: navigator.camera.DestinationType.FILE_URI,
                 encodingType: navigator.camera.EncodingType.JPEG,
                 sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+                targetWidth: 1000,
+                targetHeight: 1000,
+                correctOrientation: true,
             },
         );
-    }
+    };
 
     render() {
         const {
