@@ -39,15 +39,22 @@ class SearchResult extends Component {
                     </div>
                 </div>
             );
-        } else if (!loader && searchText !== '') {
+        } else if (searchText !== '') {
+            if (!loader) {
+                return (
+                    <div className="search-result__empty-block">
+                        <p className="search-result__message">Мы не нашли точных результатов. Создайте тему и люди помогут</p>
+                        <Button
+                            text="Создать тему"
+                            icon={<Icon iconName="theme" />}
+                            onClick={this.createNewCollection}
+                        />
+                    </div>
+                );
+            }
             return (
-                <div className="search-result__empty-block">
-                    <p className="search-result__message">Мы не нашли точных результатов. Создайте тему и люди помогут</p>
-                    <Button
-                        text="Создать тему"
-                        icon={<Icon iconName="theme" />}
-                        onClick={this.createNewCollection}
-                    />
+                <div className="search-result__preloader-wrapper">
+                    <Preloader />
                 </div>
             );
         } else if (searchText === '') {
@@ -57,12 +64,6 @@ class SearchResult extends Component {
                         Ищите по названиям подборок или категориям.
                         Чтобы искать по категориям, поставьте знак # перед запросом.
                     </p>
-                </div>
-            );
-        } else if (searchText !== '') {
-            return (
-                <div className="search-result__preloader-wrapper">
-                    <Preloader />
                 </div>
             );
         }
