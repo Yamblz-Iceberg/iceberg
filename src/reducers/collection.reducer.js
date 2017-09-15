@@ -155,6 +155,7 @@ export {
     changeOpenStatusOfLinkById,
     clearCollection,
     removeCollection,
+    removeCollectionAction,
     deleteLinkFromCollection,
     FETCH_COLLECTION,
     REMOVE_COLLECTION,
