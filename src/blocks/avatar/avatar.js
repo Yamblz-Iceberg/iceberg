@@ -19,7 +19,7 @@ const Avatar = ({ photo, size, iconColor }) => {
     if (photo !== null) {
         template = (
             <div className="avatar" style={avatarStyles}>
-                <img className="avatar__photo" src={photo} alt="user" width={size} />
+                <img className="avatar__photo" src={photo} alt="" width={size} />
             </div>
         );
     } else {

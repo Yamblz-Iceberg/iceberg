@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import SearchHeader from './header/search-header';
-import SearchResult from './result/search-result';
+import SearchHeader from './__header/search__header';
+import SearchResult from './__result/search__result';
 
 import './search.scss';
 
@@ -25,11 +25,9 @@ class Search extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
+export default connect(
+    state => ({
         search: state.search,
         token: state.authorization.access_token,
-    };
-}
-
-export default connect(mapStateToProps)(Search);
+    }),
+)(Search);

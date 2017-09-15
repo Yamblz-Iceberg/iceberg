@@ -4,11 +4,25 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { Button, Icon, Preloader } from '../../../blocks';
-import SearchResultItem from './../result-item/search-result-item';
+import SearchResultItem from '../__result-item/search__result-item';
 
-import './search-result.scss';
+import './search__result.scss';
 
 class SearchResult extends Component {
+    static propTypes = {
+        result: PropTypes.object.isRequired,
+        loader: PropTypes.bool.isRequired,
+        searchText: PropTypes.string.isRequired,
+        history: PropTypes.any.isRequired,
+        userData: PropTypes.object.isRequired,
+    };
+
+    static defaultProps = {
+        result: {
+            collections: [],
+        },
+    };
+
     constructor(props) {
         super(props);
         const { result } = this.props;
@@ -29,8 +43,8 @@ class SearchResult extends Component {
 
         if (result.collections.length !== 0) {
             return (
-                <div className="search-result__info">
-                    <div className="search-result__list">
+                <div className="search__result-info">
+                    <div className="search__result-list">
                         {
                             result.collections.map(item => (
                                 <SearchResultItem key={item._id} data={item} />
@@ -39,30 +53,31 @@ class SearchResult extends Component {
                     </div>
                 </div>
             );
-        } else if (!loader && searchText !== '') {
+        } else if (searchText !== '') {
+            if (!loader) {
+                return (
+                    <div className="search__result-empty-block">
+                        <p className="search__result-message">Мы не нашли точных результатов. Создайте тему и люди помогут</p>
+                        <Button
+                            text="Создать тему"
+                            icon={<Icon iconName="theme" />}
+                            onClick={this.createNewCollection}
+                        />
+                    </div>
+                );
+            }
             return (
-                <div className="search-result__empty-block">
-                    <p className="search-result__message">Мы не нашли точных результатов. Создайте тему и люди помогут</p>
-                    <Button
-                        text="Создать тему"
-                        icon={<Icon iconName="theme" />}
-                        onClick={this.createNewCollection}
-                    />
+                <div className="search__result-preloader-wrapper">
+                    <Preloader />
                 </div>
             );
         } else if (searchText === '') {
             return (
-                <div className="search-result__empty-block">
-                    <p className="search-result__message">
+                <div className="search__result-empty-block">
+                    <p className="search__result-message">
                         Ищите по названиям подборок или категориям.
                         Чтобы искать по категориям, поставьте знак # перед запросом.
                     </p>
-                </div>
-            );
-        } else if (searchText !== '') {
-            return (
-                <div className="search-result__preloader-wrapper">
-                    <Preloader />
                 </div>
             );
         }
@@ -79,27 +94,11 @@ class SearchResult extends Component {
     }
 }
 
-SearchResult.propTypes = {
-    result: PropTypes.object.isRequired,
-    loader: PropTypes.bool.isRequired,
-    searchText: PropTypes.string.isRequired,
-    history: PropTypes.any.isRequired,
-    userData: PropTypes.object.isRequired,
-};
-
-SearchResult.defaultProps = {
-    result: {
-        collections: [],
-    },
-};
-
-function mapStateToProps(state) {
-    return {
+export default connect(
+    state => ({
         searchText: state.search.text,
         result: state.search.result,
         loader: state.loader,
         userData: state.user.data,
-    };
-}
-
-export default connect(mapStateToProps)(withRouter(SearchResult));
+    }),
+)(withRouter(SearchResult));

@@ -8,9 +8,17 @@ import { actions } from '../../../reducers/search.reducer';
 
 import { Icon } from '../../../blocks';
 
-import './search-header.scss';
+import './search__header.scss';
 
 class SearchHeader extends Component {
+    static propTypes = {
+        search: PropTypes.object.isRequired,
+        changeSearch: PropTypes.func.isRequired,
+        searchResultLoader: PropTypes.func.isRequired,
+        history: PropTypes.any.isRequired,
+        token: PropTypes.string.isRequired,
+    };
+
     constructor(props) {
         super(props);
 
@@ -51,21 +59,20 @@ class SearchHeader extends Component {
         this.props.changeSearch(event.target.value);
     }
 
-    handleClearSearch = () => {
+    clearSearch = () => {
         this.setState({ text: '' });
         this.props.changeSearch('');
     }
 
     handleGoBack = () => {
-        this.setState({ text: '' });
-        this.props.changeSearch('');
+        this.clearSearch();
         this.props.history.goBack();
     }
 
     renderClearBlock() {
         if (this.props.search.text !== '') {
             return (
-                <div className="search-header__block" onClick={this.handleClearSearch}>
+                <div className="search__header-block" onClick={this.clearSearch}>
                     <Icon iconName={'close'} />
                 </div>
             );
@@ -77,18 +84,24 @@ class SearchHeader extends Component {
     render() {
         return (
             <header
-                className="search-header"
+                className="search__header"
                 data-role="header"
                 data-position="fixed"
                 data-tap-toggle="false"
                 data-update-page-padding="false"
             >
-                <div className="search-header__container">
-                    <div className="search-header__block" onClick={this.handleGoBack}>
+                <div className="search__header-container">
+                    <div className="search__header-block" onClick={this.handleGoBack}>
                         <Icon iconName={'arrow-back'} />
                     </div>
-                    <div className="search-header__input-block">
-                        <input type="text" className="search-header__input" placeholder="Поиск" value={this.state.text} onChange={this.handleChangeSearch} />
+                    <div className="search__header-input-block">
+                        <input
+                            type="text"
+                            className="search__header-input"
+                            placeholder="Поиск"
+                            value={this.state.text}
+                            onChange={this.handleChangeSearch}
+                        />
                     </div>
                     { this.renderClearBlock() }
                 </div>
@@ -97,19 +110,10 @@ class SearchHeader extends Component {
     }
 }
 
-SearchHeader.propTypes = {
-    search: PropTypes.object.isRequired,
-    changeSearch: PropTypes.func.isRequired,
-    searchResultLoader: PropTypes.func.isRequired,
-    history: PropTypes.any.isRequired,
-    token: PropTypes.string.isRequired,
-};
-
-function mapStateToProps(state) {
-    return {
+export default connect(
+    state => ({
         search: state.search,
         token: state.authorization.access_token,
-    };
-}
-
-export default connect(mapStateToProps, { ...actions })(withRouter(SearchHeader));
+    }),
+    { ...actions },
+)(withRouter(SearchHeader));
