@@ -9,6 +9,20 @@ import SearchResultItem from '../__result-item/search__result-item';
 import './search__result.scss';
 
 class SearchResult extends Component {
+    static propTypes = {
+        result: PropTypes.object.isRequired,
+        loader: PropTypes.bool.isRequired,
+        searchText: PropTypes.string.isRequired,
+        history: PropTypes.any.isRequired,
+        userData: PropTypes.object.isRequired,
+    };
+
+    static defaultProps = {
+        result: {
+            collections: [],
+        },
+    };
+
     constructor(props) {
         super(props);
         const { result } = this.props;
@@ -79,20 +93,6 @@ class SearchResult extends Component {
         );
     }
 }
-
-SearchResult.propTypes = {
-    result: PropTypes.object.isRequired,
-    loader: PropTypes.bool.isRequired,
-    searchText: PropTypes.string.isRequired,
-    history: PropTypes.any.isRequired,
-    userData: PropTypes.object.isRequired,
-};
-
-SearchResult.defaultProps = {
-    result: {
-        collections: [],
-    },
-};
 
 function mapStateToProps(state) {
     return {
