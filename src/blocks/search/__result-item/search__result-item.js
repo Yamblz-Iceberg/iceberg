@@ -29,7 +29,7 @@ class SearchResultItem extends Component {
                 <div className="search-result-item__details">
                     <h5 className="search-result-item__title">{data.name}</h5>
                     <div className="search-result-item__links-container">
-                        <Icon iconName={'link'} iconWidth="24" iconHeight="24" iconColor="#d0d0d0" />
+                        <Icon iconName={'link'} iconColor="#d0d0d0" />
                         <p className="search-result-item__linksCount"> {data.linksCount}</p>
                     </div>
                 </div>
