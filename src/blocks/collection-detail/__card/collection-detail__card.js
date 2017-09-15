@@ -12,7 +12,7 @@ import { socialSharing } from '../../../utils/shared-functions';
 
 import './collection-detail__card.scss';
 
-class CollectionDetailInfo extends Component {
+class CollectionDetailCard extends Component {
     static propTypes = {
         collection: PropTypes.object.isRequired,
         token: PropTypes.string.isRequired,
@@ -134,4 +134,4 @@ export default connect(
         userData: state.user.data,
     }),
     { setCollectionAsSaved, deleteCollectionFromSaved },
-)(withRouter(CollectionDetailInfo));
+)(withRouter(CollectionDetailCard));
