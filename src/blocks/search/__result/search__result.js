@@ -43,8 +43,8 @@ class SearchResult extends Component {
 
         if (result.collections.length !== 0) {
             return (
-                <div className="search-result__info">
-                    <div className="search-result__list">
+                <div className="search__result-info">
+                    <div className="search__result-list">
                         {
                             result.collections.map(item => (
                                 <SearchResultItem key={item._id} data={item} />
@@ -56,8 +56,8 @@ class SearchResult extends Component {
         } else if (searchText !== '') {
             if (!loader) {
                 return (
-                    <div className="search-result__empty-block">
-                        <p className="search-result__message">Мы не нашли точных результатов. Создайте тему и люди помогут</p>
+                    <div className="search__result-empty-block">
+                        <p className="search__result-message">Мы не нашли точных результатов. Создайте тему и люди помогут</p>
                         <Button
                             text="Создать тему"
                             icon={<Icon iconName="theme" />}
@@ -67,14 +67,14 @@ class SearchResult extends Component {
                 );
             }
             return (
-                <div className="search-result__preloader-wrapper">
+                <div className="search__result-preloader-wrapper">
                     <Preloader />
                 </div>
             );
         } else if (searchText === '') {
             return (
-                <div className="search-result__empty-block">
-                    <p className="search-result__message">
+                <div className="search__result-empty-block">
+                    <p className="search__result-message">
                         Ищите по названиям подборок или категориям.
                         Чтобы искать по категориям, поставьте знак # перед запросом.
                     </p>

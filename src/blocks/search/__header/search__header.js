@@ -72,7 +72,7 @@ class SearchHeader extends Component {
     renderClearBlock() {
         if (this.props.search.text !== '') {
             return (
-                <div className="search-header__block" onClick={this.clearSearch}>
+                <div className="search__header-block" onClick={this.clearSearch}>
                     <Icon iconName={'close'} />
                 </div>
             );
@@ -84,20 +84,20 @@ class SearchHeader extends Component {
     render() {
         return (
             <header
-                className="search-header"
+                className="search__header"
                 data-role="header"
                 data-position="fixed"
                 data-tap-toggle="false"
                 data-update-page-padding="false"
             >
-                <div className="search-header__container">
-                    <div className="search-header__block" onClick={this.handleGoBack}>
+                <div className="search__header-container">
+                    <div className="search__header-block" onClick={this.handleGoBack}>
                         <Icon iconName={'arrow-back'} />
                     </div>
-                    <div className="search-header__input-block">
+                    <div className="search__header-input-block">
                         <input
                             type="text"
-                            className="search-header__input"
+                            className="search__header-input"
                             placeholder="Поиск"
                             value={this.state.text}
                             onChange={this.handleChangeSearch}

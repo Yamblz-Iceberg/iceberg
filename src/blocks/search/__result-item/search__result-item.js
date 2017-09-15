@@ -24,13 +24,13 @@ class SearchResultItem extends Component {
         };
 
         return (
-            <div className="search-result-item" onClick={this.handlerOnClick(data._id)}>
-                <div className="search-result-item__photo" style={resultStyles} />
-                <div className="search-result-item__details">
-                    <h5 className="search-result-item__title">{data.name}</h5>
-                    <div className="search-result-item__links-container">
+            <div className="search__result-item" onClick={this.handlerOnClick(data._id)}>
+                <div className="search__result-item-photo" style={resultStyles} />
+                <div className="search__result-item-details">
+                    <h5 className="search__result-item-title">{data.name}</h5>
+                    <div className="search__result-item-links-container">
                         <Icon iconName={'link'} iconColor="#d0d0d0" />
-                        <p className="search-result-item__linksCount"> {data.linksCount}</p>
+                        <p className="search__result-item-linksCount"> {data.linksCount}</p>
                     </div>
                 </div>
             </div>
