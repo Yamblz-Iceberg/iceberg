@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import { Icon } from './../..';
 
-import './search-result-item.scss';
+import './search__result-item.scss';
 
 class SearchResultItem extends Component {
     handlerOnClick(e, cardId) {

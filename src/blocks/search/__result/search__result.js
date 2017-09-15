@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { Button, Icon, Preloader } from '../../../blocks';
-import SearchResultItem from './../result-item/search-result-item';
+import SearchResultItem from '../__result-item/search__result-item';
 
-import './search-result.scss';
+import './search__result.scss';
 
 class SearchResult extends Component {
     constructor(props) {
