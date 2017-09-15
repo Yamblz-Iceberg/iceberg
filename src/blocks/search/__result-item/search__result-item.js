@@ -7,6 +7,11 @@ import { Icon } from './../..';
 import './search__result-item.scss';
 
 class SearchResultItem extends Component {
+    static propTypes = {
+        data: PropTypes.object.isRequired,
+        history: PropTypes.any.isRequired,
+    };
+
     handlerOnClick(e, cardId) {
         this.props.history.push({ pathname: `/collection/${cardId}` });
     }
@@ -30,10 +35,5 @@ class SearchResultItem extends Component {
         </div>);
     }
 }
-
-SearchResultItem.propTypes = {
-    data: PropTypes.object.isRequired,
-    history: PropTypes.any.isRequired,
-};
 
 export default withRouter(SearchResultItem);
