@@ -2,8 +2,8 @@
     padding-top: 56px;
 }
 
-.search-result {
-    &__empty-block {
+.search__result {
+    &-empty-block {
         padding: 16px;
         text-align: center;
 
@@ -12,19 +12,19 @@
         }
     }
 
-    &__message {
+    &-message {
         font-size: 18px;
         line-height: 26px;
         text-align: center;
         color: #777777;
     }
 
-    &__info {
+    &-info {
         display: flex;
         flex-direction: column;
     }
 
-    &__count {
+    &-count {
         display: flex;
         align-items: center;
         border-bottom: 1px solid #e0e0e0;
@@ -40,13 +40,13 @@
         }
     }
 
-    &__list {
+    &-list {
         display: flex;
         flex-direction: column;
         width: 100%;
     }
 
-    &__preloader {
+    &-preloader {
         width: 25px;
         height: 25px;
         border: 3px solid #000000;
@@ -55,7 +55,7 @@
         animation: spin 1s infinite linear;
     }
 
-    &__preloader-wrapper {
+    &-preloader-wrapper {
         margin-top: 32px;
         display: flex;
         justify-content: center;

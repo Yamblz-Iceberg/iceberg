@@ -1,10 +1,10 @@
-.search-result-item {
+.search__result-item {
     border-bottom: 1px solid #e0e0e0;
     padding: 12px 18px 16px;
     display: flex;
     flex-shrink: 0;
 
-    &__photo {
+    &-photo {
         display: block;
         width: 70px;
         height: 70px;
@@ -32,24 +32,24 @@
         }
     }
 
-    &__details {
+    &-details {
         padding-left: 12px;
         display: flex;
         flex-direction: column;
         justify-content: center;
     }
 
-    &__title {
+    &-title {
         margin: 0;
     }
 
-    &__links-container {
+    &-links-container {
         display: flex;
         margin-top: 6px;
         align-items: center;
     }
 
-    &__linksCount {
+    &-linksCount {
         margin: 0;
         padding-left: 3px;
         font-size: 14px;
