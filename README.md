@@ -1,24 +1,29 @@
 # Iceberg
 
-## Используемые технологии
-
-1. Kebab-case для названий папок;
-1. Component + SASS;
-1. SASS + БЭМ;
-1. 4 пробела;
-1. Cordova;
-1. React + Redux + Thunk;
-1. Webpack + Jest;
-1. ESLint с конфигом от Airbnb.
-
 ## NPM-скрипты
 
-- `npm start` – запуск сервера (development);
-- `npm run build` – билд проекта (production);
-- `npm run patch` – патч для платформы iOS (необходимо запустить после `cordova platform add ios`);
-- `cordova platform add ios/android` – добавление платформы;
-- `cordova run ios/android` – билд статики в эмулятор;
-- `npm run android-device` – билд в production и запуск на андроид устройстве;
+### Запуск приложения
+
+1. Склонировать проект локально:
+
+`git clone https://github.com/Yamblz-Iceberg/iceberg-app.git`
+
+1. Перейти в директорию проекта: `cd iceberg`
+
+1. Установить зависимости: `npm i`
+
+1. Установить нужные платформы: 
+- Android `cordova platform add android`
+- iOS `cordova platform add ios`
+
+Если при установке платформы IOS возникает ошибка 'Error: Cannot read property 'replace' of undefined', то предварительно выполните команду: `npm run patch`
+
+1. Команды для запуска проекта:
+- в браузере в режиме **livereload**: `npm start`
+- на устройстве Android: `npm run android-device`
+- в эмуляторе Android по умолчанию: `npm run android-emulator`
+- на устройстве iOS: `npm run ios-device`
+- в эмуляторе iOS по умолчанию: `npm run ios-emulator`
 
 #### Имена иконок в `icons-sprite.svg`
 - search
@@ -56,26 +61,20 @@
 - like-filled
 - exit
 
+#### Сборка спрайта с иконками с их предварительной оптимизацией
 
-### Запуск приложения
+1. Необходимо установить глобально `svgo` (для оптимизации иконок) и `svgstore` (для сборки отдельных иконок в спрайт).
+Для этого нужно выполнить следующую команду: `npm install -g svgo && npm install -g svgstore`.
 
-1. Склонировать проект локально:
+1. Перед добавлением иконки в спрайт необходимо немного подготовить иконку:
 
-`git clone https://github.com/Yamblz-Iceberg/iceberg-app.git`
+- положите иконку в директорию `generate-icons-sprite/icons`
+- переименуйте её, чтобы название могло описать содержимое, используйте **kebab-case** в написании
+- если иконка универсальная и одноцветная, то замените значение свойства **fill** в коде на `currentColor`
 
-1. Перейти в директорию проекта: `cd iceberg`
+1. Добавьте заданные в коде иконки размеры в дефолтные в компоненте `Icon`
 
-1. Установить зависимости: `npm i`
+1. Добавьте название иконки в Readme
 
-1. Установить нужные платформы: 
-- Android `cordova platform add android`
-- iOS `cordova platform add ios`
+1. Чтобы собрать спрайт выполните скрипт `generate-icons-sprite/create-icons-sprite`
 
-Если при установке платформы IOS возникает ошибка 'Error: Cannot read property 'replace' of undefined', то предварительно выполните команду: `npm run patch`
-
-1. Команды для запуска проекта:
-- в браузере в режиме **livereload**: `npm start`
-- на устройстве Android: `npm run android-device`
-- в эмуляторе Android по умолчанию: `npm run android-emulator`
-- на устройстве iOS: `npm run ios-device`
-- в эмуляторе iOS по умолчанию: `npm run ios-emulator`
