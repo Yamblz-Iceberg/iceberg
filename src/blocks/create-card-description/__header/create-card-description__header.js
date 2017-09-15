@@ -32,7 +32,6 @@ class CreateCardDescriptionHeader extends Component {
                 data-position="fixed"
                 data-tap-toggle="false"
                 data-update-page-padding="false"
-                data-hide-during-focus="false"
             >
                 <span
                     className="create-card-description-header__back"

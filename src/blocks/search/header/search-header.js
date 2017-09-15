@@ -82,14 +82,13 @@ class SearchHeader extends Component {
                 data-position="fixed"
                 data-tap-toggle="false"
                 data-update-page-padding="false"
-                data-hide-during-focus="false"
             >
                 <div className="search-header__container">
                     <div className="search-header__block" onClick={this.handleGoBack}>
                         <Icon iconName={'arrow-back'} />
                     </div>
                     <div className="search-header__input-block">
-                        <input type="text" className="search-header__input" placeholder="Поиск" value={this.state.text} onChange={this.handleChangeSearch} autoFocus />
+                        <input type="text" className="search-header__input" placeholder="Поиск" value={this.state.text} onChange={this.handleChangeSearch} />
                     </div>
                     { this.renderClearBlock() }
                 </div>

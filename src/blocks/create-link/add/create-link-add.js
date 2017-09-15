@@ -65,7 +65,6 @@ class CreateLinkAdd extends Component {
                             value={this.state.url}
                             placeholder="Вставьте ссылку сюда"
                             onChange={this.handleChangeUrl}
-                            autoFocus
                         />
                         {
                             this.state.linkAdded
