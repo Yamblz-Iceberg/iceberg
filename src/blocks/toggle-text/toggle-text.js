@@ -39,10 +39,14 @@ class ToggleText extends Component {
         if (prevProps.text !== this.props.text
             && this.toggleTextWrapper.offsetHeight > this.toggleText.offsetHeight) {
             /* eslint-disable react/no-did-update-set-state */
-            this.setState({ showToggleIcon: true });
+            this.setState({ showToggleIcon: true, isText: true });
         } else if (prevProps.text === '' && prevProps.text === this.props.text && this.state.isText) {
             /* eslint-disable react/no-did-update-set-state */
             this.setState({ ...this.state, showToggleIcon: false, isText: false });
+        } else if (prevProps.text !== this.props.text
+            && this.toggleTextWrapper.offsetHeight <= this.toggleText.offsetHeight) {
+            /* eslint-disable react/no-did-update-set-state */
+            this.setState({ ...this.state, showToggleIcon: false, isText: true });
         }
     }
 

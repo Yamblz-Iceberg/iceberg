@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Tabs, Button, Icon, Preloader } from '../../blocks';
-import { getCollection, removeCollectionAction } from '../../reducers/collection.reducer';
+import { getCollection, clearDescriptionAction } from '../../reducers/collection.reducer';
 import { hideLoader, showLoader } from '../../reducers/loader.reducer';
 import { socialSharing } from '../../utils/shared-functions';
 import { putTags } from '../../services/personal-tags.service';
@@ -25,7 +25,7 @@ class CollectionDetail extends Component {
         loader: PropTypes.bool.isRequired,
         showLoader: PropTypes.func.isRequired,
         hideLoader: PropTypes.func.isRequired,
-        removeCollectionAction: PropTypes.func.isRequired,
+        clearDescriptionAction: PropTypes.func.isRequired,
     };
 
     componentDidMount() {
@@ -47,7 +47,7 @@ class CollectionDetail extends Component {
     }
 
     componentWillUnmount() {
-        this.props.removeCollectionAction();
+        this.props.clearDescriptionAction();
     }
 
     scrollToTop = () => {
@@ -173,5 +173,5 @@ export default connect(
         userData: state.user.data,
         loader: state.loader,
     }),
-    { getCollection, removeCollectionAction, showLoader, hideLoader },
+    { getCollection, clearDescriptionAction, showLoader, hideLoader },
 )(withRouter(CollectionDetail));

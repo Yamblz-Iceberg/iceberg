@@ -25,6 +25,7 @@ const CHANGE_LIKED_STATUS_BY_ID = 'CHANGE_LIKED_STATUS_BY_ID';
 const CHANGE_LINK_SAVED_STATUS_BY_ID = 'CHANGE_LINK_SAVED_STATUS_BY_ID';
 const CHANGE_LINK_OPENED_STATUS_BY_ID = 'CHANGE_LINK_OPENED_STATUS_BY_ID';
 const REMOVE_FROM_COLLECTION = 'REMOVE_FROM_COLLECTION';
+const CLEAR_DESCRIPTION = 'CLEAR_DESCRIPTION';
 
 const initialState = {
     description: '',
@@ -53,6 +54,7 @@ const changeOpenStatusOfLinkById =
 const clearCollection = () => ({ type: CLEAR_COLLECTION });
 const removeCollectionAction = () => ({ type: REMOVE_COLLECTION });
 const deleteLinkFromCollection = id => ({ type: REMOVE_FROM_COLLECTION, id });
+const clearDescriptionAction = () => ({ type: CLEAR_DESCRIPTION });
 
 /* reducer */
 const reducer = (state = initialState, action) => {
@@ -88,6 +90,9 @@ const reducer = (state = initialState, action) => {
     }
     case CLEAR_COLLECTION: {
         return initialState;
+    }
+    case CLEAR_DESCRIPTION: {
+        return { ...state, description: '' };
     }
     default:
         return state;
@@ -155,7 +160,7 @@ export {
     changeOpenStatusOfLinkById,
     clearCollection,
     removeCollection,
-    removeCollectionAction,
+    clearDescriptionAction,
     deleteLinkFromCollection,
     FETCH_COLLECTION,
     REMOVE_COLLECTION,
