@@ -26,7 +26,6 @@
         "cordova-plugin-customurlscheme": "^4.3.0",
         "cordova-plugin-file": "^4.3.3",
         "cordova-plugin-file-transfer": "^1.6.3",
-        "cordova-plugin-image-resizer": "git+https://github.com/protonet/cordova-plugin-image-resizer.git",
         "cordova-plugin-safariviewcontroller": "^1.4.7",
         "cordova-plugin-splashscreen": "^4.0.3",
         "cordova-plugin-statusbar": "^2.2.3",
