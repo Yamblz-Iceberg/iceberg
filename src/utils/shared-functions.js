@@ -39,20 +39,6 @@ export const generateGuid = () => {
     return `${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}`;
 };
 
-export const handleClickToCollection = (e, cardId, history) => {
-    const { className } = e.target;
-
-    if (className !== 'hash-tag'
-        && className !== 'card-footer__user'
-        && className !== 'card-footer__actions'
-        && className !== 'card-footer__save-action'
-        && (typeof className.baseVal === 'undefined'
-            || (className.baseVal
-            && className.baseVal.trim() !== 'svg-icon'))) {
-        history.push({ pathname: `/collection/${cardId}` });
-    }
-};
-
 export const authDemoUser = (registerFn, callback) => {
     const userId = generateGuid();
     const userPassword = generateGuid();

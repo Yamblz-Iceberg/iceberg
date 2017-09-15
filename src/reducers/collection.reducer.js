@@ -96,6 +96,7 @@ const reducer = (state = initialState, action) => {
 
 const getCollection = (collectionId, token) => (
     (dispatch) => {
+        dispatch(clearCollection());
         getCollectionFetch(collectionId, token).then((res) => {
             dispatch(loadCollection(res.collection));
         });

@@ -1,70 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import './creating-successfully.scss';
 
 import { CollectionCard, Button, Icon } from '../../blocks';
-import CreatingSuccessfullyHeader from './header/creating-successfully-header';
-import { handleClickToCollection, socialSharing } from '../../utils/shared-functions';
+import CreatingSuccessfullyHeader from './__header/creating-successfully__header';
+import { socialSharing } from '../../utils/shared-functions';
 
+/**
+ * Компонент отображения новой коллекции, после её создания.
+ * Состоит из шапки, карточки коллекции и кнопки поделиться.
+ */
 class CreatingSuccessfully extends Component {
-    componentWillMount() {
-        const {
-            links,
-            savedTimesCount,
-            history,
-        } = this.props;
-
-        const collection = {
-            ...history.location.state.collection,
-            savedTimesCount,
-            linksCount: links.length,
-        };
-
-        this.setCollection(collection);
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (this.props.links !== nextProps.links) {
-            this.setLinks(nextProps.links);
-        }
-    }
-
-    setCollection = (collection) => {
-        this.setState({
-            collection,
-        });
-    };
-
-    setLinks = (links) => {
-        this.setLinks({
-            collection: {
-                ...this.state.collection,
-                links,
-            },
-        });
-    };
-
-    handleClick = cardId => (e) => {
-        handleClickToCollection(e, cardId, this.props.history);
-    };
-
     shareLink = (title, message) => () => {
         socialSharing(title, message);
     };
 
     render() {
-        const { collection } = this.state;
+        const { collection } = this.props;
 
         return (
             <div className="creating-successfully">
                 <CreatingSuccessfullyHeader />
                 <div
                     className="creating-successfully__collection-card-wrapper"
-                    onClick={this.handleClick(collection._id)}
                 >
-                    <CollectionCard data={collection} />
+                    <CollectionCard data={collection} isNew />
                 </div>
                 <div className="creating-successfully__button-wrapper">
                     <Button
@@ -79,19 +41,18 @@ class CreatingSuccessfully extends Component {
 }
 
 CreatingSuccessfully.defaultProps = {
-    links: [],
     savedTimesCount: 0,
 };
 
 CreatingSuccessfully.propTypes = {
-    history: PropTypes.any.isRequired,
-    links: PropTypes.array,
-    savedTimesCount: PropTypes.number,
+    // history: PropTypes.any.isRequired,
+    collection: PropTypes.object.isRequired,
+    // savedTimesCount: PropTypes.number,
 };
 
 export default connect(
     state => ({
-        links: state.collection.links,
-        savedTimesCount: state.collection.savedTimesCount,
+        collection: state.collection,
+        // savedTimesCount: state.collection.savedTimesCount,
     }),
-)(withRouter(CreatingSuccessfully));
+)(CreatingSuccessfully);

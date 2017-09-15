@@ -11,6 +11,7 @@ import { cardBlue } from '../../../variables.scss';
 
 import { createCollection, clearCollection } from '../../../reducers/create-collection.reducer';
 import { actions as modalActions } from '../../../reducers/modal.reducer';
+import { getCollection } from './../../../reducers/collection.reducer';
 
 /*
 Компонент хедера экрана создания новой коллекции. По нажатию на кнопку "Создать"
@@ -19,7 +20,6 @@ import { actions as modalActions } from '../../../reducers/modal.reducer';
 */
 class CreateEmptyCardHeader extends Component {
     static propTypes = {
-        user: PropTypes.object.isRequired,
         title: PropTypes.string,
         photo: PropTypes.string,
         color: PropTypes.string,
@@ -31,6 +31,7 @@ class CreateEmptyCardHeader extends Component {
         showErrorModal: PropTypes.func.isRequired,
         createCollection: PropTypes.func.isRequired,
         clearCollection: PropTypes.func.isRequired,
+        getCollection: PropTypes.func.isRequired,
     }
 
     static defaultProps = {
@@ -82,27 +83,8 @@ class CreateEmptyCardHeader extends Component {
     };
 
     changeRoute = (data) => {
-        const {
-            user: {
-                firstName,
-                lastName,
-                photo,
-            },
-            tags,
-        } = this.props;
-        const collection = {
-            ...data.collection,
-            tags,
-            author: {
-                photo,
-                firstName,
-                lastName,
-            },
-        };
-        this.props.history.push({
-            pathname: '/creating-successfully',
-            state: { collection },
-        });
+        this.props.getCollection(data.collection._id, this.props.token);
+        this.props.history.push('/creating-successfully');
     };
 
     handleSubmitData = () => {
@@ -156,5 +138,5 @@ export default connect(
         color: state.createCollection.color,
         photo: state.createCollection.photo,
     }),
-    { createCollection, ...modalActions, clearCollection },
+    { createCollection, ...modalActions, clearCollection, getCollection },
 )(withRouter(CreateEmptyCardHeader));
