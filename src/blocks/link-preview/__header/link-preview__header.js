@@ -7,10 +7,16 @@ import { Icon } from '../../../blocks';
 import './link-preview__header.scss';
 
 class LinkPreviewHeader extends Component {
+    static propTypes = {
+        history: PropTypes.any.isRequired,
+        closeUrl: PropTypes.func.isRequired,
+    };
+
     handleGoBack = () => {
         this.props.closeUrl();
         this.props.history.goBack();
     }
+
     render() {
         return (<header className="link-preview__header">
             <div className="link-preview__header-container">
@@ -24,10 +30,5 @@ class LinkPreviewHeader extends Component {
         </header>);
     }
 }
-
-LinkPreviewHeader.propTypes = {
-    history: PropTypes.any.isRequired,
-    closeUrl: PropTypes.func.isRequired,
-};
 
 export default (withRouter(LinkPreviewHeader));
