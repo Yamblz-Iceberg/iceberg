@@ -4,13 +4,10 @@ import En from 'hyphenation.en-us';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import { Preloader, CollectionCard, HashTape } from './../../blocks';
 
 import { feedLoader } from './../../reducers/feed.reducer';
-
-import { handleClickToCollection } from './../../utils/shared-functions';
 
 import './home-feed.scss';
 
@@ -31,7 +28,6 @@ class HomeFeed extends Component {
         collections: PropTypes.arrayOf(PropTypes.object.isRequired),
         tags: PropTypes.arrayOf(PropTypes.object.isRequired),
         feedLoader: PropTypes.func.isRequired,
-        history: PropTypes.any.isRequired,
         queryParam: PropTypes.any.isRequired,
         token: PropTypes.string.isRequired,
         loader: PropTypes.bool.isRequired,
@@ -50,10 +46,6 @@ class HomeFeed extends Component {
         if (this.props.queryParam !== prevProps.queryParam) {
             this.props.feedLoader(this.props.queryParam, this.props.token);
         }
-    }
-
-    openCollection = cardId => (e) => {
-        handleClickToCollection(e, cardId, this.props.history);
     }
 
     /**
@@ -86,7 +78,6 @@ class HomeFeed extends Component {
                 <div
                     key={collection._id}
                     className="home-feed__collection"
-                    onClick={this.openCollection(collection._id)}
                 >
                     <CollectionCard data={collection} />
                 </div>,
@@ -128,4 +119,4 @@ export default connect(
         loader: state.loader,
     }),
     { feedLoader },
-)(withRouter(HomeFeed));
+)(HomeFeed);

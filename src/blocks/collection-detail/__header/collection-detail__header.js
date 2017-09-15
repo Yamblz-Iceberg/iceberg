@@ -57,7 +57,6 @@ class CollectionDetailHeader extends Component {
 
     handleGoBack = () => {
         this.props.history.goBack();
-        this.props.clearCollection();
     };
 
     handleGoHome = () => {
@@ -67,7 +66,12 @@ class CollectionDetailHeader extends Component {
 
     removeCollection = (id) => {
         this.props.removeCollection(id, this.props.token);
-        this.handleGoBack();
+        // если подборка только что создана, то при удалении кидаем сразу в ленту
+        if (this.props.history.location.isNew) {
+            this.props.history.push({ pathname: '/feed' });
+        } else {
+            this.handleGoBack();
+        }
     };
 
     render() {

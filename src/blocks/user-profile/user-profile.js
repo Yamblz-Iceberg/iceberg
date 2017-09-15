@@ -17,13 +17,17 @@ import './user-profile.scss';
 class UserProfile extends Component {
     static propTypes = {
         user: PropTypes.object.isRequired,
-        collections: PropTypes.array.isRequired,
+        collections: PropTypes.array,
         token: PropTypes.any.isRequired,
         userLoader: PropTypes.func.isRequired,
         collectionsLoader: PropTypes.func.isRequired,
         params: PropTypes.object.isRequired,
         loader: PropTypes.any.isRequired,
     };
+
+    static defaultProps = {
+        collections: [],
+    }
 
     componentDidMount() {
         this.props.userLoader(this.props.token, this.props.params.id);

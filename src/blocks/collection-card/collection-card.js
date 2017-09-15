@@ -17,23 +17,31 @@ class CollectionCard extends Component {
         deleteCollectionFromSaved: PropTypes.func.isRequired,
         changeSavedStatusOfCardById: PropTypes.func.isRequired,
         history: PropTypes.object.isRequired,
+        // необязательный параметр для только что созданной коллекции
+        isNew: PropTypes.bool,
     };
 
-    putToSaved = (e) => {
+    static defaultProps = {
+        isNew: false,
+    }
+
+    putToSaved = () => {
         if (typeof this.props.userData.accType !== 'undefined' && this.props.userData.accType !== 'demo') {
             this.props.setCollectionAsSaved(this.props.data._id, this.props.token);
             this.props.changeSavedStatusOfCardById(this.props.data._id, true);
-            e.stopPropagation();
         } else {
             localStorage.setItem('returnToAfterAuth', this.props.history.location.pathname);
             this.props.history.push('/authorization');
         }
     };
 
-    delFromSaved = (e) => {
+    delFromSaved = () => {
         this.props.deleteCollectionFromSaved(this.props.data._id, this.props.token);
         this.props.changeSavedStatusOfCardById(this.props.data._id, false);
-        e.stopPropagation();
+    };
+
+    openCollection = cardId => () => {
+        this.props.history.push({ pathname: `/collection/${cardId}`, isNew: this.props.isNew });
     };
 
     render() {
@@ -50,12 +58,14 @@ class CollectionCard extends Component {
             photo: data.author.photo,
             iconColor: '#fff',
         };
+        // в зависимости от того в ленте карточка или в создании новой коллекции
+        const linksCount = data.links ? data.links.length : data.linksCount;
 
         const userName = `${data.author.firstName} ${data.author.lastName}`;
 
         const hashesCount = hashes.length - 1;
         return (
-            <div className="collection-card" style={cardStyles}>
+            <div className="collection-card" style={cardStyles} onClick={this.openCollection(data._id)}>
                 <div className="collection-card__header">
                     {
                         hashes[0] && <HashTag
@@ -78,7 +88,7 @@ class CollectionCard extends Component {
                     avatarOptions={avatarOptions}
                     userName={userName}
                     userId={data.author.userId}
-                    linksCount={data.linksCount}
+                    linksCount={linksCount}
                     savedTimesCount={data.savedTimesCount}
                     saved={data.saved}
                     putToSaved={this.putToSaved}
