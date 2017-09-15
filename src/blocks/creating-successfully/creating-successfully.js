@@ -13,6 +13,14 @@ import { socialSharing } from '../../utils/shared-functions';
  * Состоит из шапки, карточки коллекции и кнопки поделиться.
  */
 class CreatingSuccessfully extends Component {
+    static defaultProps = {
+        savedTimesCount: 0,
+    };
+
+    static propTypes = {
+        collection: PropTypes.object.isRequired,
+    };
+
     shareLink = (title, message) => () => {
         socialSharing(title, message);
     };
@@ -40,19 +48,8 @@ class CreatingSuccessfully extends Component {
     }
 }
 
-CreatingSuccessfully.defaultProps = {
-    savedTimesCount: 0,
-};
-
-CreatingSuccessfully.propTypes = {
-    // history: PropTypes.any.isRequired,
-    collection: PropTypes.object.isRequired,
-    // savedTimesCount: PropTypes.number,
-};
-
 export default connect(
     state => ({
         collection: state.collection,
-        // savedTimesCount: state.collection.savedTimesCount,
     }),
 )(CreatingSuccessfully);

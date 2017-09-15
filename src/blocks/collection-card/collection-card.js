@@ -58,6 +58,8 @@ class CollectionCard extends Component {
             photo: data.author.photo,
             iconColor: '#fff',
         };
+        // в зависимости от того в ленте карточка или в создании новой коллекции
+        const linksCount = data.links ? data.links.length : data.linksCount;
 
         const userName = `${data.author.firstName} ${data.author.lastName}`;
 
@@ -86,7 +88,7 @@ class CollectionCard extends Component {
                     avatarOptions={avatarOptions}
                     userName={userName}
                     userId={data.author.userId}
-                    linksCount={data.linksCount}
+                    linksCount={linksCount}
                     savedTimesCount={data.savedTimesCount}
                     saved={data.saved}
                     putToSaved={this.putToSaved}

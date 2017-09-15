@@ -57,9 +57,6 @@ class CollectionDetailHeader extends Component {
 
     handleGoBack = () => {
         this.props.history.goBack();
-        if (!this.props.history.location.isNew) {
-            this.props.clearCollection();
-        }
     };
 
     handleGoHome = () => {

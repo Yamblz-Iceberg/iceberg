@@ -83,6 +83,7 @@ class CreateEmptyCardHeader extends Component {
     };
 
     changeRoute = (data) => {
+        // Записываем в стор collection только что созданную коллекцию 
         this.props.getCollection(data.collection._id, this.props.token);
         this.props.history.push('/creating-successfully');
     };
