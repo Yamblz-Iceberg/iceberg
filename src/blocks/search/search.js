@@ -25,11 +25,9 @@ class Search extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
+export default connect(
+    state => ({
         search: state.search,
         token: state.authorization.access_token,
-    };
-}
-
-export default connect(mapStateToProps)(Search);
+    }),
+)(Search);

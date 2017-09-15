@@ -94,13 +94,11 @@ class SearchResult extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
+export default connect(
+    state => ({
         searchText: state.search.text,
         result: state.search.result,
         loader: state.loader,
         userData: state.user.data,
-    };
-}
-
-export default connect(mapStateToProps)(withRouter(SearchResult));
+    }),
+)(withRouter(SearchResult));

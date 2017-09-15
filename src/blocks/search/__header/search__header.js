@@ -110,11 +110,10 @@ class SearchHeader extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
+export default connect(
+    state => ({
         search: state.search,
         token: state.authorization.access_token,
-    };
-}
-
-export default connect(mapStateToProps, { ...actions })(withRouter(SearchHeader));
+    }),
+    { ...actions },
+)(withRouter(SearchHeader));
