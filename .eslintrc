@@ -1,0 +1,26 @@
+// Переназначение конфигураций eslint от airbnb
+{
+    "extends": "airbnb",
+    "env": {
+        "browser": true,
+        "jest": true
+    },
+    "parser": "babel-eslint",
+    "rules": {
+        "react/jsx-filename-extension": [ 1, { "extensions": [".js"] } ],
+        // Валидация пробелов
+        "indent": ["error", 4],
+        "react/jsx-indent": ["error", 4],
+        "import/prefer-default-export": "off",
+        "import/no-extraneous-dependencies": "off",
+        // Валидация пробелов для propTypes
+        "react/jsx-indent-props": ["error", 4],
+        // forbidden proptypes
+        "react/forbid-prop-types": "off",
+        // чтобы можно было с одной папки доставать компоненты
+        "import/no-duplicates": "off",
+        "no-underscore-dangle": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
+        "jsx-a11y/no-autofocus": "off"
+    }
+}

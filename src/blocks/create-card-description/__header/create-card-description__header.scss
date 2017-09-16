@@ -1,0 +1,23 @@
+.create-card-description-header {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 56px;
+    box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.3);
+    width: 100%;
+    z-index: 1000;
+    background-color: #ffffff;
+
+    &__title {
+        margin-right: auto;
+        margin-left: 28px;
+        font-weight: 600;
+        text-transform: capitalize;
+    }
+
+    &__menu-wrapper {
+        width: 10px;
+    }
+}

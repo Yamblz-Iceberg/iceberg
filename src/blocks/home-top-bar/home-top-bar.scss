@@ -1,0 +1,21 @@
+.home-top-bar {
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+
+    &__block {
+        display: flex;
+        align-items: center;
+    }
+
+    &__title {
+        font-weight: 500;
+        margin-left: 25px;
+    }
+
+    &__icon-user {
+        margin-left: 25px;
+    }
+}

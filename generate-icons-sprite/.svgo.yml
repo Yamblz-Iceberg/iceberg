@@ -1,0 +1,6 @@
+plugins: 
+- transformsWithOnePath: true
+- mergePaths: true
+- cleanupAttrs: true
+- removeEmptyAttrs: true
+- removeDimensions: true

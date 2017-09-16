@@ -1,0 +1,94 @@
+@import "../../../variables";
+
+.collection-detail {
+    &__card {
+        position: relative;
+        height: 256px;
+        padding-top: 56px;
+        overflow: hidden;
+    }
+
+    &__card-img {
+        background-color: $blue;
+        background-size: cover;
+        background-position: center;
+        transform: scale(1.1);
+        height: 250px;
+        z-index: -2;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        filter: blur(8px);
+    }
+
+    &__card-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        height: 200px;
+    }
+
+    &__card-tape {
+        z-index: 2;
+    }
+
+    &__card-header {
+        padding: 0 20px;
+        z-index: 2;
+    }
+
+    &__card-title {
+        margin-top: 10px;
+        color: #ffffff;
+        display: block;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__card-lock-icon-wrapper {
+        display: inline-block;
+        margin-left: 10px;
+    }
+
+    &__card-footer {
+        margin: 0;
+        margin-top: auto;
+        padding: 0 20px 20px 20px;
+        z-index: 2;
+    }
+
+    &__card-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: linear-gradient(-180deg, rgba(0, 0, 0, 0.2) 32%, rgba(179, 57, 13, 0) 78%, rgba(0, 0, 0, 0.2) 100%);
+        z-index: 1;
+    }
+
+    &__actions {
+        display: flex;
+        padding: 0 20px;
+    }
+
+    &__actions-add-link {
+        margin-left: 20px;
+        display: flex;
+        justify-content: center;
+        width: 90px;
+        height: 48px;
+        background-color: transparent;
+        border: 2px solid $border-gray;
+        border-radius: 4px;
+        padding: 0 10px;
+
+        svg:first-of-type {
+            margin-right: 5px;
+        }
+    }
+}

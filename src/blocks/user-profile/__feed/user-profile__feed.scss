@@ -1,0 +1,25 @@
+.user-profile {
+    &__feed-preloader {
+        padding: 16px;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__feed-empty-block {
+        padding: 16px;
+        text-align: center;
+    }
+
+    &__feed-message {
+        font-size: 18px;
+        line-height: 26px;
+        text-align: center;
+        color: #777777;
+    }
+
+    &__feed-list {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+}

@@ -1,0 +1,20 @@
+.my-profile {
+    &__filter {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 20px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    &__filter-block {
+        display: flex;
+        align-content: center;
+        padding-top: 12px;
+        padding-bottom: 12px;
+
+        &--dropdown-wrap {
+            flex-grow: 1;
+        }
+    }
+}

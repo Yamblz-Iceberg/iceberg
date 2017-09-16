@@ -1,0 +1,123 @@
+.my-profile-feed-collection {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 12px 18px 16px;
+    display: flex;
+    flex-shrink: 0;
+
+    &__lock-icon-wrapper {
+        position: absolute;
+        left: 8px;
+        top: 8px;
+        z-index: 1;
+    }
+
+    &__photo-wrapper {
+        position: relative;
+    }
+
+    &__photo {
+        display: block;
+        width: 70px;
+        height: 70px;
+        border-radius: 4px;
+        background-size: cover;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        position: relative;
+        flex-shrink: 0;
+
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            height: 20px;
+            background-color: inherit;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 4px;
+            box-shadow: inherit;
+            width: 90%;
+            bottom: -4px;
+            filter: brightness(95%);
+            z-index: -1;
+        }
+    }
+
+    &__details {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: calc(100% - 70px);
+        padding-left: 12px;
+    }
+
+    &__title {
+        margin: 0;
+    }
+
+    &__links-container {
+        display: flex;
+        margin-top: 6px;
+        align-items: center;
+    }
+
+    &__linksCount {
+        margin: 0;
+        padding-left: 3px;
+        font-size: 14px;
+        color: #d0d0d0;
+    }
+}
+
+.my-profile-feed-link {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 12px 20px 16px;
+    display: flex;
+    flex-shrink: 0;
+
+    &__photo {
+        display: block;
+        width: 60px;
+        height: 92px;
+        border-radius: 4px;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        flex-shrink: 0;
+    }
+
+    &__details {
+        padding-left: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 80%;
+    }
+
+    &__title {
+        margin: 0;
+    }
+
+    &__favicon {
+        height: 20px;
+        max-height: 20px;
+        max-width: 20px;
+        margin-right: 8px;
+    }
+
+    &__url-container {
+        display: flex;
+        margin-top: 6px;
+        align-items: center;
+    }
+
+    &__url {
+        margin: 0;
+        font-size: 14px;
+        color: #d0d0d0;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

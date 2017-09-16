@@ -1,0 +1,6 @@
+{
+    "extends": "stylelint-config-htmlacademy",
+    "rules": {
+        "indentation": 4
+    }
+}

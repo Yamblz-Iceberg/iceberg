@@ -1,0 +1,12 @@
+.collection-detail {
+    &__links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 20px;
+    }
+
+    &__links-item {
+        margin-bottom: 20px;
+    }
+}

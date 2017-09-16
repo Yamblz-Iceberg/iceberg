@@ -1,0 +1,21 @@
+.limited-textarea {
+    position: relative;
+
+    &__counter {
+        position: absolute;
+        top: 0;
+        right: 20px;
+        z-index: 1;
+        font-size: 14px;
+        color: #8b8b8b;
+    }
+
+    &__input {
+        padding: 0 20px 40px;
+        width: 100%;
+        line-height: 28px;
+        font-size: 20px;
+        border: none;
+        outline: none;
+    }
+}

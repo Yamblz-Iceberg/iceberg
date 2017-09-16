@@ -1,0 +1,21 @@
+.dropdown {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+    padding: 2px 16px;
+
+    svg {
+        margin-left: 12px;
+    }
+
+    &--opend {
+        svg {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.dropdown-selected-item {
+    white-space: nowrap;
+}

@@ -1,0 +1,75 @@
+html {
+    -webkit-user-drag: none;
+    user-drag: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    outline: none;
+}
+
+body,
+html {
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+    height: 100%;
+    font-family: "Yandex Sans Text", "Arial";
+}
+
+textarea {
+    font-family: "Yandex Sans Text", "Arial";
+}
+
+h1,
+h2,
+h3,
+h4 {
+    margin: 0;
+}
+
+input[type="text"] {
+    border: none;
+}
+
+// Заголовки подборок ("Скейтбординг для новичков")
+h2 {
+    font-size: 28px;
+    line-height: 32px;
+    font-weight: bold;
+}
+
+// Заголовки ссылок
+h3 {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: bold;
+}
+
+// Заголовки в плашках в хэддере
+h4 {
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: 500;
+}
+
+// Заголовки маленьких карточек подборок (в поиске и ЛК)
+h5 {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: bold;
+}
+
+#app {
+    height: 100%;
+}
+
+.home__wrapper {
+    height: 100%;
+}

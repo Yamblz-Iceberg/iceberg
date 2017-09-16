@@ -1,0 +1,36 @@
+.search__header {
+    height: 56px;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+    position: fixed;
+    width: 100%;
+    background-color: #ffffff;
+    z-index: 1000;
+
+    &-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+    }
+
+    &-input-block {
+        flex: 1;
+    }
+
+    &-input {
+        font-size: 20px;
+        font-weight: 500;
+        padding: 4px 16px;
+        width: 100%;
+    }
+
+    &-block {
+        display: flex;
+        padding: 0 20px;
+        align-items: center;
+    }
+
+    &-title {
+        margin-left: 25px;
+    }
+}

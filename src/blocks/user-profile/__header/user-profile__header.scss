@@ -1,0 +1,27 @@
+.user-profile {
+    &__header {
+        height: 56px;
+        background-color: transparent;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 300;
+    }
+
+    &__header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        height: 100%;
+    }
+
+    &__header-block {
+        display: flex;
+        align-items: center;
+    }
+
+    &__header-title {
+        margin-left: 25px;
+    }
+}

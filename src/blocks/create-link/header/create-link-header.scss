@@ -1,0 +1,52 @@
+.create-link-header {
+    position: fixed;
+    width: 100%;
+    height: 56px;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        height: 100%;
+    }
+
+    &__block {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    &__button {
+        width: 106px;
+    }
+
+    &__title {
+        display: block;
+        font-weight: 500;
+        margin-left: 25px;
+        max-width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    button {
+        display: none;
+    }
+
+    &--show-button {
+        .create-link-header__title {
+            max-width: 170px;
+        }
+
+        button {
+            display: initial;
+        }
+    }
+
+    &__back-to-link {
+        transform: rotate(180deg);
+    }
+}

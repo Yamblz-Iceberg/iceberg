@@ -1,0 +1,14 @@
+.create-card-description {
+    &__limited-textarea {
+        padding-top: 80px;
+        height: 100vh;
+        display: flex;
+        width: 100%;
+
+        > * {
+            display: flex;
+            width: 100%;
+            padding-top: 30px;
+        }
+    }
+}

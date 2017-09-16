@@ -1,0 +1,40 @@
+.collection-detail {
+    padding-bottom: 25px;
+
+    &__add-button {
+        width: 260px;
+        margin: 0 auto;
+
+        button {
+            margin: 0 auto;
+        }
+    }
+
+    &__mesage-wrapper {
+        padding: 40px 20px 0;
+        text-align: center;
+    }
+
+    &__title {
+        margin-top: 25px;
+        text-align: center;
+    }
+
+    &__text {
+        line-height: 18px;
+        font-size: 14px;
+        color: gray;
+        text-align: center;
+    }
+
+    &__loader {
+        display: flex;
+        justify-content: center;
+        padding-top: 50px;
+    }
+}
+
+.collection-detail-tabs {
+    margin-top: 21px;
+    border-bottom: 1px solid #e0e0e0;
+}

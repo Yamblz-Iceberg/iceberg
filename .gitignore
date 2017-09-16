@@ -1,0 +1,9 @@
+# Exclude content of www directory
+www/*
+
+# Keep empty www directory
+!www/.gitkeep
+
+node_modules
+platforms
+plugins

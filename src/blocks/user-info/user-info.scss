@@ -1,0 +1,48 @@
+.user-info {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    flex-direction: row;
+    background-color: #363636;
+    padding: 72px 20px 36px;
+    overflow: hidden;
+
+    &__background {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        -webkit-filter: blur(8px) brightness(50%);
+        filter: blur(8px) brightness(50%);
+        background-size: cover;
+        background-position: center;
+        z-index: 0;
+        transform: scale(1.1);
+    }
+
+    &__text {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        color: #ffffff;
+        z-index: 2;
+    }
+
+    &__avatar {
+        position: relative;
+        width: 90px;
+        display: flex;
+        justify-content: flex-end;
+        z-index: 2;
+
+        .rating-info-wrap {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+    }
+}
