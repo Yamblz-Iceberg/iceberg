@@ -1,4 +1,4 @@
-# Iceberg
+# Iceberg [![Build Status](https://travis-ci.org/Yamblz-Iceberg/iceberg-app.svg?branch=dev)](https://travis-ci.org/Yamblz-Iceberg/iceberg-app) [![Dependencies](https://david-dm.org/Yamblz-Iceberg/iceberg-api.svg)](https://david-dm.org/Yamblz-Iceberg/iceberg-api.svg) [![Release](http://github-release-version.herokuapp.com/github/Yamblz-Iceberg/iceberg-app/release.svg?style=flat)](https://github.com/Yamblz-Iceberg/iceberg-app/releases/latest)
 
 ## Запуск приложения
 
